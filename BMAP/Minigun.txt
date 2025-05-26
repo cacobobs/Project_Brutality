@@ -1,5 +1,0 @@
-//Minigun Brightmaps to be done soonTM
-brightmap sprite 8GUNA0
-{
-	map "brightmaps/WEAPONS/Minigun/8GUNA.png"
-}

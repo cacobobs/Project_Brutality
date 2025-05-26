@@ -1,0 +1,35 @@
+
+Actor IsPlayingAsPurist : Inventory
+{
+inventory.maxamount 1
+}
+
+
+ACTOR Purist : BrutalDoomer
+{
+	Speed 1.0
+	Player.DisplayName "Classic v20"
+	
+	Player.WeaponSlot 1, Chain_Saw, Melee_Attacks
+	Player.WeaponSlot 2, DualVanillaRifles, VanillaRifle 
+	Player.WeaponSlot 3, Shot_Gun, SSG
+	Player.WeaponSlot 4, Vanilla_Mini_Gun
+	Player.WeaponSlot 5, Rocket_Launcher
+	Player.WeaponSlot 6, DualPlasmaRifles, Plasma_Gun 
+	Player.WeaponSlot 7, BIG_FUCKING_GUN
+	Player.WeaponSlot 8, HellishMissileLauncher
+	Player.WeaponSlot 9, FlameCannon
+	Player.WeaponSlot 0, SecretWeapon_MP40
+	
+	Player.StartItem "VanillaRifle"
+	Player.StartItem "Melee_Attacks"
+	Player.StartItem "NewClip", 60
+	Player.StartItem "VanillaRifleAmmo", 31
+	Player.StartItem "ShotgunAmmo", 8
+	Player.StartItem "PlasmaAmmo", 50
+	Player.StartItem "HandGrenade"
+	Player.StartItem "HandGrenadeAmmo", 8
+	Player.StartItem "IsPlayer", 1
+	Player.StartItem "IsPlayingAsPurist", 1
+	Player.CrouchSprite "PLYC"
+}

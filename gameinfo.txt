@@ -1,6 +1,3 @@
-STARTUPTITLE = "Project Brutality"
-STARTUPCOLORS = "03ffff", "000000"
-STARTUPTYPE = "Hexen"
-//STARTUPSONG = "startupaudio.mp3"
+STARTUPTITLE = "Brutal Doom: Project Brutality"
+STARTUPCOLORS = "CC9D00", "000000"
 NoRandomPlayerClass = True
-DiscordAppID="1197377121773948978"

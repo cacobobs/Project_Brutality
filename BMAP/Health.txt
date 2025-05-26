@@ -1,6 +1,0 @@
-// Health pickups
-brightmap sprite MEDIA0{map "brightmaps/items/MEDIA0.png"disablefullbright}
-brightmap sprite PSTRA0{map "brightmaps/items/PSTRA0.png"disablefullbright}
-
-
-

@@ -1,3 +1,0 @@
-//Purple/Red Shield
-brightmap sprite SH05A0 { map "Brightmaps/ITEMS/SH05A.png" }
-brightmap sprite SH06A0 { map "Brightmaps/ITEMS/SH05A.png" }

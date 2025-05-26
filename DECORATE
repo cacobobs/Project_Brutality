@@ -1,338 +1,281 @@
-
 // IF YOU WANT TO USE STUFF FROM THIS MOD, GIVE ME CREDITS
 
-actor EvadeCheck : Inventory
-{
-    inventory.amount 0
-    inventory.maxamount 2
-    +IGNORESKILL
-}
-
-actor EvadeHold : Inventory
-{
-    inventory.amount 0
-    inventory.maxamount 1
-    +IGNORESKILL
-}
-
-actor Decelerate : Inventory
-{
-    inventory.amount 0
-    inventory.maxamount 1
-    +IGNORESKILL
-}
-Actor ExecutionToken : Inventory {inventory.maxamount 1}
-Actor SlideKicking : Inventory {}
-Actor HasUnmorphed : Inventory {}
-Actor LedgeGrabbingRightNow : Inventory {}
-Actor HeightTIDIndicator : Inventory 
-{
-	Inventory.MaxAmount 0x7FFFFFFF
-}
-Actor IsDead : Inventory {}
-Actor IsTacticalClass : Inventory {} //Fake item to fix the lag.
-
-
-#include "actors/Brutality/BrutalitiesZombieman.dec"
-#include "actors/Brutality/BrutalitiesShotgunGuy.dec"
-#include "actors/Brutality/BrutalitiesImp.dec"
-
 //Guns Guns Guns
-#include "actors/Weapons/BaseWeapon.dec"
-#include "actors/Weapons/Slot1/MELEE.dec"
-#include "actors/Weapons/Slot1/Axe.dec"
-#include "actors/Weapons/Slot1/SAW.dec"
-#include "actors/Weapons/Slot4/PBRIFLE.dec"
-//#include "actors/Weapons/Slot3/SHOTGUN.dec"
-#include "actors/Weapons/Slot3/SSG.dec"
-#include "actors/Weapons/Slot5/MINIGUN.dec"
-#include "actors/Weapons/Slot6/ROCKETLAUNCHER.dec"
-#include "actors/Weapons/EXPLOSIVES.dec"
-//#include "actors/Weapons/Slot7/PLASMA.dec"
-#include "actors/Weapons/Slot5/MG42.dec"
+#include MELEE.txt
+#include SAW.txt
+#include PBRIFLE.txt
+#include DUALRIFLE.txt
+#include SHOTGUN.txt
+#include SSG.txt
+#include MINIGUN.txt
+#include ROCKETLAUNCHER.txt
+#include EXPLOSIVES.txt
+#include PLASMA.txt
+#include DUALPLASMA.txt
+#include BFG.txt
 
-#include "actors/Weapons/Slot9/RAILGUN.dec"
-
-//Weapon select tokens
-#include "actors/Weapons/WeaponTokens.dec"
-
-//Ammo Ammo Ammo //Smart Scavenger
-#include "actors/Items/Ammo/GenericAmmo.dec"
-#include "actors/Items/Ammo/HandGrenadeBox.dec"
-#include "actors/Items/Ammo/RocketBox.dec"
-#include "actors/Items/Ammo/ShellBox.dec"
-#include "actors/Items/Ammo/Clipbox.dec"
-#include "actors/Items/Ammo/Bulletkit.dec"
-#include "actors/Items/Ammo/SpecialGrenadeBox.dec"
-#include "actors/Items/Ammo/Cellpack.dec"
-
-//Powerups
-#include "actors/Items/SpecialPowerups.dec"
-#include "actors/Items/GenericHealth.dec"
+#include STGRENADELAUNCH.txt
+#include STRAILGUN.txt
+//MeatShields
+#include IMPSHIELD.txt
+#include ZMANSHIELD.txt
+#include SGUYSHIELD.txt
+#include DARKIMPSHIELD.txt
 
 //DECORATIONS
-//#include "actors/Decorations/FURNITURE.dec"
-//#include "actors/Decorations/LAMPS.dec"
-//#include "actors/Decorations/NATURAL.dec"
-#include "actors/Decorations/FIREWORKS.dec"
-//#include "actors/Decorations/TORCHES.dec"
-#include "actors/Decorations/DEAD.dec"
+#include FURNITURE.txt
+#include LAMPS.txt
+#include NATURAL.txt
+#include FIREWORKS.txt
+#include TORCHES.txt
+#include DEAD.txt
 
-//BARRELS
-#include "Actors/Decorations/Barrels/Core/NukageBarrelTokens.dec"
-#include "Actors/Decorations/Barrels/Core/NukageBarrelEffects.dec"
-#include "Actors/Decorations/Barrels/Core/NukageBarrelParts.dec"
-#include "Actors/Decorations/Barrels/Core/TheNukageBarrel.dec"
-#include "Actors/Decorations/Barrels/NukageBarrels.dec"
-#include "Actors/Decorations/Barrels/IceBarrels.dec"
-#include "Actors/Decorations/Barrels/FlameBarrels.dec"
-
-
-//ThrownEnemies
-#include "actors/Monsters/ThrownEnemies.dec"
 //Enemies
-#include "actors/Monsters/T1-Grunts/ZOMBIEMEN.dec"
-#include "actors/Monsters/T1-Grunts/SERGEANTS.dec"
-#include "actors/Monsters/T1-Grunts/Commando.dec"
-#include "actors/Monsters/T1-Imps/IMPS.dec"
-#include "actors/Monsters/T2-Pinkies/DEMONS.dec"
-#include "actors/Monsters/T2-Pinkies/VOIDSPECTRE.dec"
-#include "actors/Monsters/T2-Pinkies/SPECTRE.dec"
-#include "actors/Monsters/T4-Nobles/KNIGHT.dec"
-#include "actors/Monsters/T4-Nobles/BARON.dec"
-#include "actors/Monsters/T3-Floaters/LOSTSOUL.dec"
-#include "actors/Monsters/T3-Arachnos/Arachnotron.dec"
-#include "actors/Monsters/T3-Revies/REVENANT.dec"
-#include "actors/Monsters/T3-Fats/MANCUBUS.dec"
-#include "actors/Monsters/T3-Floaters/CACODEMON.dec"
-#include "actors/Monsters/T3-Floaters/PAIN.dec"
-#include "actors/Monsters/T4-Viles/ARCHVILE.dec"
-#include "actors/Monsters/Tz-Bosses/CYBERDEMON.dec"
-#include "actors/Monsters/Tz-Bosses/MASTERMIND.dec"
-
+#include ZOMBIEMEN.txt
+#include SERGEANTS.txt
+#include COMANDO.txt
+#include IMPS.txt
+#include DEMONS.txt
+#include SPECTRE.txt
+#include KNIGHT.txt
+#include BARON.txt
+#include LOSTSOUL.txt
+#include SPIDERS.txt
+#include REVENANT.txt
+#include MANCUBUS.txt
+#include CACODEMO.txt
+#include PAIN.txt
+#include ARCHVILE.txt
+#include CYBERDEMON.txt
+#include MASTERMIND.txt
 //ST Monsters
-#include "actors/Monsters/T4-Nobles/BELPHEGOR.dec"
-#include "actors/Monsters/Tz-Bosses/JUGGERNAUT.dec"
-
-//Frozen Monsters
-#include "actors/Monsters/TZ-Frozen/ZombieFreezes.dec"
-#include "actors/Monsters/TZ-Frozen/BossFreezes.dec"
-#include "actors/Monsters/TZ-Frozen/CommandoFreezes.dec"
-#include "actors/Monsters/TZ-Frozen/DemonFreezes.dec"
-#include "actors/Monsters/TZ-Frozen/FatFreezes.dec"
-#include "actors/Monsters/TZ-Frozen/FloaterFreezes.dec"
-#include "actors/Monsters/TZ-Frozen/ImpFreezes.dec"
-#include "actors/Monsters/TZ-Frozen/NobleFreezes.dec"
-#include "actors/Monsters/TZ-Frozen/SpiderFreezes.dec"
-#include "actors/Monsters/TZ-Frozen/VileFreezes.dec"
-#include "actors/Monsters/TZ-Frozen/RevenantFreezes.dec"
-#include "actors/Monsters/TZ-Frozen/SergeantFreezes.dec"
-
+#include BELPHEGOR.txt
+#include JUGGERNAUT.txt
 //Gore N' Blood
-#include "actors/Gore/GORE!!!.dec"
-#include "actors/Gore/GORE2.dec"
-#include "actors/Gore/GORE3.dec"
-#include "actors/Gore/GORE4.dec"
-#include "actors/Gore/BLOOD.dec"
-#include "actors/Gore/BLOODSPLASH.dec"
-#include "actors/Gore/BURN.dec"
+#include GORE!!!.txt
+#include GORE2.txt
+#include GORE3.txt
+#include BLOOD.txt
+#include BLOODSPLASH.txt
+#include BURN.txt
 
 
-#include "actors/Gore/STICKY.dec"
-#include "actors/Gore/Underwaterblood.dec"
-#include "actors/Gore/BlackHoleDeaths.dec"
-
-//Hitboxes
-#include "actors/Hitboxes/HEAD_SYS.dec"
-#include "actors/Hitboxes/LEGBOX.dec"
-
-
-//Effects
-#include "actors/Effects/PARTICLES.dec"
-#include "actors/Effects/SMOKE.dec"
-#include "actors/Effects/FIRE.dec"
-#include "actors/Effects/SPARKS.dec"
-#include "actors/Effects/FLARES.dec"
-#include "actors/Hitboxes/BOSSBOX.dec"
-#include "actors/Weapons/DROPABLES.dec"
-#include "actors/Effects/PUFF.dec"
-#include "actors/Effects/ChexPuff.dec" //temporary until the Chex compatibility is complete
-#include "actors/Effects/TRACERS.dec"
-#include "actors/Effects/FROSTY.dec"
-
-//Misc
+//MISC
+#include HEAD_SYS.txt
+#include PARTICLES.txt
+#include SMOKE.txt
+#include CASING.txt
+#include FIRE.txt
+#include SPARKS.txt
+#include FLARES.txt
+#include ARTIFACT.txt
+#include HEALTH2.txt
+#include BOSSBOX.txt
+#include DROPABLES.txt
+#include PUFF.txt
+#include TRACERS.txt
+//#include ARACHBOX
 
 //Player Classes
-#include "actors/Player/PLAYER.dec"
-#include "actors/Player/NEWPLAYE.dec"
+#include PLAYER.txt
+#include MARINES.txt
+#include NEWPLAYE.txt
+
 
 //Project Brutality Monsters
-#include "actors/Gore/SwarmFly.dec"
+#include SwarmFly.txt
 
-#include "actors/Monsters/T1-Grunts/ZombiemanVariants.dec"
-#include "actors/Monsters/T1-Grunts/CarbineZombie.dec"
-#include "actors/Monsters/T1-Grunts/ZombieScientist.dec"
-#include "actors/Monsters/T1-Grunts/ChainsawZombie.dec"
+#include ZombiemanVariants.txt
+#include ARZombie.txt
+#include MinigunGuy.txt
+#include ZombieScientist.txt
 
-#include "actors/Monsters/T1-Grunts/SergeantVariant.dec"
-#include "actors/Monsters/T1-Grunts/RocketZombie.dec"
-#include "actors/Monsters/T1-Grunts/Kamikaze.dec"
-#include "actors/Monsters/T1-Grunts/DemonTechTroop.dec"
-#include "actors/Monsters/T1-Grunts/QuadSGGuy.dec"
-#include "actors/Monsters/T1-Grunts/ZSpecOps.dec"
-#include "actors/Monsters/T1-Grunts/AutoShottyGuy.dec"
+#include SergeantVariant.txt
+#include RocketZombie.txt
+#include Kamikaze.txt
+#include DemonTechTroop.txt
+#include QuadSGGuy.txt
+#include ZSpecOps.txt
+#include AutoShottyGuy.txt
 
-#include "actors/Monsters/T1-Imps/ImpVariants.dec"
-#include "actors/Monsters/T1-Imps/ImpVariant1.dec"
-#include "actors/Monsters/T1-Imps/ImpVariant2.dec"
-#include "actors/Monsters/T1-Imps/SavageImp.dec"
-#include "actors/Monsters/T1-Imps/DarkImpNami.dec"
-#include "actors/Monsters/T1-Imps/DarkImpNether.dec"
-#include "actors/Monsters/T1-Imps/DarkImpST.dec"
-#include "actors/Monsters/T1-Imps/DarkImpVoid.dec"
+#include ImpVariants.txt
+#include DarkImpNami.txt
+#include DarkImpNether.txt
+#include DarkImpST.txt
+#include DarkImpVoid.txt
 
-#include "actors/Monsters/T1-Grunts/PB_NailgunMajor.dec"
-#include "actors/Monsters/T1-Grunts/PlasmaZombie.dec"
-#include "actors/Monsters/T1-Grunts/HelmetCommando.dec"
+#include RifleCommando.txt
+#include ChainMajor.txt
+#include PlasmaZombie.txt
+#include ClassicCommando.txt
 
-#include "actors/Monsters/T3-Floaters/Watcher.dec"
-#include "actors/Monsters/T3-Floaters/Afrit.dec"
-#include "actors/Monsters/T3-Floaters/InfernalCaco.dec"
+#include Watcher.txt
+#include Afrit.txt
+#include MagCaco.txt
 
-#include "actors/Monsters/T2-Pinkies/MeanDemon.dec"
-#include "actors/Monsters/T2-Pinkies/MechDemon.dec"
+#include MeanDemon.txt
+#include MechDemon.txt
 
-#include "actors/Monsters/T4-Nobles/CyberKnight.dec"
-#include "actors/Monsters/T4-Nobles/CyberPaladin.dec"
+#include CyberKnight.txt
 
-#include "actors/Monsters/T3-Revies/BeamRev.dec"
-#include "actors/Monsters/T3-Revies/Draugr.dec"
+#include BeamRev.txt
 
-#include "actors/Monsters/T4-Viles/Hellion.dec"
+#include FleshWizard.txt
+#include IceVile.txt
+#include IceImps.txt
 
-#include "actors/Monsters/T3-Arachnos/InfernalArachnotron.dec"
-#include "actors/Monsters/T3-Arachnos/Arachnophyte.dec"
-#include "actors/Monsters/T3-Arachnos/EliteArachnotron.dec"
+#include SpidersX.txt
+#include Arachnophyte.txt
 
-#include "actors/Monsters/Tz-Bosses/ANNIHILATOR.dec"
-#include "actors/Monsters/Tz-Bosses/Demolisher.dec"
+#include ANNIHILATOR.txt
+#include Demolisher.txt
 
-#include "actors/Monsters/T3-Fats/Daedabus.dec"
-#include "actors/Monsters/T3-Fats/Volcabus.dec"
+#include Daedabus.txt
 
-#include "actors/Monsters/T3-Floaters/Phantasm.dec"
-#include "actors/Monsters/T3-Floaters/SufferingElemental.dec"
-#include "actors/Monsters/T4-Nobles/CyberBaron.dec"
-#include "actors/Monsters/T4-Nobles/Infernus.dec"
-#include "actors/Monsters/T4-Nobles/DyingBruiser.dec"
-#include "actors/Monsters/T4-Nobles/DyingHellKnight.dec"
-#include "actors/Monsters/T4-Nobles/DyingBaron.dec"
-
-#include "actors/Monsters/T3-Arachnos/Aracnorb.dec"
-
+#include Trite.txt
+#include Phantasm.txt
+#include GreaterElem.txt
+#include Overlord.txt
+#include CyberBaron.txt
 
 
 //Project Brutality Weapons
-#include "actors/Weapons/Throwables.dec"
-#include "actors/Weapons/Slot2/PBPISTOL.dec"
-//#include "actors/Weapons/Slot2/Deagle.dec"
-//#include "actors/Weapons/Slot2/REVOLVER.dec"
-#include "actors/Weapons/Slot2/UACSMG.dec"
-#include "actors/Weapons/Slot2/MP40.dec"
-#include "actors/Weapons/Slot3/AUTOSHOTGUN.dec"
-#include "actors/Weapons/Slot4/Carbine.dec"
-#include "actors/Weapons/Slot5/Nailgun.dec"
-#include "actors/Weapons/Slot4/LMG.dec"
-//#include "actors/Weapons/Slot6/SUPERGL.dec"
-#include "actors/Weapons/Slot8/CRYORIFLE.dec"
-#include "actors/Weapons/Slot7/M2PLASMA.dec"
-#include "actors/Weapons/Slot9/BFGMKIV.dec"
-//#include "actors/Weapons/Slot9/BFGBEAM.dec"
-// #include "actors/Weapons/Slot9/BFGPickups.dec"
-#include "actors/Weapons/Slot0/DemonTech.dec"
-#include "actors/Weapons/Slot0/Unmaker.dec"
-#include "actors/Weapons/Slot8/Flamethrower.dec"
+#include Throwables.txt
+#include POWERUPS.txt
+#include PBPISTOL.txt
+#include DualPistol.txt
+#include REVOLVER.txt
+#include DualMag.txt
+#include UACSMG.txt
+#include AUTOSHOTGUN.txt
+#include DualSSG.txt
+#include DUALAUTOSG.txt
+#include Carbine.txt
+#include DualCarbine.txt
+#include HMG.txt
+#include SUPERGL.txt
+#include FREEZER.txt
+#include M2PLASMA.txt
+#include DUALM2PLASMA.txt
+#include BFGMKIV.txt
+#include BFGBEAM.txt
+#include BLACKHOLE.txt
+#include DemonTech.txt
+#include QUADBARREL.txt
 
+#include EXTRA.txt
 
+#include TriteElem.txt
 
-#include "actors/Weapons/Slot3/QUADBARREL.dec"
-#include "actors/Weapons/Slot7/PulseCannon.dec" //Only here for the pulse cannon ball
-//#include "actors/Weapons/Slot7/DUALPULSECANNON.dec"
-#include "actors/Weapons/Slot4/ChexRifle.dec" //This is only TEMPORARY. This can be removed when the Chex Quest patch is completed.
-
-
-
-//New Death System
-#include "actors/Monsters/T1-Grunts/ZOMBIEMEN_DeathAnim.dec"
+//Vanilla Editions
+#include VANILLARIFLE.txt
+#include VANILLARIFLES.txt
+#include VANILLAMINIGUN.txt
 
 //Lil Guys!
-#include "actors/Monsters/Tz-Shrinks/ZombieShrinks.dec"
-#include "actors/Monsters/Tz-Shrinks/SergeantShrinks.dec"
-#include "actors/Monsters/Tz-Shrinks/CommandoShrinks.dec"
-#include "actors/Monsters/Tz-Shrinks/ImpShrinks.dec"
-#include "actors/Monsters/Tz-Shrinks/DemonShrinks.dec"
-#include "actors/Monsters/Tz-Shrinks/NoblesShrinks.dec"
-#include "actors/Monsters/Tz-Shrinks/MancubusShrinks.dec"
+#include ZombieShrinks
+#include SergeantShrinks
+#include CommandoShrinks
+#include ImpShrinks
+#include DemonShrinks
+#include NoblesShrinks
+#include MancubusShrinks
 
-//#include "actors/Decorations/TechPillar.dec"
+#include TechPillar.txt
 
-//New Inclusions - Daarkon (6-19-2017)
-#include "actors/Effects/FLATDECALS.dec"
-#include "actors/Effects/TELEPORTS.dec"
+#include SpawnerScript.txt
 
 
-//New Blood
-#include "actors/Gore/GreenBlood.dec"
-#include "actors/Gore/BlueBlood.dec"
-#include "actors/Gore/GreenSTICKY.dec"
-#include "actors/Gore/BlueSTICKY.dec"
-
-
-
-//Dying Monsters
-#include "actors/Monsters/T1-Grunts/DyingGuys.dec"
-#include "actors/Monsters/T1-Imps/DyingImps.dec"
-#include "actors/Monsters/T2-Pinkies/DyingDemon.dec"
-#include "actors/Monsters/T1-Imps/DyingDarkImps.dec"
-#include "actors/Monsters/T3-Floaters/DyingCacodemon.dec"
-
-
-#include "actors/Monsters/T1-Grunts/LastStandMonsters.dec"
-#include "actors/Monsters/T1-Grunts/NAZIS.dec"
-
-
-
-
-#include "actors/Spawners/SpawnerScript.dec"
-
-
-actor Z_FloorCheck
+//The Randomizers!!!
+ACTOR STRandom_Chaingun : RandomSpawner
 {
-	Radius 8
-	Height 4
-	+SOLID
-	+NOTIMEFREEZE
+	DropItem "DropedMinigun", 256, 10
+	DropItem "CompactSMG", 256,2
+	DropItem "NewChain_Gun", 256, 1 
+}
+
+ACTOR SSGReplacer : RandomSpawner
+{
+	DropItem "DropedSSG", 256, 4
+	DropItem "DropedASG", 256, 4
+}
+
+ACTOR STRandom_Rocket : RandomSpawner //replaces RocketLauncher //2003
+{
+    DropItem "Grenade_Launcher", 256, 3
+	DropItem "Rocket_Launcher", 256, 3
+	DropItem "Super_Grenade_Launcher", 256, 3
+}
+
+ACTOR STRandom_Plasma : RandomSpawner //replaces PlasmaRifle //2004
+{
+	DropItem "Rail_Gun"
+	DropItem "DropedPlasma"
+	DropItem "Freezer"
+	DropItem "DropedM2Plasma"
+}
+
+ACTOR Random_BFG : RandomSpawner //Replaces BFG9000//2006
+{
+	DropItem "BIG_FUCKING_GUN_MKIV", 256, 4 
+	DropItem "PlasmaBeam", 256, 4
+	DropItem "BHGen", 256, 2
+}
+
+
+actor ArmorReplacer: RandomSpawner Replaces GreenArmor
+{
+	DropItem "LightArmor", 256, 3
+	DropItem "MediumArmor", 256, 2
+}
+
+ACTOR NewRocketAmmo : RocketAmmo Replaces RocketAmmo
+{
+	Inventory.PickUpSound "misc/rocket_PickUp"
+	+FLOORCLIP
+}
+
+ACTOR NewRocketBox : RocketBox //19323
+{
+	Inventory.PickUpSound "misc/rockboxa"
+	+FLOORCLIP
+}
+
+
+ACTOR NewCellPack : CellPack Replaces CellPack
+{
+	Inventory.PickUpSound "misc/bulkcell_PickUp"
+	+FLOORCLIP
 	States
 	{
-		Spawn:
-			TNT1 A 1
-			Stop
+	Spawn:
+		YELP ABCD 2
+		Loop
 	}
 }
 
-ACTOR sae_extcam : Inventory
+ACTOR NewCell : Cell Replaces Cell
 {
-inventory.maxamount 1
+	Inventory.PickUpSound "misc/cell_PickUp"
+	+FLOORCLIP
+	States
+	{
+	Spawn:
+		CELL ABCDE 2
+		Loop
+	}
 }
 
-ACTOR sae_deathcam : Inventory
+ACTOR NewRadSuit : RadSuit Replaces RadSuit
 {
-inventory.maxamount 1
-}
-
-Actor CantFire : Inventory
-{
-inventory.maxamount 1
+	Inventory.PickUpSound "misc/radsuit_PickUp"
+	+FLOORCLIP
+	States
+  	{
+  	Spawn:
+		SUIT A 2
+    	Loop
+  	}
 }
 
 ACTOR PowerNoBloodDamage : PowerProtection
@@ -374,6 +317,331 @@ ACTOR painstate : PowerupGiver
   Powerup.Type "NoBloodDamage"
   +INVENTORY.AUTOACTIVATE
   States  {}
+}
+
+ACTOR HighExplosiveGrenadeRounds : Ammo 
+{
+	Game Doom
+	+FLOORCLIP
+	ConversationID 177, 170, 174
+	Inventory.Amount 6
+	Inventory.MaxAmount 25
+	Ammo.BackpackAmount 6
+	Ammo.BackpackMaxAmount 50
+	Inventory.Icon "LHEGA0"
+	Inventory.PickUpSound "misc/rockboxa"
+	Tag "$TAG_HEGRENADES"
+	Inventory.PickupMessage "You found High Explosive Grenade Rounds"
+	States
+	{
+	Spawn:
+		LHEG A -1
+		Stop
+	}
+}
+
+ACTOR SpecialGrenadeRounds : Ammo
+{
+	Game Doom
+	+FLOORCLIP
+	ConversationID 178, 171, 175
+	Inventory.Amount 4
+	Inventory.MaxAmount 50
+	Ammo.BackpackAmount 4
+	Ammo.BackpackMaxAmount 100
+	Inventory.Icon "LPHGA0"
+	Tag "$TAG_PHGRENADES"
+	Inventory.PickUpSound "misc/rockboxa"
+	Inventory.PickupMessage "$You found Special Grenade Rounds"
+	States
+	{
+	Spawn:
+		LPHG A -1
+		Stop
+	}
+}
+
+ACTOR HEGrenadeBox : HighExplosiveGrenadeRounds// 19321
+{
+  Inventory.Amount 5
+  Inventory.MaxAmount 50
+  Inventory.PickupMessage "You picked up the High Explosive Grenade Box."
+  Scale 0.75
+  States
+  {
+  Spawn:
+    LHEG A -1
+    Stop
+  }
+}
+
+ACTOR SpecialGrenadeBox : SpecialGrenadeRounds //19322
+{
+  Inventory.Amount 12
+  Inventory.MaxAmount 60
+  Inventory.PickupMessage "You picked up the Special Grenade Box."
+  Scale 0.75
+  States
+  {
+  Spawn:
+    LPHG A -1
+    Stop
+  }
+}
+
+ACTOR NewClip : Ammo //Replaces Clip
+{
+	Inventory.PickUpSound "misc/clip_PickUp"
+    Game Doom
+	Inventory.PickUpMessage "Picked up a High Caliber Magazine"
+	Inventory.Amount 15
+    Inventory.MaxAmount 300
+    Ammo.BackpackAmount 15
+    Ammo.BackpackMaxAmount 600
+    Inventory.Icon "CLIPA0"
+    States
+    {
+    Spawn:
+      CLIP A 2
+      Loop
+	}
+}
+
+ACTOR NewClipBox : NewClip //Replaces ClipBox
+{
+	Inventory.PickUpSound "cboxpkup"
+    Game Doom
+	Inventory.Amount 50
+    Inventory.MaxAmount 300
+    Ammo.BackpackAmount 50
+    Ammo.BackpackMaxAmount 600
+    Inventory.Icon "CLIPA0"
+    States
+    {
+    Spawn:
+      AMMO A 2
+      Loop
+	}
+}
+
+ACTOR NewClipBoxBig : NewClip //Replaces ClipBox
+{
+    Game Doom
+	Inventory.Amount 80
+    Inventory.MaxAmount 300
+    Inventory.Icon "CLIPA0"
+	Inventory.PickUpMessage "Picked up a large bullet case"
+	Inventory.PickUpSound "cboxpkup"
+	Ammo.BackpackAmount 80
+    Ammo.BackpackMaxAmount 600
+    States
+    {
+    Spawn:
+	TNT1 A 0 ACS_ExecuteAlways(796, 0, 0, 0, 0)//Check if Vanilla Mode is activated
+      8CLP A 2
+      Loop
+	  
+	  ReplaceVanilla:
+	TNT1 A 0 A_SpawnItemEx("NewClipBox",0,0,0,0,0,0,0,288)
+	TNT1 A 1
+	Stop
+	}
+}
+
+
+
+ACTOR NewShell : Ammo Replaces Shell
+{
+	Inventory.PickUpSound "misc/shell_PickUp"
+	+FLOORCLIP
+	Inventory.Amount 4
+	Inventory.MaxAmount 50
+	Ammo.BackpackAmount 4
+	Ammo.BackpackMaxAmount 100
+	States
+	{
+	Spawn:
+		SHEL A 2
+		Loop
+	}
+}
+
+ACTOR NewShellBox : NewShell //Replaces ShellBox
+{
+	Inventory.PickUpSound "misc/shellbox_PickUp"
+	+FLOORCLIP
+	Inventory.Amount 12
+	Inventory.MaxAmount 50
+	Ammo.BackpackAmount 12
+	Ammo.BackpackMaxAmount 100
+	States
+	{
+	Spawn:
+		SBOX A 2
+		Loop
+	}
+}
+
+ACTOR PistolBullets : Ammo 
+{
+	Scale .62
+	Game Doom
+	SpawnID 11
+	ConversationID 179, 173, 177
+	+FLOORCLIP
+	Inventory.Amount 10
+	Inventory.MaxAmount 200
+	Inventory.PickUpSound "cboxpkup"
+	Ammo.BackpackAmount 10
+	Ammo.BackpackMaxAmount 400
+	Inventory.Icon "MBLKA0"
+	Tag "$TAG_CLIPOFBULLETS"
+	Inventory.PickupMessage "$You picked up a Small Caliber Magazine"
+	States
+	{
+	Spawn:
+		MBLK A -1
+		Stop
+	}
+}
+
+actor BulletKit : PistolBullets //12444
+{
+  Game Doom
+  Scale 1.15
+  Inventory.PickupMessage "Picked up a Small Caliber Round box."
+  Inventory.Amount 30
+  Inventory.MaxAmount 200
+  Ammo.BackpackAmount 30
+  Ammo.BackpackMaxAmount 400
+  States
+  {
+  Spawn:
+	TNT1 A 1 ACS_ExecuteAlways(796, 0, 0, 0, 0)//Check if Vanilla Mode is activated
+    AMOK A -1
+    Stop
+	
+	ReplaceVanilla:
+TNT1 A 0 A_SpawnItemEx("NewClipBox",0,0,0,0,0,0,0,288)
+		Stop
+  }
+}
+
+ACTOR BulletCartridge : PistolBullets //22347
+{
+  Game Doom
+  Inventory.Amount 15
+  Inventory.MaxAmount 200
+  Ammo.BackpackAmount 55
+  Ammo.BackpackMaxAmount 400
+  Inventory.PickupMessage "You picked up a Small Caliber cartridge."
+  States
+  {
+  Spawn:
+	TNT1 A 1 ACS_ExecuteAlways(796, 0, 0, 0, 0)//Check if Vanilla Mode is activated
+    MBLK A -1
+    Stop
+
+ReplaceVanilla:
+TNT1 A 0 A_SpawnItemEx("NewClip",0,0,0,0,0,0,0,288)
+		Stop
+  }
+}
+
+ACTOR BlueKeyCard : CustomInventory Replaces BlueCard
+{
+Inventory.PickUpMessage "Picked up a blue keycard."
+Inventory.PickUpSound "PickUps/keycard"
+States
+	{
+	Spawn:
+		BKEY A 10
+		BKEY B 10 BRIGHT
+		Loop
+	PickUp:
+		TNT1 A 1 A_GiveInventory("BlueCard",1)
+		Stop
+	}
+}
+
+ACTOR RedKeyCard : CustomInventory Replaces RedCard
+{
+Inventory.PickUpMessage "Picked up a red keycard."
+Inventory.PickUpSound "PickUps/keycard"
+States
+	{
+	Spawn:
+		RKEY A 10
+		RKEY B 10 BRIGHT
+		Loop
+	PickUp:
+		TNT1 A 1 A_GiveInventory("RedCard",1)
+		Stop
+	}
+}
+
+ACTOR YellowKeyCard : CustomInventory Replaces YellowCard
+{
+Inventory.PickUpMessage "Picked up a yellow keycard."
+Inventory.PickUpSound "PickUps/keycard"
+States
+	{
+	Spawn:
+		YKEY A 10
+		YKEY B 10 BRIGHT
+		Loop
+	PickUp:
+		TNT1 A 1 A_GiveInventory("YellowCard",1)
+		Stop
+	}
+}
+
+ACTOR BlueSkullKey : CustomInventory Replaces BlueSkull
+{
+Inventory.PickUpMessage "Picked up a blue skull key."
+Inventory.PickUpSound "PickUps/skullkey"
+States
+	{
+	Spawn:
+		BSKU A 10
+		BSKU B 10 BRIGHT
+		Loop
+	PickUp:
+		TNT1 A 1 A_GiveInventory("BlueSkull",1)
+		Stop
+	}
+}
+
+ACTOR RedSkullKey : CustomInventory Replaces RedSkull
+{
+Inventory.PickUpMessage "Picked up a red skull key."
+Inventory.PickUpSound "PickUps/skullkey"
+States
+	{
+	Spawn:
+		RSKU A 10
+		RSKU B 10 BRIGHT
+		Loop
+	PickUp:
+		TNT1 A 1 A_GiveInventory("RedSkull",1)
+		Stop
+	}
+}
+
+ACTOR YellowSkullKey : CustomInventory Replaces YellowSkull
+{
+Inventory.PickUpMessage "Picked up a yellow skull key."
+Inventory.PickUpSound "PickUps/skullkey"
+States
+	{
+	Spawn:
+		YSKU A 10
+		YSKU B 10 BRIGHT
+		Loop
+	PickUp:
+		TNT1 A 1 A_GiveInventory("YellowSkull",1)
+		Stop
+	}
 }
 
 //////////////////////////////////////////////////////////
@@ -434,6 +702,156 @@ inventory.maxamount 1
 }
 
 
+Actor RifleSelected : Inventory
+{
+Inventory.MaxAmount 1
+}
+
+Actor CarbineSelected : Inventory
+{
+Inventory.MaxAmount 1
+}
+
+ACTOR FistsSelected: Inventory
+{
+Inventory.MaxAmount 1
+}
+
+ACTOR SawSelected: Inventory
+{
+Inventory.MaxAmount 1
+}
+
+ACTOR SledgeSelected: Inventory
+{
+Inventory.MaxAmount 1
+}
+
+ACTOR HandgunSelected : Inventory
+{
+Inventory.MaxAmount 1
+}
+
+ACTOR DualHandgunSelected : Inventory
+{
+Inventory.MaxAmount 1
+}
+
+ACTOR RevolverSelected : Inventory
+{
+Inventory.MaxAmount 1
+}
+
+ACTOR ShotgunSelected: Inventory
+{
+Inventory.MaxAmount 1
+}
+
+ACTOR SSGSelected: Inventory
+{
+Inventory.MaxAmount 1
+}
+
+ACTOR QSGSelected: Inventory
+{
+Inventory.MaxAmount 1
+}
+
+ACTOR ASGSelected: Inventory
+{
+Inventory.MaxAmount 1
+}
+
+ACTOR MinigunSelected: Inventory
+{
+Inventory.MaxAmount 1
+}
+
+ACTOR NewchaingunSelected: Inventory
+{
+Inventory.MaxAmount 1
+}
+
+ACTOR RocketLauncherSelected: Inventory
+{
+Inventory.MaxAmount 1
+}
+
+ACTOR GrenadeLauncherSelected: Inventory
+{
+Inventory.MaxAmount 1
+}
+
+ACTOR SGLSelected: Inventory
+{
+Inventory.MaxAmount 1
+}
+
+ACTOR PlasmaGunSelected: Inventory
+{
+Inventory.MaxAmount 1
+}
+
+ACTOR M2Selected: Inventory
+{
+Inventory.MaxAmount 1
+}
+
+ACTOR RailGunSelected: Inventory
+{
+Inventory.MaxAmount 1
+}
+
+ACTOR FreezerSelected: Inventory
+{
+Inventory.MaxAmount 1
+}
+
+ACTOR BFGSelected: Inventory
+{
+Inventory.MaxAmount 1
+}
+
+ACTOR BFGBeamSelected: Inventory
+{
+Inventory.MaxAmount 1
+}
+
+ACTOR BHCSelected: Inventory
+{
+Inventory.MaxAmount 1
+}
+
+ACTOR FlameCannonSelected: Inventory
+{
+Inventory.MaxAmount 1
+}
+
+ACTOR HellRifleSelected: Inventory
+{
+Inventory.MaxAmount 1
+}
+
+ACTOR RevenantLauncherSelected: Inventory
+{
+Inventory.MaxAmount 1
+}
+
+ACTOR SubMachineGunSelected: Inventory
+{
+Inventory.MaxAmount 1
+}
+
+ACTOR UACSMGSelected: Inventory
+{
+Inventory.MaxAmount 1
+}
+
+ACTOR LandMineSelected: Inventory
+{
+Inventory.MaxAmount 1
+}
+
 Actor FallingHeight : Inventory
 {
 inventory.maxamount 100
@@ -443,6 +861,14 @@ Actor FallingHeight2 : Inventory
 {
 inventory.maxamount 100
 }
+
+
+Actor LostSoulSelected: Inventory
+{
+inventory.maxamount 1
+}
+
+
 
 Actor DeathTimer1 : Inventory
 {
@@ -454,6 +880,14 @@ Actor Timer555 : Inventory
 {
 inventory.maxamount 555
 }
+
+
+
+
+
+
+
+
 
 
 Actor TargetIsACyberdemon : Inventory
@@ -479,35 +913,6 @@ inventory.maxamount 1
 
 
 ACTOR CasingsJanitor: Inventory
-{Inventory.MaxAmount 1}
-
-//Monster Ability Toggles
-Actor NoZombieGrenade : Inventory
-{inventory.maxamount 1}
-
-Actor NoCeilingClimb : Inventory
-{inventory.maxamount 1}
-
-Actor NoFoodHealth : Inventory
-{inventory.maxamount 1}
-
-Actor NoJetpack : Inventory
-{inventory.maxamount 1}
-
-Actor NoHellknightCharge : Inventory
-{inventory.maxamount 1}
-
-Actor NoBaronBarrels : Inventory
-{inventory.maxamount 1}
-
-Actor NoBigHeal : Inventory
-{inventory.maxamount 1}
-
-Actor NoArchvileSummon : Inventory
-{inventory.maxamount 1}
-
-Actor NoMancubusTorch : Inventory
-{inventory.maxamount 1}
-
-Actor TurboReload : Inventory
-{inventory.maxamount 1}
+{
+	Inventory.MaxAmount 1
+}
