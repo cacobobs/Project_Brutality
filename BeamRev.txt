@@ -6,12 +6,21 @@ ACTOR BeamRevenant : Revenant1 Replaces Revenant
   +MISSILEEVENMORE
   DropItem "Demonpickup2" 80
   DropItem "Demonpickup" 255
+  DropItem "DemonMorphRune" 2
   
   	Species "Bonehead"
    +DONTHARMSPECIES
 
   States
   {
+  
+  Death.Blackhole:
+		TNT1 A 0 A_JumpIfInventory("RevenantJetpack", 1, "DeathBlackHoleJetpack")
+        TNT1 A 0 A_Scream
+        TNT1 A 0 A_NoBlocking
+        TNT1 A 0 A_SpawnItem("BlackHoledSkeleton")
+		Stop
+  
   Death.Shrink:
 		TNT1 A 1 A_PlaySound("Shrink", 3)
 		TNT1 A 0 A_SpawnItemEx ("BeamRevenantShrinkFX1", 0, 0,  5, 0, 0)
@@ -24,20 +33,14 @@ ACTOR BeamRevenant : Revenant1 Replaces Revenant
 		TNT1 A 1 A_SpawnItemEx ("LilBeamRevenant", 1)
 		stop
   
-  ReplaceVanilla:
-		TNT1 A 0 A_ChangeFlag("THRUACTORS", 1)
-		TNT1 A 0 A_ChangeFlag("COUNTKILL", 0)
-		TNT1 A 0 A_SpawnItemEx ("Vanilla_BeamRevenant",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION | SXF_TRANSFERAMBUSHFLAG ,0)
-		Stop
-	
 	Spawn:
-	TNT1 A 0 ACS_ExecuteAlways(796, 0, 0, 0, 0)//Check if Vanilla Mode is activated
+		TNT1 A 0 ACS_ExecuteAlways(796, 0, 0, 0, 0)//Check if Vanilla Mode is activated
 	    TNT1 A 0 A_JumpIfInventory("Curbstomp_Marine", 1, "FatalityMarine")
 		RASK B 0 A_CheckSight("Spawn2")
 		TNT1 A 0 A_SpawnItem("HeadshotTarget4", 26, 70, 0)
 		RASK A 6 A_Look
 		TNT1 A 0 A_SpawnItem("HeadshotTarget4", 26, 70, 0)
-		Loop
+		Goto Spawn+2
 		
 	Spawn2:
 	    TNT1 A 0 A_JumpIfInventory("Curbstomp_Marine", 1, "FatalityMarine")
@@ -101,14 +104,44 @@ ACTOR BeamRevenant : Revenant1 Replaces Revenant
 	TNT1 A 0
 	TNT1 AAAAAA 0
 	TNT1 A 0 A_SpawnItem("HeadshotTarget8", 0, 70, 0)
-    RASK J 1 Bright A_FaceTarget
+	
+	TNT1 A 0 A_ChangeFlag("NOTARGET", 1)
+	//Aiming with laser pointer
+	TNT1 A 0 A_Playsound("REILAIM")
+	TNT1 A 0 A_CustomRailgun(0, 15, "None", "Red", RGF_SILENT || RGF_NOPIERCING || RGF_FULLBRIGHT , 1, 0, "NullPuff", 0, 0, 0, 2, 0.8, 1.0, "None", 25)
+	TNT1 A 0 A_CustomMissile ("RedFlareSmall", 50, 15, 0, 0)
+    RASK J 2 Bright A_FaceTarget
+	TNT1 A 0 A_CustomMissile ("RedFlareSmall", 50, 15, 0, 0)
+	TNT1 A 0 A_CustomRailgun(0, 15, "None", "Red", RGF_SILENT || RGF_NOPIERCING || RGF_FULLBRIGHT , 1, 0, "NullPuff", 0, 0, 0, 2, 0.8, 1.0, "None", 25)
+	RASK J 2 A_FaceTarget
+	TNT1 A 0 A_CustomMissile ("RedFlareSmall", 50, 15, 0, 0)
+	TNT1 A 0 A_CustomRailgun(0, 15, "None", "Red", RGF_SILENT || RGF_NOPIERCING || RGF_FULLBRIGHT , 1, 0, "NullPuff", 0, 0, 0, 2, 0.8, 1.0, "None", 25)
+    RASK J 2 Bright A_FaceTarget
+	TNT1 A 0 A_CustomMissile ("RedFlareSmall", 50, 15, 0, 0)
+	TNT1 A 0 A_CustomRailgun(0, 15, "None", "Red", RGF_SILENT || RGF_NOPIERCING || RGF_FULLBRIGHT , 1, 0, "NullPuff", 0, 0, 0, 2, 0.8, 1.0, "None", 25)
+	RASK J 2 A_FaceTarget
+	TNT1 A 0 A_CustomMissile ("RedFlareSmall", 50, 15, 0, 0)
+	TNT1 A 0 A_CustomRailgun(0, 15, "None", "Red", RGF_SILENT || RGF_NOPIERCING || RGF_FULLBRIGHT , 1, 0, "NullPuff", 0, 0, 0, 2, 0.8, 1.0, "None", 25)
+    RASK J 2 Bright A_FaceTarget
+	TNT1 A 0 A_CustomMissile ("RedFlareSmall", 50, 15, 0, 0)
+	TNT1 A 0 A_CustomRailgun(0, 15, "None", "Red", RGF_SILENT || RGF_NOPIERCING || RGF_FULLBRIGHT , 1, 0, "NullPuff", 0, 0, 0, 2, 0.8, 1.0, "None", 25)
+	RASK J 2 
+	TNT1 A 0 A_CustomMissile ("RedFlareSmall", 50, 15, 0, 0)
+	TNT1 A 0 A_CustomRailgun(0, 15, "None", "Red", RGF_SILENT || RGF_NOPIERCING || RGF_FULLBRIGHT , 1, 0, "NullPuff", 0, 0, 0, 2, 0.8, 1.0, "None", 25)
+	RASK J 2 Bright
+	TNT1 A 0 A_CustomMissile ("RedFlareSmall", 50, 15, 0, 0)
+	TNT1 A 0 A_CustomRailgun(0, 15, "None", "Red", RGF_SILENT || RGF_NOPIERCING || RGF_FULLBRIGHT , 1, 0, "NullPuff", 0, 0, 0, 2, 0.8, 1.0, "None", 25)
+	RASK J 2 
+
+	
 	TNT1 A 0 A_SpawnItem("HeadshotTarget10", 0, 70, 0)
-    RASK J 8 Bright A_FaceTarget
+    RASK J 6 Bright
 	TNT1 A 0 A_SpawnItem("HeadshotTarget10", 0, 70, 0)
 	TNT1 A 0 A_Playsound("weapons/revrailgf", 2)
     RASK K 8 A_CustomMissile("RevanentBeam",50,15,0,0)
 	TNT1 A 0 A_SpawnItem("HeadshotTarget10", 0, 70, 0)
-    RASK K 10 A_FaceTarget
+    RASK K 15 A_FaceTarget
+	TNT1 A 0 A_ChangeFlag("NOTARGET", 0)
 	TNT1 A 0 A_SpawnItem("HeadshotTarget10", 0, 70, 0)
 	TNT1 A 0 A_StopSound(2)
     Goto See
@@ -131,10 +164,26 @@ ACTOR BeamRevenant : Revenant1 Replaces Revenant
 		SKEX BCDE 6
         TNT1 A 0 A_SpawnItem ("XDeadSkeleton", 1)
         Stop
+		
+		Death.Rare:
+		TNT1 A 0 A_JumpIfInventory("RevenantJetpack", 1, "DeathJetpack")
+	        TNT1 A 0 A_NoBlocking
+		    TNT1 A 0 A_Scream
+	        SKEX A 0 A_SpawnItem("BeamRevenantU", 0, 40)
+		    TNT1 A 0 A_CustomMissile ("RoamingLegs", 0, 0, random (0, 360), 2, random (0, 160))
+			Stop
 	
   Pain:
     RASK L 5
     RASK L 5 A_Pain
+    Goto See
+	
+Possession:
+    TNT1 A 0 A_SetInvulnerable
+    RASK L 3
+    RASK L 3 A_Pain
+    "####" "#" 35 ACS_NamedExecuteAlways("Pos - Flicker effect")
+    TNT1 A 0 A_UnSetInvulnerable
     Goto See
 	
 	Pain.Kick:
@@ -300,16 +349,16 @@ DamageFactor "Blood", 0.0 DamageFactor "BlueBlood", 0.0 DamageFactor "GreenBlood
     Death.KillMe:
     Death.Taunt:
 	    TNT1 A 0 A_ChangeFlag("SOLID", 0)
-        TNT1 A 0 A_SpawnItem("RevenantU")
+        TNT1 A 0 A_SpawnItem("BeamRevenantU")
         Stop
 	}
 }
 
 ACTOR RevanentBeam : FastProjectile
 {
-  Speed 225
-  Radius 4
-  Height 4
+  Speed 130
+  Radius 2
+  Height 2
   Damage 1
   Renderstyle Add
   DamageType Saw
@@ -331,7 +380,7 @@ ACTOR RevanentBeam : FastProjectile
     Loop
   Death:
     TNT1 A 0 A_PlaySound("Weapons/YamatoExp",5)
-    TNT1 A 0 A_Explode(random(10,15),8,0,0)
+    TNT1 A 0 A_Explode(random(10,13),8,0,0)
     TNT1 AAAAAAAAAA 0 A_SpawnItemEx("ObeliskTrailSpark", random(19,-19), random(19,-19), random(19,-19), 0, 0, 0, 0, 128, 0)
     TNT1 A 0 A_SpawnItemEx("ObeliskExplode",0,0,0,0,0,0,0,128,0)
     TNT1 BCD 4

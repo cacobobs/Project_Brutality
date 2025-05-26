@@ -31,6 +31,7 @@ ACTOR ICEVILE Replaces Archvile
 	DamageFactor "Ice", 0.0
 	DamageFactor "Freeze", 0.0//THE FUCKER CAN'T BE KILLED BY THE FREEZER
 	DropItem "DemonStrengthRune" 8
+	DropItem "DemonMorphRune" 12
 	DropItem "RageSphere" 7
 	DropItem "DoubleSphere" 7
 	DropItem "TimeSphere" 7
@@ -48,6 +49,13 @@ ACTOR ICEVILE Replaces Archvile
 	DamageFactor "Flames", 1.45 //KILL IT WITH FIRE
 	States
 	{
+	
+	Death.Blackhole:
+		TNT1 A 0 A_Scream
+        TNT1 A 0 A_NoBlocking
+        TNT1 A 0 A_SpawnItem("BlackHoledArchvile")
+		Stop
+	
 	ReplaceVanilla:
 		TNT1 A 0 A_ChangeFlag("THRUACTORS", 1)
 		TNT1 A 0 A_ChangeFlag("COUNTKILL", 0)
@@ -56,8 +64,9 @@ ACTOR ICEVILE Replaces Archvile
 	
 	Spawn:
 	TNT1 A 0 ACS_ExecuteAlways(796, 0, 0, 0, 0)//Check if Vanilla Mode is activated
+		TNT1 AA 0
 		DIAF B 10 A_Look
-		Loop
+		Goto Spawn+2
 	See:
 		//TNT1 A 0 A_SpawnItem("HeadshotTarget8b",5, 54,0)
 		DIAF A 2 A_Chase
@@ -493,6 +502,14 @@ ACTOR ICEVILE Replaces Archvile
 		DIAF Q 5
 		DIAF Q 5 A_Pain
 		Goto See
+		
+	 Possession:
+    TNT1 A 0 A_SetInvulnerable
+    DIAF Q 3
+    DIAF Q 3 A_Pain
+    "####" "#" 35 ACS_NamedExecuteAlways("Pos - Flicker effect")
+    TNT1 A 0 A_UnSetInvulnerable
+    Goto See
 
 	Pain.Kick:
         TNT1 A 0 A_FaceTarget

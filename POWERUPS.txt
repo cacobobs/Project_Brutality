@@ -1,10 +1,57 @@
-ACTOR GrenadeBox: CustomInventory 23167
+Actor UpgradeSpawner
+{
+	States
+	{
+	
+	Spawn:
+		TNT1 A 1 ACS_ExecuteAlways(796, 0, 0, 0, 0)//Check if Vanilla Mode is activated
+		TNT1 A 1 ACS_NamedExecuteAlways("ToggleUpgrades", 0, 0, 0, 0)//Check if Upgrades are disabled
+		TNT1 A 1 A_Jump(256, "SpawnLMG", "SpawnAutoshotgunUpgrade", "SpawnMinigunUpgrade", "SpawnDragonBreathUpgrade")
+		TNT1 A 0
+	ReplaceVanilla:
+		TNT1 A 0 A_SpawnItemEx("AmmoSuply",0,0,0,0,0,0,0,288)
+		Stop
+		
+	BackpackSpawn:
+		TNT1 A 0
+		TNT1 A 1 ACS_ExecuteAlways(796, 0, 0, 0, 0)//Check if Vanilla Mode is activated
+		TNT1 A 0 A_SpawnItemEx("CombatBackpack",0,0,0,0,0,0,0,288)
+		Stop
+		
+	SpawnLMG:
+		TNT1 A 0
+		TNT1 A 1 ACS_NamedExecuteAlways("ToggleLMG", 0, 0, 0, 0)//Check if Upgrades are disabled
+		TNT1 A 0 A_SpawnItemEx("LMG",0,0,0,0,0,0,0,288)
+		Stop
+		
+	SpawnAutoshotgunUpgrade:
+		TNT1 A 0
+		TNT1 A 1 ACS_NamedExecuteAlways("ToggleAutoshotgunUpgrade", 0, 0, 0, 0)//Check if Upgrades are disabled
+		TNT1 A 0 A_SpawnItemEx("AutoshotgunUpgrade",0,0,0,0,0,0,0,288)
+		Stop
+		
+	SpawnMinigunUpgrade:
+		TNT1 A 0
+		TNT1 A 1 ACS_NamedExecuteAlways("ToggleMinigunUpgrade", 0, 0, 0, 0)//Check if Upgrades are disabled
+		TNT1 A 0 A_SpawnItemEx("MinigunUpgrade",0,0,0,0,0,0,0,288)
+		Stop
+		
+	SpawnDragonBreathUpgrade:
+		TNT1 A 0
+		TNT1 A 1 ACS_NamedExecuteAlways("ToggleDragonBreathUpgrade", 0, 0, 0, 0)//Check if Upgrades are disabled
+		TNT1 A 0 A_SpawnItemEx("DragonBreathShellsUpgrade",0,0,0,0,0,0,0,288)
+		Stop
+	}
+}
+
+ACTOR GrenadeBox: CustomInventory
 {
 	Game Doom
 	Scale 1.0
 	SpawnID 134
 	+COUNTITEM
 	+INVENTORY.ALWAYSPICKUP
+	Inventory.pickupsound "OPNGRN"
 	Inventory.PickupMessage "You found a box of 3 hand grenades and 4 land mines"
 	States
 	{
@@ -21,12 +68,36 @@ ACTOR GrenadeBox: CustomInventory 23167
 	}
 }
 
+ACTOR ExplosivesCrate: CustomInventory
+{
+	Game Doom
+	Scale 0.92
+	+COUNTITEM
+	+INVENTORY.ALWAYSPICKUP
+	Inventory.pickupsound "misc/rockboxa"
+	Inventory.PickupMessage "You found an explosive ordinance crate!"
+	States
+	{
+		Spawn:
+			100M B 2 
+			Loop
+			
+		Pickup:
+		TNT1 A 0 A_GiveInventory("HighExplosiveGrenadeRounds",5) 
+		TNT1 A 0 A_GiveInventory("SpecialGrenadeRounds", 6)  
+		TNT1 A 0 A_GiveInventory("RocketAmmo", 6) 					
+		TNT1 A 20
+		Stop
+		
+	}
+}
+
 ACTOR PowerDoubleDamage : PowerDamage
 {
 	Damagefactor "normal", 2
 }
 
-ACTOR DoubleSphere : PowerupGiver 12369
+ACTOR DoubleSphere : PowerupGiver
 {
 	+COUNTITEM
 	+NOGRAVITY
@@ -41,14 +112,23 @@ ACTOR DoubleSphere : PowerupGiver 12369
 	States
 	{
 	Spawn:
+		TNT1 A 2 A_JumpIf(ACS_NamedExecuteWithResult("CheckTraditional")==1,"ReplaceTraditional")
+		TNT1 AA 0
 		DDMG ABCB 6 Bright
+		Goto Spawn+2
+		
+	ReplaceTraditional:
+		TNT1 A 1
+		Stop
+		
+	Pickup:
 		TNT1 A 0 A_Print ("You got the Demon Damage sphere. You're arsenal craves blood...")
-		Loop
+		Stop
 	}
 }
 
 
-ACTOR RageSphere : PowerupGiver 12572
+ACTOR RageSphere : PowerupGiver
 {
   +COUNTITEM
   +INVENTORY.AUTOACTIVATE
@@ -59,12 +139,19 @@ ACTOR RageSphere : PowerupGiver 12572
   Powerup.Color 255, 0, 0, 0.125
   Inventory.PickupMessage "You got the Rage Sphere. Your fingers tremble with energy..."
   Powerup.Type "PowerDoubleFiringSpeed"
-  Inventory.PickupSound "misc/p_pkup"
+  Inventory.PickupSound "DEM"
   States
   {
+  
   Spawn:
+	TNT1 A 2 A_JumpIf(ACS_NamedExecuteWithResult("CheckTraditional")==1,"ReplaceTraditional")
+	TNT1 AA 0
     BLDS ABCDCB 6 Bright
-    Loop
+    Goto Spawn+2
+	
+	ReplaceTraditional:
+		TNT1 A 1
+		Stop
 	
 	Pickup:
 		TNT1 A 0 A_Print ("You got the Rage Sphere. Your fingers tremble with energy...")
@@ -79,6 +166,7 @@ Actor TimeSphere : PowerupGiver
   +Inventory.AutoActivate
   +Inventory.AlwaysPickup
   Inventory.MaxAmount 0
+  Inventory.pickupsound "TIMESPH"
   Powerup.Type TimeFreezer
   Powerup.Color GoldMap
   Powerup.Duration -10
@@ -553,6 +641,7 @@ ACTOR DidHeal : Inventory {}
 ACTOR HealthBackpack : CustomInventory
 {
 	+INVBAR
+	+DONTGIB
 	Inventory.Amount 100
 	Inventory.MaxAmount 100
 	Inventory.InterHubAmount 100
@@ -577,7 +666,6 @@ ACTOR HealthBackpack : CustomInventory
 		PlaySound:
 		TNT1 A 0 A_GiveInventory("DoHealBackpack", 1)
 		TNT1 A 0 A_TakeInventory("Didheal", 1)
-		//TNT1 A 0 A_PlaySound("FKITUSE")
 		Fail	
 		Give:
 		TNT1 A 0 A_GiveInventory("DidHeal", 1)
@@ -588,12 +676,13 @@ ACTOR HealthBackpack : CustomInventory
 	}
 }
 
-Actor CombatBackpack: Custominventory 23154
+Actor CombatBackpack: Custominventory
 {
 //$Category Ammunition
 	Game Doom
 	Height 26
 	-COUNTITEM
+	+DONTGIB
 	+INVENTORY.ALWAYSPICKUP
 	Inventory.Pickupsound "BACKPCK"
 	Inventory.PickupMessage "Found an advanced COMBAT BACKPACK stuffed with ammo!"
@@ -603,17 +692,17 @@ Actor CombatBackpack: Custominventory 23154
      CMPK ABCDEFG 1 
     Loop
     Pickup:
-	  TNT1 A 0 A_GiveInventory("AdvancedBackpackCounter", 3)
 	  TNT1 A 0 A_GiveInventory("BulletKit", 4)
-      TNT1 A 0 A_GiveInventory("NewClip", 200) //200 bullets
-	  TNT1 A 0 A_GiveInventory("NewShell",40) //40 shells
-      TNT1 A 0 A_GiveInventory("Rocketbox",14) //15 rockets
+      TNT1 A 0 A_GiveInventory("NewClip", 200)
+	  TNT1 A 0 A_GiveInventory("NewShell",50) 
+      TNT1 A 0 A_GiveInventory("Rocketbox",20)
 	  TNT1 A 0 A_GiveInventory("HighExplosiveGrenadeRounds", 10)
 	  TNT1 A 0 A_GiveInventory("SpecialGrenadeRounds", 12)
 	  TNT1 A 0 A_GiveInventory("CellPack",2) //100 plasma ammo
 	  TNT1 A 0 A_GiveInventory("Medikit",2) // 50% healing
 	  TNT1 A 0 A_GiveInventory("Backpack",1) // to grant double ammo capacity
 	  TNT1 A 0 A_GiveInventory("HandGrenadeAmmo", 8)
+	  TNT1 A 0 ACS_NamedExecuteAlways("CombatBackpack", 0, 0, 0, 0)//Check if Upgrades are disabled
       Stop
 	}
 }
@@ -625,6 +714,7 @@ ACTOR AmmoSuply : BackpackItem //Replaces Backpack
 	Game Doom
 	SpawnID 144
 	Height 26
+	+DONTGIB
 	Inventory.PickupMessage "$GOTBACKPACK"
     Inventory.PickUpSound "BACKPCK"
 	States
@@ -656,8 +746,8 @@ ACTOR Beacon : CustomInventory
   States
   {
   Spawn:
-    BEAC A -1
-    Stop
+    B3AC AABBCCDDEEDDCCBB 1 BRIGHT
+    Loop
   Use:
     TNT1 A 1 A_SpawnItemEx ("ActiveBeacon", 56, 0, 8, 0, 0, 0, 0, 1)
     Stop
@@ -704,7 +794,7 @@ DamageFactor "bloodsplasher", 0.0    DamageFactor "tinybloodsplasher", 0.0    Da
     DamageFactor "Fatality", 5.0
     DamageFactor "Shrapnel", 0.4
   MaxTargetRange 2048
-  attacksound "weapons/minigunfire"
+  attacksound "weapons/minigunfire2"
   MONSTER
   +FLOORCLIP
   +FRIENDLY
@@ -756,8 +846,8 @@ ACTOR SentryBox : CustomInventory 12379
   States
   {
   Spawn:
-    SENB A -1
-    Stop
+    S3NB AABBCCDDEEDDCCBB 1 BRIGHT
+    Loop
   Use:
     TNT1 A 1 A_SpawnItemEx ("SentryGun", 56, 0, 8, 0, 0, 0, 0, 1)
     Stop

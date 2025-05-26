@@ -51,6 +51,7 @@ damagefactor "Blood", 0.0 damagefactor "BlueBlood", 0.0 damagefactor "GreenBlood
 	damagefactor "explosiveimpact", 2.0
 	MaxStepHeight 24
 	MaxDropOffHeight 32
+	Species Imp
 	+MISSILEMORE
 	+DONTHURTSPECIES
 	+SLIDESONWALLS
@@ -105,26 +106,26 @@ damagefactor "Blood", 0.0 damagefactor "BlueBlood", 0.0 damagefactor "GreenBlood
 		Stop
 	
 	Spawn:
-	TNT1 A 0 ACS_ExecuteAlways(796, 0, 0, 0, 0)//Check if Vanilla Mode is activated
-	TNT1 A 0 A_GiveInventory("SKImp", 1)
-	TNT1 A 0 A_JumpIf(waterlevel == 2, "Swim")
-	TNT1 A 0 A_JumpIf(waterlevel == 3, "Swim")
-        TNT1 A 0 A_JumpIfInventory("Fatality_Marine", 1, "FatalityMarine")
-		TROO A 0 A_CheckSight("Spawn2")
-        TNT1 A 0 A_SpawnItem ("HeadshotTarget10", 0, 42,0)
-		//TNT1 A 0 A_JumpIf(MomZ < 0, "FallingAfterImpact")// funny thing I tried, better not implement
-		TROO B 10 A_Look
-		TROO A 0 A_CheckSight("Spawn2")
-        TNT1 A 0 A_SpawnItem ("HeadshotTarget10", 0, 42,0)
-		TROS B 10 A_Look
-		Loop
-    Spawn2:
-		TROO B 1 A_Look
-		//TNT1 A 0 A_JumpIf(MomZ < 0, "FallingAfterImpact")// funny thing I tried, better not implement
-		TNT1 A 0 A_JumpIfInventory("LookingForPlayer", 1, "LookingForPlayer")
+		TNT1 A 0 ACS_ExecuteAlways(796, 0, 0, 0, 0)//Check if Vanilla Mode is activated
+		TNT1 A 1 ACS_NamedExecuteAlways("CeilingClimbingImps", 0)//Check for CVARs
+		TNT1 A 0 A_GiveInventory("SKImp", 1)
 		TNT1 A 0 A_JumpIf(waterlevel == 2, "Swim")
 		TNT1 A 0 A_JumpIf(waterlevel == 3, "Swim")
-		Goto Spawn
+        TNT1 A 0 A_JumpIfInventory("Fatality_Marine", 1, "FatalityMarine")
+		Goto Stand
+		
+		Stand:	
+        TNT1 A 0
+		TNT1 A 0 A_CheckSight("Stand2")
+		TNT1 A 0 A_SpawnItem("HeadshotTarget10", 0, 48,0)
+		TROS ABABABABAB 10 A_Look
+		TROS ABABABABABA 10 A_Look
+		Loop
+		
+	Stand2:
+		TROS AB 10 A_Look
+		Goto Stand
+		
 		
 	Idle:
 	LookingForPlayer:
@@ -240,10 +241,11 @@ damagefactor "Blood", 0.0 damagefactor "BlueBlood", 0.0 damagefactor "GreenBlood
 	
 	CeilingLatch:
 	TNT1 A 0 A_ChangeFlag("NOGRAVITY", 1)
-	TNT1 A 0 A_ChangeFlag("CEILINGHUGGER", 1)
+	TNT1 A 0 A_ChangeFlag("THRUSPECIES", 1)
+//	TNT1 A 0 A_ChangeFlag("CEILINGHUGGER", 1)
 	TNT1 A 0 A_ChangeFlag("NOVERTICALMELEERANGE", 1)
 	TNT1 A 0 A_GiveInventory ("IsOnCeiling", 1)
-	2M40 H 8
+	2M40 HHHHHHHH 1 ThrustThingZ(0,500,0,1)
 	Goto CeilingCrawl
 	
 	CeilingCrawl:
@@ -256,54 +258,83 @@ damagefactor "Blood", 0.0 damagefactor "BlueBlood", 0.0 damagefactor "GreenBlood
 		TNT1 A 0 A_SpawnItem("HeadshotTarget4", 0, 48,0)
 		TNT1 A 0 A_SpawnItem ("LegTargetBase", 10)
 		TNT1 A 0 A_JumpIf(CallACS("IsThisSky") == 1, "CeilingPounce")
-		//TNT1 A 0 A_JumpIf(momz > 0 || momz < 0, "CeilingPounce")
+		//TNT1 A 0 A_JumpIf(momz != 0, "CeilingPounce")
+		TNT1 A 0 ThrustThingZ(0,500,0,1)
 		2M40 II 2 A_Chase("CeilingPounce", "CeilingMissile")
 		//ContinueCeilingCrawl1:
 		TNT1 A 0 A_Recoil(-1)
 		TNT1 A 0 A_SpawnItem("HeadshotTarget4", 0, 48,0)
 		TNT1 A 0 A_SpawnItem ("LegTargetBase", 10)
+		TNT1 A 0 ThrustThingZ(0,500,0,1)
 		2M40 II 2 A_Chase("CeilingPounce", "CeilingMissile")
+		TNT1 A 0 A_JumpIf(momz != 0, "CeilingPounce")
 		TNT1 A 0 A_PlaySound("flesh/step",4)
         TNT1 A 0 A_TakeInventory("SKImp", 1)
 		//ContinueCeilingCrawl2:
 		TNT1 A 0 A_SpawnItem("HeadshotTarget4", 0, 48,0)
 		TNT1 A 0 A_SpawnItem ("LegTargetBase", 10)
+		TNT1 A 0 ThrustThingZ(0,500,0,1)
 		2M40 JJ 2 A_Chase("CeilingPounce", "CeilingMissile")
 		//ContinueCeilingCrawl3:
 		TNT1 A 0 A_SpawnItem("HeadshotTarget4", 0, 48,0)
 		TNT1 A 0 A_SpawnItem ("LegTargetBase", 10)
+		TNT1 A 0 ThrustThingZ(0,500,0,1)
 		2M40 JJ 2 A_Chase("CeilingPounce", "CeilingMissile")
 		TNT1 A 0 A_PlaySound("flesh/step",4)
 		TNT1 A 0 
 		TNT1 A 0 A_JumpIf(CallACS("IsThisSky") == 1, "CeilingPounce")
-		//TNT1 A 0 A_JumpIf(momz > 0 || momz < 0, "CeilingPounce")
+		TNT1 A 0 A_JumpIf(momz != 0, "CeilingPounce")
 		//ContinueCeilingCrawl4:
 		TNT1 A 0 A_SpawnItem("HeadshotTarget4", 0, 48,0)
 		TNT1 A 0 A_SpawnItem ("LegTargetBase", 10)
+		TNT1 A 0 ThrustThingZ(0,500,0,1)
 		2M40 KK 2 A_Chase("CeilingPounce", "CeilingMissile")
 		//ContinueCeilingCrawl5:
 		TNT1 A 0 A_SpawnItem("HeadshotTarget4", 0, 48,0)
 		TNT1 A 0 A_SpawnItem ("LegTargetBase", 10)
+		TNT1 A 0 ThrustThingZ(0,500,0,1)
 		2M40 KK 2 A_Chase("CeilingPounce", "CeilingMissile")
 		TNT1 A 0 A_PlaySound("flesh/step",4)
 		TNT1 A 0 A_JumpIf(CallACS("IsThisSky") == 1, "CeilingPounce")
-		//TNT1 A 0 A_JumpIf(momz > 0 || momz < 0, "CeilingPounce")
+		TNT1 A 0 A_JumpIf(momz != 0, "CeilingPounce")
 		//ContinueCeilingCrawl6:
 		TNT1 A 0 A_SpawnItem("HeadshotTarget4", 0, 48,0)
 		TNT1 A 0 A_SpawnItem ("LegTargetBase", 10)
+		TNT1 A 0 ThrustThingZ(0,500,0,1)
 		2M40 HH 2 A_Chase("CeilingPounce", "CeilingMissile")
 		//ContinueCeilingCrawl7:
 		TNT1 A 0 A_SpawnItem("HeadshotTarget4", 0, 48,0)
 		TNT1 A 0 A_SpawnItem ("LegTargetBase", 10)
+		TNT1 A 0 ThrustThingZ(0,500,0,1)
 		2M40 HH 2 A_Chase("CeilingPounce", "MaybeCeilingPounce")
 		TNT1 A 0 A_PlaySound("flesh/step",4)
 		TNT1 A 0 A_JumpIf(CallACS("IsThisSky") == 1, "CeilingPounce")
-		//TNT1 A 0 A_JumpIf(momz > 0 || momz < 0, "CeilingPounce")
+		TNT1 A 0 A_JumpIf(momz != 0, "CeilingPounce")
+		TNT1 A 0 A_JumpIfTargetInLOS(1)
+		Goto CeilingDrop
+		TNT1 A 0
+		TNT1 A 0 A_Jump(224, 3)
+		TNT1 A 0 A_JumpIfCloser(1200, "CeilingDrop")
+		TNT1 AAAAA 0 
 		Loop
 		
+	CeilingDrop:
+		TNT1 AAA 0
+		TNT1 A 0 A_TakeInventory ("IsOnCeiling")
+		TNT1 A 0 A_ChangeFlag("NOGRAVITY", 0)//CEILINGHUGGER
+		TNT1 A 0 A_ChangeFlag("CEILINGHUGGER", 0)
+		2M40 DCBA 1 A_FaceTarget
+	CeilingDropping:
+		TROT F 1 A_JumpIf (momz == 0, "CeilingLanding")
+		loop
+	CeilingLanding:
+		TNT1 A 0 A_PlaySound("flesh/step",4)
+		TROT GHCD 5 A_FaceTarget
+		Goto SeeContinue
 	CeilingMissile:
 		TNT1 D 0 A_SpawnItem("HeadshotTarget23", 0, 48,0)
 		TNT1 A 0 A_SpawnItem ("LegTarget30", 10)
+		TNT1 A 0 ThrustThingZ(0,500,0,1)
 		2M40 L 4 A_FaceTarget
         TNT1 A 0 A_JumpIfCloser(150, "CeilingPounce")
 		TNT1 A 0 A_Playsound ("IMPCHARG")
@@ -313,29 +344,36 @@ damagefactor "Blood", 0.0 damagefactor "BlueBlood", 0.0 damagefactor "GreenBlood
 
 		 TNT1 A 0 A_CustomMissile ("SmallFlameTrails", 25, -30, random (0, 40), 2, random (0, 160))
         TNT1 A 0 A_CustomMissile ("ImBallGettingReady", 25, -30, random (0, 140), 2, random (0, 160))
+		TNT1 A 0 ThrustThingZ(0,500,0,1)
 		2M40 L 2 A_FaceTarget
 		TNT1 A 0 A_SpawnItem ("LegTargetBase", 10)
 		        TNT1 A 0 A_CustomMissile ("SmallFlameTrails", 25, -30, random (0, 40), 2, random (0, 160))
         TNT1 A 0 A_CustomMissile ("ImBallGettingReady", 25, -30, random (0, 140), 2, random (0, 160))
+		TNT1 A 0 ThrustThingZ(0,500,0,1)
 		2M40 L 2 A_FaceTarget
 		TNT1 A 0 A_SpawnItem ("LegTargetBase", 10)
 		TNT1 D 0 A_SpawnItem("HeadshotTarget23", 0, 48,0)
 		        TNT1 A 0 A_CustomMissile ("SmallFlameTrails", 25, -30, random (0, 40), 2, random (0, 160))
         TNT1 A 0 A_CustomMissile ("ImBallGettingReady", 25, -30, random (0, 140), 2, random (0, 160))
+		TNT1 A 0 ThrustThingZ(0,500,0,1)
 		2M40 L 2 A_FaceTarget
 		TNT1 A 0 A_SpawnItem ("LegTargetBase", 10)
 		TNT1 D 0 A_SpawnItem("HeadshotTarget23", 0, 48,0)
 		TNT1 A 0 A_CustomMissile ("SmallFlameTrails", 25, -30, random (0, 40), 2, random (0, 160))
         TNT1 A 0 A_CustomMissile ("ImBallGettingReady", 25, -30, random (0, 140), 2, random (0, 160))
+		TNT1 A 0 ThrustThingZ(0,500,0,1)
 		2M40 L 2 A_FaceTarget
 		TNT1 A 0 A_SpawnItem ("LegTargetBase", 10)
 		TNT1 D 0 A_SpawnItem("HeadshotTarget23", 0, 48,0)
 		TNT1 A 0 A_CustomMissile ("SmallFlameTrails", 25, -30, random (0, 40), 2, random (0, 160))
         TNT1 A 0 A_CustomMissile ("ImBallGettingReady", 25, -30, random (0, 140), 2, random (0, 160))
+		TNT1 A 0 ThrustThingZ(0,500,0,1)
 		2M40 M 2 A_FaceTarget
 		TNT1 D 0 A_SpawnItem("HeadshotTarget10", 0, 48,0)
 		TNT1 A 0 A_SpawnItem ("LegTargetBase", 10)
+		TNT1 A 0 ThrustThingZ(0,500,0,1)
 		2M40 N 6 A_CustomMissile("FireBall_", 22, 0, 0, 0) 
+		TNT1 A 0 ThrustThingZ(0,500,0,1)
 		2M40 M 4
 		Goto CeilingCrawl
 		
@@ -347,6 +385,7 @@ damagefactor "Blood", 0.0 damagefactor "BlueBlood", 0.0 damagefactor "GreenBlood
 		TNT1 A 0 A_TakeInventory ("IsOnCeiling")
 		TNT1 A 0 A_ChangeFlag("NOGRAVITY", 0)//CEILINGHUGGER
 		TNT1 A 0 A_ChangeFlag("CEILINGHUGGER", 0)
+		TNT1 A 0 A_ChangeFlag("THRUSPECIES", 0)
 		TNT1 A 0 A_Recoil (-18)
 		TNT1 A 0 A_FaceTarget
 		TNT1 A 0 A_PlaySound("weapons/fistwhoosh")
@@ -402,7 +441,9 @@ damagefactor "Blood", 0.0 damagefactor "BlueBlood", 0.0 damagefactor "GreenBlood
 		TNT1 A 0 A_SpawnItem("HeadshotTarget4", 0, 48,0)
 		TNT1 A 0 A_SpawnItem ("LegTargetBase", 10)
 		TROO DD 2 A_Chase
-		TNT1 A 0 A_Jump(232, 3)
+		TNT1 A 0 A_JumpIfInventory("NoCeilingClimb", 1, 6)
+		TNT1 A 0 A_JumpIf(ACS_NamedExecuteWithResult("CeilingClimbingImps")==1, "SeeContinue")
+		TNT1 A 0 A_Jump(236, 3)
 		TNT1 A 0 A_JumpIfCloser(800, "CeilingJump")
 		TNT1 AAAAA 0 
 		Loop
@@ -591,7 +632,7 @@ damagefactor "Blood", 0.0 damagefactor "BlueBlood", 0.0 damagefactor "GreenBlood
 		TNT1 A 0 A_JumpIfIntargetInventory("FistsSelected", 1, 1)
 		Goto Death.ExplosiveImpact
 		TNT1 A 0 A_GiveToTarget("GoFatality", 1)
-		TNT1 A 0 A_Jump(255, "Death.Fatality1", "Death.Fatality2", "Death.Fatality3", "Death.Fatality4", "Death.Fatality5", "Death.Fatality5")
+		TNT1 A 0 A_Jump(255, "Death.Fatality1", "Death.Fatality2", "Death.Fatality3", "Death.Fatality4", "Death.Fatality5")
 		Goto Death.Fatality1
  
         Death.Fatality1:
@@ -623,6 +664,7 @@ damagefactor "Blood", 0.0 damagefactor "BlueBlood", 0.0 damagefactor "GreenBlood
 		
 	Pain.Melee:
 		TNT1 A 0 A_ChangeFlag("NOGRAVITY", 0)
+		TNT1 A 0 A_ChangeFlag("THRUSPECIES", 0)
 		TNT1 A 0 A_ChangeFlag("CEILINGHUGGER", 0)
 		TNT1 D 0
 		TROO A 2
@@ -634,6 +676,7 @@ damagefactor "Blood", 0.0 damagefactor "BlueBlood", 0.0 damagefactor "GreenBlood
 	Pain:
 	    TNT1 A 0
 		TNT1 A 0 A_ChangeFlag("NOGRAVITY", 0)
+		TNT1 A 0 A_ChangeFlag("THRUSPECIES", 0)
 		TNT1 A 0 A_ChangeFlag("CEILINGHUGGER", 0)
 		TNT1 A 0 A_JumpIfInventory("IsOnCeiling", 1, "PainCanFallFromCeiling")
 		TNT1 A 0 A_JumpIfInventory("IsDown", 1, "Pain.IsDown")
@@ -643,10 +686,19 @@ damagefactor "Blood", 0.0 damagefactor "BlueBlood", 0.0 damagefactor "GreenBlood
 		TROO H 3
 		TROO H 3 A_Pain
 		Goto SeeContinue
+		
+	 Possession:
+		TNT1 A 0 A_SetInvulnerable
+		TROO H 3
+		TROO H 3 A_Pain
+		"####" "#" 35 ACS_NamedExecuteAlways("Pos - Flicker effect")
+		TNT1 A 0 A_UnSetInvulnerable
+		Goto See
 	
 	Pain.IsDown:
 	    TNT1 A 0
 		TNT1 A 0 A_ChangeFlag("NOGRAVITY", 0)
+		TNT1 A 0 A_ChangeFlag("THRUSPECIES", 0)
 		TNT1 A 0 A_ChangeFlag("CEILINGHUGGER", 0)
 	    ID11 B 1
 	    ID11 B 5 A_Pain
@@ -667,6 +719,7 @@ damagefactor "Blood", 0.0 damagefactor "BlueBlood", 0.0 damagefactor "GreenBlood
     Pain.head:
 	Pain.minorhead:
 		TNT1 A 0 A_ChangeFlag("NOGRAVITY", 0)
+		TNT1 A 0 A_ChangeFlag("THRUSPECIES", 0)
 		TNT1 A 0 A_ChangeFlag("CEILINGHUGGER", 0)
 		TNT1 A 0 A_JumpIfInventory("IsOnCeiling", 1, "PainCanFallFromCeiling")
 		TNT1 D 0 A_SpawnItem("HeadshotTarget10", 0, 48,0)
@@ -675,11 +728,12 @@ damagefactor "Blood", 0.0 damagefactor "BlueBlood", 0.0 damagefactor "GreenBlood
 		TROO H 6 A_Pain
 		Goto SeeContinue
 
-Pain.ExplosiveImpact:
+	Pain.ExplosiveImpact:
 	Pain.Explosive:
 	Pain.ExtremePunches:
 	         TNT1 A 0
 			 TNT1 A 0 A_ChangeFlag("NOGRAVITY", 0)
+			 TNT1 A 0 A_ChangeFlag("THRUSPECIES", 0)
 		TNT1 A 0 A_ChangeFlag("CEILINGHUGGER", 0)
 	         TNT1 A 0 A_Pain
 		 TNT1 A 0 A_JumpIfInventory ("IsDown", 1, "Pain")
@@ -693,6 +747,7 @@ Pain.ExplosiveImpact:
     Pain.Kick:
          TNT1 A 0
 		 TNT1 A 0 A_ChangeFlag("NOGRAVITY", 0)
+		 TNT1 A 0 A_ChangeFlag("THRUSPECIES", 0)
 		TNT1 A 0 A_ChangeFlag("CEILINGHUGGER", 0)
          IZD4 K 1 A_Pain
 		// TNT1 A 0 A_JumpIfInventory ("IsDown", 1, "Pain")
@@ -705,20 +760,13 @@ Pain.ExplosiveImpact:
          IZD4 L 8
 		Goto FallingAfterImpact
 		
-	FallingAfterImpact:
-		IZD4 L 1 A_GiveInventory ("FallingHeight", 1)
-		TNT1 A 0 A_JumpIf(waterlevel == 2, "Swim")
-		TNT1 A 0 A_JumpIf(waterlevel == 3, "Swim")
-		IZD4 L 1 A_CheckFloor ("GetUp")
-		TNT1 A 0 A_ChangeFlag("NOPAIN", 0)
-		NULL A 0 A_JumpIf (momz == 0, "GetUp")
-		Loop
 		
 	PainCanFallFromCeiling:
 		    TNT1 A 0 A_ChangeFlag("NOGRAVITY", 0)
+			TNT1 A 0 A_ChangeFlag("THRUSPECIES", 0)
 			TNT1 A 0 A_ChangeFlag("CEILINGHUGGER", 0)
 			TNT1 A 0 A_TakeInventory ("IsOnCeiling")
-		FallingAfterImpact:
+	FallingAfterImpact:
 		IZD4 L 1 A_GiveInventory ("FallingHeight", 1)
 		TNT1 A 0 A_JumpIf(waterlevel == 2, "Swim")
 		TNT1 A 0 A_JumpIf(waterlevel == 3, "Swim")
@@ -737,7 +785,7 @@ Pain.ExplosiveImpact:
 		TNT1 A 0 A_ChangeFlag("SOLID", 0)
 		TNT1 A 0 A_ChangeFlag("FORCEXYBILLBOARD", 1)
 		TNT1 A 0 A_GiveInventory("ISDOWN", 1)
-		TNT1 A 0 A_JumpIfInventory ("FallingHeight", 6, "FallingDie")
+		TNT1 A 0 A_JumpIfInventory ("FallingHeight", 8, "FallingDie")
 		IZD4 MMMMMMMM 5 A_JumpIf(momz < 0, "FallingAfterImpact")
 		TNT1 A 0 A_ChangeFlag("SOLID", 1)
 		TNT1 A 0 A_TakeInventory("ISDOWN", 1)
@@ -753,9 +801,10 @@ Pain.ExplosiveImpact:
 	TNT1 A 0 A_ChangeFlag("SHOOTABLE", 0)
 	TNT1 A 0 A_JumpIfInventory ("FallingHeight", 30, "Death.Stomp")
 	TNT1 A 0 A_JumpIfInventory ("FallingHeight", 20, "FallingSuperDeath")
-	TNT1 A 0 A_JumpIfInventory ("FallingHeight", 6, "FallingDeath")
+	TNT1 A 0 A_JumpIfInventory ("FallingHeight", 7, "FallingDeath")
 	
 	FallingDeath:
+	Death.FellFromALongFall:
 	TROO M 1
 	TNT1 A 0 A_Scream
 	TNT1 A 0 A_NoBLocking
@@ -774,6 +823,7 @@ Pain.ExplosiveImpact:
 
 	PainHurt:
 		TNT1 A 0 A_ChangeFlag("NOGRAVITY", 0)
+		TNT1 A 0 A_ChangeFlag("THRUSPECIES", 0)
 		TNT1 A 0 A_ChangeFlag("CEILINGHUGGER", 0)
 		TNT1 A 0 A_TakeInventory("SKImp", 1)
 		TNT1 D 0 A_SpawnItem("HeadshotTarget4", 0, 48,0)
@@ -783,6 +833,7 @@ Pain.ExplosiveImpact:
 		
 	Pain.BlackHole:
 		TNT1 A 0 A_ChangeFlag("NOGRAVITY", 0)
+		TNT1 A 0 A_ChangeFlag("THRUSPECIES", 0)
 		TNT1 A 0 A_ChangeFlag("CEILINGHUGGER", 0)
          IZD4 K 1 A_Pain
          TNT1 A 0 A_GiveInventory("IsDown", 1)
@@ -855,6 +906,7 @@ Death.MinorLeg:
 	Death:
         TNT1 A 0
 		TNT1 A 0 A_ChangeFlag("NOGRAVITY", 0)
+		TNT1 A 0 A_ChangeFlag("THRUSPECIES", 0)
 		TNT1 A 0 A_ChangeFlag("CEILINGHUGGER", 0)
         TNT1 A 0 A_JumpIfInventory("IsJumping", 1, "DeathJump")
         TNT1 A 0 A_Jump(32, "Death.Arm")
@@ -872,6 +924,7 @@ Death.MinorLeg:
 	Death.Down:
 	Death.Trample:
 		TNT1 A 0 A_ChangeFlag("NOGRAVITY", 0)
+		TNT1 A 0 A_ChangeFlag("THRUSPECIES", 0)
 		TNT1 A 0 A_ChangeFlag("CEILINGHUGGER", 0)
 	    TNT1 A 0 A_Scream
 		TNT1 A 0 A_NoBlocking
@@ -884,16 +937,18 @@ Death.MinorLeg:
 		Death.Fire:
         TNT1 A 0
 		TNT1 A 0 A_ChangeFlag("NOGRAVITY", 0)
+		TNT1 A 0 A_ChangeFlag("THRUSPECIES", 0)
 		TNT1 A 0 A_ChangeFlag("CEILINGHUGGER", 0)
 		TNT1 A 0 A_Scream
         TNT1 A 0 A_NoBlocking
-		TNT1 A 0 A_SpawnItem("BurningImpRunning", 0, 10)
+		TNT1 A 0 A_SpawnItemEx("BurningImpRunning",0,0,0,0,0,0,0,288)
         Stop
 		
 		
 		Death20alt:
         TNT1 A 0
 		TNT1 A 0 A_ChangeFlag("NOGRAVITY", 0)
+		TNT1 A 0 A_ChangeFlag("THRUSPECIES", 0)
 		TNT1 A 0 A_ChangeFlag("CEILINGHUGGER", 0)
 		TNT1 A 0 A_Scream
         TNT1 A 0 A_NoBlocking
@@ -906,6 +961,7 @@ Death.MinorLeg:
 
      Death.Arm:
 		TNT1 A 0 A_ChangeFlag("NOGRAVITY", 0)
+		TNT1 A 0 A_ChangeFlag("THRUSPECIES", 0)
 		TNT1 A 0 A_ChangeFlag("CEILINGHUGGER", 0)
 		TNT1 A 0 A_CustomMissile ("XDeathImpArm", 35, 0, random (0, 360), 2, random (0, 160))
 		TNT1 A 0 A_Scream
@@ -925,6 +981,7 @@ Death.MinorLeg:
       Death.Leg:
 	  TNT1 A 0
 	  TNT1 A 0 A_ChangeFlag("NOGRAVITY", 0)
+	  TNT1 A 0 A_ChangeFlag("THRUSPECIES", 0)
 		TNT1 A 0 A_ChangeFlag("CEILINGHUGGER", 0)
 	  TNT1 A 0 A_Jump(64, "DeathLeg2")
 	  TNT1 A 0 A_JumpIfInventory("IsJumping", 1, "Death.LegInTheAir")
@@ -949,6 +1006,7 @@ Death.MinorLeg:
 
     DeathJump:
 		 TNT1 A 0 A_ChangeFlag("NOGRAVITY", 0)
+		 TNT1 A 0 A_ChangeFlag("THRUSPECIES", 0)
 		TNT1 A 0 A_ChangeFlag("CEILINGHUGGER", 0)
          TNT1 A 0 A_Scream
          TNT1 A 0 A_NoBlocking
@@ -991,6 +1049,7 @@ Death.MinorLeg:
 			TNT1 A 0 A_JumpIfInventory ("SKImp", 1, "StealthKill")
       Death.Kick: 
 		 TNT1 A 0 A_ChangeFlag("NOGRAVITY", 0)
+		 TNT1 A 0 A_ChangeFlag("THRUSPECIES", 0)
 		TNT1 A 0 A_ChangeFlag("CEILINGHUGGER", 0)
          
 		 TNT1 A 0 A_Scream
@@ -1013,6 +1072,7 @@ Death.MinorLeg:
 		
 	Death.head:
 		TNT1 A 0 A_ChangeFlag("NOGRAVITY", 0)
+		TNT1 A 0 A_ChangeFlag("THRUSPECIES", 0)
 		TNT1 A 0 A_ChangeFlag("CEILINGHUGGER", 0)
 	    TNT1 A 0 A_JumpIfInTargetInventory("HasPlasmaWeapon", 1, "Death.Plasma")
 		TNT1 A 0 A_JumpIfInTargetInventory("HasCutingWeapon", 1, "Death.Decaptate")
@@ -1127,6 +1187,7 @@ Death.MinorLeg:
 	Death.Saw:
         TNT1 A 0
 		TNT1 A 0 A_ChangeFlag("NOGRAVITY", 0)
+		TNT1 A 0 A_ChangeFlag("THRUSPECIES", 0)
 		TNT1 A 0 A_ChangeFlag("CEILINGHUGGER", 0)
         TNT1 A 0 A_Jump(48, "Death.Arm", "Death")
         TNT1 A 0 A_Jump(32,"DeathNoGuts")
@@ -1139,6 +1200,7 @@ Death.MinorLeg:
 	    Death.cutless:
         TNT1 A 0
 		TNT1 A 0 A_ChangeFlag("NOGRAVITY", 0)
+		TNT1 A 0 A_ChangeFlag("THRUSPECIES", 0)
 		TNT1 A 0 A_ChangeFlag("CEILINGHUGGER", 0)
        TNT1 A 0 A_JumpIfInventory ("IsDown", 1, "Death.Down")
 	   TNT1 A 0 A_Jump(42,"DeathNoGuts")
@@ -1146,12 +1208,18 @@ Death.MinorLeg:
 		TNT1 A 0 A_Jump(16, "Death.LegMassacre")
         Goto Death.Minigun
 		
-	        Death.Minigun:
+	    Death.Minigun:
         TNT1 A 0
 		TNT1 A 0 A_FaceTarget
 		TNT1 A 0 A_Scream
 		TNT1 O 0 A_NoBlocking
+		TNT1 A 0 A_Jump(128, "DeathMinigun2")
         TNT1 A 0 A_SpawnItem ("BrutalizedImp1", 1)
+		Stop
+		
+		DeathMinigun2:
+        TNT1 A 0
+        TNT1 A 0 A_SpawnItem ("BrutalizedImp4", 1)
 		Stop
 		
 		Death.LegMassacre:
@@ -1178,6 +1246,7 @@ Death.MinorLeg:
 
 	Death.Tear:
 		TNT1 A 0 A_ChangeFlag("NOGRAVITY", 0)
+		TNT1 A 0 A_ChangeFlag("THRUSPECIES", 0)
 		TNT1 A 0 A_ChangeFlag("CEILINGHUGGER", 0)
 		TNT1 A 0 A_Jump(128, "Tear2", "Tear3", "Tear4")
 		TNT1 A 0 A_XScream
@@ -1334,6 +1403,7 @@ DeathNoGuts2:
 		
     Death.Plasma: Death.Plasma2:
 			TNT1 A 0 A_ChangeFlag("NOGRAVITY", 0)
+			TNT1 A 0 A_ChangeFlag("THRUSPECIES", 0)
 		TNT1 A 0 A_ChangeFlag("CEILINGHUGGER", 0)
 	TNT1 A 0 A_Jump(118, "OtherPlasmaDeath")
 	PBR1 A 6 A_Scream
@@ -1405,6 +1475,7 @@ DeathNoGuts2:
 	Death.Railgun:
 	    TNT1 A 0
 		TNT1 A 0 A_ChangeFlag("NOGRAVITY", 0)
+		TNT1 A 0 A_ChangeFlag("THRUSPECIES", 0)
 		TNT1 A 0 A_ChangeFlag("CEILINGHUGGER", 0)
 		TNT1 A 0 A_FaceTarget
 		TNT1 A 0 A_Jump(12, "Death.Arm")
@@ -1452,6 +1523,7 @@ DeathNoGuts2:
 	Death.SSG:
 	Death.SuperPunch:
 		TNT1 A 0 A_ChangeFlag("NOGRAVITY", 0)
+		TNT1 A 0 A_ChangeFlag("THRUSPECIES", 0)
 		TNT1 A 0 A_ChangeFlag("CEILINGHUGGER", 0)
 	    IZD1 E 1 A_Pain
 		IZD1 E 1 A_FaceTarget
@@ -1481,6 +1553,7 @@ DeathNoGuts2:
 		TNT1 A 1 A_JumpIfInTargetInventory("RocketLauncherSelected", 1, "RocketMan")
 	XDeath:
 		TNT1 A 0 A_ChangeFlag("NOGRAVITY", 0)
+		TNT1 A 0 A_ChangeFlag("THRUSPECIES", 0)
 		TNT1 A 0 A_ChangeFlag("CEILINGHUGGER", 0)
 		TNT1 A 0 A_JumpIfInTargetInventory("SSGSelected", 1, "Death.SSG")
 		TNT1 A 0 A_XScream
@@ -1507,6 +1580,7 @@ DeathNoGuts2:
 	Death.ExtremePunches:
 		TNT1 A 0
 		TNT1 A 0 A_ChangeFlag("NOGRAVITY", 0)
+		TNT1 A 0 A_ChangeFlag("THRUSPECIES", 0)
 		TNT1 A 0 A_ChangeFlag("CEILINGHUGGER", 0)
 		TNT1 A 0 A_NoBlocking
 		TNT1 A 0 A_XScream
@@ -1536,11 +1610,24 @@ DeathNoGuts2:
 		Stop
 		
 		Dead.ExplosiveImpact:
+		TNT1 A 0 A_Jump(128, "Dead.ExplosiveImpact2")
 		TNT1 O 0 A_NoBlocking
 		TNT1 A 0 A_ChangeFlag("NOGRAVITY", 0)
+		TNT1 A 0 A_ChangeFlag("THRUSPECIES", 0)
 		TNT1 A 0 A_ChangeFlag("CEILINGHUGGER", 0)
 		TNT1 A 0 A_SpawnItem ("GrowingBloodPool")
 		TNT1 A 0 A_SpawnItem ("ThisImpGotFuckedHard")
+		TNT1 A 0 A_SpawnItem ("Ploft")
+		TNT1 AAAA 0 A_SpawnItem ("Blood")
+		Stop
+		
+		Dead.ExplosiveImpact2:
+		TNT1 O 0 A_NoBlocking
+		TNT1 A 0 A_ChangeFlag("NOGRAVITY", 0)
+		TNT1 A 0 A_ChangeFlag("THRUSPECIES", 0)
+		TNT1 A 0 A_ChangeFlag("CEILINGHUGGER", 0)
+		TNT1 A 0 A_SpawnItem ("GrowingBloodPool")
+		TNT1 A 0 A_SpawnItem ("ThisImpGotFuckedHard2")
 		TNT1 A 0 A_SpawnItem ("Ploft")
 		TNT1 AAAA 0 A_SpawnItem ("Blood")
 		Stop
@@ -1550,6 +1637,7 @@ DeathNoGuts2:
 		Death.LandMine2:
 		TNT1 O 0 A_NoBlocking
 	TNT1 A 0 A_ChangeFlag("NOGRAVITY", 0)
+	TNT1 A 0 A_ChangeFlag("THRUSPECIES", 0)
 		TNT1 A 0 A_ChangeFlag("CEILINGHUGGER", 0)
 	TNT1 A 0 ThrustThingZ(0,15,0,1)
 	Death.LegInTheAir:
@@ -1764,6 +1852,7 @@ ACTOR FireBall_ Replaces DoomImpBall
 	{
 	Spawn:
 	    TNT1 A 0 A_JumpIf(waterlevel > 1, "SpawnUnderwater")
+		TNT1 A 0 //A_JumpIf(ACS_NamedExecuteWithResult("PerformanceMode")==1,"SpawnCheap")
 		TNT1 A 0 ACS_ExecuteAlways(798, 0, 0, 0, 0)//Check Effects
 		TNT1 A 0 A_Playsound("ImpFire", 0)
 	Spawn1:
@@ -1777,9 +1866,9 @@ ACTOR FireBall_ Replaces DoomImpBall
 		//TNT1 A 0 A_SpawnItem ("OldschoolRocketSmokeTrail2")
 		Loop
 	SpawnCheap:
-	    TNT1 A 0 A_SpawnItem ("CoolAndNewFlameTrails")
+	    TNT1 A 0 //A_SpawnItem ("CoolAndNewFlameTrails")
 		FR7X A 1 BRIGHT A_SpawnItem("FireballFlare",0,0)
-		TNT1 A 0 A_SpawnItem ("CoolAndNewFlameTrails")
+		TNT1 A 0 //A_SpawnItem ("CoolAndNewFlameTrails")
 		FR7X B 1 BRIGHT A_SpawnItem("FireballFlare",0,0)
 		Loop
 		
@@ -2517,17 +2606,23 @@ Actor Vanilla_Imp : Imp
 	States
 	{
 		Spawn:
+		TNT1 A 1 ACS_NamedExecuteAlways("CeilingClimbingImps", 0)//Check for CVARs
 		TNT1 A 0 A_GiveInventory("SKImp", 1)
 		TNT1 A 0 A_JumpIf(waterlevel == 2, "Swim")
 		TNT1 A 0 A_JumpIf(waterlevel == 3, "Swim")
         TNT1 A 0 A_JumpIfInventory("Fatality_Marine", 1, "FatalityMarine")
-		TROO A 0 A_CheckSight("Spawn2")
-        TNT1 A 0 A_SpawnItem ("HeadshotTarget10", 0, 42,0)
-		//TNT1 A 0 A_JumpIf(MomZ < 0, "FallingAfterImpact")// funny thing I tried, better not implement
-		TROO B 10 A_Look
-		TROO A 0 A_CheckSight("Spawn2")
-        TNT1 A 0 A_SpawnItem ("HeadshotTarget10", 0, 42,0)
-		TROS B 10 A_Look
+		Goto Stand
+		
+		Stand:	
+        TNT1 A 0
+		TNT1 A 0 A_CheckSight("Stand2")
+		TNT1 A 0 A_SpawnItem("HeadshotTarget10", 0, 48,0)
+		TROS ABABABABAB 10 A_Look
+		TROS ABABABABABA 10 A_Look
 		Loop
+		
+	Stand2:
+		TROS AB 10 A_Look
+		Goto Stand
 	}
 }

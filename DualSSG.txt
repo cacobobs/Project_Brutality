@@ -19,6 +19,10 @@ ACTOR DualSSG: DoomWeapon
     +WEAPON.NOAUTOAIM //Makes this weapon never autoaim, so recoil can work better
     Scale 0.6 //Weapon's pickup sprite size
 	+WEAPON.NOAUTOFIRE
+	+WEAPON.NO_AUTO_SWITCH
+	+POWERED_UP
+	Weapon.SisterWeapon SSG
+	
 	States
 	{
 	

@@ -117,6 +117,7 @@
 #include MechDemon.txt
 
 #include CyberKnight.txt
+#include CyberPaladin.txt
 
 #include BeamRev.txt
 
@@ -126,11 +127,13 @@
 
 #include SpidersX.txt
 #include Arachnophyte.txt
+#include Spiders2.txt
 
 #include ANNIHILATOR.txt
 #include Demolisher.txt
 
 #include Daedabus.txt
+#include Volcabus.txt
 
 #include Trite.txt
 #include Phantasm.txt
@@ -153,6 +156,7 @@
 #include Carbine.txt
 #include DualCarbine.txt
 #include HMG.txt
+#include LMG.txt
 #include SUPERGL.txt
 #include FREEZER.txt
 #include M2PLASMA.txt
@@ -162,15 +166,22 @@
 #include BLACKHOLE.txt
 #include DemonTech.txt
 #include QUADBARREL.txt
+#include AGITATION.txt
+
 
 #include EXTRA.txt
 
+
 #include TriteElem.txt
+
 
 //Vanilla Editions
 #include VANILLARIFLE.txt
 #include VANILLARIFLES.txt
 #include VANILLAMINIGUN.txt
+#include VANILLASSG.txt
+#include VANILLASAW.txt
+#include Traditional.txt
 
 //Lil Guys!
 #include ZombieShrinks
@@ -517,13 +528,8 @@ actor BulletKit : PistolBullets //12444
   States
   {
   Spawn:
-	TNT1 A 1 ACS_ExecuteAlways(796, 0, 0, 0, 0)//Check if Vanilla Mode is activated
     AMOK A -1
     Stop
-	
-	ReplaceVanilla:
-TNT1 A 0 A_SpawnItemEx("NewClipBox",0,0,0,0,0,0,0,288)
-		Stop
   }
 }
 
@@ -538,15 +544,11 @@ ACTOR BulletCartridge : PistolBullets //22347
   States
   {
   Spawn:
-	TNT1 A 1 ACS_ExecuteAlways(796, 0, 0, 0, 0)//Check if Vanilla Mode is activated
     MBLK A -1
     Stop
-
-ReplaceVanilla:
-TNT1 A 0 A_SpawnItemEx("NewClip",0,0,0,0,0,0,0,288)
-		Stop
   }
 }
+
 
 ACTOR BlueKeyCard : CustomInventory Replaces BlueCard
 {
@@ -560,6 +562,7 @@ States
 		Loop
 	PickUp:
 		TNT1 A 1 A_GiveInventory("BlueCard",1)
+		TNT1 A 1 ACS_NamedExecuteAlways("GiveAllPlayersBlueCard", 0)
 		Stop
 	}
 }
@@ -576,6 +579,7 @@ States
 		Loop
 	PickUp:
 		TNT1 A 1 A_GiveInventory("RedCard",1)
+		TNT1 A 1 ACS_NamedExecuteAlways("GiveAllPlayersRedCard", 0)
 		Stop
 	}
 }
@@ -592,6 +596,7 @@ States
 		Loop
 	PickUp:
 		TNT1 A 1 A_GiveInventory("YellowCard",1)
+		TNT1 A 1 ACS_NamedExecuteAlways("GiveAllPlayersYellowCard", 0)
 		Stop
 	}
 }
@@ -608,6 +613,7 @@ States
 		Loop
 	PickUp:
 		TNT1 A 1 A_GiveInventory("BlueSkull",1)
+		TNT1 A 1 ACS_NamedExecuteAlways("GiveAllPlayersBlueSkull", 0)
 		Stop
 	}
 }
@@ -624,6 +630,7 @@ States
 		Loop
 	PickUp:
 		TNT1 A 1 A_GiveInventory("RedSkull",1)
+		TNT1 A 1 ACS_NamedExecuteAlways("GiveAllPlayersRedSkull", 0)
 		Stop
 	}
 }
@@ -640,6 +647,7 @@ States
 		Loop
 	PickUp:
 		TNT1 A 1 A_GiveInventory("YellowSkull",1)
+		TNT1 A 1 ACS_NamedExecuteAlways("GiveAllPlayersYellowSkull", 0)
 		Stop
 	}
 }
@@ -708,6 +716,11 @@ Inventory.MaxAmount 1
 }
 
 Actor CarbineSelected : Inventory
+{
+Inventory.MaxAmount 1
+}
+
+Actor LMGSelected : Inventory
 {
 Inventory.MaxAmount 1
 }
@@ -913,6 +926,32 @@ inventory.maxamount 1
 
 
 ACTOR CasingsJanitor: Inventory
-{
-	Inventory.MaxAmount 1
-}
+{Inventory.MaxAmount 1}
+
+//Monster Ability Toggles
+Actor NoZombieGrenade : Inventory
+{inventory.maxamount 1}
+
+Actor NoCeilingClimb : Inventory
+{inventory.maxamount 1}
+
+Actor NoFoodHealth : Inventory
+{inventory.maxamount 1}
+
+Actor NoJetpack : Inventory
+{inventory.maxamount 1}
+
+Actor NoHellknightCharge : Inventory
+{inventory.maxamount 1}
+
+Actor NoBaronBarrels : Inventory
+{inventory.maxamount 1}
+
+Actor NoBigHeal : Inventory
+{inventory.maxamount 1}
+
+Actor NoArchvileSummon : Inventory
+{inventory.maxamount 1}
+
+Actor NoMancubusTorch : Inventory
+{inventory.maxamount 1}

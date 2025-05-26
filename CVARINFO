@@ -7,19 +7,134 @@ server int zdoombrutaljanitorcasings = 0; //For casings & clips
 server int isrunningzandronum = 1;
 server int bd_nobulletpenetration = 1;
 
-
+//Regeneration
 user int cl_regen = 0;
 user int cl_regenamount = 35;
 server int sv_forceregen = 0;
+
+//Footsteps
 user float cl_step_volmul = 7.0;
 user float cl_step_delaymul = 1.0;
+
+//Gameplay Option
 server int donotsidestep = 0;
 server int nodoomguytalk = 0;
 server int performancemode = 0;
+server int bd_replacemarines = 0;
 
-server int bd_restrictedmode = 0;
+server int bd_restrictedmode = 0; //Nothing
 
+//Rendering
 server int noscreensplash = 0;
 server int nopaineffect = 0;
 
+//Global Spawn balance. Do NOT touch.
 server int BrutalSpawnBalance=9;
+
+//Monster Ability Toggles
+server int bd_NoZmanGrenade = 0;
+server int bd_GroundImps = 0;
+server int bd_HungryPinky = 0;
+server int bd_GroundRevenant = 0;
+server int bd_NoKnightCharge = 0;
+server int bd_NoBaronBarrel = 0;
+server int bd_NoArchvileHeal = 0;
+server int bd_NoArchvileSummon = 0;
+server int bd_NoMancubusFlamer = 0;
+
+////////////////////Monster Spawning Toggles//////////////////////////
+
+//Zombieman
+server int bd_NoPistolZman = 0;
+server int bd_NoZombieScientist = 0;
+server int bd_NoCarbineZombie = 0;
+server int bd_NoMinigunZombieman = 0;
+server int bd_NoRifleCommando = 0;
+
+//Sergeant
+server int bd_NoHelmetSergeant = 0;
+server int bd_NoAutoshotgunSergeant = 0;
+server int bd_NoZSpecOps = 0;
+server int bd_NoQuadSergeant = 0;
+server int bd_NoRocketSergeant = 0;
+server int bd_NoDemonTechSoldier = 0;
+
+//Commando
+server int bd_NoChaingunMajor = 0;
+server int bd_NoPlasmaZombie = 0;
+server int bd_NoClassicCommando = 0;
+
+//Imp Variants
+server int bd_NoBrownImps = 0;
+server int bd_NoDarkImps = 0;
+
+//Pinky Demon Variants
+server int bd_NoBloodDemon = 0;
+server int bd_NoMechDemon = 0;
+
+//Cacodemon Variants
+server int bd_NoMagCaco = 0;
+server int bd_NoAfrit = 0;
+
+//Pain Elemental Variants
+server int bd_NoSufferElemental = 0;
+server int bd_NoTriteElemental = 0;
+server int bd_NoOverlord = 0;
+
+//Lost Soul Variants
+server int bd_NoPhantasm = 0;
+
+//Revenant Variants
+server int bd_NoBeamRevenant = 0;
+
+//Arachnotron Variants
+server int bd_NoInfernoArachnotron = 0;
+server int bd_NoArachnotron2 = 0;
+server int bd_NoArachnophyte = 0;
+
+//Hell Knight Variants
+server int bd_NoCyberKnight = 0;
+server int bd_NoCyberPaladin = 0;
+
+//Baron Variants
+server int bd_NoCyberBaron = 0;
+server int bd_NoBelphegor = 0;
+
+//Fatso Variants
+server int bd_NoDaedabus = 0;
+server int bd_NoVolcabus = 0;
+
+//Archvile Variants
+server int bd_NoIceVile = 0;
+server int bd_NoFleshwizard = 0;
+
+//Mastermind Variants
+server int bd_NoDemolisher = 0;
+
+//Cyber Demon Variants
+server int bd_NoAnnihilator = 0;
+
+//Weapon Toggles
+server int bd_NoLMG = 0;
+server int bd_NoMinigunUpgrade = 0;
+server int bd_NoAutoshotgunUpgrade = 0;
+server int bd_NoDBUpgrade = 0;
+server int bd_NoUpgrades = 0;
+
+user int bd_UpgradeRevolver = 0;
+user int bd_UpgradeCarbine = 0;
+user int bd_UpgradeShotgun = 0;
+user int bd_UpgradeHMG = 0;
+user int bd_UpgradePlasma = 0;
+user int bd_UpgradeGL = 0;
+user int bd_RestoreCarbines = 0;
+server int bd_UnifiedExplosives = 0;
+
+//Weapon Skins
+user int bd_shotgunskin = 0;
+
+//Player Game Mode
+server int bd_TraditionalMode = 0;
+
+//STFU Marines
+server int bd_ShutTheFuckUp = 0;

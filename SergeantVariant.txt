@@ -2,7 +2,7 @@ ACTOR ShotgunGuy2 : ShotgunGuy1 Replaces ShotgunGuy
 {
 	DropItem "DropedGrenade" 7
 	DropItem "PistolDrop"
-	DropItem "Shot_Gun"
+	DropItem "ShotGun"
 	+MissileEvenMore
 	States
 	{
@@ -486,14 +486,14 @@ ACTOR ShotgunGuy2 : ShotgunGuy1 Replaces ShotgunGuy
 		TNT1 A 0 A_Jump(128, "DeathShotgunontheface2")
 		TNT1 A 0 A_Stop
 		TNT1 A 0 A_Pain
-		SPOS H 1 A_FaceTarget
+		SPV1 A 1 A_FaceTarget
 		TNT1 A 0 A_Recoil(13)
 		TNT1 A 0 ThrustThingZ(0,20,0,1)
 		TNT1 A 0 A_Scream
 		TNT1 A 0 A_CustomMissile ("MuchBlood2", 35, 0, random (0, 360), 2, random (0, 160))
 		TNT1 AA 0 A_CustomMissile ("XDeath1", 35, 0, random (0, 360), 2, random (0, 160))
-        SPO4 ABCD 4
-		SPO4 EFGHIJ 4 A_JumpIf((MomY == 0), "DSFStop")
+        SPV4 ABCD 4
+		SPV4 EFGHIJ 4 A_JumpIf((MomY == 0), "DSFStop")
 		Goto DSFStop+1
 		
 	DSFStop:
@@ -502,21 +502,21 @@ ACTOR ShotgunGuy2 : ShotgunGuy1 Replaces ShotgunGuy
 	TNT1 A 0 A_SpawnItem ("GrowingBloodPool")
 		TNT1 A 0 A_PlaySound("BODYF",6)
 	TNT1 A 0 A_CustomMissile ("SuperWallRedBlood", 2, 0, random (170, 190), 2, random (0, 0))
-		SPO4 J -1
+		SPV4 J -1
 		Stop
 	
 	DeathShotgunontheface2:	
 		TNT1 A 0 A_ChangeFlag("NOBLOCKMONST", 1)
 		TNT1 A 0 A_Stop
 		TNT1 A 0 A_Pain
-		SPOS H 1 A_FaceTarget
+		SPV1 A 1 A_FaceTarget
 		TNT1 A 0 A_Scream
 		TNT1 A 0 A_Recoil(13)
 		TNT1 A 0 ThrustThingZ(0,20,0,1)
 		TNT1 A 0 A_CustomMissile ("MuchBlood2", 35, 0, random (0, 360), 2, random (0, 160))
 		TNT1 AA 0 A_CustomMissile ("XDeath1", 35, 0, random (0, 360), 2, random (0, 160))
-        SPO4 KLMN 4
-		SPO4 OPQRST 4 A_JumpIf((MomY == 0), "DSFStop2")
+        SPV4 KLMN 4
+		SPV4 OPQRST 4 A_JumpIf((MomY == 0), "DSFStop2")
 		Goto DSFStop2+1
 		
 	DSFStop2:
@@ -525,7 +525,7 @@ ACTOR ShotgunGuy2 : ShotgunGuy1 Replaces ShotgunGuy
 	TNT1 A 0 A_SpawnItem ("GrowingBloodPool")
 		TNT1 A 0 A_PlaySound("BODYF",6)
 	TNT1 A 0 A_CustomMissile ("SuperWallRedBlood", 2, 0, random (170, 190), 2, random (0, 0))
-		SPO4 T -1
+		SPV4 T -1
 		Stop
 		
 	DeathShotgunFly:
@@ -770,6 +770,14 @@ ACTOR ShotgunGuy2 : ShotgunGuy1 Replaces ShotgunGuy
         TNT1 A 0 A_TakeInventory("IsDown", 1)
 		1D11 T 10
         Goto SeeContinue
+		
+	Possession:
+		TNT1 A 0 A_SetInvulnerable
+		SPV1 A 3
+		SPV1 A 3 A_Pain
+		"####" "#" 35 ACS_NamedExecuteAlways("Pos - Flicker effect")
+		TNT1 A 0 A_UnSetInvulnerable
+		Goto See
 		
 	Death.Ice:
 	Death.Freeze:

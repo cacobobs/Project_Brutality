@@ -26,9 +26,6 @@ OptionMenu "OptionsMenu"
 
 OptionMenu "BrutalOptions"
 {
-
-  
-  
   Title "Brutal Doom Options"
 	StaticText " "
 
@@ -44,11 +41,10 @@ OptionMenu "BrutalOptions"
   Option "Enable Blood/Gore Janitor", "zdoombrutaljanitor", "YesOrNo"
   StaticText "Makes blood, gore, and parts anatomy disappear after 30 seconds."
   StaticText " "
-  
+ 
   Option "Enable Bullet Janitor", "zdoombrutaljanitorcasings", "YesOrNo"
   StaticText "Makes bullet casings & empty magazines disappear over time."
   StaticText " "
- 
 }
 
 OptionValue "BrutalBlood"
@@ -74,20 +70,55 @@ OptionValue "YesOrNoFalse"
 	0, "Yes"
 }
 
-//My Stuff
+//////////////////////////////////////////////////////////////////////////////////////
 OptionMenu "BDSettings"
 {
 	Title "Project Brutality Settings"
 	StaticText " "
 	
-	StaticText "--- Spawn Presets ---"
+	Submenu "Global Settings",		"GlobalSettings"
+	StaticText " "
+	Submenu "Brutal Doom Options",			"BrutalOptions"
+	StaticText " "
+	Submenu "Gameplay Settings",		"GameplaySettings"
+	StaticText " "
+	Submenu "Weapon Settings",		"WeaponSettings"
+	StaticText " "
+	Submenu "Rendering Settings",		"RenderingSettings"
+	StaticText " "
+	
+}
+
+OptionMenu "GlobalSettings"
+{
+	Title "--------- Global Settings ---------"
+	StaticText " "
 	Option "Spawn Preset: ", "BrutalSpawnBalance","BrutalDoomSpawnBalanceChoices"
 	StaticText "This determines what weapons and enemies you'll encounter."
 	StaticText " "
+	Submenu "Advanced Monster Spawns",		"MonsterSpawns"
+	StaticText " "
+	Submenu "Configure Monster Abilities",		"MonsterSettings"
+	StaticText " "
 	StaticText " "
 	
-	StaticText "---Game Settings---"
+}
+
+
+OptionMenu "GameplaySettings"
+{
+	Title "---------Game Settings---------"
 	StaticText " "
+	Option "Replace Captured Marines",				"bd_replacemarines", "OnOff"
+	StaticText "This will replace captured marines with the traditional Blursphere."
+	StaticText " "
+	StaticText " "
+	
+	Option "Disable Marine Idle Chatter",				"bd_ShutTheFuckUp", "OnOff"
+	StaticText "No longer hear STAY ALERT MARINES every two seconds"
+	StaticText " "
+	StaticText " "
+	
 	Option "Disable Side Step Shortcut",				"donotsidestep", "OnOff"
 	StaticText "This will prevent dodging by double key tapping for players."
 	StaticText " "
@@ -103,14 +134,18 @@ OptionMenu "BDSettings"
 	StaticText " "
 	StaticText " "
 	
-	StaticText "---Rendering Settings---"
+}
+
+OptionMenu "RenderingSettings"
+{
+	Title "---------Rendering Settings---------"
 	StaticText " "
 	Slider "Maximum Decal Amount",				"cl_maxdecals", 0, 10000, 1
 	Command "Infinite Decals",				"cl_maxdecals 0x7FFFFFFF"
 	StaticText " "
 	
 	Option "Enable Performance Mode",				"performancemode", "OnOff"
-	StaticText "This limits, disables, or replaces various particle effects"
+	StaticText "This limits, disables, or replaces advanced decorative effects"
 	StaticText " "
 	
 	Option "Disable Screen Splash Effects",				"noscreensplash", "OnOff"
@@ -120,15 +155,256 @@ OptionMenu "BDSettings"
 	Option "Disable Screen Pain Effects",				"nopaineffect", "OnOff"
 	StaticText "Disables the screen scratches, bullet holes, and cracks"
 	StaticText " "
-	//nopaineffect
 	
- /*
-  StaticText "----- Server options -----"
-  StaticText "(Requires map restart to take effect)"
-  Option "Classic v20 Mode", "bd_classicmonsters", "YesOrNo"
-  StaticText "Enabled only when using the Classic v20 player class"
-  StaticText " "
-  */
+}
+
+OptionMenu "WeaponSettings"
+{
+	Title "---------Weapon Settings---------"
+	
+	StaticText "-----------------Weapon Upgrades-----------------"
+	
+	Option "Completely Disable Weapon Upgrades",				"bd_NoUpgrades", "OnOff"
+	StaticText " "
+	
+	Option "Disable UAC349 LMG Upgrade",				"bd_NoLMG", "OnOff"
+	StaticText "Removes the LMG that upgrades the UAC41 Carbine"
+	StaticText " "
+	
+	Option "Disable Triple Minigun Upgrade",				"bd_NoMinigunUpgrade", "OnOff"
+	StaticText "Removes the triple barrel upgrade for the minigun"
+	StaticText " "
+	
+	Option "Disable Dragon's Breath Upgrade",				"bd_NoDBUpgrade", "OnOff"
+	StaticText "Removes the incendiary shell upgrade for the shotgun"
+	StaticText " "
+	StaticText " "
+	
+	StaticText "-----------------Weapon Progression-----------------"
+	
+	StaticText " "
+	Option "Revolver upgrades Pistol",				"bd_UpgradeRevolver", "OnOff"
+	StaticText "No longer use the Pistol once you collect a revolver"
+	StaticText " "
+	
+	Option "Carbine upgrades DMR",				"bd_UpgradeCarbine", "OnOff"
+	StaticText "No longer use the DMR once you collect a Carbine"
+	StaticText " "
+	
+	Option "Autoshotgun upgrades Pump Shotgun",				"bd_UpgradeShotgun", "OnOff"
+	StaticText "No longer use the Pump Shotgun once you collect a Autoshotgun"
+	StaticText " "
+	
+	Option "HMG upgrades Minigun",				"bd_UpgradeHMG", "OnOff"
+	StaticText "No longer use the Minigun once you collect an HMG"
+	StaticText " "
+	
+	Option "Super Grenade Launcher upgrades Grenade Launcher",				"bd_UpgradeGL", "OnOff"
+	StaticText "No longer use the single GL once you collect a SGL"
+	StaticText " "
+	
+	StaticText "-----------------Weapon Misc-----------------"
+	
+	Option "Restore Dual Carbine",				"bd_RestoreCarbines", "OnOff"
+	StaticText "Dual wield the carbines instead of selecting firemodes"
+	StaticText " "
+	
+	Option "Wooden Shotgun Skin",				"bd_shotgunskin", "OnOff"
+	StaticText "Restores the wooden frame of the pump shotgun"
+	StaticText " "
+	
+	Option "Unified Explosive Ammo",				"bd_UnifiedExplosives", "OnOff"
+	StaticText "Explosive crate replaces rocket box in Project Brutality"
+	StaticText " "
+	
+	//bd_shotgunskin
+}
+///////////////////////////////////////////////////////////////////////////////////////
+
+OptionMenu "MonsterSettings"
+{
+	Option "No Zombie Grenades", "bd_NoZmanGrenade", "YesOrNo"
+	StaticText "Zombie men will not throw grenades"
+	StaticText " "
+
+	Option "Grounded Imps", "bd_GroundImps", "YesOrNo"
+	StaticText "Prohibit imps from climbing on the ceiling"
+	StaticText " "
+	
+	Option "Hungry Pinky Demons", "bd_HungryPinky", "YesOrNo"
+	StaticText "Prevent pinky demon variants recovering health by eating monsters"
+	StaticText " "
+	
+	Option "Grounded Revenants", "bd_GroundRevenant", "YesOrNo"
+	StaticText "Prohibit the Revenant's use of his jetpack"
+	StaticText " "
+	
+	Option "Normal Hellknights", "bd_NoKnightCharge", "YesOrNo"
+	StaticText "Prevent the Hellknight from sprinting toward targets"
+	StaticText " "
+	
+	Option "Generic Archvile Heal", "bd_NoArchvileHeal", "YesOrNo"
+	StaticText "Archvile will not have the chance to area heal surrounding monsters"
+	StaticText " "
+	
+	Option "Generic Archvile Attack", "bd_NoArchvileSummon", "YesOrNo"
+	StaticText "Archvile will not summon additional monsters to fight"
+	StaticText " "
+	
+	Option "Simple Mancubus", "bd_NoMancubusFlamer", "YesOrNo"
+	StaticText "Mancubus will not use flamethrower attack when close"
+	StaticText " "
+	
+}
+
+OptionMenu "MonsterSpawns"
+{
+	StaticText "---------------Zombiemen Variants---------------"
+	StaticText " "
+	Option "No Pistol Zombiemen", "bd_NoPistolZman", "YesOrNo"
+	StaticText " "
+	
+	Option "No Zombie Scientist", "bd_NoZombieScientist", "YesOrNo"
+	StaticText " "
+	
+	Option "No Carbine Zombie", "bd_NoCarbineZombie", "YesOrNo"
+	StaticText " "
+	
+	Option "No Minigun Zombieman", "bd_NoMinigunZombieman", "YesOrNo"
+	StaticText " "
+	
+	Option "No Rifle Commando", "bd_NoRifleCommando", "YesOrNo"
+	StaticText " "
+	
+	StaticText "---------------Sergeant Variants---------------"
+	StaticText " "
+	Option "No Helmet Sergeant", "bd_NoHelmetSergeant", "YesOrNo"
+	StaticText " "
+	
+	Option "No Autoshotgun Sergeant", "bd_NoAutoshotgunSergeant", "YesOrNo"
+	StaticText " "
+	
+	Option "No Z-SpecOps", "bd_NoZSpecOps", "YesOrNo"
+	StaticText " "
+	
+	Option "No Quad-Shotgun Sergeant", "bd_NoQuadSergeant", "YesOrNo"
+	StaticText " "
+	
+	Option "No Rocket Launcher Sergeant", "bd_NoRocketSergeant", "YesOrNo"
+	StaticText " "
+	
+	Option "No Demon Tech Soldier", "bd_NoDemonTechSoldier", "YesOrNo"
+	StaticText " "
+	
+	StaticText "---------------Commando Variants---------------"
+	StaticText " "
+	Option "No Chaingun Major", "bd_NoChaingunMajor", "YesOrNo"
+	StaticText " "
+	
+	Option "No Plasma Zombie", "bd_NoPlasmaZombie", "YesOrNo"
+	StaticText " "
+	
+	Option "No Classic Chaingun Commando", "bd_NoClassicCommando", "YesOrNo"
+	StaticText " "
+	
+	StaticText "---------------Imp Variants---------------"
+	StaticText " "
+	Option "No Brown Variants", "bd_NoBrownImps", "YesOrNo"
+	StaticText " "
+	
+	Option "No Dark Variants", "bd_NoDarkImps", "YesOrNo"
+	StaticText " "
+	
+	StaticText "---------------Pinky Demon Variants---------------"
+	StaticText " "
+	Option "No Blood Demons", "bd_NoBloodDemon", "YesOrNo"
+	StaticText " "
+	
+	Option "No Mech Demons", "bd_NoMechDemon", "YesOrNo"
+	StaticText " "
+	
+	StaticText "---------------Cacodemon Variants---------------"
+	StaticText " "
+	Option "No Inferno Caco", "bd_NoMagCaco", "YesOrNo"
+	StaticText " "
+	
+	Option "No Afrit", "bd_NoAfrit", "YesOrNo"
+	StaticText " "
+	
+	StaticText "---------------Pain Elemental Variants---------------"
+	StaticText " "
+	Option "No Suffering Elemental", "bd_NoSufferElemental", "YesOrNo"
+	StaticText " "
+	
+	Option "No Trite Elemental", "bd_NoTriteElemental", "YesOrNo"
+	StaticText " "
+	
+	Option "No Overlord", "bd_NoOverlord", "YesOrNo"
+	StaticText " "
+	
+	StaticText "---------------Lost Soul Variants---------------"
+	StaticText " "
+	Option "No Phantasm", "bd_NoPhantasm", "YesOrNo"
+	StaticText " "
+	
+	StaticText "---------------Revenant Variants---------------"
+	StaticText " "
+	Option "No Beam Revenant", "bd_NoBeamRevenant", "YesOrNo"
+	StaticText " "
+	
+	StaticText "---------------Arachnotron Variants---------------"
+	StaticText " "
+	Option "No Inferno Arachnotron", "bd_NoInfernoArachnotron", "YesOrNo"
+	StaticText " "
+
+	Option "No Arachnophyte", "bd_NoArachnophyte", "YesOrNo"
+	StaticText " "
+	
+	StaticText " "
+	Option "No Elite Arachnotron", "bd_NoArachnophyte", "YesOrNo"
+	StaticText " "
+	
+	StaticText "---------------Hell Knight Variants---------------"
+	StaticText " "
+	Option "No Cyber Hell Knight", "bd_NoCyberKnight", "YesOrNo"
+	StaticText " "
+	
+	Option "No Cyber Hell Paladin", "bd_NoCyberPaladin", "YesOrNo"
+	StaticText " "
+	
+	StaticText "---------------Baron of Hell Variants---------------"
+	StaticText " "
+	Option "No Cyber Baron", "bd_NoCyberBaron", "YesOrNo"
+	StaticText " "
+	
+	Option "No Belphegor", "bd_NoBelphegor", "YesOrNo"
+	StaticText " "
+	
+	StaticText "---------------Mancubus Variants---------------"
+	StaticText " "
+	Option "No Daedabus", "bd_NoDaedabus", "YesOrNo"
+	StaticText " "
+	
+	StaticText " "
+	Option "No Volcabus", "bd_NoVolcabus", "YesOrNo"
+	StaticText " "
+	
+	StaticText "---------------Archvile Variants---------------"
+	StaticText " "
+	Option "No Ice Vile", "bd_NoIceVile", "YesOrNo"
+	StaticText " "
+	Option "No Fleshwizard", "bd_NoFleshwizard", "YesOrNo"
+	StaticText " "
+	
+	StaticText "---------------Spider Mastermind Variants---------------"
+	StaticText " "
+	Option "No Demolisher", "bd_NoDemolisher", "YesOrNo"
+	StaticText " "
+	
+	StaticText "---------------Cyber Demon Variants---------------"
+	StaticText " "
+	Option "No Annihilator", "bd_NoAnnihilator", "YesOrNo"
+	StaticText " "
 }
 
 OptionMenu "SpawnSettings"

@@ -3,7 +3,7 @@ actor NetherDarkImp Replaces DoomImp
     Game Doom
     Scale 1.04
 	SpawnID 5
-	Health 135
+	Health 140
 	Radius 18
 	Height 48
 	Speed 10
@@ -38,6 +38,7 @@ actor NetherDarkImp Replaces DoomImp
     damagefactor "Kick", 0.5
     damagefactor "SSG", 5.0
 	DropItem "DemonStrengthRune" 1
+	DropItem "DemonMorphRune" 1
 	damagefactor "explosiveimpact", 2.0
 	MaxStepHeight 24
 	MaxDropOffHeight 32
@@ -45,7 +46,7 @@ actor NetherDarkImp Replaces DoomImp
 	+DONTHURTSPECIES
 	+SLIDESONWALLS
 	PainChance "Trample", 255
-	Species "EvilImp"
+	Species Imp
     Obituary "%o was cursed by a dark imp."
     HitObituary "%o was touched by a dark imp."
     MissileType "InfernoBall"
@@ -95,7 +96,7 @@ actor NetherDarkImp Replaces DoomImp
 		DRKF A 0 A_CheckSight("Spawn2")
         TNT1 A 0 A_SpawnItem ("HeadshotTarget10", 0, 42,0)
 		DRKF B 10 A_Look
-		Loop
+		Goto Spawn+3
     Spawn2:
 		DRKF B 1 A_Look
 		//TNT1 A 0 A_JumpIf(MomZ < 0, "FallingAfterImpact")// funny thing I tried, better not implement
@@ -297,13 +298,88 @@ actor NetherDarkImp Replaces DoomImp
         DRKF E 6 A_FaceTarget
 		TNT1 A 0 A_SpawnItem ("HeadshotTarget6", 0, 44,0)
 		TNT1 A 0 A_SpawnItem ("LegTarget12", 10)
-        DRKF F 6 A_FaceTarget
+		TNT1 A 0 A_Playsound("weapons/shock")
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsBlue", 20, 0, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsBlue", 20, 0, random (0, 360), 2, random (70, 110))
+		
+		DRKF F 2 A_FaceTarget
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsBlue", 28, 22, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("NetherLightningTrail", 27, 20, random (0, 140), 2, random (0, 160))
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsBlue", 28, -20, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("NetherLightningTrail", 27, -20, random (0, 140), 2, random (0, 160))
+		DRKF F 2 BRIGHT A_FaceTarget
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsBlue", 28, 22, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("NetherLightningTrail", 27, 20, random (0, 140), 2, random (0, 160))
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsBlue", 28, -20, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("NetherLightningTrail", 27, -20, random (0, 140), 2, random (0, 160))
+		DRKF F 2 A_FaceTarget
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsBlue", 28, 22, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("NetherLightningTrail", 27, 20, random (0, 140), 2, random (0, 160))
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsBlue", 28, -20, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("NetherLightningTrail", 27, -20, random (0, 140), 2, random (0, 160))
+		TNT1 A 0 A_SpawnItem ("HeadshotTarget6", 0, 44,0)
+		DRKF F 2 BRIGHT A_FaceTarget
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsBlue", 28, 22, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("NetherLightningTrail", 27, 20, random (0, 140), 2, random (0, 160))
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsBlue", 28, -20, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("NetherLightningTrail", 27, -20, random (0, 140), 2, random (0, 160))
+		
+		DRKF F 2 A_FaceTarget
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsBlue", 28, 22, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("NetherLightningTrail", 27, 20, random (0, 140), 2, random (0, 160))
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsBlue", 28, -20, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("NetherLightningTrail", 27, -20, random (0, 140), 2, random (0, 160))
+		DRKF F 2 BRIGHT A_FaceTarget
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsBlue", 28, 22, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("NetherLightningTrail", 27, 20, random (0, 140), 2, random (0, 160))
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsBlue", 28, -20, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("NetherLightningTrail", 27, -20, random (0, 140), 2, random (0, 160))
+		DRKF F 2 A_FaceTarget
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsBlue", 28, 22, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("NetherLightningTrail", 27, 20, random (0, 140), 2, random (0, 160))
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsBlue", 28, -20, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("NetherLightningTrail", 27, -20, random (0, 140), 2, random (0, 160))
+		TNT1 A 0 A_SpawnItem ("HeadshotTarget6", 0, 44,0)
+		DRKF F 2 BRIGHT A_FaceTarget
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsBlue", 28, 22, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("NetherLightningTrail", 27, 20, random (0, 140), 2, random (0, 160))
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsBlue", 28, -20, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("NetherLightningTrail", 27, -20, random (0, 140), 2, random (0, 160))
+		
+		DRKF F 2 A_FaceTarget
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsBlue", 28, 22, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("NetherLightningTrail", 27, 20, random (0, 140), 2, random (0, 160))
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsBlue", 28, -22, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("NetherLightningTrail", 27, -20, random (0, 140), 2, random (0, 160))
+		DRKF F 2 BRIGHT A_FaceTarget
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsBlue", 28, 22, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("NetherLightningTrail", 27, 20, random (0, 140), 2, random (0, 160))
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsBlue", 28, -22, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("NetherLightningTrail", 27, -20, random (0, 140), 2, random (0, 160))
+		DRKF F 2 A_FaceTarget
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsBlue", 28, 22, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("NetherLightningTrail", 27, 20, random (0, 140), 2, random (0, 160))
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsBlue", 28, -22, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("NetherLightningTrail", 27, -20, random (0, 140), 2, random (0, 160))
+		TNT1 A 0 A_SpawnItem ("HeadshotTarget6", 0, 44,0)
+		DRKF F 2 BRIGHT A_FaceTarget
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsBlue", 28, 22, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("NetherLightningTrail", 27, 20, random (0, 140), 2, random (0, 160))
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsBlue", 28, -22, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("NetherLightningTrail", 27, -20, random (0, 140), 2, random (0, 160))
+		DRKF F 2 A_FaceTarget
+		
+        DRKF F 3 A_FaceTarget
+		TNT1 A 0 A_SpawnItem ("HeadshotTarget6", 0, 44,0)
+		TNT1 A 0 A_SpawnItem ("LegTarget12", 10)
+        DRKF F 3 A_FaceTarget
 		TNT1 A 0 A_SpawnItem ("HeadshotTarget6", 0, 44,0)
 		TNT1 A 0 A_SpawnItem ("LegTarget12", 10)
         DRKF G 6 A_CustomMissile ("NetherLightning", 32, 0, 0)
 		TNT1 A 0 A_SpawnItem ("HeadshotTarget6", 0, 44,0)
 		TNT1 A 0 A_SpawnItem ("LegTarget12", 10)
         Goto SeeContinue
+		
     Attack2:
 		TNT1 A 0 A_SpawnItem ("HeadshotTarget6", 0, 44,0)
 		TNT1 A 0 A_SpawnItem ("LegTarget12", 10)
@@ -311,6 +387,100 @@ actor NetherDarkImp Replaces DoomImp
 		TNT1 A 0 A_SpawnItem ("HeadshotTarget6", 0, 44,0)
 		TNT1 A 0 A_SpawnItem ("LegTarget12", 10)
         DRKF J 6 A_FaceTarget
+		
+		TNT1 A 0 A_Playsound("redburn")
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsGreen", 20, 0, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsGreen", 20, 0, random (0, 360), 2, random (70, 110))
+		
+		DRKF J 2 BRIGHT A_FaceTarget
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsGreen", 28, 22, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("BallGettingReadyGreen", 27, 20, random (0, 140), 2, random (0, 160))
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsGreen", 28, -20, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("BallGettingReadyGreen", 27, -20, random (0, 140), 2, random (0, 160))
+		DRKF J 2 A_FaceTarget
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsGreen", 28, 22, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("BallGettingReadyGreen", 27, 20, random (0, 140), 2, random (0, 160))
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsGreen", 28, -20, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("BallGettingReadyGreen", 27, -20, random (0, 140), 2, random (0, 160))
+		DRKF J 2 BRIGHT A_FaceTarget
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsGreen", 28, 22, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("BallGettingReadyGreen", 27, 20, random (0, 140), 2, random (0, 160))
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsGreen", 28, -20, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("BallGettingReadyGreen", 27, -20, random (0, 140), 2, random (0, 160))
+		TNT1 A 0 A_SpawnItem ("HeadshotTarget6", 0, 44,0)
+		DRKF J 2 A_FaceTarget
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsGreen", 28, 22, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("BallGettingReadyGreen", 27, 20, random (0, 140), 2, random (0, 160))
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsGreen", 28, -20, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("BallGettingReadyGreen", 27, -20, random (0, 140), 2, random (0, 160))
+		
+		DRKF J 2 BRIGHT A_FaceTarget
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsGreen", 28, 22, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("BallGettingReadyGreen", 27, 20, random (0, 140), 2, random (0, 160))
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsGreen", 28, -20, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("BallGettingReadyGreen", 27, -20, random (0, 140), 2, random (0, 160))
+		DRKF J 2 A_FaceTarget
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsGreen", 28, 22, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("BallGettingReadyGreen", 27, 20, random (0, 140), 2, random (0, 160))
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsGreen", 28, -20, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("BallGettingReadyGreen", 27, -20, random (0, 140), 2, random (0, 160))
+		DRKF J 2 BRIGHT A_FaceTarget
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsGreen", 28, 22, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("BallGettingReadyGreen", 27, 20, random (0, 140), 2, random (0, 160))
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsGreen", 28, -20, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("BallGettingReadyGreen", 27, -20, random (0, 140), 2, random (0, 160))
+		TNT1 A 0 A_SpawnItem ("HeadshotTarget6", 0, 44,0)
+		DRKF J 2 A_FaceTarget
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsGreen", 28, 22, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("BallGettingReadyGreen", 27, 20, random (0, 140), 2, random (0, 160))
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsGreen", 28, -20, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("BallGettingReadyGreen", 27, -20, random (0, 140), 2, random (0, 160))
+		
+		DRKF J 2 BRIGHT A_FaceTarget
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsGreen", 28, 22, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("BallGettingReadyGreen", 27, 20, random (0, 140), 2, random (0, 160))
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsGreen", 28, -20, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("BallGettingReadyGreen", 27, -20, random (0, 140), 2, random (0, 160))
+		DRKF J 2 BRIGHT A_FaceTarget
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsGreen", 28, 22, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("BallGettingReadyGreen", 27, 20, random (0, 140), 2, random (0, 160))
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsGreen", 28, -20, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("BallGettingReadyGreen", 27, -20, random (0, 140), 2, random (0, 160))
+		DRKF J 2 BRIGHT A_FaceTarget
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsGreen", 28, 22, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("BallGettingReadyGreen", 27, 20, random (0, 140), 2, random (0, 160))
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsGreen", 28, -20, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("BallGettingReadyGreen", 27, -20, random (0, 140), 2, random (0, 160))
+		TNT1 A 0 A_SpawnItem ("HeadshotTarget6", 0, 44,0)
+		DRKF J 2 A_FaceTarget
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsGreen", 28, 22, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("BallGettingReadyGreen", 27, 20, random (0, 140), 2, random (0, 160))
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsGreen", 28, -20, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("BallGettingReadyGreen", 27, -20, random (0, 140), 2, random (0, 160))
+		
+		DRKF J 1 A_FaceTarget
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsGreen", 28, 22, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("BallGettingReadyGreen", 27, 20, random (0, 140), 2, random (0, 160))
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsGreen", 28, -22, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("BallGettingReadyGreen", 27, -20, random (0, 140), 2, random (0, 160))
+		DRKF J 1 BRIGHT A_FaceTarget
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsGreen", 28, 22, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("BallGettingReadyGreen", 27, 20, random (0, 140), 2, random (0, 160))
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsGreen", 28, -22, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("BallGettingReadyGreen", 27, -20, random (0, 140), 2, random (0, 160))
+		DRKF J 1 A_FaceTarget
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsGreen", 28, 22, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("BallGettingReadyGreen", 27, 20, random (0, 140), 2, random (0, 160))
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsGreen", 28, -22, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("BallGettingReadyGreen", 27, -20, random (0, 140), 2, random (0, 160))
+		TNT1 A 0 A_SpawnItem ("HeadshotTarget6", 0, 44,0)
+		DRKF J 1 BRIGHT A_FaceTarget
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsGreen", 28, 22, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("BallGettingReadyGreen", 27, 20, random (0, 140), 2, random (0, 160))
+		TNT1 A 0 bright A_CustomMissile ("RealFlameTrailsGreen", 28, -22, random (0, 360), 2, random (70, 110))
+		TNT1 A 0 A_CustomMissile ("BallGettingReadyGreen", 27, -20, random (0, 140), 2, random (0, 160))
+		DRKF J 1 A_FaceTarget
+		
 		TNT1 A 0 A_SpawnItem ("HeadshotTarget6", 0, 44,0)
 		TNT1 A 0 A_SpawnItem ("LegTarget12", 10)
         DRKF K 6 A_CustomMissile ("InfernoBall", 32, 0, 0)
@@ -326,6 +496,14 @@ actor NetherDarkImp Replaces DoomImp
 		TNT1 A 0 A_SpawnItem ("HeadshotTarget6", 0, 44,0)
 		TNT1 A 0 A_SpawnItem ("LegTarget12", 10)
         Goto SeeContinue
+		
+	Possession:
+		TNT1 A 0 A_SetInvulnerable
+		DRKF H 3
+		DRKF H 3 A_Pain
+		"####" "#" 35 ACS_NamedExecuteAlways("Pos - Flicker effect")
+		TNT1 A 0 A_UnSetInvulnerable
+		Goto See
 		
 	Pain.Kick:
 	Pain.ExtremePunches:
@@ -425,7 +603,9 @@ actor NetherDarkImp Replaces DoomImp
 	TNT1 A 0 A_SpawnItem ("GrowingBloodPool")
 	Goto Death.ExplosiveImpact+1
 */
-	Death.Plasma: Death.Plasma2:
+	Death.Plasma: 
+	Death.Plasma2:
+	Death.SuperPlasma:
 		TNT1 A 0 A_Jump(118, "Death.Lightning", "OtherPlasmaDeath")
 		PBR1 B 1 A_Scream
 		TNT1 AAAAAAAAAAAAAAAAAA 0 A_CustomMissile ("Ashes1", 32, 0, random (0, 360), 2, random (0, 180))
@@ -735,8 +915,14 @@ Goto SeeContinue
 		Stop
 
 		Dead.ExplosiveImpact:
-		TNT1 A 0
+		TNT1 A 0 A_Jump(128, "Dead.ExplosiveImpact2")
 		TNT1 A 0 A_SpawnItem ("ThisDarkImpGotFuckedHard")
+		TNT1 A 0 A_SpawnItem ("Ploft")
+		TNT1 AAAA 0 A_SpawnItem ("Blood")
+		Stop
+		
+		Dead.ExplosiveImpact2:
+		TNT1 A 0 A_SpawnItem ("ThisDarkImpGotFuckedHard2")
 		TNT1 A 0 A_SpawnItem ("Ploft")
 		TNT1 AAAA 0 A_SpawnItem ("Blood")
 		Stop
@@ -909,13 +1095,13 @@ actor InfernoBall
 {
     Radius 8
     Height 6
-    Speed 20
-    Damage 12
+    Speed 12
+    Damage 6
 	DamageType Desintegrate
     PROJECTILE
     RENDERSTYLE ADD
     ALPHA 0.67
-    SeeSound "imp/attack"
+    SeeSound "dimp/missile"
     DeathSound "imp/shotx"
     Decal DoomImpScorch
     States
@@ -952,16 +1138,16 @@ actor NetherLightning
 {
     Radius 8
     Height 6
-    Speed 24
+    Speed 19
     Damage 4
 	DamageType Plasma
     PROJECTILE
     +RIPPER
     RENDERSTYLE ADD
     ALPHA 0.75
-    Scale 0.75
+    Scale 0.85
     SeeSound "caco/attack"
-	DeathSound "caco/shotx"
+    DeathSound "weapons/devzap"
     Decal DoomImpScorch
     States
     {
@@ -987,9 +1173,9 @@ actor NetherLightningTrail
     Height 6
     Speed 1
     Damage 0
-	DamageType Plasma
+	DamageType blood
     PROJECTILE
-    +RIPPER
+   // +RIPPER
     RENDERSTYLE ADD
     ALPHA 0.75
     Scale 0.75
@@ -1042,6 +1228,6 @@ Actor Vanilla_NetherDarkImp : NetherDarkImp
 		DRKF A 0 A_CheckSight("Spawn2")
         TNT1 A 0 A_SpawnItem ("HeadshotTarget10", 0, 42,0)
 		DRKF B 10 A_Look
-		Loop
+		Goto Spawn+3
 	}
 }

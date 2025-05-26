@@ -45,6 +45,10 @@ ACTOR DualRifles: DoomWeapon
     +WEAPON.NOAUTOAIM //Makes this weapon never autoaim, so recoil can work better
     Scale 0.6 //Weapon's pickup sprite size
 	+WEAPON.NOAUTOFIRE
+	+WEAPON.NO_AUTO_SWITCH
+	+POWERED_UP
+	Weapon.SisterWeapon Rifle
+	
 	States
 	{
 	
@@ -102,12 +106,16 @@ ACTOR DualRifles: DoomWeapon
 		Goto Select
 		
 	Deselect:
+		TNT1 A 0 A_Takeinventory("HasUnloaded",1)
+		TNT1 A 0 A_Takeinventory("Unloading",1)
 		TNT1 A 0 A_PlaySound("IronSights", 0)
 	 	TNT1 A 0 A_TakeInventory("DoPunch",1)
 		TNT1 AAAAAA 0 A_Lower
 		TNT1 A 1 A_Lower //Makes player switch weapons faster
 		Wait
 	Select:
+		TNT1 A 0 A_Takeinventory("HasUnloaded",1)
+		TNT1 A 0 A_Takeinventory("Unloading",1)
 		TNT1 A 0 A_PlaySound("IronSights", 0)
 		TNT1 A 0 A_TakeInventory("GoWeaponSpecialAbility", 1)
 		TNT1 A 0 A_Raise //Makes the weapon always be selected fast

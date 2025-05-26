@@ -377,3 +377,13 @@ decal SmallerScorch
 	randomflipx
 	randomflipy
 }
+
+decal IceScorch //That name really doesn't make any sense....
+{
+	pic SCORCH1
+	shade "60 60 85"
+	x-scale 1.25
+	y-scale 1.25
+	randomflipx
+	randomflipy
+}

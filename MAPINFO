@@ -45,7 +45,7 @@ Skill Hard
 {
    AmmoFactor = 1
    DamageFactor = 1.0
-   Aggressiveness = .2
+   Aggressiveness = .15
    SpawnFilter = Nightmare
    Textcolor = Yellow
    DisableCheats
@@ -58,7 +58,7 @@ Skill Brutal
    AmmoFactor = 1
    DamageFactor = 1.0
    FastMonsters
-   Aggressiveness = 0.5
+   Aggressiveness = 0.10
    SpawnFilter = Nightmare
    Textcolor = Orange
    DisableCheats
@@ -71,7 +71,7 @@ Skill Superbad
    AmmoFactor = 1
    DamageFactor = 1.25
    SpawnFilter = Nightmare
-   Aggressiveness = 0.50
+   Aggressiveness = 0.12
    DisableCheats
    Textcolor = "Dark Red"
    Name = "I'm a Man and a Half"
@@ -84,7 +84,7 @@ Skill BlackMetal
    DamageFactor = 1.25
    FastMonsters
    SpawnFilter = Nightmare
-   Aggressiveness = 0.75
+   Aggressiveness = 0.15
    DisableCheats
    Name = "I AM THE PAINKILLER!!!"
    Textcolor = "Reddish Brick"
@@ -96,7 +96,7 @@ Skill HELL
    AmmoFactor = 1
    DamageFactor = 1.50
    FastMonsters
-   Aggressiveness = 1.0
+   Aggressiveness = 0.20
    SpawnFilter = Nightmare
    Textcolor = Red
    DisableCheats

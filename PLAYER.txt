@@ -1,3 +1,8 @@
+Actor PlayerIsDead : Inventory
+{
+inventory.maxamount 1
+}
+
 //**Alright so this is how I'm doing the new dual wielding mechanic and weapon special abilities.
 Actor IsPlayingAsProjectBrutality : Inventory
 {
@@ -741,7 +746,7 @@ ACTOR Doomer : PlayerPawn Replaces DoomPlayer
 	Health 100
 	Radius 16
 	Height 56
-	Mass 500
+	Mass 400
     player.viewheight	44
     player.attackzoffset 16
     GibHealth 20
@@ -775,13 +780,24 @@ ACTOR Doomer : PlayerPawn Replaces DoomPlayer
 	damagefactor "TeleportRemover", 0.0
 	DamageFactor "CauseObjectsToSplash", 0.0
 	damagefactor "BFGShield", 0.0
+	
+	
+	
+	damagefactor "Flames", 0.875
+	damagefactor "Fire", 0.875
+	damagefactor "Burn", 0.875
+	
 	Player.ColorRange 112, 127
 	
-	//WEAPON SLOTS FOR THIS PLAYER CLASS MOD
+	//WEAPON SLOTS FOR THIS PLAYER CLASS
+	
+	var int user_spellbuttons[4]; //The quick-selection thingamajib
+	var int user_amuletopen;
+	
 	Player.WeaponSlot 1, Chain_Saw, Melee_Attacks
 	Player.WeaponSlot 2, BDPistol, Revolver, CompactSMG
 	Player.WeaponSlot 3, Shot_Gun, SSG, AutoShotgun
-	Player.WeaponSlot 4, Rifle, Mini_Gun, Carbine, HMG 
+	Player.WeaponSlot 4, Rifle, Mini_Gun, Carbine, HMG//, LMG
 	Player.WeaponSlot 5, Grenade_Launcher, Super_Grenade_Launcher, Rocket_Launcher
 	Player.WeaponSlot 6, Plasma_Gun, M2PlasmaRifle
 	Player.WeaponSlot 7, Rail_Gun, FreezerRifle
@@ -789,26 +805,51 @@ ACTOR Doomer : PlayerPawn Replaces DoomPlayer
 	Player.WeaponSlot 9, HellishMissileLauncher, FlameCannon, Hell_rifle
 	Player.WeaponSlot 0, SecretWeapon_MP40
 	
-	//
-	
 	Player.StartItem "Rifle"
 	Player.StartItem "BDPistol"
 	Player.StartItem "Melee_Attacks"
 	Player.StartItem "NewClip", 60
 	Player.StartItem "RifleAmmo", 31
-//	Player.StartItem "DoubleRifleAmmo", 31
+	Player.StartItem "DoubleRifleAmmo", 31
 	Player.StartItem "PistolAmmo", 15
+	Player.StartItem "HandgunAmmo", 15
 	Player.StartItem "PistolBullets", 60
 	Player.StartItem "ShotgunAmmo", 8
-	Player.StartItem "RevolverAmmo", 6
 	Player.StartItem "AutoShotgunAmmo", 12
+	Player.StartItem "RevolverAmmo", 6
+	Player.StartItem "SSGAmmoCounter", 2
+	Player.StartItem "DoubleASGAmmo", 12
 	Player.StartItem "HMGAmmo", 100
 	Player.StartItem "PlasmaAmmo", 50
+	Player.StartItem "DoublePlasmagunAmmo", 50
 	Player.StartItem "RocketRounds", 6
 	Player.StartItem "RailgunAmmo", 50
+	Player.StartItem "DualSSGAmmo", 4
+	Player.StartItem "RightSSGAmmo", 2
+	Player.StartItem "LeftSSGAmmo", 2
 	Player.StartItem "IsPlayer", 1
+	Player.StartItem "SMGAmmo", 50
+	Player.StartItem "XRifleAmmo", 40
+	Player.StartItem "LMGAmmo", 70
+	Player.StartItem "M2PlasmaAmmo", 50
+	Player.StartItem "MP40Ammo", 32
+	Player.StartItem "HellAmmo", 50
+	Player.StartItem "GrenadeRounds", 6
 	//Player.StartItem "TargetIsAMarine", 1
 	//PB
+	
+	
+     Player.StartItem "SlotOWN1", 1
+	 Player.StartItem "SlotOWN2", 1
+	 Player.StartItem "SlotOWN3", 1
+	 Player.StartItem "SlotOWN4", 1
+	 Player.StartItem "SlotOWN5", 1
+	 Player.StartItem "SlotOWN6", 1
+	 Player.StartItem "SlotOWN7", 1
+	 Player.StartItem "SlotOWN8", 1
+	 Player.StartItem "SlotOWN9", 1
+	 Player.StartItem "SlotOWN0", 1
+	
 	Player.StartItem "HandGrenade"
 	Player.StartItem "HandGrenadeAmmo", 8
 	Player.StartItem "IsPlayingAsProjectBrutality", 1
@@ -820,6 +861,46 @@ ACTOR Doomer : PlayerPawn Replaces DoomPlayer
 	States
 	{
 	
+  Revenant_Spawn:
+	TNT1 A 0 A_JumpIfInventory("RevenantCurse", 1, 2)
+	Goto See+8
+	TNT1 AAA 0
+    DREV AB 10 A_Look
+    loop
+  Revenant_See:
+	TNT1 A 0 A_JumpIfInventory("RevenantCurse", 1, 2)
+	Goto See+8
+	TNT1 AAA 0
+    DREV AA 2
+    DREV BB 2
+    DREV CC 2
+    DREV DD 2
+    DREV EE 2
+    DREV FF 2
+    loop
+  Revenant_AltFire:
+	TNT1 A 0 A_JumpIfInventory("RevenantCurse", 1, 2)
+	Goto See+8
+	TNT1 AAA 0
+    DREV GHI 6
+    Goto see
+  Revenant_Pain:
+	TNT1 A 0 A_JumpIfInventory("RevenantCurse", 1, 2)
+	Goto Pain+6
+	TNT1 AAA 0
+    DREV L 5
+    DREV L 5 A_playsound("skeleton/pain")
+    goto See
+  Revenant_Death:
+    NULL A 0 ACS_ExecuteAlways(477, 0, 0, 0, 0)//Start Camera
+	NULL A 0 A_GiveInventory("PlayerIsDead", 1)
+    NULL A 0 A_Takeinventory("Kicking",1)
+    DREV LM 7
+    DREV N 7 A_Scream
+    DREV O 7 A_NoBlocking
+    DREV P 7
+    DREV Q -1
+    stop
 
     Spawn:
 		MARN A 0
@@ -838,6 +919,7 @@ ACTOR Doomer : PlayerPawn Replaces DoomPlayer
 
 		
 		MARN A 0 A_JumpIfInventory("FistsSelected", 1, "FistsStand")
+		TNT1 A 0 A_JumpIfInventory("RevenantCurse", 1, "Revenant_Spawn")
 		
 		MARN B 0 A_JumpIfInventory("GoSpecial", 1, "SpecialCheckerMoving")
 		
@@ -930,6 +1012,7 @@ ACTOR Doomer : PlayerPawn Replaces DoomPlayer
 		MARN A 0 A_TakeInventory("ChainguyguyContinue", 1)
 		MARN A 0 A_JumpIfInventory("ADSMode", 1, "ADSStand")
 		MARN A 0 A_JumpIfInventory("FistsSelected", 1, "FistsMove")
+		TNT1 A 0 A_JumpIfInventory("RevenantCurse", 1, "Revenant_See")
 		
 		MARN A 0 A_JumpIfInventory("GoSpecial", 1, "SpecialCheckerMoving")
 		TNT1 A 0 A_JumpIfInventory("BloodSplasherz", 1, "Pain.Blood")
@@ -981,6 +1064,7 @@ ACTOR Doomer : PlayerPawn Replaces DoomPlayer
 		MARN A 0 A_TakeInventory("ChainguyguyContinue", 1)
 		MARN A 0 A_JumpIfInventory("ADSMode", 1, "ADSStand")
 		MARN A 0 A_JumpIfInventory("FistsSelected", 1, "FistsMove")
+		TNT1 A 0 A_JumpIfInventory("RevenantCurse", 1, "Revenant_See")
 		
 		MARN A 0 A_JumpIfInventory("GoSpecial", 1, "SpecialCheckerMoving")
 		TNT1 A 0 A_JumpIfInventory("BloodSplasherz", 1, "Pain.Blood")
@@ -1028,6 +1112,7 @@ ACTOR Doomer : PlayerPawn Replaces DoomPlayer
 		MARN A 0 A_TakeInventory("ChainguyguyContinue", 1)
 		MARN A 0 A_JumpIfInventory("ADSMode", 1, "ADSStand")
 		MARN A 0 A_JumpIfInventory("FistsSelected", 1, "FistsMove")
+		TNT1 A 0 A_JumpIfInventory("RevenantCurse", 1, "Revenant_See")
 		
 		MARN A 0 A_JumpIfInventory("GoSpecial", 1, "SpecialCheckerMoving")
 		
@@ -1201,7 +1286,7 @@ ACTOR Doomer : PlayerPawn Replaces DoomPlayer
 	
 		NULL A 0 ACS_ExecuteAlways(477, 0, 0, 0, 0)//Start Camera//Start Camera
 		NULL A 0 ThrustThing(angle*256/360+192,20,0,0)//Thrust Right
-		PROL EDCBA 4
+		PROL EDCBA 3
 		MARN A 0 ACS_ExecuteAlways(171, 0, 0, 0, 0)//Disable Camera.
 		NULL A 0 A_JumpIfInventory("GoFatality", 1, "FatalityChecker")
         NULL A 0 A_JumpIfInventory("GoSpecial", 1, "SpecialChecker")
@@ -1225,7 +1310,7 @@ ACTOR Doomer : PlayerPawn Replaces DoomPlayer
 	
 		NULL A 0 ACS_ExecuteAlways(477, 0, 0, 0, 0)//Start Camera//Start Camera
 		NULL A 0 ThrustThing(angle*256/360+64,20,0,0)//Thrust Left
-		PROL ABCDE 4
+		PROL ABCDE 3
 		MARN A 0 ACS_ExecuteAlways(171, 0, 0, 0, 0)//Disable Camera.
 		NULL A 0 A_JumpIfInventory("GoFatality", 1, "FatalityChecker")
         NULL A 0 A_JumpIfInventory("GoSpecial", 1, "SpecialChecker")
@@ -1264,12 +1349,13 @@ ACTOR Doomer : PlayerPawn Replaces DoomPlayer
 
     HeavyWounds:
 	  	NULL A 0 A_JumpIfHealthLower(2, 2)
-		NULL A 0 A_Jump(256, 5)
+		NULL A 1 A_Jump(256, 5)
 		NULL AA 0
 		NULL A 0 A_Giveinventory("HealthBonus",1)
 		NULL AAA 0
 		
 		MARN A 0 A_JumpIfInventory("FistsSelected", 1, "FistsMove")
+		TNT1 A 0 A_JumpIfInventory("RevenantCurse", 1, "Revenant_See")
 		MARN A 0 A_JumpIfInventory("GoSpecial", 1, "SpecialCheckerMoving")
 		MARN A 0 A_SpawnItemEx("FootStep6", 0, 0, 40, 0, 0)
 		MARN A 0 A_JumpIfInventory("GoFatality", 1, "FatalityChecker")
@@ -1279,7 +1365,7 @@ ACTOR Doomer : PlayerPawn Replaces DoomPlayer
 		
 	 HeavyWoundsSpawn:
 	  	NULL A 0 A_JumpIfHealthLower(2, 2)
-		NULL A 0 A_Jump(256, 5)
+		NULL A 1 A_Jump(256, 5)
 		NULL AA 0
 		NULL A 0 A_Giveinventory("HealthBonus",1)
 		NULL AAA 0
@@ -1587,6 +1673,7 @@ ACTOR Doomer : PlayerPawn Replaces DoomPlayer
        // NULL A 0 ACS_Execute(577, 0, 0, 0, 0)
         NULL A 0 ACS_Execute(530, 0, 0, 0, 0)
 	    NULL A 0 A_JumpIfInventory("FistsSelected", 1, "PainWfist")
+		TNT1 A 0 A_JumpIfInventory("RevenantCurse", 1, "Revenant_Pain")
 		//TNT1 A 0 A_GiveInventory("ImpactMovesSling", 1)
        // NULL A 0 A_PlaySound("PAIN1", 2)
 		PLAY G 5
@@ -1598,6 +1685,8 @@ ACTOR Doomer : PlayerPawn Replaces DoomPlayer
 		Goto See
 		
 	PainWfist:
+		MARN B 0 A_JumpIfInventory("GoFatality", 1, "FatalityChecker")
+        MARN B 0 A_JumpIfInventory("GoSpecial", 1, "SpecialCheckerMoving")
 	    NULL A 0 A_JumpIfInventory("HasImpShield", 1, "SeeImpShield")
 		NULL A 0 A_JumpIfInventory("HasDarkImpShield", 1, "SeeDarkImpShield")
 		NULL A 0 A_JumpIfInventory("HasZmanShield", 1, "SeeZmanShield")
@@ -1616,6 +1705,7 @@ ACTOR Doomer : PlayerPawn Replaces DoomPlayer
 	Pain.ExplosiveImpact:
 	Pain.Explosive:
         NULL A 0 ACS_Execute(531, 0, 0, 0, 0)
+		TNT1 A 0 A_JumpIfInventory("RevenantCurse", 1, "Revenant_Pain")
 		TNT1 A 0 A_JumpIfInventory("BloodSplasherz", 1, "Pain.Blood")
 		TNT1 A 0 A_JumpIfInventory("BloodSplasherBlueBlood", 1, "Pain.BlueBlood")
 		TNT1 A 0 A_JumpIfInventory("WaterSplasherz", 1, "WaterSplash")
@@ -1627,7 +1717,7 @@ ACTOR Doomer : PlayerPawn Replaces DoomPlayer
 	Pain.Bullet:
 	Pain.SSG:
 	Pain.CutLess:
-		NULL A 0 A_Jump(255,"PBUL1","PBUL2","PBUL3","PBUL4","PBUL5","PBUL6")
+		NULL A 1 A_Jump(255,"PBUL1","PBUL2","PBUL3","PBUL4","PBUL5","PBUL6")
         Goto Pain
         //Scripts 611 to 616 are responsible for making the bullet damage effect on screen
         PBUL1:
@@ -1681,10 +1771,11 @@ ACTOR Doomer : PlayerPawn Replaces DoomPlayer
 	TNT1 A 0 SetPlayerProperty(0,0,PROP_TOTALLYFROZEN)
 	Goto See
 	
-		Death.Ice:
+	Death.Ice:
 	DeathIce:
 	Death.Frost:
 	Death.Freeze:
+		TNT1 A 0 A_JumpIfInventory("RevenantCurse", 1, "Revenant_Death")
 		TNT1 A 0 A_NoBlocking
 		TNT1 A 0 A_PlaySound ("DSBOTTLE")
 		TNT1 AAAAAAAAAAAAAAAAAAA 0 A_CustomMissile ("XIceChunk1", 48, 0, random (0, 360), 2, random (0, 160))
@@ -1701,7 +1792,9 @@ ACTOR Doomer : PlayerPawn Replaces DoomPlayer
 
 	Death:
         NULL A 0 A_Takeinventory("Kicking",1)
-		NULL A 0 A_JumpIfInTargetInventory("TypeSergeant", 1, "DeathShotgun")
+		MARN A 0 A_GiveInventory("PlayerIsDead", 1)
+		TNT1 A 0 A_JumpIfInventory("RevenantCurse", 1, "Revenant_Death")
+		NULL A 0 A_JumpIfInTargetInventory("TypeSergeant", 1, "Death.Shotgun")
 		NULL A 0 A_Jump (160, 3)
         Goto Death.Arm
         NULL AAA 0
@@ -1715,8 +1808,10 @@ ACTOR Doomer : PlayerPawn Replaces DoomPlayer
 		PLAY N -1
 		Stop
 		
-	DeathShotgun:
-		NULL A 0 A_JumpIfCloser(345, "Death.Eat")
+	Death.Shotgun:
+		TNT1 A 0 A_JumpIfInventory("RevenantCurse", 1, "Revenant_Death")
+		MARN A 0 A_GiveInventory("PlayerIsDead", 1)
+		NULL A 0 A_JumpIfCloser(345, "Death.Blast")
 		NULL A 0 A_Jump (160, 3)
         Goto Death.Arm
         NULL AAA 0
@@ -1732,9 +1827,14 @@ ACTOR Doomer : PlayerPawn Replaces DoomPlayer
 	
 
     Death.Eat:
+        NULL A 0 A_GiveToTarget("EatMe",1)
+	Death.SuperPunch:
+    Death.Blast:
+	Death.SSG:
+		TNT1 A 0 A_JumpIfInventory("RevenantCurse", 1, "Revenant_Death")
+		MARN A 0 A_GiveInventory("PlayerIsDead", 1)
         NULL A 0 A_Takeinventory("Kicking",1)
         NULL A 0 ACS_ExecuteAlways(477, 0, 0, 0, 0)//Start Camera
-        NULL A 0 A_GiveToTarget("EatMe",1)
 		NULL A 0 A_CustomMissile ("XDeath1", 1, 0, random (0, 360), 2, random (0, 160))
 		NULL A 0 A_CustomMissile ("XDeath4", 1, 0, random (0, 360), 2, random (0, 160))
 		NULL A 0 A_CustomMissile ("MuchBlood", 50, 0, random (0, 360), 2, random (0, 160))
@@ -1749,9 +1849,10 @@ ACTOR Doomer : PlayerPawn Replaces DoomPlayer
 
     Death.Cut:
 	Death.Saw:
+		TNT1 A 0 A_JumpIfInventory("RevenantCurse", 1, "Revenant_Death")
+		MARN A 0 A_GiveInventory("PlayerIsDead", 1)
         NULL A 0 A_Takeinventory("Kicking",1)
         NULL A 0 ACS_ExecuteAlways(477, 0, 0, 0, 0)//Start Camera
-		
 		NULL A 0 A_CustomMissile ("XDeath1", 1, 0, random (0, 360), 2, random (0, 160))
 		NULL A 0 A_CustomMissile ("XDeath2", 1, 0, random (0, 360), 2, random (0, 160))
 		NULL A 0 A_CustomMissile ("XDeath3", 1, 0, random (0, 360), 2, random (0, 160))
@@ -1771,16 +1872,29 @@ ACTOR Doomer : PlayerPawn Replaces DoomPlayer
         Stop
 
     Death.Slime:
+		TNT1 A 0 A_JumpIfInventory("RevenantCurse", 1, "Revenant_Death")
+		MARN A 0 A_GiveInventory("PlayerIsDead", 1)
         NULL A 0 A_PlaySound("BIGSCREA")
         NULL A 0 A_Takeinventory("Kicking",1)
         NULL A 0 ACS_ExecuteAlways(477, 0, 0, 0, 0)//Start Camera
-        PMET AABBCCDDEEFFGGHHIIIII 10 A_CustomMissile ("PlasmaSmoke", 25, 0, random (0, 180), 2, random (0, 180))
-        PMET IIIIIIIIIIJJJJJJJJJJJJJJJJJJJJJJKKKKKKKKKKKKKKKKKKKKKKKKKKLLLLLLLLLLLLLLL 3 A_CustomMissile ("PlasmaSmoke", 25, 0, random (0, 180), 2, random (0, 180))
+		
+       TNT1 AA 0 A_CustomMissile ("MuchBlood", 30, 0, random (0, 360), 2, random (0, 160))
+       TNT1 AAA 0 A_CustomMissile ("Brutal_FlyingBloodLevel3", 30, 0, random (0, 360), 2, random (10, 50))
+	   TNT1 AAAA 0 A_CustomMissile ("Brutal_FlyingBloodLevel3", 25, 0, random (0, 360), 2, random (40, 60))
+	   TNT1 AAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile ("BrainBlood", 40, 0, random (0, 360), 2, random (0, 160))
+	   PMET AAABBBCC 1 A_CustomMissile ("PlasmaSmoke", 25, 0, random (0, 180), 2, random (0, 180))
+       TNT1 AAA 0 A_CustomMissile ("Brutal_FlyingBloodLevel3", 30, 0, random (0, 360), 2, random (10, 50))
+	   TNT1 AA 0 A_CustomMissile ("Brutal_FlyingBloodLevel3", 25, 0, random (0, 360), 2, random (40, 60))
+		TNT1 A 0 A_SpawnItemEx("DesintegratedHuman3",0,0,0,0,0,0,0,288)
+     //   PMET AABBCCDDEEFFGGHHIIIII 10 A_CustomMissile ("PlasmaSmoke", 25, 0, random (0, 180), 2, random (0, 180))
+      //  PMET IIIIIIIIIIJJJJJJJJJJJJJJJJJJJJJJKKKKKKKKKKKKKKKKKKKKKKKKKKLLLLLLLLLLLLLLL 3 A_CustomMissile ("PlasmaSmoke", 25, 0, random (0, 180), 2, random (0, 180))
         NULL A 0 A_NoBlocking
         NULL A -1
         Stop
 
     Death.CutLess:
+		TNT1 A 0 A_JumpIfInventory("RevenantCurse", 1, "Revenant_Death")
+		MARN A 0 A_GiveInventory("PlayerIsDead", 1)
          NULL A 0 A_Takeinventory("Kicking",1)
          NULL A 0 ACS_ExecuteAlways(477, 0, 0, 0, 0)//Start Camera
 		 NULL A 0 A_Scream
@@ -1797,6 +1911,8 @@ ACTOR Doomer : PlayerPawn Replaces DoomPlayer
 		 Stop
 
     Death.Rip:
+		TNT1 A 0 A_JumpIfInventory("RevenantCurse", 1, "Revenant_Death")
+		MARN A 0 A_GiveInventory("PlayerIsDead", 1)
         NULL A 0 A_Takeinventory("Kicking",1)
         NULL A 0 ACS_ExecuteAlways(477, 0, 0, 0, 0)//Start Camera
         NULL AAAAAAAAAAA 0 A_CustomMissile ("MuchBlood", 50, 0, random (0, 360), 2, random (0, 160))
@@ -1815,6 +1931,8 @@ ACTOR Doomer : PlayerPawn Replaces DoomPlayer
 
     Death.Explosives:
 	XDeath:
+		TNT1 A 0 A_JumpIfInventory("RevenantCurse", 1, "Revenant_Death")
+		MARN A 0 A_GiveInventory("PlayerIsDead", 1)
         NULL A 0 A_Takeinventory("Kicking",1)
 		NULL A 0 ThrustThingZ(0,60,0,1)
 		PPOD A 0 A_SpawnItemEx("BasicMarineGib1", 0, 0, 0, 0, 0, 0, 0, SXF_TRANSFERTRANSLATION)
@@ -1841,31 +1959,9 @@ ACTOR Doomer : PlayerPawn Replaces DoomPlayer
 		XDMG E -1
 		Stop
 
-	Death.SuperPunch:
-    Death.Blast:
-	Death.SSG:
-        NULL A 0 A_Takeinventory("Kicking",1)
-        NULL A 0 ACS_ExecuteAlways(477, 0, 0, 0, 0)//Start Camera
-	    POSS Q 2 A_FaceTarget
-        //NULL A 0 A_CustomMissile ("MeatDeath", 0, 0, random (0, 360), 2, random (0, 160))
-		NULL AAAA 0 A_CustomMissile ("XDeath1", 32, 0, random (170, 190), 2, random (0, 40))
-		NULL AAAA 0 A_CustomMissile ("XDeath2", 32, 0, random (170, 190), 2, random (0, 40))
-		NULL AAAA 0 A_CustomMissile ("XDeath3", 32, 0, random (170, 190), 2, random (0, 40))
-		NULL AAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 32, 0, random (170, 190), 2, random (0, 40))
-		NULL AAAA 0 A_CustomMissile ("Brutal_FlyingBloodFaster", 32, 0, random (170, 190), 2, random (0, 40))
-		NULL AAAA 0 A_CustomMissile ("Brutal_FlyingBloodMuchFaster", 32, 0, random (170, 190), 2, random (0, 40))
-		NULL AAAA 0 A_CustomMissile ("SuperWallRedBlood", 32, 0, random (170, 190), 2, random (0, 40))
-		NULL AAAA 0 A_CustomMissile ("SuperWallRedBlood", 46, 0, random (170, 190), 2, random (0, 40))
-		NULL A 0 A_CustomMissile ("XDeathArm1", 32, 0, random (170, 190), 2, random (0, 40))
-		NULL AAAA 0 A_CustomMissile ("SuperGoreSpawner", 22, 0, random (170, 190), 2, random (0, 15))
-        NULL A 0 A_XScream
-		NULL A 0 A_NoBlocking
-        POSS RSTUVW 8
-		NULL A 0 A_SpawnItem ("GrowingBloodPool")
-        POSS X -1
-        Stop
-
     Death.Rape:
+		TNT1 A 0 A_JumpIfInventory("RevenantCurse", 1, "Revenant_Death")
+		MARN A 0 A_GiveInventory("PlayerIsDead", 1)
         NULL A 0 A_Takeinventory("Kicking",1)
 		NULL A 0 A_Jump (160, 3)
         Goto Death.Arm
@@ -1894,6 +1990,8 @@ ACTOR Doomer : PlayerPawn Replaces DoomPlayer
 		
 		
 	Death.Arm:
+		TNT1 A 0 A_JumpIfInventory("RevenantCurse", 1, "Revenant_Death")
+		MARN A 0 A_GiveInventory("PlayerIsDead", 1)
         NULL A 0 A_Takeinventory("Kicking",1)
         NULL A 0 ACS_ExecuteAlways(477, 0, 0, 0, 0)//Start Camera
 		NULL AA 0 A_CustomMissile ("XDeath1", 50, 0, random (0, 360), 2, random (0, 160))
@@ -1912,6 +2010,8 @@ ACTOR Doomer : PlayerPawn Replaces DoomPlayer
 		
 	Death.ExtremePunches:
 	Death.ExplosiveImpact:
+		TNT1 A 0 A_JumpIfInventory("RevenantCurse", 1, "Revenant_Death")
+		MARN A 0 A_GiveInventory("PlayerIsDead", 1)
         NULL A 0 A_Takeinventory("Kicking",1)
         NULL A 0 ACS_ExecuteAlways(477, 0, 0, 0, 0)//Start Camera
 		NULL A 0 ThrustThingZ(0,30,0,1)
@@ -1936,6 +2036,8 @@ ACTOR Doomer : PlayerPawn Replaces DoomPlayer
         Stop
 		
 	Death.GreenFire:
+		TNT1 A 0 A_JumpIfInventory("RevenantCurse", 1, "Revenant_Death")
+		MARN A 0 A_GiveInventory("PlayerIsDead", 1)
         NULL A 0
         NULL A 0 A_XScream
         NULL A 0 A_NoBlocking
@@ -1956,6 +2058,8 @@ ACTOR Doomer : PlayerPawn Replaces DoomPlayer
         Stop
 		
 Death.Plasma: Death.Plasma2:
+		TNT1 A 0 A_JumpIfInventory("RevenantCurse", 1, "Revenant_Death")
+		MARN A 0 A_GiveInventory("PlayerIsDead", 1)
 		NULL A 0
 		NULL A 0 ACS_ExecuteAlways(477, 0, 0, 0, 0)//Start Camera
 		PBR1 A 6 A_Scream
@@ -1969,6 +2073,8 @@ Death.Plasma: Death.Plasma2:
 		Stop
 	
     Death.superplasma:
+		TNT1 A 0 A_JumpIfInventory("RevenantCurse", 1, "Revenant_Death")
+		MARN A 0 A_GiveInventory("PlayerIsDead", 1)
         NULL A 0
         NULL A 0 A_XScream
         NULL A 0 A_NoBlocking
@@ -1986,8 +2092,11 @@ Death.Plasma: Death.Plasma2:
         Stop
 
     Death.burn:
+		TNT1 A 0 A_JumpIfInventory("RevenantCurse", 1, "Revenant_Death")
+		MARN A 0 A_GiveInventory("PlayerIsDead", 1)
         NULL A 0 A_Takeinventory("Kicking",1)
         NULL A 0 ACS_ExecuteAlways(477, 0, 0, 0, 0)//Start Camera
+		TNT1 A 0 A_Jump(122, "Burn2")
 		PBUR A 1
 		PBUR A 1 A_PlayerScream
 		PBUR A 1 A_NoBlocking
@@ -1998,8 +2107,26 @@ Death.Plasma: Death.Plasma2:
         PBUR E -1
         Stop
 
+	Burn2:
+		TNT1 A 0 A_JumpIfInventory("RevenantCurse", 1, "Revenant_Death")
+		NULL AAAAA 0 bright A_CustomMissile ("XDeath1", 35, 0, random (0, 360), 2, random (30, 180))
+        NULL AAA 0 A_CustomMissile ("Brutal_FlyingBlood", 37, 0, random (0, 360), 2, random (0, 160))
+	    NULL A 0 A_CustomMissile ("XDeathBurnedMeat", 32, 0, random (0, 360), 2, random (0, 160))
+	    NULL A 0 A_CustomMissile ("XDeathBurnedMeat2", 32, 0, random (0, 360), 2, random (0, 160))
+		P2D0 A 1
+		P2D0 A 1 A_PlayerScream
+		P2D0 A 1 A_NoBlocking
+		P2D0 BCBCBCBCBC 2 A_CustomMissile ("SmallFlameTrails", 28, 0, random (0, 180), 2, random (0, 180))
+        P2D0 DDDD 2 A_CustomMissile ("SmallFlameTrails", 8, 0, random (0, 180), 2, random (0, 180))
+		P2D0 EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE 6 A_CustomMissile ("PlasmaSmoke", 8, 0, random (0, 180), 2, random (0, 180))
+        P2D0 E -1
+        Stop
+		
+
 	Death.Fire:
     Death.flames:
+		TNT1 A 0 A_JumpIfInventory("RevenantCurse", 1, "Revenant_Death")
+		MARN A 0 A_GiveInventory("PlayerIsDead", 1)
         NULL A 0
         NULL A 0 A_Takeinventory("Kicking",1)
         NULL A 0 ACS_ExecuteAlways(477, 0, 0, 0, 0)//Start Camera
@@ -2011,6 +2138,8 @@ Death.Plasma: Death.Plasma2:
 		Stop
 		
    Death.Desintegrate:
+		TNT1 A 0 A_JumpIfInventory("RevenantCurse", 1, "Revenant_Death")
+		MARN A 0 A_GiveInventory("PlayerIsDead", 1)
 	    NULL A 0 A_Takeinventory("Kicking",1)
         NULL A 0 ACS_ExecuteAlways(477, 0, 0, 0, 0)//Start Camera
         NULL A 0 A_Scream
@@ -2021,6 +2150,8 @@ Death.Plasma: Death.Plasma2:
         Stop
 		
 	 Death.Blackhole:
+		TNT1 A 0 A_JumpIfInventory("RevenantCurse", 1, "Revenant_Death")
+		MARN A 0 A_GiveInventory("PlayerIsDead", 1)
 	    NULL A 0 A_Takeinventory("Kicking",1)
         NULL A 0 ACS_ExecuteAlways(477, 0, 0, 0, 0)//Start Camera
         NULL A 0 A_Scream
@@ -2031,6 +2162,8 @@ Death.Plasma: Death.Plasma2:
         Stop
 	  
     Death.Stomp:
+		TNT1 A 0 A_JumpIfInventory("RevenantCurse", 1, "Revenant_Death")
+		MARN A 0 A_GiveInventory("PlayerIsDead", 1)
 		NULL AAAAAA 0 bright A_CustomMissile ("SuperGoreSpawner", 5, 0, random (0, 360), 2, random (30, 180))
 		NULL AAAAAA 0 bright A_CustomMissile ("XDeath1", 5, 0, random (0, 360), 2, random (30, 180))
 		NULL AA 0 bright A_CustomMissile ("XDeath2", 55, 0, random (0, 360), 2, random (30, 180))
@@ -3810,7 +3943,7 @@ SFNZ C 16
         NULL A 0 A_Giveinventory("WaterOnVisor",1)
        // NULL A 0 A_Giveinventory("GiveHealth",1)
 		//NULL A 0 A_GiveInventory("MeatAmmo", 1)
-	  NULL A 0 A_Jump(255,"Wled1","Wled2","Wled3","Wled4","Wled5","Wled6")
+	  NULL A 1 A_Jump(255,"Wled1","Wled2","Wled3","Wled4","Wled5","Wled6")
 	  Goto Wled1
 
         Wled1:
@@ -3837,7 +3970,7 @@ SFNZ C 16
         NULL A 0 A_Giveinventory("SlimeOnVisor",1)
        // NULL A 0 A_Giveinventory("GiveHealth",1)
 		//NULL A 0 A_GiveInventory("MeatAmmo", 1)
-	  NULL A 0 A_Jump(255,"Sled1","Sled2","Sled3","Sled4","Sled5","Sled6")
+	  NULL A 1 A_Jump(255,"Sled1","Sled2","Sled3","Sled4","Sled5","Sled6")
 	  Goto Wled1
 
         Sled1:
@@ -3864,7 +3997,7 @@ SFNZ C 16
         NULL A 0 A_Giveinventory("SludgeOnVisor",1)
        // NULL A 0 A_Giveinventory("GiveHealth",1)
 		//NULL A 0 A_GiveInventory("MeatAmmo", 1)
-	  NULL A 0 A_Jump(255,"lled1","lled2","lled3","lled4","lled5","lled6")
+	  NULL A 1 A_Jump(255,"lled1","lled2","lled3","lled4","lled5","lled6")
 	  Goto lled1
 
         lled1:
@@ -3892,7 +4025,7 @@ SFNZ C 16
         NULL A 0 A_Giveinventory("BloodOnVisor",1)
        // NULL A 0 A_Giveinventory("GiveHealth",1)
 		//NULL A 0 A_GiveInventory("MeatAmmo", 1)
-	  NULL A 0 A_Jump(255,"Bled1","Bled2","Bled3","Bled4","Bled5","Bled6")
+	  NULL A 1 A_Jump(255,"Bled1","Bled2","Bled3","Bled4","Bled5","Bled6")
 	  Goto Bled1
 
         Bled1:
@@ -3917,7 +4050,7 @@ SFNZ C 16
 	Pain.BlueBlood:
 		NULL A 0 A_TakeInventory("BloodSplasherBlueBlood", 1)
         NULL A 0 A_Giveinventory("BlueBloodOnVisor",1)
-  NULL A 0 A_Jump(255,"BBled1","BBled2","BBled3","BBled4","BBled5","BBled6")
+  NULL A 1 A_Jump(255,"BBled1","BBled2","BBled3","BBled4","BBled5","BBled6")
   Goto BBled1
         BBled1:
         NULL A 0 ACS_Execute(570, 0, 0, 0, 0)
@@ -3940,7 +4073,7 @@ SFNZ C 16
 
 	Pain.GreenBlood:
         NULL A 0 A_Giveinventory("GreenBloodOnVisor",1)
-  NULL A 0 A_Jump(255,"GBled1","GBled2","GBled3","GBled4","GBled5","GBled6")
+  NULL A 1 A_Jump(255,"GBled1","GBled2","GBled3","GBled4","GBled5","GBled6")
   Goto Bled1
 
         GBled1:
@@ -3961,6 +4094,7 @@ SFNZ C 16
         GBled6:
         NULL A 0 ACS_Execute(565, 0, 0, 0, 0)
          Goto StandStill
+
 
 		 
 		 

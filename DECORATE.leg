@@ -46,6 +46,7 @@ PainChance 255
 	-COUNTKILL
 	
 	damagefactor "Trample", 0
+Renderstyle "none"
 States
 {
 Spawn:
@@ -188,6 +189,7 @@ PROJECTILE
 	+DEHEXPLOSION
 	+ACTIVATEMCROSS
 +NOEXTREMEDEATH
+Renderstyle "none"
 States
 {
 Spawn:
@@ -215,6 +217,7 @@ PROJECTILE
 	+DEHEXPLOSION
 	+ACTIVATEMCROSS
 +NOEXTREMEDEATH
+Renderstyle "none"
 States
 {
 Spawn:
@@ -242,6 +245,7 @@ PROJECTILE
 	+DEHEXPLOSION
 	+ACTIVATEMCROSS
 +NOEXTREMEDEATH
+Renderstyle "none"
 States
 {
 Spawn:
@@ -270,6 +274,7 @@ PROJECTILE
 	+DEHEXPLOSION
 	+ACTIVATEMCROSS
 +NOEXTREMEDEATH
+Renderstyle "none"
 States
 {
 Spawn:
@@ -297,6 +302,7 @@ PROJECTILE
 	+DEHEXPLOSION
 	+ACTIVATEMCROSS
 +NOEXTREMEDEATH
+Renderstyle "none"
 States
 {
 Spawn:
@@ -324,6 +330,7 @@ PROJECTILE
 	+DEHEXPLOSION
 	+ACTIVATEMCROSS
 +EXTREMEDEATH
+Renderstyle "none"
 States
 {
 Spawn:

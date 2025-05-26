@@ -3,7 +3,6 @@
 
 script 647 enter
 {
-    //ClearInventory();
     GiveInventory("CheckMarines", 1);
 }
 
@@ -62,7 +61,11 @@ else {TakeInventory("LowGraphicsMode", 1);}
 
 Script "PerformanceMode" (VOID)
 {
-if	(GetCvar("performancemode") == 1) { SetActorState(0,"Performance"); }
+	if	(GetCvar("performancemode") == 1) 
+	{ 
+		SetActorState(0,"Performance"); 
+		SetResultValue(1);
+	}
 }
 
 Script "MonsterPerformanceMode" (VOID)
@@ -90,8 +93,6 @@ Script 796 (VOID)
 {
 if	(GetCvar("bd_classicmonsters") == 1) { SetActorState(0,"ReplaceVanilla"); }
 }
-
-
 
 Script 719 (VOID)
 {
@@ -129,7 +130,7 @@ Script 3755 (VOID) NET
  GiveInventory("DoMine", 1);
 }
 
-Script 281 (void) // Shotgun Recoil
+Script 281 (void) NET // Shotgun Recoil
 {
 SetActorPitch(0, (GetActorPitch(0) - 700)); 
 Delay(1);
@@ -148,7 +149,7 @@ Delay(1);
 SetActorPitch(0, (GetActorPitch(0) + 100));
 }
 
-script 374 (void) // 1-Barreled SSG Shot
+script 374 (void) NET // 1-Barreled SSG Shot
 {
 SetActorPitch(0, (GetActorPitch(0) - 700)); 
 Delay(1);
@@ -167,7 +168,7 @@ Delay(1);
 SetActorPitch(0, (GetActorPitch(0) + 100));
 }
 
-Script 375 (void) // 2-Barreled SSG Shot
+Script 375 (void) NET // 2-Barreled SSG Shot
 {
 SetActorPitch(0, (GetActorPitch(0) - 1200)); 
 Delay(1);
@@ -240,19 +241,33 @@ script "DemonSoulSeeker" (void)
 
 Script "GuranteeGameMode" ENTER NET
 {
-	if(PlayerClass(PlayerNumber()) == 1)
-		SetCVar("bd_classicmonsters", 1);
-	else
-		SetCVar("bd_classicmonsters", 0);
-		
-	if(PlayerClass(PlayerNumber()) == 2)
-		{
-			SetCVar("bd_restrictedmode", 1);
-			Thing_Hate(643, 0, 0);
-		}
-	else
-		SetCVar("bd_restrictedmode", 0);
+	if (CheckInventory("Revenant_Rune"))
+	{
+		SetFont("");
+		HudMessage(s:""; HUDMSG_FADEOUT, 50, CR_UNTRANSLATED, 133.0, 100.0, 0.0);
+		SetActorProperty(0, APROP_HEALTH, 100);
+		SetAirControl(0.00390625);
+		TakeInventory("RevenantCurse", 1);
+		SetWeapon("Melee_Attacks");
+		delay(35);
+		TakeInventory("Revenant_Rune", 1);
+	}
 	
+	if(PlayerClass(PlayerNumber()) == 2) {
+		//PrintBold(s:"PLAYER CLASS 2");
+		SetCVar("bd_classicmonsters", 1);
+		SetCVar("bd_TraditionalMode", 1);
+	}
+	else if(PlayerClass(PlayerNumber()) == 1) {
+			//PrintBold(s:"PLAYER CLASS 1");
+			SetCVar("bd_classicmonsters", 1);
+			SetCVar("bd_TraditionalMode", 0);
+	}
+	else if(PlayerClass(PlayerNumber()) == 0) {
+			//PrintBold(s:"PLAYER CLASS 0");
+			SetCVar("bd_classicmonsters", 0);
+			SetCVar("bd_TraditionalMode", 0);
+	}
 }
 
 script "WeaponSwapSound" (VOID) NET
@@ -283,4 +298,638 @@ Script "Regen" ENTER NET
 		}
 		Delay(35);
 	}
+}
+
+Script "ReplaceMarines" (VOID) NET
+{
+if	(GetCvar("bd_replacemarines") == 1) { SetActorState(0,"ReplaceMarine"); }
+}
+
+Script 363 (VOID) NET
+{
+ GiveInventory("Unloading", 1);
+ GiveInventory("GoSpecial", 1);
+}
+
+Script "ZombieManGrenades" (VOID) NET
+{
+if	(GetCvar("bd_NoZmanGrenade") == 1) { GiveInventory("NoZombieGrenade", 1); }
+}
+
+Script "CeilingClimbingImps" (VOID) NET
+{
+	if	(GetCvar("bd_GroundImps") == 1)
+	{ 
+		SetResultValue(1);
+		GiveInventory("NoCeilingClimb", 1);
+	}
+	else
+		SetResultValue(0);
+}
+
+Script "PinkyHealthFood" (VOID) NET
+{
+if	(GetCvar("bd_HungryPinky") == 1) { GiveInventory("NoFoodHealth", 1); }
+}
+
+Script "JetpackRevenant" (VOID) NET
+{
+
+if	(GetCvar("bd_GroundRevenant") == 1)
+	{ 
+		SetResultValue(1);
+		GiveInventory("NoJetpack", 1);
+	}
+}
+
+Script "ChargingHellknight" (VOID) NET
+{
+if	(GetCvar("bd_NoKnightCharge") == 1) { GiveInventory("NoHellknightCharge", 1); }
+}
+
+Script "BaronBarrelFun" (VOID) NET
+{
+	if	(GetCvar("bd_NoBaronBarrel") == 1)
+	{ 
+		GiveInventory("ComingToGetTheBarrel", 1);
+	}
+
+}
+
+Script "ArchvileBigHeal" (VOID) NET
+{
+if	(GetCvar("bd_NoArchvileHeal") == 1) { GiveInventory("NoBigHeal", 1); }
+}
+
+Script "ArchvileDemonSummon" (VOID) NET
+{
+if	(GetCvar("bd_NoArchvileSummon") == 1) { GiveInventory("NoArchvileSummon", 1); }
+}
+
+Script "MancubusFlamethrower" (VOID) NET
+{
+if	(GetCvar("bd_NoMancubusFlamer") == 1) { GiveInventory("NoMancubusTorch", 1); }
+}
+
+////////////////////////////Monster Spawn Toggles///////////////////////////////
+
+
+//Zman
+Script "TogglePistolZombie" (VOID) NET
+{
+if	(GetCvar("bd_NoPistolZman") == 1) { SetActorState(0,"ReplaceToggle"); }
+}
+
+Script "ToggleScientistZombie" (VOID) NET
+{
+if	(GetCvar("bd_NoZombieScientist") == 1) { SetActorState(0,"ReplaceToggle"); }
+}
+
+Script "ToggleCarbineZombie" (VOID) NET
+{
+if	(GetCvar("bd_NoCarbineZombie") == 1) { SetActorState(0,"ReplaceToggle"); }
+}
+
+Script "ToggleMinigunZombie" (VOID) NET
+{
+if	(GetCvar("bd_NoMinigunZombieman") == 1) { SetActorState(0,"ReplaceToggle"); }
+}
+
+Script "ToggleRifleCommando" (VOID) NET
+{
+if	(GetCvar("bd_NoRifleCommando") == 1) { SetActorState(0,"ReplaceToggle"); }
+}
+
+//Sergeant
+Script "ToggleHelmetSergeant" (VOID) NET
+{
+if	(GetCvar("bd_NoHelmetSergeant") == 1) { SetActorState(0,"ReplaceToggle"); }
+}
+
+Script "ToggleAutoshotgunSergeant" (VOID) NET
+{
+if	(GetCvar("bd_NoAutoshotgunSergeant") == 1) { SetActorState(0,"ReplaceToggle"); }
+}
+
+Script "ToggleZSpecOps" (VOID) NET
+{
+if	(GetCvar("bd_NoZSpecOps") == 1) { SetActorState(0,"ReplaceToggle"); }
+}
+
+Script "ToggleQuadShotgunZombie" (VOID) NET
+{
+if	(GetCvar("bd_NoQuadSergeant") == 1) { SetActorState(0,"ReplaceToggle"); }
+}
+
+Script "ToggleRocketSergeant" (VOID) NET
+{
+if	(GetCvar("bd_NoRocketSergeant") == 1) { SetActorState(0,"ReplaceToggle"); }
+}
+
+Script "ToggleDemonTechSoldier" (VOID) NET
+{
+if	(GetCvar("bd_NoDemonTechSoldier") == 1) { SetActorState(0,"ReplaceToggle"); }
+}
+
+//Commando
+Script "ToggleChaingunMajor" (VOID) NET
+{
+if	(GetCvar("bd_NoChaingunMajor") == 1) { SetActorState(0,"ReplaceToggle"); }
+}
+
+Script "TogglePlasmaZombie" (VOID) NET
+{
+if	(GetCvar("bd_NoPlasmaZombie") == 1) { SetActorState(0,"ReplaceToggle"); }
+}
+
+Script "ToggleClassicCommando" (VOID) NET
+{
+if	(GetCvar("bd_NoClassicCommando") == 1) { SetActorState(0,"ReplaceToggle"); }
+}
+
+
+//Imps
+Script "ToggleBrownImps" (VOID) NET
+{
+if	(GetCvar("bd_NoBrownImps") == 1) { SetActorState(0,"ReplaceToggle"); }
+}
+
+Script "ToggleDarkImps" (VOID) NET
+{
+if	(GetCvar("bd_NoDarkImps") == 1) { SetActorState(0,"ReplaceToggle"); }
+}
+
+//Demons
+Script "ToggleBloodDemons" (VOID) NET
+{
+if	(GetCvar("bd_NoBloodDemon") == 1) { SetActorState(0,"ReplaceToggle"); }
+}
+
+Script "ToggleMechDemons" (VOID) NET
+{
+if	(GetCvar("bd_NoMechDemon") == 1) { SetActorState(0,"ReplaceToggle"); }
+}
+
+//Cacodemons
+Script "ToggleMagCaco" (VOID) NET
+{
+if	(GetCvar("bd_NoMagCaco") == 1) { SetActorState(0,"ReplaceToggle"); }
+}
+
+Script "ToggleAfrit" (VOID) NET
+{
+if	(GetCvar("bd_NoAfrit") == 1) { SetActorState(0,"ReplaceToggle"); }
+}
+
+//Pain Elemental
+Script "ToggleSufferElemental" (VOID) NET
+{
+if	(GetCvar("bd_NoSufferElemental") == 1) { SetActorState(0,"ReplaceToggle"); }
+}
+
+Script "ToggleTriteElemental" (VOID) NET
+{
+if	(GetCvar("bd_NoTriteElemental") == 1) { SetActorState(0,"ReplaceToggle"); }
+}
+
+Script "ToggleOverlord" (VOID) NET
+{
+if	(GetCvar("bd_NoOverlord") == 1) { SetActorState(0,"ReplaceToggle"); }
+}
+
+//Lost Soul
+Script "TogglePhantasm" (VOID) NET
+{
+if	(GetCvar("bd_NoPhantasm") == 1) { SetActorState(0,"ReplaceToggle"); }
+}
+
+//Revenant
+Script "ToggleBeamRevenant" (VOID) NET
+{
+if	(GetCvar("bd_NoBeamRevenant") == 1) { SetActorState(0,"ReplaceToggle"); }
+}
+
+//Spiders
+Script "ToggleInfernoSpider" (VOID) NET
+{
+if	(GetCvar("bd_NoInfernoArachnotron") == 1) { SetActorState(0,"ReplaceToggle"); }
+}
+
+Script "ToggleArachnotron2" (VOID) NET
+{
+if	(GetCvar("bd_NoArachnotron2") == 1) { SetActorState(0,"ReplaceToggle"); }
+}
+
+Script "ToggleArachnophyte" (VOID) NET
+{
+if	(GetCvar("bd_NoArachnophyte") == 1) { SetActorState(0,"ReplaceToggle"); }
+}
+
+//Knight
+Script "ToggleCyberKnight" (VOID) NET
+{
+if	(GetCvar("bd_NoCyberKnight") == 1) { SetActorState(0,"ReplaceToggle"); }
+}
+
+Script "ToggleCyberPaladin" (VOID) NET
+{
+if	(GetCvar("bd_NoCyberPaladin") == 1) { SetActorState(0,"ReplaceToggle"); }
+}
+
+//Baron
+Script "ToggleCyberBaron" (VOID) NET
+{
+if	(GetCvar("bd_NoCyberBaron") == 1) { SetActorState(0,"ReplaceToggle"); }
+}
+
+Script "ToggleBelphegor" (VOID) NET
+{
+if	(GetCvar("bd_NoBelphegor") == 1) { SetActorState(0,"ReplaceToggle"); }
+}
+
+//Fatso
+Script "ToggleDaedabus" (VOID) NET
+{
+if	(GetCvar("bd_NoDaedabus") == 1) { SetActorState(0,"ReplaceToggle"); }
+}
+
+Script "ToggleVolcabus" (VOID) NET
+{
+if	(GetCvar("bd_NoVolcabus") == 1) { SetActorState(0,"ReplaceToggle"); }
+}
+
+//Archvile
+Script "ToggleIceVile" (VOID) NET
+{
+if	(GetCvar("bd_NoIceVile") == 1) { SetActorState(0,"ReplaceToggle"); }
+}
+
+Script "ToggleFleshwizard" (VOID) NET
+{
+if	(GetCvar("bd_NoFleshWizard") == 1) { SetActorState(0,"ReplaceToggle"); }
+}
+//Mastermind Variants
+Script "ToggleDemonlisher" (VOID) NET
+{
+if	(GetCvar("bd_NoDemolisher") == 1) { SetActorState(0,"ReplaceToggle"); }
+}
+
+Script "ToggleJuggernaut" (VOID) NET
+{
+if	(GetCvar("bd_NoJuggernaut") == 1) { SetActorState(0,"ReplaceToggle"); }
+}
+
+//Cyberdemon
+Script "ToggleAnnihilator" (VOID) NET
+{
+if	(GetCvar("bd_NoAnnihilator") == 1) { SetActorState(0,"ReplaceToggle"); }
+}
+
+/////////////////////////////////WEAPON TOGGLES///////////////////////////////
+
+Script "ToggleUpgrades" (VOID) NET
+{
+if	(GetCvar("bd_NoUpgrades") == 1) { SetActorState(0,"BackpackSpawn"); }
+}
+
+Script "ToggleLMG" (VOID) NET
+{
+if	(GetCvar("bd_NoLMG") == 1) { SetActorState(0,"BackpackSpawn"); }
+}
+
+Script "ToggleMinigunUpgrade" (VOID) NET
+{
+if	(GetCvar("bd_NoMinigunUpgrade") == 1) { SetActorState(0,"BackpackSpawn"); }
+}
+
+Script "ToggleAutoshotgunUpgrade" (VOID) NET
+{
+if	(GetCvar("bd_NoAutoshotgunUpgrade") == 1) { SetActorState(0,"BackpackSpawn"); }
+}
+
+Script "ToggleDragonBreathUpgrade" (VOID) NET
+{
+if	(GetCvar("bd_NoDBUpgrade") == 1) { SetActorState(0,"BackpackSpawn"); }
+}
+
+Script "ToggleRevolverUpgraded" (VOID) NET
+{
+	if	(GetCvar("bd_UpgradeRevolver") == 1)
+	{ 
+		if (CheckInventory("RevolverSelected") == TRUE)
+		{
+			TakeInventory("BDPistol", 99);
+		}
+		
+		else if (CheckInventory("Revolver") == TRUE)
+		{
+			SetWeapon("Revolver");
+		}
+	}
+}
+
+Script "ToggleCarbineUpgraded" (VOID) NET
+{
+	if	(GetCvar("bd_UpgradeCarbine") == 1)
+	{ 
+		if (CheckInventory("CarbineSelected") == TRUE)
+		{
+			TakeInventory("Rifle", 99);
+		}
+		
+		else if (CheckInventory("Carbine") == TRUE)
+		{
+			SetWeapon("Carbine");
+		}
+	}
+}
+
+Script "ToggleShotgunUpgraded" (VOID) NET
+{
+	if	(GetCvar("bd_UpgradeShotgun") == 1)
+	{
+		if (CheckInventory("ASGSelected") == TRUE)
+		{
+			TakeInventory("Shot_Gun", 99);
+		}
+		
+		else if (CheckInventory("AutoShotgun") == TRUE)
+		{
+			SetWeapon("AutoShotgun");
+		}
+	}
+}
+
+Script "ToggleHMGUpgraded" (VOID) NET
+{
+	if	(GetCvar("bd_UpgradeHMG") == 1)
+	{
+		if (CheckInventory("NewChaingunSelected") == TRUE)
+		{
+			TakeInventory("Mini_Gun", 99);
+		}
+		
+		else if (CheckInventory("HMG") == TRUE)
+		{
+			SetWeapon("HMG");
+		}
+	}
+}
+
+Script "ToggleSuperGLUpgraded" (VOID) NET
+{
+	if	(GetCvar("bd_UpgradeGL") == 1)
+	{
+		if (CheckInventory("SGLSelected") == TRUE)
+		{
+			TakeInventory("Grenade_Launcher", 99);
+		}
+		
+		else if (CheckInventory("Super_Grenade_Launcher") == TRUE)
+		{
+			SetWeapon("Super_Grenade_Launcher");
+		}
+	}
+}
+
+Script "AutoShotgunDrumMag" (void)
+{
+	SetAmmoCapacity("AutoshotgunAmmo", 16);
+	SetAmmoCapacity("LeftASGAmmo", 16);
+	SetAmmoCapacity("DoubleASGAmmo", 32);
+}
+
+//Starter Pack Cyberdemon fix
+Script "CyberDemonDoorFix" (void)
+{
+
+if (CheckActorFloorTexture(0, "RROCK13"))
+	{	
+		int level_number = GetLevelInfo(LEVELINFO_LEVELNUM);
+		if(level_number == 26)
+		{
+			Door_Open(17, 45);
+		}
+	}
+}
+
+/////////////////Nazi Check
+
+script 177 (void)
+{
+if (CheckActorFloorTexture(0, "FLAT5_4"))
+    GiveActorInventory(748, "NaziVerification1", 1);
+else
+    ;
+	
+if (CheckActorCeilingTexture(0, "CEIL4_2"))
+    GiveActorInventory(748, "NaziVerification2", 1);
+else
+    ;
+	
+	
+if (CheckActorCeilingTexture(0, "ACEIL42"))
+    GiveActorInventory(748, "Epic2AlienVerification", 1);
+else
+    ;	
+	
+if (CheckActorFloorTexture(0, "ACEIL22"))
+    GiveActorInventory(748, "Epic2AlienVerification", 1);
+else
+
+if (CheckActorFloorTexture(0, "ACEIL42"))
+    GiveActorInventory(748, "Epic2AlienVerification", 1);
+else
+
+if (CheckActorcEILINGTexture(0, "ACEIL22"))
+    GiveActorInventory(748, "Epic2AlienVerification", 1);
+else
+    ;		
+	
+if (CheckActorFloorTexture(0, "ACEIL68"))
+    GiveActorInventory(748, "Epic2AlienVerification", 1);
+else	
+
+if (CheckActorFloorTexture(0, "FL0"))
+    GiveActorInventory(748, "AltEasyMarineVerification", 1);
+else	
+	
+	
+if	(GetCvar("bd_isnazilevel") == 1) { SetActorState(0,"ISANazi"); }	
+
+
+if (CheckActorcEILINGTexture(0, "F_SKY1"))
+    GiveActorInventory(728, "TVRRainVerification", 1);
+else
+    ;	
+}
+
+script "CombatBackPack" (void)
+{
+	SetAmmoCapacity("PistolBullets", 600);
+	SetAmmoCapacity("NewClip", 800);
+	SetAmmoCapacity("NewShell", 150);
+	SetAmmoCapacity("RocketAmmo", 125);
+	SetAmmoCapacity("Cell", 800);
+	SetAmmoCapacity("Demonpower", 800);
+}
+
+Script "ToggleRestoreDualCarbine" (VOID) NET
+{
+		if(GetCvar("bd_RestoreCarbines") == 1)
+		{
+			SetResultValue(1);
+		}
+		else if(GetCvar("bd_RestoreCarbines") == 0)
+		{
+			SetResultValue(0);
+		}
+}
+
+Script "ToggleShotgunSkin" (VOID) NET
+{
+		if(GetCvar("bd_shotgunskin") == 1)
+		{
+			SetResultValue(1);
+		}
+		else if(GetCvar("bd_shotgunskin") == 0)
+		{
+			SetResultValue(0);
+		}
+}
+
+Script "ToggleBulletJanitor" (VOID) NET
+{
+	if(GetCvar("zdoombrutaljanitorcasings") == 1)
+		{
+			SetResultValue(1);
+		}
+		else if(GetCvar("zdoombrutaljanitorcasings") == 0)
+		{
+			SetResultValue(0);
+		}
+}
+
+Script "CheckTraditional" (VOID) net
+{
+	if(GetCvar("bd_TraditionalMode") == 1)
+	{ 
+		SetResultValue(1);
+	}
+	else
+		SetResultValue(0);
+}
+
+Script "ToggleUnifiedExplosives" (VOID) net
+{
+	if(GetCvar("bd_UnifiedExplosives") == 1)
+	{ 
+		SetResultValue(1);
+	}
+	else
+		SetResultValue(0);
+}
+
+Script "ShutUpDammit" (VOID) net
+{
+	if(GetCvar("bd_ShutTheFuckUp") == 1)
+	{ 
+		GiveInventory("ShutTheFuckUp", 1);
+	}
+}
+
+script "RevenantFilter" (VOID) NET
+{
+	SetWeapon("Revenant_Rune");
+	SetActorProperty(0, APROP_HEALTH, 300);
+	SetAirControl(1.0);
+	int revenant_timer = 0;
+	while(revenant_timer < 2100)
+	{	
+		SetHudSize(267, 200, TRUE);
+		SetFont("VHSTX1");
+		HudMessage(s:"A"; HUDMSG_PLAIN, 50, CR_UNTRANSLATED, 133.0, 100.0, 0.0);
+		delay(35);
+		revenant_timer+=35;
+	}
+	SetFont("");
+	HudMessage(s:""; HUDMSG_FADEOUT, 50, CR_UNTRANSLATED, 133.0, 100.0, 0.0);
+	SetAirControl(0.00390625);
+	SetActorProperty(0, APROP_HEALTH, 100);
+	TakeInventory("RevenantCurse", 1);
+	SetWeapon("Melee_Attacks");
+	delay(35);
+	TakeInventory("Revenant_Rune", 1);
+}
+
+//Key cards, Taggert. What do they mean?
+script "AssignPlayerTID" enter
+{
+    Thing_ChangeTID(0, 800 + PlayerNumber());
+}
+
+script "GiveAllPlayersRedCard" (void)
+{
+    for (int p = 0; p < 8; p++)
+    {
+        if (PlayerInGame(p) && !CheckActorInventory(800 + p, "RedCard"))
+        {
+            GiveActorInventory(800 + p, "RedCard", 1);
+        }
+    }
+}
+
+script "GiveAllPlayersYellowCard" (void)
+{
+    for (int p = 0; p < 8; p++)
+    {
+        if (PlayerInGame(p) && !CheckActorInventory(800 + p, "YellowCard"))
+        {
+            GiveActorInventory(800 + p, "YellowCard", 1);
+        }
+    }
+}
+
+script "GiveAllPlayersBlueCard" (void)
+{
+    for (int p = 0; p < 8; p++)
+    {
+        if (PlayerInGame(p) && !CheckActorInventory(800 + p, "BlueCard"))
+        {
+            GiveActorInventory(800 + p, "BlueCard", 1);
+        }
+    }
+}
+
+script "GiveAllPlayersRedSkull" (void)
+{
+    for (int p = 0; p < 8; p++)
+    {
+        if (PlayerInGame(p) && !CheckActorInventory(800 + p, "RedSkull"))
+        {
+            GiveActorInventory(800 + p, "RedSkull", 1);
+        }
+    }
+}
+
+script "GiveAllPlayersYellowSkull" (void)
+{
+    for (int p = 0; p < 8; p++)
+    {
+        if (PlayerInGame(p) && !CheckActorInventory(800 + p, "YellowSkull"))
+        {
+            GiveActorInventory(800 + p, "YellowSkull", 1);
+        }
+    }
+}
+
+script "GiveAllPlayersBlueSkull" (void)
+{
+    for (int p = 0; p < 8; p++)
+    {
+        if (PlayerInGame(p) && !CheckActorInventory(800 + p, "BlueSkull"))
+        {
+            GiveActorInventory(800 + p, "BlueSkull", 1);
+        }
+    }
 }

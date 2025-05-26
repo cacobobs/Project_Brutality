@@ -4,7 +4,7 @@ ACTOR Cyberbaron replaces BaronofHell
 {
   obituary "%o was shock-and-awed by a cyber baron"
   hitobituary "%o was ripped to shreds by a cyber baron"
-  health 1100
+  health 1150
   radius 24
   height 64
   mass 1000
@@ -15,7 +15,7 @@ ACTOR Cyberbaron replaces BaronofHell
   DamageFactor "Crush", 10.0
   DamageFactor "GreenFire", 1.05
   DamageFactor "Desintegrate", 0.95
-  DamageFactor "SSG", 0.5
+  DamageFactor "SSG", 0.33
   DamageFactor "ExplosiveImpact", 2.5
   DamageFactor "Ice", 1.01 DamageFactor "Freeze", 1.01 DamageFactor "Frost", 1.01 
 	DamageFactor "Blood", 0.0 DamageFactor "BlueBlood", 0.0 DamageFactor "GreenBlood", 0.0
@@ -27,6 +27,7 @@ ACTOR Cyberbaron replaces BaronofHell
 	DropItem "RageSphere" 8
 	DropItem "DoubleSphere" 7
 	DropItem "ShieldSphere" 5
+	DropItem "DemonMorphRune" 9
   PainChance "Kick", 200
   PainChance "ExtremePunches", 200
   PainChance "Head", 255
@@ -40,14 +41,22 @@ ACTOR Cyberbaron replaces BaronofHell
   // -HARMFRIENDS 
    
 	MONSTER
-	+NORADIUSDMG
 	+BossDeath
 	+DONTHURTSPECIES
 	+QUICKTORETALIATE
 	
   states
   {
+  
+  Death.Blackhole:
+        TNT1 A 0 A_Scream
+        TNT1 A 0 A_NoBlocking
+        TNT1 A 0 A_SpawnItem("BlackHoledBaron")
+		Stop
+  
   Death.Shrink:
+		TNT1 A 0 A_NoBlocking
+	    TNT1 A 0 A_BossDeath
 		TNT1 A 1 A_PlaySound("Shrink", 3)
 		TNT1 A 0 A_SpawnItemEx ("CyberBaronShrinkFX1", 0, 0,  5, 0, 0)
 		TNT1 A 1 A_SpawnItemEx ("CyberBaronShrinkFX2", 0, 0, 5, 0, 0)
@@ -73,7 +82,7 @@ ACTOR Cyberbaron replaces BaronofHell
 	TNT1 A 0 A_SpawnItem("HeadshotTarget8b", 0, 66,0)
     CBOS B 10 A_Look
 	TNT1 A 0 A_SpawnItem("HeadshotTarget8b", 0, 66,0)
-    loop
+    Goto Spawn+3
   See:
 	TNT1 A 0 A_JumpIfInventory("Curbstomp_Marine", 1, "CurbstompMarine")
 	TNT1 A 0 A_SpawnItem("HeadshotTarget8b", 0, 66,0)
@@ -115,6 +124,7 @@ ACTOR Cyberbaron replaces BaronofHell
       Goto See
   Missile:
 	TNT1 A 0 A_SpawnItem("HeadshotTarget8b", 0, 66,0)
+	TNT1 A 0 A_ChangeFlag("NOTARGET", 1)
     CBOS E 0 A_jump(86,"BaronBall")
 	TNT1 A 0 A_SpawnItem("HeadshotTarget8b", 0, 66,0)
 	CYUS E 0 A_JumpIfCloser(400, "FlameOn")
@@ -138,7 +148,8 @@ ACTOR Cyberbaron replaces BaronofHell
 	TNT1 A 0 A_SpawnItem("HeadshotTarget8b", 0, 66,0)
     CBOS E 6 A_FaceTarget
 	TNT1 A 0 A_SpawnItem("HeadshotTarget8b", 0, 66,0)
-      goto See
+	TNT1 A 0 A_ChangeFlag("NOTARGET", 0)
+    goto See
 	  
   BaronBall:
 	TNT1 A 0 A_SpawnItem("HeadshotTarget8b", 0, 66,0)
@@ -154,7 +165,8 @@ ACTOR Cyberbaron replaces BaronofHell
 	CBOS Q 6 A_FaceTarget
 	TNT1 A 0 A_SpawnItem("HeadshotTarget8b", 0, 66,0)
     CBOS R 6 A_CustomMissile("BaronBall", 36, 0, 0, 1)
-      Goto See
+	TNT1 A 0 A_ChangeFlag("NOTARGET", 0)
+    Goto See
       
   FlameOn:
 		TNT1 A 0 A_SpawnItem("HeadshotTarget8b", 0, 66,0)
@@ -182,7 +194,8 @@ ACTOR Cyberbaron replaces BaronofHell
 		TNT1 A 0 A_JumpIfCloser(315, "Missile")
 		TNT1 A 0 A_CPosRefire
 		CBOS EE 5
-	Goto See
+		TNT1 A 0 A_ChangeFlag("NOTARGET", 0)
+		Goto See
 	
 	CurbstompMarine:
         TNT1 A 0 A_SetInvulnerable
@@ -325,6 +338,15 @@ Goto See
     CBOS H 2
     CBOS H 2 A_Pain
     goto See
+	
+Possession:
+		TNT1 A 0 A_SetInvulnerable
+		CBOS H 3
+		CBOS H 3 A_Pain
+		"####" "#" 35 ACS_NamedExecuteAlways("Pos - Flicker effect")
+		TNT1 A 0 A_UnSetInvulnerable
+		Goto See
+	
 Pain.ExtremePunches:
     CBOS H 2
 	TNT1 A 0 A_Pain
@@ -364,7 +386,6 @@ Pain.ExtremePunches:
  
  Death2:
  Death.Explosive:
- Death.BlackHole:
 	CBOS I 1 A_Scream
 	TNT1 A 0 A_BossDeath
 	TNT1 A 0 A_NoBlocking
@@ -390,6 +411,7 @@ Pain.ExtremePunches:
 		TNT1 A 0 A_Jump(118, "ChestCavity")
 	    TNT1 A 0 A_XScream
 		TNT1 A 0 A_NoBlocking
+	    TNT1 A 0 A_BossDeath
 		TNT1 AAAA 0 A_CustomMissile ("XDeath2", 62, 0, random (0, 360), 2, random (0, 160))
 		TNT1 AAAAAAAAAAAAAA 0 A_CustomMissile ("MuchBlood", 62, 0, random (0, 360), 2, random (0, 160))
 		TNT1 AAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 35, 0, random (0, 360), 2, random (0, 160))
@@ -419,6 +441,8 @@ Pain.ExtremePunches:
 	Death.Ice:
 	Death.Freeze:
 	Death.Frost:
+		TNT1 A 0 A_NoBlocking
+	    TNT1 A 0 A_BossDeath
 	TNT1 A 0 A_ChangeFlag("SHOOTABLE", 0)
 	TNT1 A 0 A_ChangeFlag("SOLID", 0)
 	TNT1 A 0 A_SpawnItem("FrozenCyberBaron")
@@ -960,7 +984,7 @@ P19D A -1
 
 ///////////////////////////======VANILLA======//////////////////////////////////
 
-Actor Vanilla_CyberBaron : CyberBaron
+Actor Vanilla_CyberBaron : CyberBaron Replaces BaronofHell
 {
 	DropItem "DemonStrengthRune" 9
 	States
@@ -972,6 +996,6 @@ Actor Vanilla_CyberBaron : CyberBaron
 		TNT1 A 0 A_SpawnItem("HeadshotTarget8b", 0, 66,0)
 		CBOS B 10 A_Look
 		TNT1 A 0 A_SpawnItem("HeadshotTarget8b", 0, 66,0)
-		loop
+		Goto Spawn+2
 	}
 }

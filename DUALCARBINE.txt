@@ -18,6 +18,10 @@ ACTOR DualCarbines: DoomWeapon
     +WEAPON.NOAUTOAIM //Makes this weapon never autoaim, so recoil can work better
     Scale 0.6 //Weapon's pickup sprite size
 	+WEAPON.NOAUTOFIRE
+	+WEAPON.NO_AUTO_SWITCH
+	+POWERED_UP
+	Weapon.SisterWeapon Carbine
+	
 	States
 	{
 	
@@ -40,7 +44,7 @@ ACTOR DualCarbines: DoomWeapon
 	
 	Ready:
 		TNT1 A 0 A_JumpIfInventory("IsPlayingAsPurist", 1, "GoToPurist")
-		P3SS ABCDEF 1
+		P3SS FEDCBA 1
 		TNT1 A 0 A_GunFlash
 		Goto ReadyToFire
 		
@@ -211,7 +215,7 @@ ACTOR DualCarbines: DoomWeapon
 		TNT1 A 0 A_TakeInventory("FiredPrimary", 1)
 		TNT1 A 0 A_TakeInventory("FiredSecondary", 1)
 		TNT1 A 5
-		P3SS ABCDEF 1
+		P3SS FEDCBA 1
 		TNT1 A 0 A_GunFlash
 		Goto ReadyToFire
 		
@@ -265,7 +269,7 @@ ACTOR DualCarbines: DoomWeapon
 		TNT1 A 0 A_TakeInventory("FiredPrimary", 1)
 		TNT1 A 0 A_TakeInventory("FiredSecondary", 1)
 		TNT1 A 5
-		P3SS ABCDEF 1
+		P3SS FEDCBA 1
 		TNT1 A 0 A_GunFlash
 		Goto ReadyToFire	
 		
@@ -287,7 +291,7 @@ ACTOR DualCarbines: DoomWeapon
 		TNT1 A 0 A_TakeInventory("FiredPrimary", 1)
 		TNT1 A 0 A_TakeInventory("FiredSecondary", 1)
 		TNT1 A 5
-		P3SS ABCDEF 1
+		P3SS FEDCBA 1
 		TNT1 A 0 A_GunFlash
 		Goto ReadyToFire	
 		
@@ -307,7 +311,7 @@ ACTOR DualCarbines: DoomWeapon
 		TNT1 A 0 A_TakeInventory("FiredPrimary", 1)
 		TNT1 A 0 A_TakeInventory("FiredSecondary", 1)
 		TNT1 A 5
-		P3SS ABCDEF 1
+		P3SS FEDCBA 1
 		TNT1 A 0 A_GunFlash
 		Goto ReadyToFire		
 		

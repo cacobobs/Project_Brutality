@@ -2590,3 +2590,596 @@ BrightMap Sprite DRKVL0
 Map BMDRKVL0
 DisableFullBright
 }
+
+//Paladin
+
+BrightMap Sprite HPALA1
+{
+Map BMHPALA1
+DisableFullBright
+}
+
+BrightMap Sprite HPALA2
+{
+Map BMHPALA2
+DisableFullBright
+}
+
+BrightMap Sprite HPALA3
+{
+Map BMHPALA3
+DisableFullBright
+}
+
+BrightMap Sprite HPALA8
+{
+Map BMHPALA8
+DisableFullBright
+}
+
+BrightMap Sprite HPALB1
+{
+Map BMHPALB1
+DisableFullBright
+}
+
+BrightMap Sprite HPALB2
+{
+Map BMHPALB2
+DisableFullBright
+}
+
+BrightMap Sprite HPALB3
+{
+Map BMHPALB3
+DisableFullBright
+}
+
+BrightMap Sprite HPALB7
+{
+Map BMHPALB7
+DisableFullBright
+}
+
+BrightMap Sprite HPALB8
+{
+Map BMHPALB8
+DisableFullBright
+}
+
+BrightMap Sprite HPALC1
+{
+Map BMHPALC1
+DisableFullBright
+}
+
+BrightMap Sprite HPALC2
+{
+Map BMHPALC2
+DisableFullBright
+}
+
+BrightMap Sprite HPALC3
+{
+Map BMHPALC3
+DisableFullBright
+}
+
+BrightMap Sprite HPALC8
+{
+Map BMHPALC8
+DisableFullBright
+}
+
+BrightMap Sprite HPALD1
+{
+Map BMHPALD1
+DisableFullBright
+}
+
+BrightMap Sprite HPALD2
+{
+Map BMHPALD2
+DisableFullBright
+}
+
+BrightMap Sprite HPALD3
+{
+Map BMHPALD3
+DisableFullBright
+}
+
+BrightMap Sprite HPALD8
+{
+Map BMHPALD8
+DisableFullBright
+}
+
+BrightMap Sprite HPALE1
+{
+Map BMHPALE1
+DisableFullBright
+}
+
+BrightMap Sprite HPALE2
+{
+Map BMHPALE2
+DisableFullBright
+}
+
+BrightMap Sprite HPALE3
+{
+Map BMHPALE3
+DisableFullBright
+}
+
+BrightMap Sprite HPALE8
+{
+Map BMHPALE8
+DisableFullBright
+}
+
+BrightMap Sprite HPALF1
+{
+Map BMHPALF1
+DisableFullBright
+}
+
+BrightMap Sprite HPALF2
+{
+Map BMHPALF2
+DisableFullBright
+}
+
+BrightMap Sprite HPALF3
+{
+Map BMHPALF3
+DisableFullBright
+}
+
+BrightMap Sprite HPALF8
+{
+Map BMHPALF8
+DisableFullBright
+}
+
+BrightMap Sprite HPALG1
+{
+Map BMHPALG1
+DisableFullBright
+}
+
+BrightMap Sprite HPALG2
+{
+Map BMHPALG2
+DisableFullBright
+}
+
+BrightMap Sprite HPALG3
+{
+Map BMHPALG3
+DisableFullBright
+}
+
+BrightMap Sprite HPALG8
+{
+Map BMHPALG8
+DisableFullBright
+}
+
+BrightMap Sprite HPALH1
+{
+Map BMHPALH1
+DisableFullBright
+}
+
+BrightMap Sprite HPALH2
+{
+Map BMHPALH2
+DisableFullBright
+}
+
+BrightMap Sprite HPALH3
+{
+Map BMHPALH3
+DisableFullBright
+}
+
+BrightMap Sprite HPALH8
+{
+Map BMHPALH8
+DisableFullBright
+}
+
+BrightMap Sprite HPALI1
+{
+Map BMHPALI1
+DisableFullBright
+}
+
+BrightMap Sprite HPALI2
+{
+Map BMHPALI2
+DisableFullBright
+}
+
+BrightMap Sprite HPALI3
+{
+Map BMHPALI3
+DisableFullBright
+}
+
+BrightMap Sprite HPALI8
+{
+Map BMHPALI8
+DisableFullBright
+}
+
+BrightMap Sprite HPALJ1
+{
+Map BMHPALJ1
+DisableFullBright
+}
+
+BrightMap Sprite HPALJ2
+{
+Map BMHPALJ2
+DisableFullBright
+}
+
+BrightMap Sprite HPALJ3
+{
+Map BMHPALJ3
+DisableFullBright
+}
+
+BrightMap Sprite HPALJ4
+{
+Map BMHPALJ4
+DisableFullBright
+}
+
+BrightMap Sprite HPALJ5
+{
+Map BMHPALJ5
+DisableFullBright
+}
+
+BrightMap Sprite HPALJ6
+{
+Map BMHPALJ6
+DisableFullBright
+}
+
+BrightMap Sprite HPALJ7
+{
+Map BMHPALJ7
+DisableFullBright
+}
+
+BrightMap Sprite HPALJ8
+{
+Map BMHPALJ8
+DisableFullBright
+}
+
+BrightMap Sprite HPALK1
+{
+Map BMHPALK1
+DisableFullBright
+}
+
+BrightMap Sprite HPALK2
+{
+Map BMHPALK2
+DisableFullBright
+}
+
+BrightMap Sprite HPALK3
+{
+Map BMHPALK3
+DisableFullBright
+}
+
+BrightMap Sprite HPALK8
+{
+Map BMHPALK8
+DisableFullBright
+}
+
+BrightMap Sprite HPALL1
+{
+Map BMHPALL1
+DisableFullBright
+}
+
+BrightMap Sprite HPALL2
+{
+Map BMHPALL2
+DisableFullBright
+}
+
+BrightMap Sprite HPALL3
+{
+Map BMHPALL3
+DisableFullBright
+}
+
+BrightMap Sprite HPALL7
+{
+Map BMHPALL7
+DisableFullBright
+}
+
+BrightMap Sprite HPALL8
+{
+Map BMHPALL8
+DisableFullBright
+}
+
+BrightMap Sprite HPALM1
+{
+Map BMHPALM1
+DisableFullBright
+}
+
+BrightMap Sprite HPALM2
+{
+Map BMHPALM2
+DisableFullBright
+}
+
+BrightMap Sprite HPALM3
+{
+Map BMHPALM3
+DisableFullBright
+}
+
+BrightMap Sprite HPALM8
+{
+Map BMHPALM8
+DisableFullBright
+}
+
+BrightMap Sprite HPALN1
+{
+Map BMHPALN1
+DisableFullBright
+}
+
+BrightMap Sprite HPALN2
+{
+Map BMHPALN2
+DisableFullBright
+}
+
+BrightMap Sprite HPALN8
+{
+Map BMHPALN8
+DisableFullBright
+}
+
+BrightMap Sprite HPALO1
+{
+Map BMHPALO1
+DisableFullBright
+}
+
+BrightMap Sprite HPALO2
+{
+Map BMHPALO2
+DisableFullBright
+}
+
+BrightMap Sprite HPALO8
+{
+Map BMHPALO8
+DisableFullBright
+}
+
+BrightMap Sprite HPALP1
+{
+Map BMHPALP1
+DisableFullBright
+}
+
+BrightMap Sprite HPALP8
+{
+Map BMHPALP8
+DisableFullBright
+}
+
+BrightMap Sprite HPLXA0
+{
+Map BMHPALQ0
+DisableFullBright
+}
+
+BrightMap Sprite HPLXB0
+{
+Map BMHPALR0
+DisableFullBright
+}
+
+BrightMap Sprite HPLXC0
+{
+Map BMHPALS0
+DisableFullBright
+}
+
+BrightMap Sprite HPLXD0
+{
+Map BMHPALT0
+DisableFullBright
+}
+
+BrightMap Sprite HPLXE0
+{
+Map BMHPALU0
+DisableFullBright
+}
+
+BrightMap Sprite HPLXF0
+{
+Map BMHPALV0
+DisableFullBright
+}
+
+BrightMap Sprite HPLXG0
+{
+Map BMHPALW0
+DisableFullBright
+}
+
+BrightMap Sprite HPLXH0
+{
+Map BMHPALX0
+DisableFullBright
+}
+
+Pointlight PaladinExplode1
+{
+Color 1.0 0.5 0.0
+Size 35
+}
+
+Pointlight PaladinExplode2
+{
+Color 1.0 0.5 0.0
+Size 40
+}
+
+Pointlight PaladinExplode3
+{
+Color 0.9 0.4 0.0
+Size 45
+}
+
+Pointlight PaladinExplode4
+{
+Color 0.7 0.2 0.0
+Size 35
+}
+
+Pointlight PaladinExplode5
+{
+Color 0.5 0.1 0.0
+Size 30
+}
+
+Pointlight PaladinExplode6
+{
+Color 0.3 0.0 0.0
+Size 25
+}
+
+Pointlight PaladinExplode7
+{
+Color 0.1 0.0 0.0
+Size 20
+}
+
+Pointlight PaladinExplode8
+{
+Color 0.1 0.0 0.0
+Size 15
+}
+
+Object CyberPaladin
+{
+Frame HPLXA { Light PaladinExplode1 }
+Frame HPLXB { Light PaladinExplode2 }
+Frame HPLXC { Light PaladinExplode3 }
+Frame HPLXD { Light PaladinExplode4 }
+Frame HPLXE { Light PaladinExplode5 }
+Frame HPLXF { Light PaladinExplode6 }
+Frame HPLXG { Light PaladinExplode7 }
+Frame HPLXH { Light PaladinExplode8 }
+}
+
+Pointlight PaladinBall1
+{
+Color 1.0 0.0 0.0
+Size 32
+}
+
+Pointlight PaladinBall2
+{
+Color 0.9 0.0 0.0
+Size 30
+}
+
+Pointlight PaladinBall3
+{
+Color 0.8 0.0 0.0
+Size 28
+}
+
+Pointlight PaladinBall4
+{
+Color 0.7 0.0 0.0
+Size 26
+}
+
+Pointlight PaladinBall5
+{
+Color 0.6 0.0 0.0
+Size 24
+}
+
+Pointlight PaladinBall6
+{
+Color 0.5 0.0 0.0
+Size 22
+}
+
+Pointlight PaladinBall7
+{
+Color 0.4 0.0 0.0
+Size 20
+}
+
+Object PaladinBall
+{
+Frame HPLBA { Light PaladinBall1 }
+Frame HPLBB { Light PaladinBall1 }
+Frame HPLBC { Light PaladinBall1 }
+Frame HPLBD { Light PaladinBall1 }
+Frame HPLBE { Light PaladinBall2 }
+Frame HPLBF { Light PaladinBall3 }
+Frame HPLBG { Light PaladinBall4 }
+Frame HPLBH { Light PaladinBall5 }
+Frame HPLBI { Light PaladinBall6 }
+Frame HPLBJ { Light PaladinBall7 }
+}
+
+flickerlight PaladinGrenade1
+{
+    color 1.0 0.7 0.0
+    size 64
+    secondarySize 72
+    chance 0.3
+}
+
+flickerlight PaladinGrenade2
+{
+    color 0.5 0.1 0.0
+    size 80
+    secondarySize 88
+    chance 0.3
+}
+
+flickerlight PaladinGrenade3
+{
+    color 0.3 0.0 0.0
+    size 96
+    secondarySize 104
+    chance 0.3
+}
+
+object PaladinGrenade
+{
+    frame MISLB { light PaladinGrenade1 }
+    frame MISLC { light PaladinGrenade2 }
+    frame MISLD { light PaladinGrenade3 }
+}

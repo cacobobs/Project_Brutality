@@ -235,62 +235,53 @@ ACTOR MechDemonFatality : Inventory
 {
 Inventory.MaxAmount 1
 }
+
+ACTOR CyberPaladinFatality1 : Inventory
+{
+Inventory.MaxAmount 1
+}
+
+ACTOR ArachnotronXFatality : Inventory
+{
+Inventory.MaxAmount 1
+}
+ACTOR ArachnotronXFatality2 : Inventory
+{
+Inventory.MaxAmount 1
+}
+
+ACTOR VolcabusFatality : Inventory
+{
+Inventory.MaxAmount 1
+}
+ACTOR VolcabusFatality2 : Inventory
+{
+Inventory.MaxAmount 1
+}
+
+ACTOR RevenantTransformation : Inventory
+{
+Inventory.MaxAmount 1
+}
+
+ACTOR RevenantCurse : Inventory
+{
+Inventory.MaxAmount 1
+}
+
+ACTOR Arachnotron2FatalityA : Inventory
+{
+Inventory.MaxAmount 1
+}
+ACTOR Arachnotron2FatalityB : Inventory
+{
+Inventory.MaxAmount 1
+}
+
 ACTOR BrutalDoomer: Doomer
 {
 States
 {
-	/*		
-See:
-		TNT1 A 0
-		TNT1 A 0 A_JumpIfInventory("ADSMode", 1, "ADSStand")
-		
-		
-        TNT1 A 0 ACS_Execute(171, 0, 0, 0, 0)
-		
-		TNT1 A 0 A_JumpIfInventory("FistsSelected", 1, "FistsMove")
-		TNT1 A 0 A_JumpIfInventory("SawSelected", 1, "SawMove")
-		TNT1 A 0 A_JumpIfInventory("SledgeSelected", 1, "FistsMove")
-		TNT1 A 0 A_JumpIfInventory("HandgunSelected", 1, "HandgunMove")
-		TNT1 A 0 A_JumpIfInventory("DualHandgunSelected", 1, "DualHandgunMove")
-		TNT1 A 0 A_JumpIfInventory("RevolverSelected", 1, "RevolverMove")
-		TNT1 A 0 A_JumpIfInventory("ShotgunSelected", 1, "ShotgunMove")
-		TNT1 A 0 A_JumpIfInventory("ASGSelected", 1, "ASGMove")
-		TNT1 A 0 A_JumpIfInventory("SSGSelected", 1, "SSGMove")
-		TNT1 A 0 A_JumpIfInventory("QSGSelected", 1, "QSGMove")
-		TNT1 A 0 A_JumpIfInventory("MinigunSelected", 1, "MinigunMove")
-		TNT1 A 0 A_JumpIfInventory("NewChaingunSelected", 1, "NewChaingunMove")
-		TNT1 A 0 A_JumpIfInventory("RocketLauncherSelected", 1, "RLMove")
-		TNT1 A 0 A_JumpIfInventory("GrenadeLauncherSelected", 1, "GrenadeLauncherMove")
-		TNT1 A 0 A_JumpIfInventory("SGLSelected", 1, "SGLMove")
-		TNT1 A 0 A_JumpIfInventory("PlasmaGunSelected", 1, "PlasmaGunMove")
-		TNT1 A 0 A_JumpIfInventory("M2Selected", 1, "M2Move")
-		TNT1 A 0 A_JumpIfInventory("RailGunSelected", 1, "RailGunMove")
-		TNT1 A 0 A_JumpIfInventory("FreezerSelected", 1, "FreezerMove")
-		TNT1 A 0 A_JumpIfInventory("RevenantLauncherSelected", 1, "RevenantLauncherMove")
-		TNT1 A 0 A_JumpIfInventory("UACSMGSelected", 1, "UACSMGMove")
-		TNT1 A 0 A_JumpIfInventory("HellRifleSelected", 1, "HellRifleMove")
-		TNT1 A 0 A_JumpIfInventory("SubMachineGunSelected", 1, "SubMachinegunMove")
-		TNT1 A 0 A_JumpIfInventory("LandMineSelected", 1, "LandMineMove")
-		TNT1 A 0 A_JumpIfInventory("BFGSelected", 1, "BFGMove")
-		TNT1 A 0 A_JumpIfInventory("BFGBeamSelected", 1, "BFGBeamMove")
-		TNT1 A 0 A_JumpIfInventory("BHCSelected", 1, "BHCMove")
-		TNT1 A 0 A_JumpIfInventory("FlameCannonSelected", 1, "FlameCannonMove")
-		TNT1 A 0 A_JumpIfInventory("GoFatality", 1, "FatalityChecker")
-		TNT1 A 0 A_JumpIfInventory("GoSpecial", 1, "SpecialCheckerMoving")
-		
-		MARN A 4 A_SpawnItemEx("FootStep6", 0, 0, 40, 0, 0)
-		MARN B 4
-		TNT1 A 0 A_JumpIfInventory("GoFatality", 1, "FatalityChecker")
-        TNT1 A 0 A_JumpIfInventory("GoSpecial", 1, "SpecialCheckerMoving")
-	MARN C 4
-		TNT1 A 0 A_JumpIfInventory("GoFatality", 1, "FatalityChecker")
-        TNT1 A 0 A_JumpIfInventory("GoSpecial", 1, "SpecialCheckerMoving")
-		MARN B 4
-		TNT1 A 0 A_JumpIfInventory("GoFatality", 1, "FatalityChecker")
-        TNT1 A 0 A_JumpIfInventory("GoSpecial", 1, "SpecialCheckerMoving")
-		TNT1 A 0 A_JumpIfHealthLower(31, "HeavyWounds")
-		Goto See
-		*/
 
 FatalityChecker:
 		TNT1 A 1
@@ -324,7 +315,6 @@ FatalityChecker:
 		TNT1 A 0 A_JumpIfInventory("SergeantFatality4", 1, "FatalitySergeant4")
 		TNT1 A 0 A_JumpIfInventory("SergeantFatality5", 1, "FatalitySergeant5")
 		TNT1 A 0 A_JumpIfInventory("SergeantFatality6", 1, "FatalitySergeant6")//AutoshotgunGuyFatality
-		//TNT1 A 0 A_JumpIfInventory("SergeantFatality7", 1, "FatalitySergeant7")//AutoshotgunGuyFatality
 		TNT1 A 0 A_JumpIfInventory("ZSpecFatality", 1, "FatalityZSpec")//AutoshotgunGuyFatality
 		TNT1 A 0 A_JumpIfInventory("AutoshotgunGuyFatality", 1, "FatalityAutoshotgunGuy")
         TNT1 A 0 A_JumpIfInventory("ComandoFatality", 1, "FatalityComando")
@@ -357,6 +347,8 @@ FatalityChecker:
 		TNT1 A 0 A_JumpIfInventory("BelphegorFatality", 1, "FatalityBelphegor")
 	    TNT1 A 0 A_JumpIfInventory("ArachnotronFatality", 1, "FatalityArachnotron")
 		TNT1 A 0 A_JumpIfInventory("ArachnotronFatality2", 1, "FatalityArachnotron2")
+		TNT1 A 0 A_JumpIfInventory("ArachnotronXFatality", 1, "FatalityArachnotronX")
+		TNT1 A 0 A_JumpIfInventory("ArachnotronXFatality2", 1, "FatalityArachnotronX2")
 		TNT1 A 0 A_JumpIfInventory("ArachnophyteFatality", 1, "FatalityArachnophyte")
 	    TNT1 A 0 A_JumpIfInventory("FleshWizardFatality", 1, "FatalityFleshWizard")
 		TNT1 A 0 A_JumpIfInventory("ArchVileFatality", 1, "FatalityArchVile")
@@ -382,6 +374,12 @@ FatalityChecker:
 		TNT1 A 0 A_JumpIfInventory("RapidFireTrooperFatality", 1, "FatalityRapidFireTrooper")//TriteElementalFatality
 		TNT1 A 0 A_JumpIfInventory("TriteElementalFatality", 1, "FatalityTriteElemental")//MechDemonFatality
 		TNT1 A 0 A_JumpIfInventory("MechDemonFatality", 1, "FatalityMechDemon")
+		TNT1 A 0 A_JumpIfInventory("CyberPaladinFatality1", 1, "FatalityCyberPaladin")
+		TNT1 A 0 A_JumpIfInventory("VolcabusFatality", 1, "FatalityVolcabus")		
+		TNT1 A 0 A_JumpIfInventory("VolcabusFatality2", 1, "FatalityVolcabus2")		
+		TNT1 A 0 A_JumpIfInventory("RevenantTransformation", 1, "TransformationRevenant")
+		TNT1 A 0 A_JumpIfInventory("Arachnotron2FatalityA", 1, "FatalityArachnotron2A")
+		TNT1 A 0 A_JumpIfInventory("Arachnotron2FatalityB", 1, "FatalityArachnotron2B")			
 		//DarkImpFatality1
 		//STEALTH KILLS
 		TNT1 A 0 A_JumpIfInventory("SKZSpecOps", 1, "StealthKillZSpecOps")//SKARZombie
@@ -393,8 +391,60 @@ FatalityChecker:
 		
         TNT1 A 0 A_TakeInventory("GoFatality", 1)
 		Goto See	
+	
+//Inspired by Doom 4
+TransformationRevenant:
+		TNT1 A 0 SetPlayerProperty(0,1,0)
+        TNT1 A 0 ACS_Execute(477, 0, 0, 0, 0)
+		TNT1 A 0 ACS_Execute(acsFatality, 0)
+		TNT1 A 0 A_ChangeFlag("DONTTHRUST", 1)
+		TNT1 A 0 A_PlaySound("DSFDTHE", 7)
+		XXXX A 0 A_CustomMissile ("ShakeShakeShake", 1, 0, random (0, 360), 2, random (0, 160))
+		TNT1 A 0 A_SpawnItemEx("WalkFire",0,0,0,1,0,0,0,128)
+        PVPF E 7
+		XXXX A 0 A_CustomMissile ("ShakeShakeShake", 1, 0, random (0, 360), 2, random (0, 160))
+		TNT1 A 0 A_SpawnItemEx("WalkFire",0,0,0,1,0,0,0,128)
+		PVPF F 7
+		XXXX A 0 A_CustomMissile ("ShakeShakeShake", 1, 0, random (0, 360), 2, random (0, 160))
+		TNT1 A 0 A_SpawnItemEx("WalkFire",0,0,0,1,0,0,0,128)
+		PVPF G 6
+		XXXX A 0 A_CustomMissile ("ShakeShakeShake", 1, 0, random (0, 360), 2, random (0, 160))
+		TNT1 A 0 A_SpawnItemEx("WalkFire",0,0,0,1,0,0,0,128)
+		PVPF G 6
+		XXXX A 0 A_CustomMissile ("ShakeShakeShake", 1, 0, random (0, 360), 2, random (0, 160))
+		TNT1 A 0 A_SpawnItemEx("WalkFire",0,0,0,1,0,0,0,128)
+		PVPF G 6
+		XXXX A 0 A_CustomMissile ("ShakeShakeShake", 1, 0, random (0, 360), 2, random (0, 160))
+		TNT1 A 0 A_SpawnItemEx("WalkFire",0,0,0,1,0,0,0,128)
+		PVPF G 6
 		
+		TNT1 A 0 A_PlaySound("Afrit/Hellfire", 8)
+		EXPL AAAAA 0 A_CustomMissile ("FireballExplosionFlamesBig", 36, 0, random (0, 360), 2, random (0, 360))
+		FRFX ZZZ 0 BRIGHT A_CustomMissile ("BigNeoSmoke", 22, 0, random (0, 360), 2, random (0, 360))
+		EXPL AAAAA 0 A_CustomMissile ("FireballExplosionFlamesBig", 26, 0, random (0, 360), 2, random (0, 360))
+		EXPL AAAAA 0 A_CustomMissile ("FireballExplosionFlamesBig", 16, 0, random (0, 360), 2, random (0, 360))
 		
+		XXXX A 0 A_CustomMissile ("ShakeShakeShake", 1, 0, random (0, 360), 2, random (0, 160))
+		TNT1 A 0 A_SpawnItemEx("WalkFire",0,0,0,1,0,0,0,128)
+		TNT1 A 0 A_SpawnItemEx("TeleportationFog",0,0,0,1,0,0,0,128)
+		TNT1 AAAAAAAAAAAAAA 0 A_CustomMissile ("BloodMistExtraBig", 30, 0, random (0, 360), 2, random (20, 90))
+		PVPF G 2
+		TNT1 A 0 A_SpawnItemEx("WalkFire",0,0,0,1,0,0,0,128)
+		TNT1 A 0 A_PlaySound("skeleton/sight", 9)
+		DKLA A 5
+		DKLA B 5
+		DKLA CDEEDC 7 A_CustomMissile ("Brutal_LiquidBlood2", 35, random(-4, 4), random (0, 360), 2, random (60, 120))
+		DKLA CDEEDC 7 A_CustomMissile ("Brutal_LiquidBlood2", 35, random(-4, 4), random (0, 360), 2, random (60, 120))
+		DKLA CDEEDC 7 A_CustomMissile ("Brutal_LiquidBlood2", 35, random(-4, 4), random (0, 360), 2, random (60, 120))
+    
+		TNT1 A 0 A_ChangeFlag("DONTTHRUST", 0)
+        TNT1 A 0 A_TakeInventory("GoFatality", 1)
+        TNT1 A 0 A_TakeInventory("RevenantTransformation", 1)
+		TNT1 A 0 ACS_ExecuteAlways(171, 0, 0, 0, 0)//Stop Camera
+		TNT1 A 0 SetPlayerProperty(0,0,0)
+        Goto Spawn
+
+
 //ArachnoGunner
 ArachnoGunner:
 	TNT1 A 0 SetPlayerProperty(0,1,0)
@@ -1035,12 +1085,14 @@ FatalityAfrit3:
         Goto Spawn
 		
 	FatalityOtherFatso:
-		TNT1 A 0 SetPlayerProperty(0,1,0)
+		TNT1 A 0 SetPlayerProperty(0,4,0)
         TNT1 A 0 ACS_Execute(477, 0, 0, 0, 0)
 		TNT1 A 0 ACS_Execute(acsFatality, 0)
+		TNT1 A 0 ACS_Execute(5922, 0, 0, 0, 0)
 		//////////////////////////////////////////////////////
-		TNT1 A 0 ACS_Execute(585, 0, 0, 0, 0)
-		
+		TNT1 A 0 A_Changevelocity(0, 0, 0)
+		TNT1 A 0 A_SpawnItem("DaedabusFatalityHelper", 1)				
+
 		TNT1 A 0 A_Playsound("Daedabus/pain",1)
 		TNT1 A 0 A_Playsound("humans/step",1)
 		FDAE A 6
@@ -1072,15 +1124,19 @@ FatalityAfrit3:
 		TNT1 A 0 A_TakeInventory("OtherFatsoFatality",1)
 		TNT1 AAAAAAAAAAAAAAA 0 A_GiveInventory("HealthBonus",1)
         TNT1 A 0 A_SpawnItemEx("FatalizedOtherFatso", 0, 1, 1, 1, 1)
+		TNT1 A 0 ACS_Execute(5923, 0, 0, 0, 0)
         TNT1 A 0 SetPlayerProperty(0,0,0)
         Goto Spawn
 		
 	FatalityOtherFatso2:
-		TNT1 A 0 SetPlayerProperty(0,1,0)
-        TNT1 A 0 ACS_Execute(477, 0, 0, 0, 0)
+		TNT1 A 0 SetPlayerProperty(0,4,0)
+		TNT1 A 0 ACS_Execute(477, 0, 0, 0, 0)
 		TNT1 A 0 ACS_Execute(acsFatality, 0)
 		//////////////////////////////////////////////////////
-		TNT1 A 0 ACS_Execute(585, 0, 0, 0, 0)
+		TNT1 A 0 A_Changevelocity(0, 0, 0)
+		TNT1 A 0 ACS_Execute(5922, 0, 0, 0, 0)		
+		TNT1 A 0 A_SpawnItem("DaedabusFatalityHelper2", 20)		
+
 		FDA1 A 5 A_CustomMissile ("Brutal_FlyingBlood", 50, 0, random (0, 360), 2, random (0, 160))
 		XXXX AAAA 0 A_CustomMissile ("ShakeShakeShake", 1, 0, random (0, 360), 2, random (0, 160))
 		FDA1 B 5 A_Playsound("Daedabus/pain",1)
@@ -1113,23 +1169,25 @@ FatalityAfrit3:
 		TNT1 AAAAA 0 A_CustomMissile ("SuperWallRedBlood", 32, 0, random (170, 190), 2, random (0, 40))
 		TNT1 AAAA 0 A_CustomMissile ("SuperWallRedBlood", 46, 0, random (170, 190), 2, random (0, 40))
 		TNT1 AAAAAA 0 A_CustomMissile ("Instestin", 32, 0, random (0, 360), 2, random (0, 160))
+		XXXX AAAA 0 A_CustomMissile ("ShakeShakeShake", 1, 0, random (0, 360), 2, random (0, 160))
 		FDA1 F 11
 		TNT1 A 0 A_PlaySound("FLMDRAW",8)
 		TNT1 A 0 A_Playsound("misc/gibbed",9)
-		XXXX AAAA 0 A_CustomMissile ("ShakeShakeShake", 1, 0, random (0, 360), 2, random (0, 160))
+		TNT1 A 0 ACS_Execute(585, 0, 0, 0, 0)		
 		TNT1 AAAAA 0 A_CustomMissile ("SuperWallRedBlood", 32, 0, random (170, 190), 2, random (0, 40))
 		TNT1 AAAA 0 A_CustomMissile ("SuperWallRedBlood", 46, 0, random (170, 190), 2, random (0, 40))
 		TNT1 AA 0 A_CustomMissile ("xdeath2", 15, 3, random (0, 360), 2, random (0, 160))
 		TNT1 AAA 0 A_CustomMissile ("xdeath3", 15, 3, random (0, 360), 2, random (0, 160))
 		TNT1 AAAA 0 A_CustomMissile ("XDeath2", 15, 3, random (0, 360), 2, random (0, 160))
-		FDA1 F 6
+		FDA1 G 11
 		TNT1 A 0 A_PlaySound("HRSteam",1)//FLMDRAW
 		//////////////////////////////////////////////////////
 		TNT1 A 0 A_TakeInventory("GoFatality", 1)
 		TNT1 A 0 A_TakeInventory("OtherFatsoFatality2",1)
 		TNT1 AAAAAAAAAAAAAAA 0 A_GiveInventory("HealthBonus",1)
-        TNT1 A 0 A_SpawnItem("FatalizedOtherFatso2", 15)
+        TNT1 A 0 A_SpawnItem("FatalizedOtherFatso2", 45)
         TNT1 A 0 SetPlayerProperty(0,0,0)
+		TNT1 A 0 ACS_Execute(5923, 0, 0, 0, 0)
 		Goto Spawn
 
 		FatalityArachnophyte:
@@ -1356,39 +1414,39 @@ FatalityAfrit3:
 			TNT1 AA 0 A_CustomMissile ("MuchBlood", 49, 0, random (0, 360), 2, random (0, 160))
 			TNT1 AAAAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 42, 0, random (0, 360), 2, random (0, 160))
 			FCY2 G 9
-			TNT1 AAA 0 A_SpawnItem("Spark_UpOnce",0,65)
+			TNT1 AAA 0 A_SpawnItemEx("Spark_UpOnce", 0, 15, 15, 65, 1, 1, 1, SXF_NOCHECKPOSITION)
 			TNT1 A 0 A_SpawnItemEx("ShoqueAzul", 1, 1, 38)
 			TNT1 AAA 0 A_CustomMissile ("PlayerFlyingBlood", 50, 0, random (0, 360), 2, random (0, 160))
 			TNT1 A 0 A_CustomMissile ("Brutal_FlyingBlood", 42, 0, random (0, 360), 2, random (0, 160))
 			FCY2 H 4
-			TNT1 AAA 0 A_SpawnItem("Spark_UpOnce",0,65)
+			TNT1 AAA 0 A_SpawnItemEx("Spark_UpOnce", 0, 15, 15, 65, 1, 1, 1, SXF_NOCHECKPOSITION)
 			TNT1 A 0 A_SpawnItemEx("ShoqueAzul", 1, 1, 38)
 			TNT1 AAA 0 A_CustomMissile ("PlayerFlyingBlood", 50, 0, random (0, 360), 2, random (0, 160))
 			TNT1 A 0 A_CustomMissile ("Brutal_FlyingBlood", 42, 0, random (0, 360), 2, random (0, 160))
 			FCY2 I 4
 			TNT1 A 0 A_PlaySound("HKPAIN", 3)
-			TNT1 AAA 0 A_SpawnItem("Spark_UpOnce",0,55)
+			TNT1 AAA 0 A_SpawnItemEx("Spark_UpOnce", 0, 15, 15, 55, 1, 1, 1, SXF_NOCHECKPOSITION)
 			TNT1 A 0 A_CustomMissile ("Brutal_FlyingBlood", 42, 0, random (0, 360), 2, random (0, 160))
 			FCY2 J 4
-			TNT1 AAA 0 A_SpawnItem("Spark_UpOnce",0,55)
+			TNT1 AAA 0 A_SpawnItemEx("Spark_UpOnce", 0, 15, 15, 55, 1, 1, 1, SXF_NOCHECKPOSITION)
 			TNT1 AAA 0 A_CustomMissile ("PlayerFlyingBlood", 50, 0, random (0, 360), 2, random (0, 160))
 			TNT1 A 0 A_CustomMissile ("Brutal_FlyingBlood", 42, 0, random (0, 360), 2, random (0, 160))
 			FCY2 I 4
-			TNT1 AAA 0 A_SpawnItem("Spark_UpOnce",0,55)
+			TNT1 AAA 0 A_SpawnItemEx("Spark_UpOnce", 0, 15, 15, 55, 1, 1, 1, SXF_NOCHECKPOSITION)
 			TNT1 A 0 A_SpawnItemEx("ShoqueAzul", 1, 1, 38)
 			TNT1 A 0 A_CustomMissile ("Brutal_FlyingBlood", 42, 0, random (0, 360), 2, random (0, 160))
 			FCY2 H 4
 			
 			FCY2 I 3
 			TNT1 A 0 A_PlaySound("HKPAIN", 5)
-			TNT1 AAA 0 A_SpawnItem("Spark_UpOnce",0,55)
+			TNT1 AAA 0 A_SpawnItemEx("Spark_UpOnce", 0, 15, 15, 55, 1, 1, 1, SXF_NOCHECKPOSITION)
 			TNT1 AAA 0 A_CustomMissile ("PlayerFlyingBlood", 50, 0, random (0, 360), 2, random (0, 160))
 			TNT1 A 0 A_CustomMissile ("Brutal_FlyingBlood", 42, 0, random (0, 360), 2, random (0, 160))
 			XXXX A 0 A_CustomMissile ("ShakeShakeShake", 1, 0, random (0, 360), 2, random (0, 160))
 			FCY2 J 3
 			TNT1 A 0 A_PlaySound("EYEPULL", 4)
 			TNT1 A 0 A_SpawnItemEx("ShoqueAzul", 1, 1, 38)
-			TNT1 AAAAAA 0 A_SpawnItem("Spark_UpOnce",0,55)
+			TNT1 AAAAAA 0 A_SpawnItemEx("Spark_UpOnce", 0, 15, 15, 55, 1, 1, 1, SXF_NOCHECKPOSITION)
 			TNT1 AAA 0 A_CustomMissile ("PlayerFlyingBlood", 50, 0, random (0, 360), 2, random (0, 160))
 			TNT1 AAA 0 A_CustomMissile ("Brutal_FlyingBlood", 42, 0, random (0, 360), 2, random (0, 160))
 			TNT1 AA 0 A_CustomMissile ("XDeath1", 42, 0, random (0, 360), 2, random (0, 160))
@@ -1396,7 +1454,7 @@ FatalityAfrit3:
 			
 			FCY2 MMMMMMMMMMMMMMMMM 1 A_CustomMissile ("Brutal_FlyingBlood", 52, -5, random (0, 360), 2, random (0, 160))
 		
-			TNT1 A 0 A_SpawnItemEx("FriendlyCyberKnight", 0, 10, 8, 1, 1, 1, 1, SXF_NOCHECKPOSITION)
+			TNT1 A 0 A_SpawnItemEx("FriendlyCyberKnight", 0, 25, 25, 1, 1, 1, 1, SXF_NOCHECKPOSITION)
 			TNT1 A 0 A_TakeInventory("GoFatality", 1)
 			TNT1 A 0 A_TakeInventory("CyberKnightFatality2",1)
 			TNT1 AAAAAAAAAAAAAAA 0 A_GiveInventory("HealthBonus",1)
@@ -2617,9 +2675,9 @@ FatalityHFQSZ3:
 	   TNT1 A 0 ACS_Execute(acsFatality, 0)
 	   //////////////////////////////////////////////////////
 	   TNT1 A 0 A_PlaySound("weapons/fistwhoosh",7)
-	   BS4F A 7
+	   BS4F A 5
 	   
-	   TNT1 A 0 A_PlaySound("misc/xdeath4f", 7)
+	   TNT1 A 0 A_PlaySound("misc/gibbed")
 	   BS4F B 3
 	   TNT1 AAA 0 A_CustomMissile ("Brutal_FlyingBlood", 71, 0, random (0, 360), 2, random (0, 160))
 	   BS4F C 3
@@ -2632,15 +2690,15 @@ FatalityHFQSZ3:
 	   BS4F DE 4
 	   
 	   
-	   BS4F F 6
+	   BS4F F 5
 	   //blood splashing
 	   TNT1 A 0 A_PlaySound("misc/xdeath2c",8)
 	   TNT1 AAAAAAAA 0 A_SpawnItem ("Blood", 0, 69)
-	   BS4F F 6
+	   BS4F F 5
 	   //blood splashing
 	   TNT1 A 0 A_PlaySound("misc/xdeath2c", 9)
 	   TNT1 AAAAAAAA 0 A_SpawnItem ("Blood", 0, 69)
-	   BS4F GG 13 A_CustomMissile ("ShakeShakeShake", 1, 0, random (0, 360), 2, random (0, 160))
+	   BS4F GG 12 A_CustomMissile ("ShakeShakeShake", 1, 0, random (0, 360), 2, random (0, 160))
 	   TNT1 A 0 A_PlaySound("misc/xdeath4f", 7)
 	   TNT1 AAAAAAAAAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 1, 0, random (0, 360), 2, random (0, 160))
 		TNT1 AA 0 A_CustomMissile ("XDeath1", 53, 0, random (170, 190), 2, random (0, 40))
@@ -3844,7 +3902,374 @@ TNT1 A 0 ACS_Execute(585, 0, 0, 0, 0)
 		TNT1 A 0 SetPlayerProperty(0,0,0)
 		Goto Spawn
 		
+		FatalityCyberPaladin:
+		TNT1 A 0 SetPlayerProperty(0,1,0)
+        TNT1 A 0 ACS_Execute(477, 0, 0, 0, 0)
+        TNT1 A 0 ACS_Execute(acsFatality, 0)
+        //////////////////////////////////////////////////////
 		
+		
+		TNT1 A 0 A_PlaySound("Paladin/Pain",1)
+		CP1F AB 6
+		TNT1 A 0 A_PlaySound("Paladin/Pain",2)
+		CP1F AB 6
+		TNT1 A 0 A_PlaySound("weapons/fistwhoosh", 3)
+		CP1F CDD 6
+		CP1F EFGH 4
+		TNT1 A 0 A_PlaySound("barrel/pain", 4)
+		CP1F H 1
+		TNT1 A 0 A_PlaySound("Paladin/Sight", 5)
+		TNT1 AAA 0 A_CustomMissile ("Brutal_FlyingBlood", 48, 9, random (0, 360), 2, random (0, 160))
+		TNT1 AA 0 A_CustomMissile ("Brutal_LiquidBlood2", 45, 11, random (0, 360), 2, random (60, 120))
+		TNT1 A 0 A_CustomMissile ("MuchBlood", 53, 11, random (0, 360), 2, random (0, 160))
+		TNT1 AA 0 A_CustomMissile ("xdeath1", 52, 11, random (0, 360), 2, random (0, 160))
+		TNT1 AAA 0 A_CustomMissile ("Teeth", 59, 12, random (0, 360), 2, random (0, 160))
+		TNT1 A 0 A_CustomMissile ("XDeath3b", 59, 12, random (0, 360), 2, random (0, 160))
+		CP1F I 11
+		TNT1 A 0 A_PlaySound("weapons/fistwhoosh", 6)
+		CP1F JK 5
+		TNT1 A 0 A_PlaySound("barrel/pain", 1)
+		TNT1 AAA 0 A_CustomMissile ("Brutal_FlyingBlood", 50, 8, random (0, 360), 2, random (0, 160))
+		TNT1 AAAAA 0 A_CustomMissile ("Brutal_LiquidBlood2", 50, 11, random (0, 360), 2, random (60, 120))
+		TNT1 AA 0 A_CustomMissile ("MuchBlood", 47, 13, random (0, 360), 2, random (0, 160))
+		TNT1 AAAA 0 A_CustomMissile ("Teeth", 59, 12, random (0, 360), 2, random (0, 160))
+		TNT1 AAA 0 A_CustomMissile ("XDeath3b", 49, 8, random (0, 360), 2, random (0, 160))
+		CP1F LMN 4
+		TNT1 A 0 A_PlaySound("knight/step",2)
+		CP1F OOOOO 2 A_CustomMissile ("Brutal_LiquidBlood2", 18, 43, random (0, 360), 2, random (60, 120))
+		TNT1 A 0 A_PlaySound("Paladin/Pain",3)
+		CP1F PPPPPPOOOOO 2 A_CustomMissile ("Brutal_LiquidBlood2", 13, 43, random (0, 360), 2, random (60, 120))
+		TNT1 A 0 A_PlaySound("Paladin/Pain",4)
+		CP1F PPPPP 2 A_CustomMissile ("Brutal_LiquidBlood2", 13, 41, random (0, 360), 2, random (60, 120))
+		TNT1 A 0 A_PlaySound("weapons/fistwhoosh", 5)
+		
+		CP1F QR 5
+		TNT1 A 0 A_PlaySound("misc/gibbed",5)
+		XXXX A 0 A_CustomMissile ("ShakeShakeShake", 1, 0, random (0, 360), 2, random (0, 160))
+		TNT1 AAAA 0 A_CustomMissile ("Xdeath1", 21, 13, random (0, 360), 2, random (0, 160))
+		TNT1 AAAA 0 A_CustomMissile ("Brains1", 21, 11, random (0, 360), 2, random (0, 160))
+		TNT1 AA 0 A_CustomMissile ("Brains2", 21, 14, random (0, 360), 2, random (0, 160))
+		TNT1 AAA 0 A_CustomMissile ("Brains3", 21, 12, random (0, 360), 2, random (0, 160))
+		TNT1 AAA 0 A_CustomMissile ("Brains6", 21, 13, random (0, 360), 2, random (0, 160))
+		TNT1 AA 0 A_CustomMissile ("Brains7", 21, 15, random (0, 360), 2, random (0, 160))
+		TNT1 AAA 0 A_CustomMissile ("Teeth", 21, 12, random (0, 360), 2, random (0, 160))
+		TNT1 AAA 0 A_CustomMissile ("XDeath1", 21, 10, random (0, 360), 2, random (0, 160))
+		TNT1 AAA 0 A_CustomMissile ("XDeath3b", 21, 9, random (0, 360), 2, random (50, 80))
+		TNT1 AAA 0 A_CustomMissile ("SmallBrainPieceFast", 21, 12, random (170, 190), 2, random (-10, 10))
+		TNT1 AAAAA 0 A_CustomMissile ("SmallBrainPiece", 21, 13, random (0, 360), 2, random (0, 160))
+	    TNT1 AAAAA 0 A_CustomMissile ("BloodMistBig", 21, 12, random (0, 360), 2, random (30, 90))
+		TNT1 AAAAA 0 A_CustomMissile ("Brutal_FlyingBlood", 21, 11, random (0, 360), 2, random (30, 90))
+		TNT1 AA 0 A_CustomMissile ("PlayerFlyingBlood", 15, 0, random (0, 360), 2, random (0, 160))
+		CP1F S 4
+		CP1F TTTTTTTTTTTTTTTTTTT 1 A_CustomMissile ("Brutal_LiquidBlood2", 8, 50, random (0, 360), 2, random (60, 120))
+		
+		TNT1 A 0 A_TakeInventory("CyberPaladinFatality1", 1)
+		TNT1 A 0 A_TakeInventory("GoFatality", 1)
+		TNT1 A 0 A_SpawnItem("FatalizedCyberPaladin", 5, 1)
+		TNT1 A 0 SetPlayerProperty(0,0,0)
+		Goto Spawn
+		
+		FatalityArachnotronX:
+		NULL A 0 SetPlayerProperty(0,1,0)
+		NULL A 0 ACS_ExecuteAlways(477, 0, 0, 0, 0)//Start Camera
+		
+		NULL A 0 ACS_Execute(acsFatality, 0)
+		//////////////////////////////////////////////////////
+		XXXX A 0 A_CustomMissile ("ShakeShakeShake", 1, 0, random (0, 360), 2, random (0, 160))
+		ARF3 ABABABABABABAB 2
+		NULL A 0 A_SpawnItem("Spark_UpOnce",0,60)
+		ARF3 CD 3
+		NULL A 0 A_PlaySound("baby/death")
+		ARF3 EFFFF 3
+		ARF3 GGHHI 3
+		XXXX A 0 A_CustomMissile ("ShakeShakeShake", 1, 0, random (0, 360), 2, random (0, 160))
+		XXXX A 0 A_CustomMissile ("ShakeShakeShake", 1, 0, random (0, 360), 2, random (0, 160))
+		NULL A 0 ACS_Execute(580, 0, 0, 0, 0)
+		NULL A 0 ACS_Execute(581, 0, 0, 0, 0)
+		NULL A 0 ACS_Execute(582, 0, 0, 0, 0)
+		NULL A 0 ACS_Execute(583, 0, 0, 0, 0)
+		NULL AAAAA 0 A_CustomMissile ("Instestin2", 14, 0, random (0, 360), 2, random (0, 160))
+		NULL AAAAAA 0 A_CustomMissile ("CeilBloodLauncher", 40, 0, random (0, 360), 2, random (50, 130))
+		NULL AAAAA 0 A_CustomMissile ("XDeath1", 10, 0, random (0, 360), 2, random (0, 160))
+		NULL AAAAA 0 A_CustomMissile ("XDeath2", 10, 0, random (0, 360), 2, random (0, 160))
+		NULL AAAAA 0 A_CustomMissile ("XDeath3", 10, 0, random (0, 360), 2, random (0, 160))
+		NULL AAAAAAAAAAAAA 0 A_CustomMissile ("PlayerFlyingBlood", 50, 0, random (0, 360), 2, random (0, 160))
+		ARF3 JKLMNNNNNNNNNNNNNNNN 3
+		
+		//////////////////////////////////////////////////////
+		NULL A 0 A_TakeInventory("ArachnotronXFatality",1)
+		NULL A 0 A_TakeInventory("GoFatality", 1)
+		NULL A 0 A_GiveInventory("HealthBonus",20)
+		NULL A 0 A_SpawnItemEx("RapedArachnotronX", 0, 1, 1, 1, 1)
+		//NULL A 0 A_CustomMissile ("SpiderLeg", 30, 0, 0, 2, 0)
+		MARN A 0 ACS_ExecuteAlways(171, 0, 0, 0, 0)//Stop Camera
+		NULL A 0 SetPlayerProperty(0,0,0)
+		Goto Spawn
+		
+		
+	FatalityArachnotronX2:
+		NULL A 0 SetPlayerProperty(0,1,0)
+		NULL A 0 ACS_ExecuteAlways(477, 0, 0, 0, 0)//Start Camera
+		
+		NULL A 0 ACS_Execute(acsFatality, 0)
+		//////////////////////////////////////////////////////
+		ARF4 A 6
+		NULL A 0 A_PlaySound("grunt/pain")
+		ARF4 B 3
+		XXXX A 0 A_CustomMissile ("ShakeShakeShake", 1, 0, random (0, 360), 2, random (0, 160))
+		ARF4 BIBIBI 2
+		NULL A 0 A_PlaySound("baby/death")
+		XXXX A 0 A_CustomMissile ("ShakeShakeShake", 1, 0, random (0, 360), 2, random (0, 160))
+		NULL A 0 ACS_Execute(580, 0, 0, 0, 0)
+		NULL A 0 ACS_Execute(581, 0, 0, 0, 0)
+		NULL A 0 ACS_Execute(582, 0, 0, 0, 0)
+		NULL A 0 ACS_Execute(583, 0, 0, 0, 0)
+		NULL AAAAA 0 A_CustomMissile ("Instestin2", 14, 0, random (0, 360), 2, random (0, 160))
+		NULL AAAAAA 0 A_CustomMissile ("CeilBloodLauncher", 40, 0, random (0, 360), 2, random (50, 130))
+		NULL AAAAA 0 A_CustomMissile ("XDeath1", 10, 0, random (0, 360), 2, random (0, 160))
+		NULL AAAAA 0 A_CustomMissile ("XDeath2", 10, 0, random (0, 360), 2, random (0, 160))
+		NULL AAAAAAAAAAAAA 0 A_CustomMissile ("PlayerFlyingBlood", 50, 0, random (0, 360), 2, random (0, 160))
+		
+		ARF4 CDE 3
+		NULL A 0 A_CustomMissile ("XDeathArachnotronHead2", 50, 0, random (0, 360), 2, random (40, 130))
+		//////////////////////////////////////////////////////
+		NULL A 0 A_TakeInventory("ArachnotronXFatality2",1)
+		NULL A 0 A_TakeInventory("GoFatality", 1)
+		NULL A 0 A_GiveInventory("HealthBonus",20)
+		TNT1 A 0 A_SpawnItemEx("ArachnoTurretFrame", 0, 1, 1, 1, 1)
+		//NULL A 0 A_CustomMissile ("SpiderLeg", 30, 0, 0, 2, 0)
+		MARN A 0 ACS_ExecuteAlways(171, 0, 0, 0, 0)//Stop Camera
+		NULL A 0 SetPlayerProperty(0,0,0)
+		Goto Spawn		
+
+		FatalityVolcabus:
+		TNT1 A 0 SetPlayerProperty(0,1,0)
+		TNT1 A 0 ACS_Execute(477, 0, 0, 0, 0)
+		
+		TNT1 A 0 ACS_Execute(acsFatality, 0)
+		//////////////////////////////////////////////////////
+		FA2F AA 6
+		TNT1 A 0 ACS_Execute(580, 0, 0, 0, 0)
+		TNT1 A 0 ACS_Execute(581, 0, 0, 0, 0)
+		XXXX A 0 A_CustomMissile ("ShakeYourAssMinor", 1, 0, random (0, 360), 2, random (0, 160))
+		TNT1 A 0 A_PlaySound("fatso/pain", 1)
+		TNT1 A 0 A_PlaySound("player/cyborg/fist", 4)
+		TNT1 A 0 A_CustomMissile ("Blood", 44, -7, random (0, 360), 2, random (0, 160))
+		TNT1 AAA 0 A_CustomMissile ("PlayerFlyingBlood", 34, -6, random (0, 360), 2, random (0, 160))
+		TNT1 AA 0 A_CustomMissile ("XDeath1", 48, -7, random (0, 360), 2, random (0, 160))
+		TNT1 AA 0 A_CustomMissile ("XDeath2", 48, -7, random (0, 360), 2, random (0, 160))
+		FA2F B 5
+		
+		FA2F C 10
+		
+		TNT1 A 0 ACS_Execute(580, 0, 0, 0, 0)
+		TNT1 A 0 ACS_Execute(581, 0, 0, 0, 0)
+		XXXX A 0 A_CustomMissile ("ShakeYourAssMinor", 1, 0, random (0, 360), 2, random (0, 160))
+		TNT1 A 0 A_PlaySound("fatso/pain", 1)
+		TNT1 A 0 A_PlaySound("player/cyborg/fist", 4)
+		TNT1 A 0 A_CustomMissile ("Blood", 44, -7, random (0, 360), 2, random (0, 160))
+		TNT1 AAA 0 A_CustomMissile ("PlayerFlyingBlood", 34, -4, random (0, 360), 2, random (0, 160))
+		TNT1 AA 0 A_CustomMissile ("XDeath3", 48, -7, random (0, 360), 2, random (0, 160))
+		TNT1 AA 0 A_CustomMissile ("XDeath2", 48, -7, random (0, 360), 2, random (0, 160))
+		FA2F B 5
+		
+		FA2F C 8
+		
+		TNT1 A 0 ACS_Execute(580, 0, 0, 0, 0)
+		 TNT1 A 0 ACS_Execute(581, 0, 0, 0, 0)
+		XXXX A 0 A_CustomMissile ("ShakeYourAssMinor", 1, 0, random (0, 360), 2, random (0, 160))
+		TNT1 A 0 A_PlaySound("fatso/pain", 1)
+		TNT1 A 0 A_PlaySound("player/cyborg/fist", 4)
+		TNT1 A 0 A_PlaySound("misc/xdeath4c", 3)
+		TNT1 AA 0 A_CustomMissile ("Blood", 44, -7, random (0, 360), 2, random (0, 160))
+		TNT1 AAA 0 A_CustomMissile ("PlayerFlyingBlood", 32, -5, random (0, 360), 2, random (0, 160))
+		TNT1 AA 0 A_CustomMissile ("XDeath1", 48, -7, random (0, 360), 2, random (0, 160))
+		TNT1 AA 0 A_CustomMissile ("XDeath3", 48, -7, random (0, 360), 2, random (0, 160))
+		FA2F D 5
+		
+		FA2F C 8
+		
+		TNT1 A 0 ACS_Execute(580, 0, 0, 0, 0)
+		 TNT1 A 0 ACS_Execute(581, 0, 0, 0, 0)
+		XXXX A 0 A_CustomMissile ("ShakeYourAssMinor", 1, 0, random (0, 360), 2, random (0, 160))
+		TNT1 A 0 A_PlaySound("fatso/pain", 1)
+		TNT1 A 0 A_PlaySound("player/cyborg/fist", 4)
+		TNT1 A 0 A_PlaySound("misc/xdeath4c", 3)
+		TNT1 AA 0 A_CustomMissile ("Blood", 44, -7, random (0, 360), 2, random (0, 160))
+		TNT1 AAA 0 A_CustomMissile ("PlayerFlyingBlood", 32, -5, random (0, 360), 2, random (0, 160))
+		TNT1 AA 0 A_CustomMissile ("XDeath1", 48, -7, random (0, 360), 2, random (0, 160))
+		TNT1 AA 0 A_CustomMissile ("XDeath2", 48, -7, random (0, 360), 2, random (0, 160))
+		FA2F FFF 2 A_CustomMissile ("PlayerFlyingBlood", 33, -6, random (0, 360), 2, random (0, 160))	
+		
+		FA2F E 8
+		TNT1 A 0 ACS_Execute(580, 0, 0, 0, 0)
+		TNT1 A 0 ACS_Execute(581, 0, 0, 0, 0)
+		XXXX A 0 A_CustomMissile ("ShakeYourAssMinor", 1, 0, random (0, 360), 2, random (0, 160))
+		TNT1 A 0 A_PlaySound("fatso/pain", 1)
+		TNT1 A 0 A_PlaySound("player/cyborg/fist", 4)
+		TNT1 A 0 A_PlaySound("misc/xdeath", 3)
+		XXXX A 0 A_CustomMissile ("ShakeShakeShake", 1, 0, random (0, 360), 2, random (0, 160))
+		TNT1 AAAA 0 A_CustomMissile ("Blood", 44, -6, random (0, 360), 2, random (0, 160))
+		TNT1 AAAA 0 A_CustomMissile ("PlayerFlyingBlood", 45, -6, random (0, 360), 2, random (0, 160))
+		TNT1 AAA 0 A_CustomMissile ("SmallBrainPieceFast", 48, -7, random (170, 190), 2, random (-10, 10))
+		TNT1 AAA 0 A_CustomMissile ("SmallBrainPiece", 48, -7, random (0, 360), 2, random (0, 160))
+		TNT1 AA 0 A_CustomMissile ("XDeath1", 48, -7, random (0, 360), 2, random (0, 160))
+		TNT1 AA 0 A_CustomMissile ("XDeath2", 48, -7, random (0, 360), 2, random (0, 160))
+		FA2F FFF 2 A_CustomMissile ("PlayerFlyingBlood", 48, -6, random (0, 360), 2, random (0, 160))	
+		
+		FA2F E 8
+		TNT1 A 0 ACS_Execute(580, 0, 0, 0, 0)
+		TNT1 A 0 ACS_Execute(581, 0, 0, 0, 0)
+		XXXX A 0 A_CustomMissile ("ShakeYourAssMinor", 1, 0, random (0, 360), 2, random (0, 160))
+		TNT1 A 0 A_PlaySound("fatso/pain", 1)
+		TNT1 A 0 A_PlaySound("player/cyborg/fist", 4)
+		TNT1 A 0 A_PlaySound("misc/xdeath", 3)
+		XXXX A 0 A_CustomMissile ("ShakeShakeShake", 1, 0, random (0, 360), 2, random (0, 160))
+		TNT1 AAAA 0 A_CustomMissile ("Blood", 44, -6, random (0, 360), 2, random (0, 160))
+		TNT1 AAAA 0 A_CustomMissile ("PlayerFlyingBlood", 48, -6, random (0, 360), 2, random (0, 160))
+		TNT1 AAA 0 A_CustomMissile ("SmallBrainPieceFast", 48, -7, random (170, 190), 2, random (-10, 10))
+		TNT1 AAA 0 A_CustomMissile ("SmallBrainPiece", 48, -7, random (0, 360), 2, random (0, 160))
+		TNT1 AA 0 A_CustomMissile ("XDeath1", 48, -7, random (0, 360), 2, random (0, 160))
+		TNT1 AA 0 A_CustomMissile ("XDeath2", 48, -7, random (0, 360), 2, random (0, 160))
+		FA2F FFF 2	A_CustomMissile ("PlayerFlyingBlood", 48, -6, random (0, 360), 2, random (0, 160))	
+		
+		TNT1 A 0 A_TakeInventory("GoFatality", 1)
+		TNT1 A 0 A_TakeInventory("VolcabusFatality",1)
+		TNT1 AAAAA 0 A_GiveInventory("HealthBonus",1)
+		TNT1 A 0 A_SpawnItem ("FatalizedVolcabus", 45)
+		  TNT1 A 0 SetPlayerProperty(0,0,0)
+		Goto Spawn	
+		
+		//Fatso fatality from brutal doom v11
+	FatalityVolcabus2:
+		TNT1 A 0 SetPlayerProperty(0,1,0)
+		TNT1 A 0 ACS_Execute(477, 0, 0, 0, 0)
+		TNT1 A 0 A_SetInvulnerable
+		//////////////////////////////////////////////////////
+		FA3F A 8
+		TNT1 A 0 A_PlaySound("player/cyborg/fist", 4)
+		TNT1 A 0 A_Playsound("misc/gibbed",3)
+		TNT1 AAAAAAA 0 A_CustomMissile ("Blood", 45, 0, random (0, 360), 2, random (0, 160))						
+		FA3F B 8
+		TNT1 A 0 ACS_Execute(585, 0, 0, 0, 0)
+		TNT1 AAAAAAAAAAAAAAAAA 0 A_CustomMissile ("Brutal_FlyingBloodTrail", 45, 0, random (0, 180), 2, random (0, 180))
+		FA3F C 5 A_PlaySound("Volcabus/pain", 1)
+		//XXXX A 0 A_CustomMissile ("ShakeShakeShake", 1, 0, random (0, 360), 2, random (0, 160))
+		FA3F D 6 A_PlaySound("misc/xdeath4", 3)
+		TNT1 AAAAAAA 0 A_CustomMissile ("Blood", 45, 0, random (0, 360), 2, random (0, 160))
+		TNT1 AA 0 A_CustomMissile ("XDeath1", 50, 0, random (0, 360), 2, random (0, 160))
+		TNT1 AAA 0 A_CustomMissile ("XDeath2", 50, 0, random (0, 360), 2, random (0, 160))
+		TNT1 AAA 0 A_CustomMissile ("XDeath3", 50, 0, random (0, 360), 2, random (0, 160))
+		TNT1 AA 0 A_CustomMissile ("Instestin", 48, -6, random (0, 360), 2, random (0, 160))		
+		TNT1 A 0 ACS_Execute(580, 0, 0, 0, 0)
+
+		TNT1 AAAAAAAAAAAAAAAAA 0 A_CustomMissile ("Brutal_FlyingBloodTrail", 45, 0, random (0, 180), 2, random (0, 180))
+		FA3F E 6 A_PlaySound("Volcabus/pain", 1)
+		FA3F F 6 A_PlaySound("misc/xdeath4", 3)
+		TNT1 AAA 0 A_CustomMissile ("Blood", 45, 0, random (0, 360), 2, random (0, 160))
+		TNT1 AA 0 A_CustomMissile ("Instestin", 48, -6, random (0, 360), 2, random (0, 160))			
+	
+		TNT1 AAAAAAAAAAAAAAAAA 0 A_CustomMissile ("Brutal_FlyingBloodTrail", 45, 0, random (0, 180), 2, random (0, 180))
+		FA3F G 5 A_PlaySound("Volcabus/pain", 1)
+		FA3F H 6 A_PlaySound("misc/xdeath4", 3)
+		TNT1 AAA 0 A_CustomMissile ("Blood", 45, 0, random (0, 360), 2, random (0, 160))
+		TNT1 AA 0 A_CustomMissile ("Instestin", 48, -6, random (0, 360), 2, random (0, 160))	
+		
+		TNT1 AAAAAAAAAAAAAAAAA 0 A_CustomMissile ("Brutal_FlyingBloodTrail", 45, 0, random (0, 180), 2, random (0, 180))
+		FA3F I 5 A_PlaySound("Volcabus/pain", 1)
+		FA3F J 6 A_PlaySound("misc/xdeath4", 3)
+		TNT1 AAA 0 A_CustomMissile ("Blood", 45, 0, random (0, 360), 2, random (0, 160))
+		TNT1 AA 0 A_CustomMissile ("Instestin", 48, -6, random (0, 360), 2, random (0, 160))
+
+		XXXX A 0 A_CustomMissile ("ShakeShakeShake", 1, 0, random (0, 360), 2, random (0, 160))		
+		FA3F K 10
+				
+		//////////////////////////////////////////////////////
+		TNT1 A 0 A_TakeInventory("VolcabusFatality2",1)
+		TNT1 A 0 A_TakeInventory("GoFatality", 1)
+		TNT1 AAAAAAAAAAAAAAA 0 A_GiveInventory("HealthBonus",1)
+		TNT1 A 0 A_SpawnItem ("FatalizedVolcabus2", 45)
+		TNT1 A 0 SetPlayerProperty(0,0,0)
+		TNT1 A 0 A_UnSetInvulnerable
+		Goto Spawn
+		
+		
+		FatalityArachnotron2B:		
+		NULL A 0 SetPlayerProperty(0,1,0)
+		NULL A 0 ACS_ExecuteAlways(477, 0, 0, 0, 0)//Start Camera
+		
+		NULL A 0 ACS_Execute(acsFatality, 0)
+		//////////////////////////////////////////////////////
+		ARF6 A 6
+		NULL A 0 A_PlaySound("baby/pain")
+		ARF6 B 3
+		XXXX A 0 A_CustomMissile ("ShakeShakeShake", 1, 0, random (0, 360), 2, random (0, 160))
+		ARF6 BIBIBI 2
+		NULL A 0 A_PlaySound("baby/death")
+		NULL A 0 ACS_Execute(580, 0, 0, 0, 0)
+		NULL A 0 ACS_Execute(581, 0, 0, 0, 0)
+		NULL A 0 ACS_Execute(582, 0, 0, 0, 0)
+		NULL A 0 ACS_Execute(583, 0, 0, 0, 0)
+		NULL AAAAA 0 A_CustomMissile ("Instestin2", 14, 0, random (0, 360), 2, random (0, 160))
+		NULL AAAAAA 0 A_CustomMissile ("CeilBloodLauncher", 40, 0, random (0, 360), 2, random (50, 130))
+		 NULL AAAAA 0 A_CustomMissile ("XDeath1", 10, 0, random (0, 360), 2, random (0, 160))
+		 NULL AAAAA 0 A_CustomMissile ("XDeath2", 10, 0, random (0, 360), 2, random (0, 160))
+		 NULL AAAAAAAAAAAAA 0 A_CustomMissile ("PlayerFlyingBlood", 50, 0, random (0, 360), 2, random (0, 160))
+		
+		ARF6 CD 7
+		XXXX A 0 A_CustomMissile ("ShakeShakeShake", 1, 0, random (0, 360), 2, random (0, 160))		
+		ARF6 EF 7
+		NULL A 0 A_CustomMissile ("XDeathArachnotronHead2", 50, 0, random (0, 360), 2, random (40, 130))
+		//////////////////////////////////////////////////////
+		NULL A 0 A_TakeInventory("Arachnotron2FatalityB",1)
+		NULL A 0 A_TakeInventory("GoFatality", 1)
+		NULL A 0 A_GiveInventory("HealthBonus",20)
+		TNT1 A 0 A_SpawnItem("ArachnoTurretFrame2", 45)
+		//NULL A 0 A_CustomMissile ("SpiderLeg", 30, 0, 0, 2, 0)
+		MARN A 0 ACS_ExecuteAlways(171, 0, 0, 0, 0)//Stop Camera
+		NULL A 0 SetPlayerProperty(0,0,0)
+		Goto StandStill				
+
+	FatalityArachnotron2A:
+		NULL A 0 SetPlayerProperty(0,1,0)
+		NULL A 0 ACS_ExecuteAlways(477, 0, 0, 0, 0)//Start Camera
+		
+		NULL A 0 ACS_Execute(acsFatality, 0)
+		//////////////////////////////////////////////////////
+		XXXX A 0 A_CustomMissile ("ShakeShakeShake", 1, 0, random (0, 360), 2, random (0, 160))
+		ARF5 ABABABABABABAB 2
+		TNT1 A 0 A_PlaySound("BONEBRK3", 3)
+		XXXX A 0 A_CustomMissile ("ShakeShakeShake", 1, 0, random (0, 360), 2, random (0, 160))
+		NULL A 0 A_SpawnItem("Spark_UpOnce",0,60)
+		ARF5 CD 3
+		NULL A 0 A_PlaySound("baby/death")
+		ARF5 EFFFF 3
+		ARF5 GGHHI 3
+		
+		TNT1 A 0 A_PlaySound("misc/gibbed", 3)
+		XXXX A 0 A_CustomMissile ("ShakeShakeShake", 1, 0, random (0, 360), 2, random (0, 160))
+		XXXX A 0 A_CustomMissile ("ShakeShakeShake", 1, 0, random (0, 360), 2, random (0, 160))
+		NULL A 0 ACS_Execute(580, 0, 0, 0, 0)
+		NULL A 0 ACS_Execute(581, 0, 0, 0, 0)
+		NULL A 0 ACS_Execute(582, 0, 0, 0, 0)
+		NULL A 0 ACS_Execute(583, 0, 0, 0, 0)
+		NULL AAAAA 0 A_CustomMissile ("Instestin2", 14, 0, random (0, 360), 2, random (0, 160))
+		NULL AAAAAA 0 A_CustomMissile ("CeilBloodLauncher", 40, 0, random (0, 360), 2, random (50, 130))
+		NULL AAAAA 0 A_CustomMissile ("XDeath1", 10, 0, random (0, 360), 2, random (0, 160))
+		NULL AAAAA 0 A_CustomMissile ("XDeath2", 10, 0, random (0, 360), 2, random (0, 160))
+		NULL AAAAA 0 A_CustomMissile ("XDeath3", 10, 0, random (0, 360), 2, random (0, 160))
+		NULL AAAAAAAAAAAAA 0 A_CustomMissile ("PlayerFlyingBlood", 50, 0, random (0, 360), 2, random (0, 160))
+		ARF5 JKLMMMMMMMMM 3 A_CustomMissile ("Brutal_LiquidBlood2", 16, 0, random (0, 360), 2, random (60, 120))
+		
+		//////////////////////////////////////////////////////
+		NULL A 0 A_TakeInventory("Arachnotron2FatalityA",1)
+		NULL A 0 A_TakeInventory("GoFatality", 1)
+		NULL A 0 A_GiveInventory("HealthBonus",20)
+		NULL A 0 A_SpawnItemEx("RapedArachnotron2", 0, 1, 1, 1, 1)
+		//NULL A 0 A_CustomMissile ("SpiderLeg", 30, 0, 0, 2, 0)
+		MARN A 0 ACS_ExecuteAlways(171, 0, 0, 0, 0)//Stop Camera
+		NULL A 0 SetPlayerProperty(0,0,0)
+		Goto StandStill
 
 // STEALTH KILLS
 

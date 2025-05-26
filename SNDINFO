@@ -1,5 +1,135 @@
 ////////////////////////////////////////////////////////PROJECT BRUTALITY SOUNDS
 
+//Power Up Sounds
+TIMESPH TIMESPH
+SSPH SSPH
+MEGASPH MEGASPH
+INVUL INVUL
+INVISIBL INVISIBL
+DEM DEM
+
+//Arachnotron 2 gun
+PAILGF3 PAILGF3
+PAILGF2 PAILGF2
+PAILGD3 PAILGD3
+
+$random fatso/shotx { fbx1 fbx2 fbx3 fbx4 }
+fbx1		fallexp1
+fbx2		fallexp2
+fbx3		fallexp3
+fbx4		fallexp4
+
+//VOLCABUS
+Volcabus/Sight VOLCST
+Volcabus/Pain VOLCPN
+Volcabus/Death VOLCDTH
+Volcabus/Attack VOLCATK
+$random Volcabus/Cannon { VOLCCF1 VOLCCF2 VOLCCF3 VOLCCF4 }
+VOLCCF1 VOLCCF1
+VOLCCF2 VOLCCF2
+VOLCCF3 VOLCCF3
+VOLCCF4 VOLCCF4
+
+VOLCBRN VOLCBRN
+
+//TURNED INTO POOPOO
+MELT MELTIN
+
+//Traditional BFg
+TRBFGF TRBFGF
+TRBFGC TRBFGC
+
+PLSCO0L PLSCO0L
+
+//Traditional Plasma Rifle
+$random P1SM9 { P1SM0 P1SM1 P1SM2 }
+P1SM0 P1SM0
+P1SM1 P1SM1
+P1SM2 P1SM2
+
+//Traditional Rocket Launcher
+$random 0SRFIRE { 0SRFIRE1 0SRFIRE2 }
+0SRFIRE1 0SRFIRE1
+0SRFIRE2 0SRFIRE2
+
+//Traditional Chaingun
+$random weapons/gatlingfire	{ CGFIRE0 CGFIRE2 CGFIRE3 }
+CGFIRE0 CGFIRE0
+CGFIRE2 CGFIRE2
+CGFIRE3 CGFIRE3
+
+CHAINUP CHAINUP
+
+//Traditional Pistol
+TRPFIRE TRPFIRE
+TRPSEL TRPSEL
+//Evil Marines
+$random EvilmarineSight { EVMRSIT1 EVMRSIT2 EVMRSIT3 EVMRSIT4 EVMRSIT5 EVMRSIT6}
+EVMRSIT1 EVMRSIT1
+EVMRSIT2 EVMRSIT2
+EVMRSIT3 EVMRSIT3
+EVMRSIT4 EVMRSIT4
+EVMRSIT5 EVMRSIT5
+EVMRSIT6 EVMRSIT6
+
+$random EvilmarineActive { NONE NONE NONE EVMRACT2 EVMRACT3 EVMRACT4}
+EVMRACT1 EVMRACT1
+EVMRACT2 EVMRACT2
+EVMRACT3 EVMRACT3
+EVMRACT4 EVMRACT4
+
+$random EvilmarinePain { EVMRPN1 EVMRPN2}
+EVMRPN1 EVMRPN1
+EVMRPN2 EVMRPN2
+
+$random EvilmarineDeath { EVMRDT1 EVMRDT2}
+EVMRDT1 EVMRDT1
+EVMRDT2 EVMRDT2
+
+EVMRLAUG EVMRLAUG
+
+
+//Red Commando Steps
+$random metalboot/steps     { metb1 metb2 metb3 metb4 }
+
+metb1       clank1
+metb2       clank2
+metb3       clank3
+metb4       clank4
+$volume metalboot/steps 0.95
+$limit metalboot/steps 14 256
+
+
+//LMG
+LMGFIRE LMGFIRE
+LMGOUT LMGOUT
+LMGIN LMGIN
+LMGCLK LMGCLK
+LMGUP LMGUP
+LMGPKP LMGPKP
+
+//Paladin
+Paladin/Sight	HPALSIT
+Paladin/Active	HPALACT
+Paladin/Pain	HPALPAIN
+Paladin/Death	HPALDTH
+Paladin/XDeath	HPALXDTH
+Paladin/Swing	HPALSWG
+Paladin/Melee	HPALHIT
+Paladin/Shoot	HPALATK
+Paladin/Hit		HPALHIT2
+Paladin/Grenade	HPALGREN
+Paladin/Bounce	HPALBNC
+Paladin/Explode	HPALEXPL
+Paladin/Step	HPALSTEP
+
+//Combat Knife
+KNIFUP KNIFUP
+KNIFSWNG KNIFSWNG
+KNIFSWN1 KNIFSWN1
+KNIFSWN2 KNIFSWN2
+
+
 //Swapping Weapons
 weapons/swapping change
 
@@ -48,7 +178,7 @@ grunt/sight9	zomsit9
 grunt/sight10	zomsit10
 grunt/sight11	zomsit11
 
-$volume grunt/sight 0.9
+$volume grunt/sight 0.85
 
 $random grunt/death
 { grunt/death1
@@ -99,7 +229,7 @@ grunt/active3	zomact3
 grunt/active4	zomact4
 grunt/active5	zomact5
 
-$volume grunt/active 0.88
+$volume grunt/active 0.80
 
 
 $random commando/sight { ZCSIT1 ZCSIT2 ZCSIT3 ZCSIT4 }
@@ -184,6 +314,7 @@ BALLEXP4 BALLEXP4
 
 ImpFireLoop BALLOOP1
 DarkImpFireLoop BALLOOP2
+dimp/missile DMPCHARG
 
 BaronFire BARO_F
 BaronFireImpact CACOX1
@@ -241,7 +372,7 @@ blodr7 dsdrip7
 blodr8 dsdrip8
 blodr9 dsdrip9
 blodr10 dsdrip10
-$volume BloodPoolStep 0.70
+$volume BloodPoolStep 0.55
 
 //New Blackhole Sounds
 TPortalLoop bh_loop
@@ -598,6 +729,7 @@ revrail1 REILGF1
 revrail2 REILGF2
 revrail3 REILGF3
 
+REILAIM REILAIM
 RAIL_I RAIL_I
 
 //Heavy Chaingun
@@ -608,7 +740,11 @@ cbaron/sight	 cbarnsit
 cbaron/pain		 cbarnpai
 cbaron/death	 cbarndth
 cbaron/active	 cbarnact
-cbaron/metal	 cmetal
+$random cbaron/metal { DSTEKFS1 DSTEKFS2 DSTEKFS3 DSTEKFS4 }
+DSTEKFS1 DSTEKFS1
+DSTEKFS2 DSTEKFS2
+DSTEKFS3 DSTEKFS3
+DSTEKFS4 DSTEKFS4
 
 monster/brusit dsbrusit
 monster/brudth dsbrudth
@@ -723,7 +859,11 @@ acid/spewstop SPEWSTOP
 BIOSHOOT BIOSHOOT
 
 //Hellish Missile
-hellishmissle/fire revgun
+$random hellishmissle/fire { RHEAT1 RHEAT2 RHEAT3 }
+RHEAT1	RHEAT1
+RHEAT2	RHEAT2
+RHEAT3	RHEAT3
+
 
 // Demon Tech Rifle
 HRCharge HRCHRG
@@ -883,6 +1023,7 @@ rail3 railgf3
 
 //BackPack
 BACKPCK BACKPCK
+CACKPCK BPAKPICK
 
 // Cell
 misc/cell_pickup BATTERY
@@ -917,7 +1058,7 @@ bounce1      hgrenb1a
 bounce2      hgrenb2a
 
 //Freezer gun
-Weapons/FreezerFire	STNRFIRE
+Weapons/FreezerFire	STNRFIRE2
 Weapons/FreezerHit	STNRHIT
 Weapons/FreezerReady FRRDY
 Weapons/FreezerFire FREFIRE
@@ -927,19 +1068,25 @@ Weapons/CellKickIn CLKICKIN
 Weapons/PistolDraw PSTDRAW
 Weapons/PistolHolster PSTHOLS
 Weapons/DeadMansClick DMANC
-weapons/cryobowflyby    DSBOWFLY
+weapons/cryobowflyby    FRZSTRM
 DSBOWREL DSBOWREL
 
 //Rocket Launcher
 misc/rockboxa rockboxa
 SEEKER SEEKER
-RLCYC RLCYC
+RLCYC RLCYCLE
+RLCYCLE RLCYCLE
+RLCYCLE2 RLCYCLE2
 RELOADRL RELOADRL
 RLSHOT2 RLSHOT2
 
 //Minigun
+weapons/minigunfire2 DSMINIGL
 weapons/minigunfire DSMINIGN
+weapons/minigunfirefast DSMINIGF
 CHAINSPI CHAINSPI
+CHA1NSPI CHA1NSPI
+$volume CHAINSPI 0.65
 8HAINFIR 8HAINFIR
 DTHDLRST DTHDLRST
 DTHDLRSP DTHDLRSP
@@ -948,6 +1095,7 @@ CHGNPKUP CHGNPKUP
 
 //Heavy Machine Gun
 HMGUP HMGUP
+HMGHEAT HMGHEAT
 8HAINAMO 8HAINAMO
 8HAINAM1 8HAINAM1
 DIBSTOP DIBSTOP
@@ -967,13 +1115,20 @@ emgun emgun
 
 
 //Carbine
-Weapons/Rifle/SFire 4AFLFIRE
+$random Weapons/Rifle/SFire { 4AFLFIR1 4AFLFIR2 4AFLFIR3 }
+4AFLFIR1 4AFLFIR1
+4AFLFIR2 4AFLFIR2
+4AFLFIR3 4AFLFIR3
 
 //Autoshotgun
-$random FLAKFIRE { WWFIRE2 WWFIRE3}
-WWFIRE2	WWFIRE2
-WWFIRE3	WWFIRE3
+$random FLAKFIRE { SSALT1 SSALT2 SSALT3}
+SSALT1	SSALT1
+SSALT2	SSALT2
+SSALT3	SSALT3
+
 H4SGCOCK H4SGCOCK
+ASGIN ASGIN
+ASGOUT ASGOUT
 
 $random Weapons/AutoShotgun { XSG1 XSG2 XSG3 XSG4 }
 XSG1 A4SGFIR1
@@ -1010,6 +1165,8 @@ SlugSS2 SlugSS2
 SlugSS3 SlugSS3
 SlugSS4 SlugSS4
 
+DRBTFIRE DRBTFIRE
+
 $random insertshell { shellin1 shellin2 shellin3 shellin4 }
 shellin1 shtload1
 shellin2 shtload2
@@ -1045,6 +1202,7 @@ $Limit ZSpecOps/MGun	0
 //MINES
 MINE001		MINE001
 MINE002		MINE002
+Weapons/StickyBombTick		SBMBTICK
 
 //UAC DMR
 $random weapons/rifle { HYPADDF1 HYPADDF2 HYPADDF3 }
@@ -1142,9 +1300,11 @@ rexpl12 expl_12
 rexpl13 expl_13
 
 // Health
+misc/E_HP_pickup E_HEALTH
 misc/L_HP_pickup L_HEALTH
 misc/N_HP_pickup N_HEALTH
 misc/hbonus_pickup S_HEALTH
+$volume misc/hbonus_pickup 0.65
 
 //Fists
 $random weapons/ultrwhoosh { FISTWH5 FISTWH6 }
@@ -1567,7 +1727,10 @@ u45/fire4		uspfire4
 Ricochet		RIC1
 
 RIFLE RIFLE
-SSHFIRE SSHFIRE
+$random SSHFIRE { SSHFIRE0 SSHFIRE2 SSHFIRE3 }
+SSHFIRE0 SSHFIRE0
+SSHFIRE2 SSHFIRE2
+SSHFIRE3 SSHFIRE3
 PLASMA PLASM
 PLSCHARG PLSCHARG
 PLSALTFR PLSALTFR
@@ -1839,6 +2002,7 @@ weapons/RLL RLANSHOT
 $volume weapons/RL 2.5
 
 CHAINSTO CHAINSTO
+CHA1NSTO CHA1NSTO
 weapons/gswing                  dsswing
 weapons/gpunch                  dspunch
 DSSAWZIP DSSAWZIP
@@ -1912,6 +2076,7 @@ BEEEP BEEEP
 DSFDTHG DSFDTHG
 DSFDTHE DSFDTHE
 CHAINSTA CHAINSTA
+CHA1NSTA CHA1NSTA
 
 flamersh FLAMER
 flameren FLAMSTOP
@@ -1986,6 +2151,7 @@ IMPCHARG IMPCHARG
 DSRFIRE DSRFIRE
 
 KICK KICK
+$pitchshift KICK 5
 FOOTWALL FOOTWALL
 
 juggernaut/see BTKUNQV2

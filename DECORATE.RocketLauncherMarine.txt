@@ -13,12 +13,12 @@ ACTOR PrePlacedMarineRocket Replaces MarineRocket
 
 Actor NumberOfAlliesRocket : Inventory
 {
-inventory.maxamount 5
+inventory.maxamount 1
 }
 
 Actor MarinesRocketDispenser : Inventory
 {
-inventory.maxamount 5
+inventory.maxamount 1
 }
 
 

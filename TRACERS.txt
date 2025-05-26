@@ -154,7 +154,7 @@ ACTOR FlackTracer: Tracer
 +BLOODSPLATTER 
 +THRUGHOST
 +Friendly
--DONTSPLASH
++DONTSPLASH
 speed 80
 damage 12
 Decal "BulletChip"
@@ -242,6 +242,24 @@ Death:
 }
 
 
+ACTOR MonsterLMGTracer: Tracer
+{
++BLOODSPLATTER 
++THRUGHOST
+-DONTSPLASH
+speed 80
+damage (random(3,4))
+seesound "weapons/chainwiz"
+damagetype Cutless
+Decal "BulletChip"
+States
+{
+Death:
+    TNT1 A 1 A_SpawnItem("HitPuff")
+    Stop
+}
+}
+
 Actor MeatShieldTracer: Tracer
 {
 +BLOODSPLATTER 
@@ -278,7 +296,7 @@ Actor MarineMinigunTracer: Tracer
 -DONTSPLASH
 speed 100
 damage 1
-seesound "weapons/minigunfire"
+seesound "weapons/minigunfire2"
 damagetype FriendBullet
 Decal "BulletDecalNew1"
 States
@@ -435,7 +453,7 @@ Actor MastermindTracer: Tracer
 speed 90
 damage (random(5,7))
 scale .45
-seesound "SSHFIRE"
+seesound "MastermindTracer"
 damagetype ExplosiveImpact
 Decal "Scorch"
 Obituary "$OB_SPIDER"

@@ -10,9 +10,9 @@ ACTOR Purist : BrutalDoomer
 	Speed 1.0
 	Player.DisplayName "Classic v20"
 	
-	Player.WeaponSlot 1, Chain_Saw, Melee_Attacks
+	Player.WeaponSlot 1, Vanilla_Chain_saw, Melee_Attacks
 	Player.WeaponSlot 2, DualVanillaRifles, VanillaRifle 
-	Player.WeaponSlot 3, Shot_Gun, SSG
+	Player.WeaponSlot 3, Shot_Gun, Vanilla_SSG
 	Player.WeaponSlot 4, Vanilla_Mini_Gun
 	Player.WeaponSlot 5, Rocket_Launcher
 	Player.WeaponSlot 6, DualPlasmaRifles, Plasma_Gun 
@@ -25,6 +25,7 @@ ACTOR Purist : BrutalDoomer
 	Player.StartItem "Melee_Attacks"
 	Player.StartItem "NewClip", 60
 	Player.StartItem "VanillaRifleAmmo", 31
+	Player.StartItem "SSGAmmoCounter", 2
 	Player.StartItem "ShotgunAmmo", 8
 	Player.StartItem "PlasmaAmmo", 50
 	Player.StartItem "HandGrenade"

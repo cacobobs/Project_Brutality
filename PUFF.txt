@@ -39,7 +39,7 @@ ACTOR MeleePuff: BulletPuff
   renderstyle Translucent
   alpha 0.5
   Scale 1.5
-DamageType Melee
+  DamageType Melee
   +NOBLOCKMAP
   +NOGRAVITY
   +NOEXTREMEDEATH
@@ -60,6 +60,34 @@ DamageType Melee
  
   }
 }
+
+//For Revenant's laser pointer
+ACTOR NullPuff: BulletPuff
+{
+  renderstyle Translucent
+  alpha 1.0
+  Scale 0.1
+  Damage 0
+  DamageType Blood
+  +NOBLOCKMAP
+  +NOGRAVITY
+  +NOEXTREMEDEATH
+  +BLOODLESSIMPACT 
+  +FORCEXYBILLBOARD
+  +DONTSPLASH
+  +PAINLESS
+  states
+  {
+  Spawn:
+  Death:
+  Melee:
+  XDeath:
+	TNT1 A 1
+    stop
+ 
+  }
+}
+
 
 ACTOR FatalityPuff: MeleePuff
 {
@@ -340,6 +368,7 @@ Height 0
 	TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAA 0 A_CustomMissile ("WaterParticleXSuperFast", 14, 0, random (0, 360), 2, random (30, 160))
 	TNT1 A 20
 	Stop
+	
 	
  Death.CauseObjectsToSplashSlime:
  SpawnSlime:

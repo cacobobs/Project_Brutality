@@ -13,7 +13,17 @@ ACTOR FiredGun : Inventory
 Inventory.MaxAmount 1
 }
 
-Actor Chain_saw : Chainsaw replaces Chainsaw 13205
+Actor SawFireSeq1: Inventory
+{
+inventory.maxamount 1
+}
+
+Actor SawFireSeq2: Inventory
+{
+inventory.maxamount 1
+}
+
+Actor Chain_saw : Chainsaw //replaces Chainsaw 13205
 {
 Weapon.BobRangeX 0.3
 	Weapon.BobRangeY 0.5
@@ -29,9 +39,11 @@ Inventory.PickUpSound "IGOTSAW"
 	+WEAPON.NOALERT
 states
 	{
+		
 	Select:
-		TNT1 A 0
+	TNT1 A 0
 	TNT1 A 0 A_TakeInventory("RifleSelected",1)
+	TNT1 A 0 A_TakeInventory("CarbineSelected",1)
 	TNT1 A 0 A_TakeInventory("FistsSelected",1)
 	TNT1 A 0 A_GiveInventory("SawSelected",1)
 	TNT1 A 0 A_TakeInventory("SledgeSelected",1)
@@ -96,8 +108,9 @@ Steady:
 		TNT1 A 0 A_Takeinventory("HasCutingWeapon",1)
 		SAWS AGAGAGAG 1 
 
-        TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0
-		
+        TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 0
+	OnLoop:
+		TNT1 A 0 A_StopsoundEx("Weapon")
 		TNT1 A 0 A_JumpIfInventory("DoPunch",1,"QuickPunch")
         TNT1 A 0 A_JumpIfInventory("PowerBlueBloodOnVisor",1,"Ready.BlueBlood")
         TNT1 A 0 A_JumpIfInventory("PowerBloodOnVisor",1,"Ready.Blood")
@@ -193,117 +206,7 @@ Steady:
 		TNT1 A 0 A_TakeInventory("FiredGun", 1)
 		TNT1 A 0 A_playsound("weapons/chainsaw/idle")
 		goto ready+35
-	
-	
 		
-	WeaponSpecialPurist:
-		TNT1 A 0 A_Print("Weapon Special Not Available in Classic Mode!")
-		TNT1 A 0 A_Takeinventory("GoWeaponSpecialAbility",1)
-		Goto Ready+35
-		
-	WeaponSpecial:
-		TNT1 A 0 A_JumpIfInventory("IsPlayingAsPurist", 1, "WeaponSpecialPurist")
-		TNT1 A 0 A_Takeinventory("GoWeaponSpecialAbility",1)
-		TNT1 A 0 A_JumpIfInventory("DualSSGChecker", 1, 4)
-		TNT1 A 0 A_Print("You need a sawed-off shotgun!")
-		Goto Ready+35
-		TNT1 AAAAA 0
-		TNT1 A 0 A_JumpIfInventory("NewShell", 2, 4)
-		TNT1 A 0 A_Print("You need shotgun shells!")
-		Goto Ready+35
-		TNT1 AAAAA 0
-		TNT1 A 0 A_GunFlash("SSGFlash")
-		TNT1 A 0 A_JumpIfInventory("PowerBloodOnVisor",1,"WeaponSpecialBlood")
-		TNT1 A 0 A_JumpIfInventory("PowerBlueBloodOnVisor",1,"WeaponSpecialBlueBlood")
-		SAWG A 1 //Offset(20,40)
-		SAWG B 1 //Offset(40,43)
-		SAWG E 1 //Offset(60,46)
-		SAWG F 1 //Offset(80,46)
-		SAWG G 1
-		SAWG G 40
-		SAWG FEBA 1
-		TNT1 A 0 A_Takeinventory("GoWeaponSpecialAbility",1)
-		Goto Ready+35
-		
-	WeaponSpecialBlood:
-		SAWG H 1 //Offset(20,40)
-		SAWG I 1 //Offset(40,43)
-		SAWG J 1 //Offset(60,46)
-		SAWG K 1 //Offset(80,46)
-		SAWG L 1
-		SAWG L 40
-		SAWG KJIH 1
-		TNT1 A 0 A_Takeinventory("GoWeaponSpecialAbility",1)
-		Goto Ready+35
-		
-	WeaponSpecialBlueBlood:
-		S4WG H 1 //Offset(20,40)
-		S4WG I 1 //Offset(40,43)
-		S4WG J 1 //Offset(60,46)
-		S4WG K 1 //Offset(80,46)
-		S4WG L 1
-		S4WG L 40
-		S4WG KJIH 1
-		TNT1 A 0 A_Takeinventory("GoWeaponSpecialAbility",1)
-		Goto Ready+35
-		
-	SSGFlash:
-		S6AS AB 2
-		TNT1 A 0 A_PlaySound("insertshell", 5)
-		S6AS CDD 2
-		TNT1 A 0 A_PlaySound("weapons/ssg/close", 7)
-		P6W1 A 4
-		
-		TNT1 A 0 A_TakeInventory("NewShell", 2)
-		TNT1 A 0 A_AlertMonsters
-	    P6W1 B 1 BRIGHT A_FireBullets(0, 0, 1, 20, "shotpuff", 1, 120)//Horizontal Spread, Vertical Spread, Numbers of Projectiles (Leave as -1 if its a single one), Damage Factor
-		TNT1 A 0  A_PlaySound("SSHFIRE", 1)//Play gun fire sound
-		TNT1 AAAAAAAAAAA 0 A_FireCustomMissile("Tracer", Random(-7, 7), 0, -1, Random(-7, 7))
-		TNT1 A 0 A_FireBullets(15, 9, 22, 7, "ShotgunPuff")
-		TNT1 AA 0 A_FireCustomMissile("YellowFlareSpawn", 15, 0, 0, 0)
-		TNT1 AA 0 A_FireCustomMissile("YellowFlareSpawn", -15, 0, 0, 0)
-		TNT1 A 0 A_SetPitch(-1.55 + pitch)//Vertical recoil down
-		TNT1 A 0 ACS_Execute(282, 0, 0, 0, 0)
-		P6W1 C 2 //A_FireCustomMissile("RifleCaseSpawn",0,0,6,4) //Ejetts empty brass
-		
-		P6W1 DEFGHIJKLMN 1 //A_Refire
-		TNT1 A 0 A_PlaySound("insertshell", 5)
-		S6AS DC 2
-		TNT1 A 0 A_PlaySound("weapons/ssg/close", 7)
-		S6AS BA 2
-		Stop
-	
-	Fire:
-		TNT1 A 0
-		TNT1 A 0 A_Giveinventory("HasCutingWeapon",1)
-		TNT1 A 0 A_JumpIfInventory("ComboSeq", 1, "QuickShot")
-        TNT1 A 0 A_JumpIfInventory("PowerBloodOnVisor",1,"Fire.Blood")
-        TNT1 A 0 A_JumpIfInventory("PowerBlueBloodOnVisor",1,"Fire.BlueBlood")
-         TNT1 A 0 A_JumpIfInventory("PowerGreenBloodOnVisor",1,"Fire.GreenBlood")
-		TNT1 A 0 A_playsound("weapons/chainsaw/start")
-		TNT1 A 0 A_AlertMonsters
-		SAWG ABCD 1
-	Hold:
-	TNT1 A 0 A_FireCustomMissile("ShakeYourAssMinor", 0, 0, 0, 0)
-TNT1 A 0 A_JumpIfInventory("PowerBloodOnVisor",1,"Hold.Blood")
-        TNT1 A 0 A_JumpIfInventory("PowerBlueBloodOnVisor",1,"Hold.BlueBlood")
- TNT1 A 0 A_JumpIfInventory("PowerGreenBloodOnVisor",1,"Hold.GreenBlood")
-        TNT1 A 0 A_FireCustomMissile("SmokeSpawner",0,0,0,5)
-		TNT1 A 0 A_PlaySoundEx("weapons/chainsaw/loop","Weapon",0)
-		SAWF A 1 A_Saw("weapons/chainsaw/loop", "DSSAWHIT", 6, "SSawPuff3")
-		SAWF B 1
-		SAWF C 1 A_Saw("", "BladeRip", 6, "SSawPuff4")
-		SAWF D 1
-		TNT1 A 0 A_TakeInventory("Gas", 1)
-		TNT1 A 0 A_Refire
-		TNT1 A 0 A_StopsoundEx("Weapon")
-		TNT1 A 0 A_Playsound("CSAWSTAT", 9)
-		TNT1 A 0 ACS_Execute(282, 0, 0, 0, 0)
-		TNT1 AAA 0 A_FireCustomMissile("SmokeSpawner",0,0,0,5)
-		//TNT1 A 0 A_Playsound("weapons/chainsaw/stop")
-		SAWG DC 1
-		goto ready+35
-
 	Ready.Blood:
         TNT1 A 0 A_JumpIfInventory("Kicking",1,"DoKick")
 		TNT1 A 0 A_JumpIfInventory("DoPunch",1,"QuickPunch")
@@ -474,37 +377,7 @@ TNT1 A 0 A_JumpIfInventory("PowerBloodOnVisor",1,"Hold.Blood")
 		TNT1 A 0 A_playsound("weapons/chainsaw/idle")
         SSW2 GHIJ 2 A_weaponready
 		Goto Ready+35
-	Fire.Blood:
-		TNT1 A 0 A_playsound("weapons/chainsaw/start")
-		SAW2 ABCD 1
-	Hold.Blood:
-	    TNT1 A 0
-		TNT1 A 0 A_JumpIfCloser(100, "RareAttack")
-		//TNT1 A 0 A_Jump(255, 1)
-		//TNT1 A 0 A_JumpIfTargetInLOS("RareAttack")
-        TNT1 A 0 A_FireCustomMissile("SmokeSpawner",0,0,0,5)
-		KICK A 0 A_Takeinventory("PowerBlueBloodOnVisor",1)
-		KICK A 0 A_Takeinventory("PowerGreenBloodOnVisor",1)
-		TNT1 A 0 A_TakeInventory("ComboSeq", 2)
-		TNT1 A 0 A_TakeInventory("FiredGun", 1)
-		//TNT1 A 0 A_PlaySoundEx("weapons/chainsaw/loop","Weapon",0)
-		SAW2 G 1 A_Saw("weapons/chainsaw/loop", "DSSAWHIT", random(4,6), "SSawPuff3")
-		SAW2 F 1
-		SAW2 G 1 A_Saw("", "BladeRip", random(4,6), "SSawPuff4")
-		SAW2 H 1
-	//	TNT1 A 0 A_TakeInventory("Gas", 1)
-        TNT1 A 0 A_JumpIfInventory("PowerBlueBloodOnVisor",1,"Hold.BlueBlood")
-        TNT1 A 0 A_JumpIfInventory("PowerGreenBloodOnVisor",1,"Hold.GreenBlood")
-		TNT1 A 0 A_Refire
-		TNT1 A 0 A_StopsoundEx("Weapon")
-		TNT1 A 0 A_Playsound("CSAWSTAT", 9)
-		TNT1 AAA 0 A_FireCustomMissile("SmokeSpawner",0,0,0,5)
-		TNT1 A 0 ACS_Execute(282, 0, 0, 0, 0)
-		//TNT1 A 0 A_Playsound("weapons/chainsaw/stop")
-		SAW2 DC 1
-		goto ready.blood
-
-
+		
 	Ready.BlueBlood:
         TNT1 A 0 A_JumpIfInventory("Kicking",1,"DoKick")
 		TNT1 A 0 A_JumpIfInventory("DoPunch",1,"QuickPunch")
@@ -675,129 +548,610 @@ TNT1 A 0 A_JumpIfInventory("PowerBloodOnVisor",1,"Hold.Blood")
 		TNT1 A 0 A_playsound("weapons/chainsaw/idle")
         SSW3 GHIJ 2 A_weaponready
 		Goto Ready+35
-		
-	Fire.BlueBlood:
-		TNT1 A 0 A_playsound("weapons/chainsaw/start")
-		S4W2 ABCD 1
-	Hold.BlueBlood:
-	    TNT1 A 0
-		TNT1 A 0 A_JumpIfCloser(100, "BlueRareAttack")
-		//TNT1 A 0 A_Jump(255, 1)
-		//TNT1 A 0 A_JumpIfTargetInLOS("RareAttack")
-        //TNT1 A 0 A_FireCustomMissile("SmokeSpawner",0,0,0,5)
-		KICK A 0 A_Takeinventory("PowerBloodOnVisor",1)
-		KICK A 0 A_Takeinventory("PowerGreenBloodOnVisor",1)
-		//TNT1 A 0 A_PlaySoundEx("weapons/chainsaw/loop","Weapon",0)
-		S4W2 G 1 A_Saw("weapons/chainsaw/loop", "CSAWCUT", 5, "SSawPuff2")
-		S4W2 F 1
-		S4W2 G 1 A_Saw("", "", 5, "SSawPuff2")
-		S4W2 H 1
-		
-        TNT1 A 0 A_JumpIfInventory("PowerBloodOnVisor",1,"Hold.Blood")
-        TNT1 A 0 A_JumpIfInventory("PowerGreenBloodOnVisor",1,"Hold.GreenBlood")
-		TNT1 A 0 A_Refire
-		TNT1 A 0 A_StopsoundEx("Weapon")
-		TNT1 A 0 A_Playsound("weapons/chainsaw/stop")
-		S4W2 DC 1
-		goto ready.BlueBlood
-		
-		
-	BlueRareAttack:
-		KICK A 0 A_Takeinventory("PowerBloodOnVisor",1)
-		KICK A 0 A_Takeinventory("PowerGreenBloodOnVisor",1)
-		TNT1 A 0 A_Jump(128, "BlueRareAttack2")
-		
-		TNT1 A 0 A_PlaySoundEx("weapons/chainsaw/loop","Weapon",0)
-		TNT1 A 0 A_FireCustomMissile("ShakeYourAssMinor", 0, 0, 0, 0)
-		
-		S4W5 MO 1
-		S4W5 ML 1
-		S4W5 F 0 A_JumpIfCloser(110, "BlueRareAttackContinue")
-		Goto BlueRareAttackEnd
-		
-	BlueRareAttackContinue:	
-		TNT1 A 0 A_Playsound("DSSAWHIT", 3)
-		S4W5 D 1 A_Saw("weapons/chainsaw/loop", "Machete/Yum", random(4,6), "SSawPuff")
-		S4W5 C 1 A_Saw("", "", random(2,3), "SSawPuff2")
-		S4W5 B 1 A_Saw("", "BladeRip", random(2,3), "SSawPuff")
-		
-		S4W5 A 1 A_Saw("weapons/chainsaw/loop", "Machete/Yum", random(4,6), "SSawPuff")
-		S4W5 B 1 A_Saw("", "", random(2,3), "SSawPuff2")
-		S4W5 C 1 A_Saw("", "", random(2,3), "SSawPuff")
-		S4W5 D 1 A_Saw("", "BladeRip", random(2,3), "SSawPuff")
-		
-		
-		S4W5 F 0 A_JumpIfCloser(110, "BlueRareAttackContinue2")
-		//TNT1 A 0 A_Jump(128, 13)
-		Goto BlueRareAttackEnd
-		
-	BlueRareAttackContinue2:
-		S4W2 G 1 A_Saw("weapons/chainsaw/loop", "DSSAWHIT", random(4,6), "SSawPuff3")
-		S4W2 F 1 A_Saw("", "BladeRip", random(2,4), "SSawPuff3")
-		S4W2 G 1 A_Saw("", "BladeRip", random(4,6), "SSawPuff3")
-		S4W2 H 1 A_Saw("", "BladeRip", random(2,4), "SSawPuff3")
-		S4W2 F 0 A_JumpIfCloser(90, "BlueRareAttackContinue2")
-	BlueRareAttackEnd:	
-		TNT1 A 0 A_Playsound("Machete/Yum", 6)
-		S4W5 FGHIJKJIHFG 1
-		//TNT1 A 0 A_Jump(255, 11)
-		//SAW5 LMNOPQPONML 1
-		
-		
-        TNT1 A 0 A_JumpIfInventory("PowerBlueBloodOnVisor",1,"Hold.BlueBlood")
-        TNT1 A 0 A_JumpIfInventory("PowerGreenBloodOnVisor",1,"Hold.GreenBlood")
-		TNT1 A 0 A_Refire
-		TNT1 A 0 A_StopsoundEx("Weapon")
-		TNT1 AAA 0 A_FireCustomMissile("SmokeSpawner",0,0,0,5)
-		TNT1 A 0 ACS_Execute(282, 0, 0, 0, 0)
-		TNT1 A 0 A_Playsound("CSAWSTAT", 9)
-		//TNT1 A 0 A_Playsound("weapons/chainsaw/stop")CSAWSTAT
-		//SAW2 DC 1
-		goto ready.Blueblood
-		
-		
-	BlueRareAttack2:
-		KICK A 0 A_Takeinventory("PowerBlueBloodOnVisor",1)
-		KICK A 0 A_Takeinventory("PowerGreenBloodOnVisor",1)
-		//TNT1 A 0 A_PlaySoundEx("weapons/chainsaw/loop","Weapon",0)
-		TNT1 A 0 A_FireCustomMissile("ShakeYourAssMinor", 0, 0, 0, 0)
-		S4W6 A 1
-		S4W6 CE 1
-		
-		S4W6 G 1 //A_Saw("", "", 6, "SSawPuff")
-		S4W6 H 1
-		S4W6 I 1 //A_Saw("", "", 6, "SSawPuff")
-		S4W6 JK 1
-		S4W6 F 0 A_JumpIfCloser(90, "BlueRareAttack2Continue")
-		Goto BlueRareAttack2End
-		
-	BlueRareAttack2Continue:	
-	TNT1 A 0 A_FireCustomMissile("ShakeYourAssMinor", 0, 0, 0, 0)
-		S4W6 U 1 A_Saw("weapons/chainsaw/loop", "DSSAWHIT", 5, "SSawPuff")
-		S4W6 V 1
-		S4W6 W 1 A_Saw("", "", 4, "SSawPuff")
-		S4W6 X 1
-		
-		S4W5 F 0 A_JumpIfCloser(90, "BlueRareAttack2Continue")
-		
-	BlueRareAttack2End:	
-		
-		TNT1 A 0 A_FireCustomMissile("ShakeYourAssMinor", 0, 0, 0, 0)
-		S4W6 K 1 A_Saw("weapons/chainsaw/loop", "DSSAWHIT", 5, "SSawPuff")
-		S4W6 L 1
-		S4W6 M 1 //A_Saw("", "", 6, "SSawPuff")
-		S4W6 N 1
-		
-		
-		S4W6 O 1 //A_Saw("", "", 6, "SSawPuff")
-		S4W6 P 1
-		S4W6 Q 1 //A_Saw("", "", 6, "SSawPuff")
-		S4W6 R 1
-		
-		
-		S4W6 ST 1
-		goto ready.blueblood		
 	
+	
+		
+	WeaponSpecialPurist:
+		TNT1 A 0 A_Print("Weapon Special Not Available in Classic Mode!")
+		TNT1 A 0 A_Takeinventory("GoWeaponSpecialAbility",1)
+		Goto Ready+35
+		
+	WeaponSpecial:
+		TNT1 A 0 A_JumpIfInventory("IsPlayingAsPurist", 1, "WeaponSpecialPurist")
+		TNT1 A 0 A_Takeinventory("GoWeaponSpecialAbility",1)
+		TNT1 A 0 A_JumpIfInventory("DualSSGChecker", 1, 4)
+		TNT1 A 0 A_Print("You need a sawed-off shotgun!")
+		Goto Ready+35
+		TNT1 AAAAA 0
+		TNT1 A 0 A_JumpIfInventory("NewShell", 2, 4)
+		TNT1 A 0 A_Print("You need shotgun shells!")
+		Goto Ready+35
+		TNT1 AAAAA 0
+		TNT1 A 0 A_GunFlash("SSGFlash")
+		TNT1 A 0 A_JumpIfInventory("PowerBloodOnVisor",1,"WeaponSpecialBlood")
+		TNT1 A 0 A_JumpIfInventory("PowerBlueBloodOnVisor",1,"WeaponSpecialBlueBlood")
+		SAWG A 1 //Offset(20,40)
+		SAWG B 1 //Offset(40,43)
+		SAWG E 1 //Offset(60,46)
+		SAWG F 1 //Offset(80,46)
+		SAWG G 1
+		SAWG G 40
+		SAWG FEBA 1
+		TNT1 A 0 A_Takeinventory("GoWeaponSpecialAbility",1)
+		Goto Ready+35
+		
+	WeaponSpecialBlood:
+		SAWG H 1 //Offset(20,40)
+		SAWG I 1 //Offset(40,43)
+		SAWG J 1 //Offset(60,46)
+		SAWG K 1 //Offset(80,46)
+		SAWG L 1
+		SAWG L 40
+		SAWG KJIH 1
+		TNT1 A 0 A_Takeinventory("GoWeaponSpecialAbility",1)
+		Goto Ready+35
+		
+	WeaponSpecialBlueBlood:
+		S4WG H 1 //Offset(20,40)
+		S4WG I 1 //Offset(40,43)
+		S4WG J 1 //Offset(60,46)
+		S4WG K 1 //Offset(80,46)
+		S4WG L 1
+		S4WG L 40
+		S4WG KJIH 1
+		TNT1 A 0 A_Takeinventory("GoWeaponSpecialAbility",1)
+		Goto Ready+35
+		
+	SSGFlash:
+		S6AS AB 2
+		TNT1 A 0 A_PlaySound("insertshell", 5)
+		S6AS CDD 2
+		TNT1 A 0 A_PlaySound("weapons/ssg/close", 7)
+		P6W1 A 4
+		
+		TNT1 A 0 A_TakeInventory("NewShell", 2)
+		TNT1 A 0 A_AlertMonsters
+	    P6W1 B 1 BRIGHT A_FireBullets(0, 0, 1, 20, "shotpuff", 1, 120)//Horizontal Spread, Vertical Spread, Numbers of Projectiles (Leave as -1 if its a single one), Damage Factor
+		TNT1 A 0  A_PlaySound("SSHFIRE", 1)//Play gun fire sound
+		TNT1 AAAAAAAAAAA 0 A_FireCustomMissile("Tracer", Random(-7, 7), 0, -1, Random(-7, 7))
+		TNT1 A 0 A_FireBullets(15, 9, 22, 7, "ShotgunPuff")
+		TNT1 AA 0 A_FireCustomMissile("YellowFlareSpawn", 15, 0, 0, 0)
+		TNT1 AA 0 A_FireCustomMissile("YellowFlareSpawn", -15, 0, 0, 0)
+		TNT1 A 0 A_SetPitch(-1.55 + pitch)//Vertical recoil down
+		TNT1 A 0 ACS_Execute(282, 0, 0, 0, 0)
+		P6W1 C 2 //A_FireCustomMissile("RifleCaseSpawn",0,0,6,4) //Ejetts empty brass
+		
+		P6W1 DEFGHIJKLMN 1 //A_Refire
+		TNT1 A 0 A_PlaySound("insertshell", 5)
+		S6AS DC 2
+		TNT1 A 0 A_PlaySound("weapons/ssg/close", 7)
+		S6AS BA 2
+		Stop
+	/*
+	Fire:
+		TNT1 A 0
+		TNT1 A 0 A_Giveinventory("HasCutingWeapon",1)
+		TNT1 A 0 A_JumpIfInventory("ComboSeq", 1, "QuickShot")
+        TNT1 A 0 A_JumpIfInventory("PowerBloodOnVisor",1,"Fire.Blood")
+        TNT1 A 0 A_JumpIfInventory("PowerBlueBloodOnVisor",1,"Fire.BlueBlood")
+         TNT1 A 0 A_JumpIfInventory("PowerGreenBloodOnVisor",1,"Fire.GreenBlood")
+		TNT1 A 0 A_playsound("weapons/chainsaw/start")
+		TNT1 A 0 A_AlertMonsters
+		SAWG ABCD 1
+	Hold:
+	TNT1 A 0 A_FireCustomMissile("ShakeYourAssMinor", 0, 0, 0, 0)
+TNT1 A 0 A_JumpIfInventory("PowerBloodOnVisor",1,"Hold.Blood")
+        TNT1 A 0 A_JumpIfInventory("PowerBlueBloodOnVisor",1,"Hold.BlueBlood")
+ TNT1 A 0 A_JumpIfInventory("PowerGreenBloodOnVisor",1,"Hold.GreenBlood")
+        TNT1 A 0 A_FireCustomMissile("SmokeSpawner",0,0,0,5)
+		TNT1 A 0 A_PlaySoundEx("weapons/chainsaw/loop","Weapon",0)
+		SAWF A 1 A_Saw("weapons/chainsaw/loop", "DSSAWHIT", 6, "SSawPuff3")
+		SAWF B 1
+		SAWF C 1 A_Saw("", "BladeRip", 6, "SSawPuff4")
+		SAWF D 1
+		//TNT1 A 0 A_TakeInventory("Gas", 1)
+		TNT1 A 0 A_Refire
+		TNT1 A 0 A_StopsoundEx("Weapon")
+		TNT1 A 0 A_Playsound("CSAWSTAT", 9)
+		TNT1 A 0 ACS_Execute(282, 0, 0, 0, 0)
+		TNT1 AAA 0 A_FireCustomMissile("SmokeSpawner",0,0,0,5)
+		//TNT1 A 0 A_Playsound("weapons/chainsaw/stop")
+		SAWG DC 1
+		goto ready+35
+		*/
+		
+		//Clean Fire Start
+		Fire:
+		TNT1 A 0
+		TNT1 A 0 A_Giveinventory("HasCutingWeapon",1)
+		TNT1 A 0 A_JumpIfInventory("ComboSeq", 1, "QuickShot")
+		TNT1 A 0 A_JumpIfInventory("PowerBlueBloodOnVisor",1,"AltFireBlue")
+		TNT1 A 0 A_JumpIfInventory("PowerBloodOnVisor",1,"AltFireRed")
+		TNT1 A 0 A_JumpIfInventory("PowerGreenBloodOnVisor",1,"AltFireGreen")
+		TNT1 A 0 A_PlaySoundEx("weapons/chainsaw/loop","Weapon",0)
+		//TNT1 A 0 A_PlaySound("Machete/Yum", 3)
+		TNT1 A 0 A_Jump(48, "AltFire2")
+		TNT1 A 0 A_JumpIfInventory("SawFireSeq2", 1, 15)
+		TNT1 A 0 A_JumpIfInventory("SawFireSeq1", 1, "AltFireLeft")
+		NULL A 0 A_JumpIf (momZ > 0, "AltFire2")
+		NULL A 0 A_JumpIf (momZ < 0, "AltFire2")
+		CSA1 ABCD 1
+		TNT1 AAAAAAAAAAAAAA 0
+		TNT1 A 0 A_GiveInventory("SawFireSeq1")
+		TNT1 A 0 A_TakeInventory("SawFireSeq2")
+		
+		CSA1 D 1 Offset(4, 36)
+		CSA1 D 1 Offset(8, 40)
+		CSA1 D 1 Offset(4, 36)
+		
+		TNT1 A 0 A_playsound("weapons/chainsaw/start", 4)
+		CSA1 EFG 1
+		TNT1 AAAAA 0 A_Saw("", "", 1, "SSawPuff2", 0, 120, 32)
+		CSA1 H 1 A_Saw("", "", 0, "SSawPuff2", 0, 120, 32)
+		TNT1 A 0 A_JumpIfCloser(119, "AltContinue")
+		CSA1 JKL 1
+		
+		CSA1 L 1 Offset(-4, 36)
+		CSA1 L 1 Offset(-8, 40)
+		CSA1 L 1 Offset(-4, 36)
+		
+		TNT1 A 0 A_ReFire
+		TNT1 A 0 A_TakeInventory("SawFireSeq1", 1)
+		CSA1 MNO 1
+		TNT1 A 0 A_StopsoundEx("Weapon")
+		TNT1 A 0 A_Playsound("CSAWSTAT", 5)
+		Goto ready+35
+		
+	AltContinue:
+		CSA1 P 1 A_Saw("weapons/chainsaw/loop", "Machete/Yum", 6, "SSawPuff2", 0, 120, 3)
+		CSA1 QI 1
+		TNT1 A 0 A_JumpIfInventory("PowerBloodOnVisor",1,"AltContinueRed")
+		TNT1 A 0 A_JumpIfInventory("PowerGreenBloodOnVisor",1,"AltContinueGreen")
+		TNT1 A 0 A_JumpIfInventory("PowerBlueBloodOnVisor",1,"AltContinueBlue")
+		TNT1 A 0 A_JumpIfCloser(119, "AltContinue")
+		TNT1 A 0 A_PlaySound("weapons/chainsaw/draw", 4)
+		CSA1 JKL 1
+		//TNT1 A 3
+		CSA1 L 1 Offset(-4, 36)
+		CSA1 L 1 Offset(-8, 40)
+		CSA1 L 1 Offset(-4, 36)
+		
+		CSA1 MNO 1
+		TNT1 A 0 A_TakeInventory("SawFireSeq1", 1)
+		TNT1 A 0 A_TakeInventory("SawFireSeq2", 1)
+		TNT1 A 0 A_Playsound("CSAWSTAT", 5)
+		Goto ready+35	
+		
+	AltFireLeft:	
+		//TNT1 A 2
+		
+		CSA1 L 1 Offset(8, 40)
+		CSA1 L 1 Offset(4, 36)
+		
+		TNT1 A 0 A_PlaySound("weapons/chainsaw/draw", 4)
+		CSA1 LKJ 1
+		TNT1 AAAAA 0 A_Saw("", "", 1, "SSawPuff2", 0, 120, 32)
+		CSA1 I 1 A_Saw("", "", 0, "SSawPuff2", 0, 120, 32)
+		TNT1 A 0 A_JumpIfCloser(119, "AltContinueleft")
+		CSA1 HGFE 1
+		TNT1 A 0 A_TakeInventory("SawFireSeq1", 1)
+		TNT1 A 0 A_GiveInventory("SawFireSeq2", 1)
+	//	TNT1 A 3
+		
+		CSA1 E 1 Offset(4, 36)
+		CSA1 E 1 Offset(8, 40)
+		CSA1 E 1 Offset(4, 36)
+		
+		TNT1 A 0 A_ReFire
+		CSA1 DCBA 1
+		TNT1 A 0 A_TakeInventory("SawFireSeq2", 1)
+		TNT1 A 0 A_Playsound("CSAWSTAT", 5)
+		Goto ready+35
+		
+	AltContinueLeft:
+		CSA1 P 1 A_Saw("weapons/chainsaw/loop", "Machete/Yum", 6, "SSawPuff2", 0, 120, 3)
+		CSA1 QI 1
+		TNT1 A 0 A_JumpIfCloser(119, "AltContinueleft")
+		TNT1 A 0 A_PlaySound("weapons/chainsaw/draw", 4)
+		CSA1 HGFE 1
+	//	TNT1 A 3
+	
+		CSA1 E 1 Offset(4, 36)
+		CSA1 E 1 Offset(8, 40)
+		CSA1 E 1 Offset(4, 36)
+	
+		TNT1 A 0 A_TakeInventory("SawFireSeq1", 1)
+		TNT1 A 0 A_TakeInventory("SawFireSeq2", 1)
+		CSA1 DCBA 1
+		TNT1 A 0 A_Playsound("CSAWSTAT", 5)
+		Goto ready+35	
+		
+	AltFire2:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIfInventory("PowerBlueBloodOnVisor",1,"AltFire2Blue")
+		TNT1 A 0 A_JumpIfInventory("PowerBloodOnVisor",1,"AltFire2Red")
+		TNT1 A 0 A_JumpIfInventory("PowerGreenBloodOnVisor",1,"AltFire2Green")
+		CSA2 ABCDDEEEF 1
+		TNT1 A 0 A_PlaySound("weapons/chainsaw/draw", 4)
+		CSA2 GHI 1 A_JumpIfCloser(119, "AltContinue2")
+		TNT1 AAAAAAAAAAAAAAA 0 A_Saw("", "", 0, "SSawPuff", 0, 120, 0, 32)
+		CSA2 J 1 A_Saw("", "", 8, "SSawPuff",0,120)
+		TNT1 A 0 A_JumpIfCloser(119, "AltContinue2")
+		CSA2 MNO 1 A_JumpIfCloser(119, "AltContinue2")
+		TNT1 A 5
+		CSA2 PQ 1
+		TNT1 A 0 A_Playsound("CSAWSTAT", 5)
+		Goto ready+35
+	
+	AltContinue2:
+		CSA2 J 1 A_Saw("weapons/chainsaw/loop", "Machete/Yum", 8, "SSawPuff", 0, 120)
+		CSA2 KL 1
+		TNT1 A 0 A_JumpIfCloser(119, "AltContinue2")
+		TNT1 A 0 A_PlaySound("weapons/chainsaw/draw", 4)
+		CSA2 J 1 A_Saw("weapons/chainsaw/loop", "Machete/Yum", 8, "SSawPuff", 0, 120)
+		CSA2 KL 1
+		TNT1 A 0 A_JumpIfCloser(119, "AltContinue2")
+		TNT1 A 0 A_PlaySound("weapons/chainsaw/draw", 4)
+		CSA2 MNO 1
+		TNT1 A 5
+		CSA2 PQ 1
+		TNT1 A 0 A_Playsound("CSAWSTAT", 5)
+		Goto ready+35
+		
+		//Clean Fire End
+		
+		
+		//Blood Fire Start
+		
+		AltFireRed:
+		TNT1 A 0
+		TNT1 A 0 A_PlaySoundEx("weapons/chainsaw/loop","Weapon",0)
+		//TNT1 A 0 A_PlaySound("Machete/Yum", 3)
+		TNT1 A 0 A_JumpIfInventory("SawFireSeq2", 1, 15)
+		TNT1 A 0 A_JumpIfInventory("SawFireSeq1", 1, "AltFireLeftRed")
+		//TNT1 A 0 A_Jump(12, "AltFire2")
+		TNT1 A 0 A_Jump(48, "AltFire2Red")
+		NULL A 0 A_JumpIf (momZ > 0, "AltFire2")
+		NULL A 0 A_JumpIf (momZ < 0, "AltFire2")
+		CSR1 ABCD 1
+		TNT1 AAAAAAAAAAAAAA 0
+		TNT1 A 0 A_GiveInventory("SawFireSeq1")
+		TNT1 A 0 A_TakeInventory("SawFireSeq2")
+		//TNT1 A 3
+		CSR1 D 1 Offset(4, 36)
+		CSR1 D 1 Offset(8, 40)
+		CSR1 D 1 Offset(4, 36)
+		TNT1 A 0 A_PlaySound("weapons/chainsaw/draw", 4)
+		CSR1 EFG 1
+		TNT1 AAAAA 0 A_Saw("", "", 1, "SSawPuff2", 0, 120, 32)
+		CSR1 H 1 A_Saw("", "", 0, "SSawPuff2", 0, 120, 32)
+		TNT1 A 0 A_JumpIfCloser(119, "AltContinueRed")
+		CSR1 JKL 1
+		
+		CSR1 L 1 Offset(-4, 36)
+		CSR1 L 1 Offset(-8, 40)
+		CSR1 L 1 Offset(-4, 36)
+		
+		TNT1 A 0 A_ReFire
+		TNT1 A 0 A_TakeInventory("SawFireSeq1", 1)
+		CSR1 MNO 1
+		TNT1 A 0 A_Playsound("CSAWSTAT" ,5)
+		Goto ready+35
+		
+	AltContinueRed:
+		CSR1 P 1 A_Saw("weapons/chainsaw/loop", "Machete/Yum", 6, "SSawPuff2", 0, 120, 3)
+		CSR1 QI 1
+		CSR1 QI 1
+		TNT1 A 0 A_JumpIfCloser(119, "AltContinueRed")
+		TNT1 A 0 A_PlaySound("weapons/chainsaw/draw", 4)
+		CSR1 JKL 1
+		//TNT1 A 3
+		CSR1 L 1 Offset(-4, 36)
+		CSR1 L 1 Offset(-8, 40)
+		CSR1 L 1 Offset(-4, 36)
+		CSR1 MNO 1
+		TNT1 A 0 A_TakeInventory("SawFireSeq1", 1)
+		TNT1 A 0 A_TakeInventory("SawFireSeq2", 1)
+		TNT1 A 0 A_Playsound("CSAWSTAT" ,5)
+		Goto ready+35
+		
+	AltFireLeftRed:	
+		//TNT1 A 2
+		CSR1 L 1 Offset(8, 40)
+		CSR1 L 1 Offset(4, 36)
+		
+		TNT1 A 0 A_PlaySound("weapons/chainsaw/draw", 4)
+		CSR1 LKJ 1
+		TNT1 AAAAA 0 A_Saw("", "", 1, "SSawPuff2", 0, 120, 32)
+		CSR1 I 1 A_Saw("", "", 0, "SSawPuff2", 0, 120, 32)
+		TNT1 A 0 A_JumpIfCloser(119, "AltContinueleftred")
+		CSR1 HGFE 1
+		TNT1 A 0 A_TakeInventory("SawFireSeq1", 1)
+		TNT1 A 0 A_GiveInventory("SawFireSeq2", 1)
+		//TNT1 A 3
+	
+		CSR1 E 1 Offset(4, 36)
+		CSR1 E 1 Offset(8, 40)
+		CSR1 E 1 Offset(4, 36)
+		
+		TNT1 A 0 A_ReFire
+		CSR1 DCBA 1
+		TNT1 A 0 A_TakeInventory("SawFireSeq2", 1)
+		TNT1 A 0 A_Playsound("CSAWSTAT" ,5)
+		Goto ready+35
+		
+	AltContinueLeftRed:
+		CSR1 P 1 A_Saw("weapons/chainsaw/loop", "Machete/Yum", 6, "SSawPuff2", 0, 120, 3)
+		CSR1 QI 1
+		TNT1 A 0 A_JumpIfCloser(119, "AltContinueleftred")
+		TNT1 A 0 A_PlaySound("weapons/chainsaw/draw", 4)
+		CSR1 HGFE 1
+		//TNT1 A 3
+		CSR1 E 1 Offset(4, 36)
+		CSR1 E 1 Offset(8, 40)
+		CSR1 E 1 Offset(4, 36)
+		TNT1 A 0 A_TakeInventory("SawFireSeq1", 1)
+		TNT1 A 0 A_TakeInventory("SawFireSeq2", 1)
+		CSR1 DCBA 1
+		TNT1 A 0 A_Playsound("CSAWSTAT" ,5)
+		Goto ready+35
+	
+	AltFire2Red:
+		TNT1 A 0
+		CSR2 ABCDDEEEF 1
+		TNT1 A 0 A_PlaySound("weapons/chainsaw/draw", 4)
+		CSR2 GHI 1 A_JumpIfCloser(119, "AltContinue2Red")
+		TNT1 AAAAAAAAAAAAAAA 0 A_Saw("", "", 0, "SSawPuff", 0, 120, 0, 32)
+		CSR2 J 1 A_Saw("", "", 8, "SSawPuff",0,120)
+		TNT1 A 0 A_JumpIfCloser(119, "AltContinue2Red")
+		CSR2 MNO 1 A_JumpIfCloser(119, "AltContinue2Red")
+		TNT1 A 3
+		CSR2 PQ 1
+		TNT1 A 0 A_Playsound("CSAWSTAT" ,5)
+		Goto ready+35
+	
+	AltContinue2Red:
+		CSR2 J 1 A_Saw("weapons/chainsaw/loop", "Machete/Yum", 8, "SSawPuff", 0, 120)
+		CSR2 KL 1
+		TNT1 A 0 A_JumpIfCloser(119, "AltContinue2Red")
+		TNT1 A 0 A_PlaySound("weapons/chainsaw/draw", 4)
+		CSR2 J 1 A_Saw("weapons/chainsaw/loop", "Machete/Yum", 8, "SSawPuff", 0, 120)
+		CSR2 KL 1
+		TNT1 A 0 A_JumpIfCloser(119, "AltContinue2Red")
+		TNT1 A 0 A_PlaySound("weapons/chainsaw/draw", 4)
+		CSR2 MNO 1
+		TNT1 A 3
+		CSR2 PQ 1
+		TNT1 A 0 A_Playsound("CSAWSTAT" ,5)
+		Goto ready+35	
+		
+		//Blood Fire End
+		
+		
+		//Blue Blood Fire Start
+		
+		AltFireBlue:
+		TNT1 A 0
+		TNT1 A 0 A_PlaySoundEx("weapons/chainsaw/loop","Weapon",0)
+		//TNT1 A 0 A_PlaySound("Machete/Yum", 3)
+		TNT1 A 0 A_Jump(48, "AltFire2")
+		TNT1 A 0 A_JumpIfInventory("SawFireSeq2", 1, 15)
+		TNT1 A 0 A_JumpIfInventory("SawFireSeq1", 1, "AltFireLeftBlue")
+		NULL A 0 A_JumpIf (momZ > 0, "AltFire2")
+		NULL A 0 A_JumpIf (momZ < 0, "AltFire2")
+		CSB1 ABCD 1
+		TNT1 AAAAAAAAAAAAAA 0
+		TNT1 A 0 A_GiveInventory("SawFireSeq1")
+		TNT1 A 0 A_TakeInventory("SawFireSeq2")
+		//TNT1 A 3
+		CSB1 D 1 Offset(4, 36)
+		CSB1 D 1 Offset(8, 40)
+		CSB1 D 1 Offset(4, 36)
+		TNT1 A 0 A_PlaySound("weapons/chainsaw/draw", 4)
+		CSB1 EFG 1
+		TNT1 AAAAA 0 A_Saw("", "", 1, "SSawPuff2", 0, 120, 32)
+		CSB1 H 1 A_Saw("", "", 0, "SSawPuff2", 0, 120, 32)
+		TNT1 A 0 A_JumpIfCloser(119, "AltContinueBlue")
+		CSB1 JKL 1
+	//	TNT1 A 3
+		CSB1 L 1 Offset(-4, 36)
+		CSB1 L 1 Offset(-8, 40)
+		CSB1 L 1 Offset(-4, 36)
+		TNT1 A 0 A_ReFire
+		TNT1 A 0 A_TakeInventory("SawFireSeq1", 1)
+		CSB1 MNO 1
+		TNT1 A 0 A_Playsound("CSAWSTAT" ,5)
+		Goto ready+35	
+		
+	AltContinueBlue:
+		CSB1 P 1 A_Saw("weapons/chainsaw/loop", "Machete/Yum", 6, "SSawPuff2", 0, 120, 3)
+		CSB1 QI 1
+		TNT1 A 0 A_JumpIfCloser(119, "AltContinueBlue")
+		TNT1 A 0 A_PlaySound("weapons/chainsaw/draw", 4)
+		CSB1 JKL 1
+		//TNT1 A 3
+		CSB1 L 1 Offset(-4, 36)
+		CSB1 L 1 Offset(-8, 40)
+		CSB1 L 1 Offset(-4, 36)
+		CSB1 MNO 1
+		TNT1 A 0 A_TakeInventory("SawFireSeq1", 1)
+		TNT1 A 0 A_TakeInventory("SawFireSeq2", 1)
+		TNT1 A 0 A_Playsound("CSAWSTAT" ,5)
+		Goto ready+35		
+		
+	AltFireLeftBlue:	
+		CSB1 L 1 Offset(8, 40)
+		CSB1 L 1 Offset(4, 36)
+		TNT1 A 0 A_PlaySound("weapons/chainsaw/draw", 4)
+		CSB1 LKJ 1
+		TNT1 AAAAA 0 A_Saw("", "", 1, "SSawPuff2", 0, 120, 32)
+		CSB1 I 1 A_Saw("", "", 0, "SSawPuff2", 0, 120, 32)
+		TNT1 A 0 A_JumpIfCloser(119, "AltContinueleftBlue")
+		CSB1 HGFE 1
+		TNT1 A 0 A_TakeInventory("SawFireSeq1", 1)
+		TNT1 A 0 A_GiveInventory("SawFireSeq2", 1)
+		//TNT1 A 3
+		CSB1 E 1 Offset(4, 36)
+		CSB1 E 1 Offset(8, 40)
+		CSB1 E 1 Offset(4, 36)
+		TNT1 A 0 A_ReFire
+		CSB1 DCBA 1
+		TNT1 A 0 A_TakeInventory("SawFireSeq2", 1)
+		TNT1 A 0 A_Playsound("CSAWSTAT" ,5)
+		Goto ready+35	
+		
+	AltContinueLeftBlue:
+		CSB1 P 1 A_Saw("weapons/chainsaw/loop", "Machete/Yum", 6, "SSawPuff2", 0, 120, 3)
+		CSB1 QI 1
+		TNT1 A 0 A_JumpIfCloser(119, "AltContinueleftBlue")
+		TNT1 A 0 A_PlaySound("weapons/chainsaw/draw", 4)
+		CSB1 HGFE 1
+		//TNT1 A 3
+		CSB1 E 1 Offset(4, 36)
+		CSB1 E 1 Offset(8, 40)
+		CSB1 E 1 Offset(4, 36)
+		TNT1 A 0 A_TakeInventory("SawFireSeq1", 1)
+		TNT1 A 0 A_TakeInventory("SawFireSeq2", 1)
+		CSB1 DCBA 1
+		TNT1 A 0 A_Playsound("CSAWSTAT" ,5)
+		Goto ready+35		
+	
+	
+	AltFire2Blue:
+		TNT1 A 0
+		CSB2 ABCDDEEEF 1
+		TNT1 A 0 A_PlaySound("weapons/chainsaw/draw", 4)
+		CSB2 GHI 1 A_JumpIfCloser(119, "AltContinue2Blue")
+		TNT1 AAAAAAAAAAAAAAA 0 A_Saw("", "", 0, "SSawPuff", 0, 120, 0, 32)
+		CSB2 J 1 A_Saw("", "", 8, "SSawPuff",0,120)
+		TNT1 A 0 A_JumpIfCloser(119, "AltContinue2Blue")
+		CSB2 MNO 1 A_JumpIfCloser(119, "AltContinue2Blue")
+		TNT1 A 3
+		CSB2 PQ 1
+		TNT1 A 0 A_Playsound("CSAWSTAT" ,5)
+		Goto ready+35	
+	
+	AltContinue2Blue:
+		CSB2 J 1 A_Saw("weapons/chainsaw/loop", "Machete/Yum", 8, "SSawPuff", 0, 120)
+		CSB2 KL 1
+		TNT1 A 0 A_JumpIfCloser(119, "AltContinue2Blue")
+		TNT1 A 0 A_PlaySound("weapons/chainsaw/draw", 4)
+		CSB2 J 1 A_Saw("weapons/chainsaw/loop", "Machete/Yum", 8, "SSawPuff", 0, 120)
+		CSB2 KL 1
+		TNT1 A 0 A_JumpIfCloser(119, "AltContinue2Blue")
+		TNT1 A 0 A_PlaySound("weapons/chainsaw/draw", 4)
+		CSB2 MNO 1
+		TNT1 A 3
+		CSB2 PQ 1
+		TNT1 A 0 A_Playsound("CSAWSTAT" ,5)
+		Goto ready+35	
+		
+		//Blue Blood Fire End
+		
+	//Green Blood Fire Start
+	
+	AltFireGreen:
+		TNT1 A 0
+		TNT1 A 0 A_PlaySoundEx("weapons/chainsaw/loop","Weapon",0)
+		//TNT1 A 0 A_PlaySound("Machete/Yum", 3)
+		TNT1 A 0 A_JumpIfInventory("SawFireSeq2", 1, 15)
+		TNT1 A 0 A_JumpIfInventory("SawFireSeq1", 1, "AltFireLeftGreen")
+		//TNT1 A 0 A_Jump(12, "AltFire2")
+		NULL A 0 A_JumpIf (momZ > 0, "AltFire2")
+		NULL A 0 A_JumpIf (momZ < 0, "AltFire2")
+		CSG1 ABCD 1
+		TNT1 AAAAAAAAAAAAAA 0
+		TNT1 A 0 A_GiveInventory("SawFireSeq1")
+		TNT1 A 0 A_TakeInventory("SawFireSeq2")
+		TNT1 A 5
+		TNT1 A 0 A_PlaySound("weapons/chainsaw/draw", 4)
+		CSG1 EFG 1
+		TNT1 AAAAA 0 A_Saw("", "", 1, "SSawPuff2", 0, 120, 32)
+		CSG1 H 1 A_Saw("", "", 0, "SSawPuff2", 0, 120, 32)
+		TNT1 A 0 A_JumpIfCloser(119, "AltContinueGreen")
+		CSG1 JKL 1
+		TNT1 A 5
+		TNT1 A 0 A_ReFire
+		TNT1 A 0 A_TakeInventory("SawFireSeq1", 1)
+		CSG1 MNO 1
+		TNT1 A 0 A_Playsound("CSAWSTAT" ,5)
+		Goto OnLoop
+		
+	AltContinueGreen:
+		CSG1 P 1 A_Saw("weapons/chainsaw/loop", "Machete/Yum", 6, "SSawPuff2", 0, 120, 3)
+		CSG1 QI 1
+		TNT1 A 0 A_JumpIfCloser(119, "AltContinueGreen")
+		TNT1 A 0 A_PlaySound("weapons/chainsaw/draw", 4)
+		CSG1 JKL 1
+		TNT1 A 5
+		CSG1 MNO 1
+		TNT1 A 0 A_TakeInventory("SawFireSeq1", 1)
+		TNT1 A 0 A_TakeInventory("SawFireSeq2", 1)
+		TNT1 A 0 A_Playsound("CSAWSTAT" ,5)
+		Goto OnLoop	
+		
+	AltFireLeftGreen:	
+		TNT1 A 2
+		TNT1 A 0 A_PlaySound("weapons/chainsaw/draw", 4)
+		CSG1 LKJ 1
+		TNT1 AAAAA 0 A_Saw("", "", 1, "SSawPuff2", 0, 120, 32)
+		CSG1 I 1 A_Saw("", "", 0, "SSawPuff2", 0, 120, 32)
+		TNT1 A 0 A_JumpIfCloser(119, "AltContinueleftGreen")
+		CSG1 HGFE 1
+		TNT1 A 0 A_TakeInventory("SawFireSeq1", 1)
+		TNT1 A 0 A_GiveInventory("SawFireSeq2", 1)
+		TNT1 A 5
+		TNT1 A 0 A_ReFire
+		CSG1 DCBA 1
+		TNT1 A 0 A_TakeInventory("SawFireSeq2", 1)
+		TNT1 A 0 A_Playsound("CSAWSTAT" ,5)
+		Goto OnLoop
+		
+	AltContinueLeftGreen:
+		CSG1 P 1 A_Saw("weapons/chainsaw/loop", "Machete/Yum", 6, "SSawPuff2", 0, 120, 3)
+		CSG1 QI 1
+		TNT1 A 0 A_JumpIfCloser(119, "AltContinueleftGreen")
+		TNT1 A 0 A_PlaySound("weapons/chainsaw/draw", 4)
+		CSG1 HGFE 1
+		TNT1 A 5
+		TNT1 A 0 A_TakeInventory("SawFireSeq1", 1)
+		TNT1 A 0 A_TakeInventory("SawFireSeq2", 1)
+		CSG1 DCBA 1
+		TNT1 A 0 A_Playsound("CSAWSTAT" ,5)
+		Goto OnLoop	
+	
+	
+		
+	AltFire2Green:
+		TNT1 A 0
+		CSG2 ABCDDEEEF 1
+		TNT1 A 0 A_PlaySound("weapons/chainsaw/draw", 4)
+		CSG2 GHI 1 A_JumpIfCloser(119, "AltContinue2Green")
+		TNT1 AAAAAAAAAAAAAAA 0 A_Saw("", "", 0, "SSawPuff", 0, 120, 0, 32)
+		CSG2 J 1 A_Saw("", "", 8, "SSawPuff",0,120)
+		TNT1 A 0 A_JumpIfCloser(119, "AltContinue2Green")
+		CSG2 MNO 1 A_JumpIfCloser(119, "AltContinue2Green")
+		TNT1 A 5
+		CSG2 PQ 1
+		TNT1 A 0 A_Playsound("CSAWSTAT" ,5)
+		Goto OnLoop
+	
+	AltContinue2Green:
+		CSG2 J 1 A_Saw("weapons/chainsaw/loop", "Machete/Yum", 8, "SSawPuff", 0, 120)
+		CSG2 KL 1
+		TNT1 A 0 A_JumpIfCloser(119, "AltContinue2Green")
+		TNT1 A 0 A_PlaySound("weapons/chainsaw/draw", 4)
+		CSG2 J 1 A_Saw("weapons/chainsaw/loop", "Machete/Yum", 8, "SSawPuff", 0, 120)
+		CSG2 KL 1
+		TNT1 A 0 A_JumpIfCloser(119, "AltContinue2Green")
+		TNT1 A 0 A_PlaySound("weapons/chainsaw/draw", 4)
+		CSG2 MNO 1
+		TNT1 A 5
+		CSG2 PQ 1
+		TNT1 A 0 A_Playsound("CSAWSTAT" ,5)
+		Goto OnLoop
+	
+	//Green Blood Fire End
 
 
 	Ready.GreenBlood:
@@ -827,147 +1181,6 @@ TNT1 A 0 A_JumpIfInventory("PowerBloodOnVisor",1,"Hold.Blood")
 		TNT1 A 0 A_Playsound("weapons/chainsaw/stop")
 		SAW4 DC 1
 		goto ready+35
-
-    RareAttack:
-		KICK A 0 A_Takeinventory("PowerBlueBloodOnVisor",1)
-		KICK A 0 A_Takeinventory("PowerGreenBloodOnVisor",1)
-		TNT1 A 0 A_Jump(128, "RareAttack2", "RareAttack3")
-		
-		TNT1 A 0 A_PlaySoundEx("weapons/chainsaw/loop","Weapon",0)
-		TNT1 A 0 A_FireCustomMissile("ShakeYourAssMinor", 0, 0, 0, 0)
-		
-		SAW5 MO 1
-		SAW5 QPONML 1
-		//SAW5 F 0 A_JumpIfCloser(300, "RareAttackContinue")
-		Goto RareAttackContinue
-		
-	RareAttackContinue:	
-		TNT1 A 0 A_Playsound("DSSAWHIT", 3)
-		SAW5 D 1 A_Saw("weapons/chainsaw/loop", "Machete/Yum", random(4,6), "SSawPuff")
-		SAW5 C 1 A_Saw("", "", random(2,3), "SSawPuff2")
-		SAW5 B 1 A_Saw("", "BladeRip", random(2,3), "SSawPuff")
-		
-		SAW5 A 1 A_Saw("weapons/chainsaw/loop", "Machete/Yum", random(4,6), "SSawPuff")
-		SAW5 B 1 A_Saw("", "", random(2,3), "SSawPuff2")
-		SAW5 C 1 A_Saw("", "", random(2,3), "SSawPuff")
-		SAW5 D 1 A_Saw("", "BladeRip", random(2,3), "SSawPuff")
-		
-		
-		SAW5 F 0 A_JumpIfCloser(90, "RareAttackContinue2")
-		//TNT1 A 0 A_Jump(128, 13)
-		Goto RareAttackEnd
-		
-	RareAttackContinue2:
-		SAW2 G 1 A_Saw("weapons/chainsaw/loop", "DSSAWHIT", random(4,6), "SSawPuff3")
-		SAW2 F 1 A_Saw("", "BladeRip", random(2,4), "SSawPuff3")
-		SAW2 G 1 A_Saw("", "BladeRip", random(4,6), "SSawPuff3")
-		SAW2 H 1 A_Saw("", "BladeRip", random(2,4), "SSawPuff3")
-		SAW5 F 0 A_JumpIfCloser(90, "RareAttackContinue2")
-	RareAttackEnd:	
-		TNT1 A 0 A_Playsound("Machete/Yum", 6)
-		SAW5 FGHIJKJIHFG 1
-		//TNT1 A 0 A_Jump(255, 11)
-		//SAW5 LMNOPQPONML 1
-		
-		
-        TNT1 A 0 A_JumpIfInventory("PowerBlueBloodOnVisor",1,"Hold.BlueBlood")
-        TNT1 A 0 A_JumpIfInventory("PowerGreenBloodOnVisor",1,"Hold.GreenBlood")
-		TNT1 A 0 A_Refire
-		TNT1 A 0 A_StopsoundEx("Weapon")
-		TNT1 AAA 0 A_FireCustomMissile("SmokeSpawner",0,0,0,5)
-		TNT1 A 0 ACS_Execute(282, 0, 0, 0, 0)
-		TNT1 A 0 A_Playsound("CSAWSTAT", 9)
-		//TNT1 A 0 A_Playsound("weapons/chainsaw/stop")CSAWSTAT
-		//SAW2 DC 1
-		goto ready.blood
-		
-	RareAttack2:
-		KICK A 0 A_Takeinventory("PowerBlueBloodOnVisor",1)
-		KICK A 0 A_Takeinventory("PowerGreenBloodOnVisor",1)
-		//TNT1 A 0 A_PlaySoundEx("weapons/chainsaw/loop","Weapon",0)
-		TNT1 A 0 A_FireCustomMissile("ShakeYourAssMinor", 0, 0, 0, 0)
-		SAW6 A 1
-		SAW6 BCDEF 1
-		
-		SAW6 G 1 //A_Saw("", "", 6, "SSawPuff")
-		SAW6 H 1
-		SAW6 I 1 //A_Saw("", "", 6, "SSawPuff")
-		SAW6 JK 1
-		SAW5 F 0 A_JumpIfCloser(90, "RareAttack2Continue")
-		Goto RareAttack2End
-		
-	RareAttack2Continue:	
-	TNT1 A 0 A_Playsound("DSSAWHIT", 3)
-	TNT1 A 0 A_FireCustomMissile("ShakeYourAssMinor", 0, 0, 0, 0)
-		SAW6 U 1 A_Saw("weapons/chainsaw/loop", "weapons/sawhit", random(4,6), "SSawPuff3")
-		SAW6 V 1 //A_Saw("", "", random(4,6), "SSawPuff")
-		SAW6 W 1 //A_Saw("", "", random(4,6), "SSawPuff")
-		SAW6 X 1 A_Saw("", "BladeRip", random(4,6), "SSawPuff3")
-		
-		SAW5 F 0 A_JumpIfCloser(90, "RareAttack2Continue")
-		
-	RareAttack2End:	
-		TNT1 A 0 A_FireCustomMissile("ShakeYourAssMinor", 0, 0, 0, 0)
-		SAW6 K 1 A_Saw("weapons/chainsaw/loop", "Machete/Yum", 5, "SSawPuff3")
-		SAW6 L 1
-		SAW6 M 1 //A_Saw("", "", 6, "SSawPuff")
-		SAW6 N 1
-		
-		
-		SAW6 O 1 //A_Saw("", "", 6, "SSawPuff")
-		SAW6 P 1
-		SAW6 Q 1 //A_Saw("", "", 6, "SSawPuff")
-		SAW6 R 1
-		
-		
-		SAW6 ST 1
-		TNT1 AAA 0 A_FireCustomMissile("SmokeSpawner",0,0,0,5)
-		TNT1 A 0 ACS_Execute(282, 0, 0, 0, 0)
-		TNT1 A 0 A_Playsound("CSAWSTAT", 9)
-		goto ready.blood	
-		
-	RareAttack3:
-		KICK A 0 A_Takeinventory("PowerBlueBloodOnVisor",1)
-		KICK A 0 A_Takeinventory("PowerGreenBloodOnVisor",1)
-		//TNT1 A 0 A_PlaySoundEx("weapons/chainsaw/loop","Weapon",0)
-		TNT1 A 0 A_FireCustomMissile("ShakeYourAssMinor", 0, 0, 0, 0)
-		SAW7 A 1
-		SAW7 BCDE 1
-		
-		SAW7 F 0 A_JumpIfCloser(90, "RareAttack3Continue")
-		Goto RareAttack3End
-		
-	RareAttack3Continue:	
-	TNT1 A 0 A_Playsound("DSSAWHIT", 3)
-	TNT1 A 0 A_FireCustomMissile("ShakeYourAssMinor", 0, 0, 0, 0)
-		SAW7 E 1 A_Saw("weapons/chainsaw/loop", "weapons/sawhit", random(4,6), "SSawPuff")
-		SAW7 F 1 //A_Saw("", "", random(4,6), "SSawPuff")
-		SAW7 E 1 //A_Saw("", "", random(4,6), "SSawPuff")
-		SAW7 D 1 A_Saw("", "BladeRip", random(4,6), "SSawPuff")
-		SAW5 F 0 A_JumpIfCloser(90, "RareAttack3Continue")
-	RareAttack3End:	
-		TNT1 A 0 A_FireCustomMissile("ShakeYourAssMinor", 0, 0, 0, 0)
-		SAW7 G 1 A_Saw("weapons/chainsaw/loop", "Machete/Yum", 5, "SSawPuff")
-		SAW7 H 1
-		SAW7 I 1 //A_Saw("", "", 6, "SSawPuff")
-		SAW7 J 1
-		
-		
-		SAW7 K 1 //A_Saw("", "", 6, "SSawPuff")
-		SAW7 L 1
-		SAW7 M 1 //A_Saw("", "", 6, "SSawPuff")
-		SAW7 N 1
-		
-		
-		SAW7 O 1
-		TNT1 AAA 0 A_FireCustomMissile("SmokeSpawner",0,0,0,5)
-		TNT1 A 0 ACS_Execute(282, 0, 0, 0, 0)
-		TNT1 A 0 A_Playsound("CSAWSTAT", 9)
-		goto ready.blood
-		
-		
-		
-		
 		
 	UseHealthBackPack:
 		TNT1 A 0 A_ZoomFactor(1.0)
@@ -1065,17 +1278,14 @@ TNT1 A 0 A_JumpIfInventory("PowerBloodOnVisor",1,"Hold.Blood")
 		TNT1 A 0 A_TakeInventory("DoMine", 1)
 		TNT1 A 0 A_JumpIfInventory("MineAmmo", 1, 1)
 		Goto NoMine
-		MIN2 ABCDEFGH 1
-		NULL A 5
-		MIN3 ABCDE 1
-		NULL A 0 A_PlayWeaponSound("MINE002")
-		MIN3 FG 1
-		MIN3 H 2 A_FireCustomMissile("Mine2",0,0,0,8)
-		MIN3 IJKL 1
-		NULL A 4
-		MINE BCDEFG 1
-		MINE A 3 //A_ReFire
+		XPFF FEDCBA 1
+		XPFS B 1
+		NULL A 0 A_PlaySound("weapons/pbarm", 2)
+		XPFS B 3
+		XHFF A 0 A_PlaySound("MINE002", 3)
+		TNT1 A 0 A_ThrowGrenade("ThrownProxMine",4,11,1,0)
 		TNT1 A 0 A_TakeInventory("MineAmmo", 1)
+		XHFF MNOPQRSTUVWXYZ 1
 		Goto Ready
 
 	NoMine:
@@ -1284,58 +1494,415 @@ TNT1 A 0 A_JumpIfInventory("PowerBloodOnVisor",1,"Hold.Blood")
 		S4WG IHIHIH 1 
 		Stop
 			
+	////////////////////////////////////////////////KNIFE COMBO//////////////////////////////////////////////////////////////
+		
+		QuickPunchPurist:
+		TNT1 A 0 A_Print("Knife Combos Not Allowed In Classic Mode!")
+		TNT1 A 0 A_Takeinventory("DoPunch",1)
+		Goto Ready+35
+		
 	QuickPunch:
+		TNT1 A 0 A_JumpIfInventory("IsPlayingAsPurist", 1, "QuickPunchPurist")
 		TNT1 A 0 A_JumpIfInventory("PowerStrength",1,"SuperQuickPunch")
+		TNT1 A 0 A_TakeInventory("DoPunch",1)
 		TNT1 A 0 A_GunFlash("FlashPunching")
-		TNT1 AAA 1
+		TNT1 A 0 A_GiveInventory("HasCutingWeapon", 1)
+		TNT1 A 0 A_PlaySound("KNIFUP", 0)
+		TNT1 AA 1
 		TNT1 A 0 A_TakeInventory("Zoomed",1)
         TNT1 A 0 A_ZoomFactor(1.0)
 		TNT1 A 0 A_TakeInventory("ADSmode",1)
-		TNT1 AAA 1
+		TNT1 AA 1
+		TNT1 A 0 A_PlaySound("KNIFSWNG", 1)
 		TNT1 A 0 A_ZoomFactor(1.015)
-		TNT1 A 0 A_PlaySound("weapons/ultrwhoosh")
-		PUNC AB 1 //A_WeaponReady(WRF_NoFire|WRF_NoSwitch) 
+		MC3S AB 1 //A_WeaponReady(WRF_NoFire|WRF_NoSwitch) 
 		TNT1 A 0 A_ZoomFactor(1.03)
 		TNT1 A 0 //A_WeaponReady(WRF_NoFire|WRF_NoSwitch)
-        PUNC C 1 A_SetPitch(+2 + pitch)
+        MC3S C 1 A_SetPitch(+2 + pitch)
 		TNT1 A 0 A_ZoomFactor(1.045)
 		TNT1 A 0 //A_WeaponReady(WRF_NoFire|WRF_NoSwitch)
-        PUNC D 1 A_SetPitch(-3 + pitch)
+        MC3S D 1 A_SetPitch(-3 + pitch)
 		TNT1 A 0 A_ZoomFactor(1.055)
-		PUNG AAAA 0 A_FireCustomMissile("MeleeStrike1", 0, 0, 0, 0)
 		TNT1 A 0 //A_WeaponReady(WRF_NoFire|WRF_NoSwitch)
-        PUNC E 1 A_SetPitch(+1 + pitch)
-		TNT1 A 0 A_ZoomFactor(1.025)
-		PUNR BCD 1 //A_WeaponReady(WRF_NoFire|WRF_NoSwitch)
-		TNT1 A 0 A_ZoomFactor(1.0)
 		TNT1 A 0 A_TakeInventory("DoPunch",1)
+		TNT1 A 0 A_FireCustomMissile("KnifeSwing", 0, 0, 0, 0)
+        MC3S EF 1 A_SetPitch(+1 + pitch)
+		TNT1 A 0 A_ZoomFactor(1.025)
+		MC3S GHIJ 1 //A_WeaponReady(WRF_NoFire|WRF_NoSwitch)
+		TNT1 A 0 A_ZoomFactor(1.0)
+		TNT1 A 0 A_JumpIfInventory("Kicking",1,"KickLeft")
+		TNT1 A 0 A_JumpIfInventory("KnifeHasHit",1,"KnifeCombo1")
+		TNT1 A 0 A_TakeInventory("DoPunch",1)
+		TNT1 A 0 A_TakeInventory("KnifeHasHit",1)
+		TNT1 A 0 A_TakeInventory("HasCutingWeapon", 1)
 		Goto Ready+35
 		
 	SuperQuickPunch:
+		TNT1 A 0 A_TakeInventory("DoPunch",1)
 		TNT1 A 0 A_GunFlash("FlashPunching")
-		TNT1 AAA 1
+		TNT1 A 0 A_GiveInventory("HasCutingWeapon", 1)
+		TNT1 A 0 A_PlaySound("KNIFUP", 0)
+		TNT1 AA 1
 		TNT1 A 0 A_TakeInventory("Zoomed",1)
         TNT1 A 0 A_ZoomFactor(1.0)
 		TNT1 A 0 A_TakeInventory("ADSmode",1)
-		TNT1 AAA 1
+		TNT1 AA 1
+		TNT1 A 0 A_PlaySound("KNIFSWNG", 1)
 		TNT1 A 0 A_ZoomFactor(1.015)
-		TNT1 A 0 A_PlaySound("weapons/ultrwhoosh")
-		PUNC AB 1 //A_WeaponReady(WRF_NoFire|WRF_NoSwitch) 
+		MC3S AB 1 //A_WeaponReady(WRF_NoFire|WRF_NoSwitch) 
 		TNT1 A 0 A_ZoomFactor(1.03)
 		TNT1 A 0 //A_WeaponReady(WRF_NoFire|WRF_NoSwitch)
-        PUNC C 1 A_SetPitch(+2 + pitch)
+        MC3S C 1 A_SetPitch(+2 + pitch)
 		TNT1 A 0 A_ZoomFactor(1.045)
 		TNT1 A 0 //A_WeaponReady(WRF_NoFire|WRF_NoSwitch)
-        PUNC D 1 A_SetPitch(-3 + pitch)
+        MC3S D 1 A_SetPitch(-3 + pitch)
 		TNT1 A 0 A_ZoomFactor(1.055)
-		PUNG A 0 A_FireCustomMissile("MeleeStrikeSuperHook", 0, 0, 10, 0)
 		TNT1 A 0 //A_WeaponReady(WRF_NoFire|WRF_NoSwitch)
-        PUNC E 1 A_SetPitch(+1 + pitch)
-		TNT1 A 0 A_ZoomFactor(1.025)
-		PUNR BCD 1 //A_WeaponReady(WRF_NoFire|WRF_NoSwitch)
-		TNT1 A 0 A_ZoomFactor(1.0)
 		TNT1 A 0 A_TakeInventory("DoPunch",1)
+		TNT1 A 0 A_FireCustomMissile("SuperKnifeSwing", 0, 0, 0, 0)
+        MC3S EF 1 A_SetPitch(+1 + pitch)
+		TNT1 A 0 A_ZoomFactor(1.025)
+		MC3S GHIJ 1 //A_WeaponReady(WRF_NoFire|WRF_NoSwitch)
+		TNT1 A 0 A_ZoomFactor(1.0)
+		TNT1 A 0 A_JumpIfInventory("Kicking",1,"SuperKickLeft")
+		TNT1 A 0 A_JumpIfInventory("KnifeHasHit",1,"SuperKnifeCombo1")
+		TNT1 A 0 A_TakeInventory("DoPunch",1)
+		TNT1 A 0 A_TakeInventory("KnifeHasHit",1)
+		TNT1 A 0 A_TakeInventory("HasCutingWeapon", 1)
 		Goto Ready+35
+		
+	KnifeCombo1:
+		TNT1 A 1 A_JumpIfInventory("DoPunch",1, 10)
+		TNT1 A 1 A_JumpIfInventory("DoPunch",1, 10)
+		TNT1 A 1 A_JumpIfInventory("DoPunch",1, 10)
+		TNT1 A 1 A_JumpIfInventory("DoPunch",1, 10)
+		TNT1 A 0 A_TakeInventory("DoPunch",1)
+		TNT1 A 0 A_TakeInventory("KnifeHasHit",1)
+		TNT1 A 0 A_TakeInventory("HasCutingWeapon", 1)
+		Goto Ready+6
+		TNT1 AAAAAAAAAAA 0
+		PUN3 ABCDE 1
+	    TNT1 A 0 A_PlaySound("weapons/fistwhoosh", 5)
+		TNT1 A 0 A_GiveInventory("Punching",1)
+		PUN3 F 1
+		RIfF AA 0 A_FireCustomMissile("MeleeStrike1", 0, 0, 0, 5)
+		RIfF A 0 A_FireCustomMissile("MeleeStrike1", 0, 0, 25, 5)
+		RIfF A 0 A_FireCustomMissile("MeleeStrike1", 0, 0, -25, 5)
+		PUN3 GHI 1
+		TNT1 A 0 A_TakeInventory("DoPunch",1)
+		PUN3 JKL 1 A_JumpIfInventory("Kicking",1,"KickLeft")
+        TNT1 AAAAA 1 A_JumpIfInventory("DoPunch",1,"KnifeCombo2")
+		TNT1 A 0 A_TakeInventory("DoPunch",1)
+		TNT1 A 0 A_TakeInventory("KnifeHasHit",1)
+		TNT1 A 0 A_TakeInventory("HasCutingWeapon", 1)
+		Goto Ready//+6
+		
+	SuperKnifeCombo1:
+		TNT1 A 1 A_JumpIfInventory("DoPunch",1, 10)
+		TNT1 A 1 A_JumpIfInventory("DoPunch",1, 10)
+		TNT1 A 1 A_JumpIfInventory("DoPunch",1, 10)
+		TNT1 A 1 A_JumpIfInventory("DoPunch",1, 10)
+		TNT1 A 0 A_TakeInventory("DoPunch",1)
+		TNT1 A 0 A_TakeInventory("KnifeHasHit",1)
+		TNT1 A 0 A_TakeInventory("HasCutingWeapon", 1)
+		Goto Ready+6
+		TNT1 AAAAAAAAAAA 0
+		PUN3 ABCDE 1
+	    TNT1 A 0 A_PlaySound("weapons/fistwhoosh", 5)
+		TNT1 A 0 A_GiveInventory("Punching",1)
+		PUN3 F 1
+		RIfF AA 0 A_FireCustomMissile("MeleeStrikeSuperHook", 0, 0, 0, 5)
+		PUN3 GHI 1
+		TNT1 A 0 A_TakeInventory("DoPunch",1)
+		PUN3 JKL 1 A_JumpIfInventory("Kicking",1,"SuperKickLeft")
+        TNT1 AAAAA 1 A_JumpIfInventory("DoPunch",1,"SuperKnifeCombo2")
+		TNT1 A 0 A_TakeInventory("DoPunch",1)
+		TNT1 A 0 A_TakeInventory("KnifeHasHit",1)
+		TNT1 A 0 A_TakeInventory("HasCutingWeapon", 1)
+		Goto Ready//+6
+		
+	KnifeCombo2:
+		TNT1 A 1 A_JumpIfInventory("DoPunch",1, 10)
+		TNT1 A 1 A_JumpIfInventory("DoPunch",1, 10)
+		TNT1 A 1 A_JumpIfInventory("DoPunch",1, 10)
+		TNT1 A 1 A_JumpIfInventory("DoPunch",1, 10)
+		TNT1 A 0 A_TakeInventory("DoPunch",1)
+		TNT1 A 0 A_TakeInventory("KnifeHasHit",1)
+		TNT1 A 0 A_TakeInventory("HasCutingWeapon", 1)
+		Goto Ready//+6
+		TNT1 AAAAAAAAAAA 0
+		TNT1 A 0 A_PlaySound("KNIFUP", 0)
+		TNT1 A 0 A_ZoomFactor(1.015)
+		MC1S AB 1 //A_WeaponReady(WRF_NoFire|WRF_NoSwitch) 
+		TNT1 A 0 A_PlaySound("KNIFSWNG", 1)
+		TNT1 A 0 A_ZoomFactor(1.03)
+		TNT1 A 0 //A_WeaponReady(WRF_NoFire|WRF_NoSwitch)
+        MC1S C 1 A_SetPitch(+2 + pitch)
+		TNT1 A 0 A_ZoomFactor(1.045)
+		TNT1 A 0 //A_WeaponReady(WRF_NoFire|WRF_NoSwitch)
+        MC1S D 1 A_SetPitch(-3 + pitch)
+		TNT1 A 0 A_ZoomFactor(1.055)
+		TNT1 A 0 //A_WeaponReady(WRF_NoFire|WRF_NoSwitch)
+		TNT1 A 0 A_TakeInventory("DoPunch",1)
+		TNT1 A 0 A_FireCustomMissile("KnifeSwing", 0, 0, 0, 0)
+        MC1S EF 1 A_SetPitch(+1 + pitch)
+		TNT1 A 0 A_ZoomFactor(1.025)
+		MC1S GHIJ 1 //A_WeaponReady(WRF_NoFire|WRF_NoSwitch)
+		TNT1 A 0 A_ZoomFactor(1.0)
+		TNT1 A 0 A_JumpIfInventory("Kicking",1,"KickRight")
+		TNT1 A 0 A_JumpIfInventory("KnifeHasHit",1,"KnifeCombo3")
+		TNT1 A 0 A_TakeInventory("DoPunch",1)
+		TNT1 A 0 A_TakeInventory("KnifeHasHit",1)
+		TNT1 A 0 A_TakeInventory("HasCutingWeapon", 1)
+		Goto Ready//+6
+		
+	SuperKnifeCombo2:
+		TNT1 A 1 A_JumpIfInventory("DoPunch",1, 10)
+		TNT1 A 1 A_JumpIfInventory("DoPunch",1, 10)
+		TNT1 A 1 A_JumpIfInventory("DoPunch",1, 10)
+		TNT1 A 1 A_JumpIfInventory("DoPunch",1, 10)
+		TNT1 A 0 A_TakeInventory("DoPunch",1)
+		TNT1 A 0 A_TakeInventory("KnifeHasHit",1)
+		TNT1 A 0 A_TakeInventory("HasCutingWeapon", 1)
+		Goto Ready//+6
+		TNT1 AAAAAAAAAAA 0
+		TNT1 A 0 A_PlaySound("KNIFUP", 0)
+		TNT1 A 0 A_ZoomFactor(1.015)
+		MC1S AB 1 //A_WeaponReady(WRF_NoFire|WRF_NoSwitch) 
+		TNT1 A 0 A_PlaySound("KNIFSWNG", 1)
+		TNT1 A 0 A_ZoomFactor(1.03)
+		TNT1 A 0 //A_WeaponReady(WRF_NoFire|WRF_NoSwitch)
+        MC1S C 1 A_SetPitch(+2 + pitch)
+		TNT1 A 0 A_ZoomFactor(1.045)
+		TNT1 A 0 //A_WeaponReady(WRF_NoFire|WRF_NoSwitch)
+        MC1S D 1 A_SetPitch(-3 + pitch)
+		TNT1 A 0 A_ZoomFactor(1.055)
+		TNT1 A 0 //A_WeaponReady(WRF_NoFire|WRF_NoSwitch)
+		TNT1 A 0 A_TakeInventory("DoPunch",1)
+		TNT1 A 0 A_FireCustomMissile("SuperKnifeSwing", 0, 0, 0, 0)
+        MC1S EF 1 A_SetPitch(+1 + pitch)
+		TNT1 A 0 A_ZoomFactor(1.025)
+		MC1S GHIJ 1 //A_WeaponReady(WRF_NoFire|WRF_NoSwitch)
+		TNT1 A 0 A_ZoomFactor(1.0)
+		TNT1 A 0 A_JumpIfInventory("Kicking",1,"SuperKickRight")
+		TNT1 A 0 A_JumpIfInventory("KnifeHasHit",1,"SuperKnifeCombo3")
+		TNT1 A 0 A_TakeInventory("DoPunch",1)
+		TNT1 A 0 A_TakeInventory("KnifeHasHit",1)
+		TNT1 A 0 A_TakeInventory("HasCutingWeapon", 1)
+		Goto Ready//+6
+		
+	KnifeCombo3:
+		TNT1 A 1 A_JumpIfInventory("DoPunch",1, 10)
+		TNT1 A 1 A_JumpIfInventory("DoPunch",1, 10)
+		TNT1 A 1 A_JumpIfInventory("DoPunch",1, 10)
+		TNT1 A 1 A_JumpIfInventory("DoPunch",1, 10)
+		TNT1 A 0 A_TakeInventory("DoPunch",1)
+		TNT1 A 0 A_TakeInventory("KnifeHasHit",1)
+		TNT1 A 0 A_TakeInventory("HasCutingWeapon", 1)
+		Goto Ready//+6
+		TNT1 AAAAAAAAAAA 0
+		TNT1 A 0 A_ZoomFactor(1.015)
+		TNT1 A 0 A_PlaySound("weapons/ultrwhoosh")
+		P0NC AB 1 //A_WeaponReady(WRF_NoFire|WRF_NoSwitch) 
+		TNT1 A 0 A_ZoomFactor(1.03)
+		TNT1 A 0 //A_WeaponReady(WRF_NoFire|WRF_NoSwitch)
+        P0NC C 1 A_SetPitch(+2 + pitch)
+		TNT1 A 0 A_ZoomFactor(1.045)
+		TNT1 A 0 //A_WeaponReady(WRF_NoFire|WRF_NoSwitch)
+        P0NC D 1 A_SetPitch(-3 + pitch)
+		TNT1 A 0 A_ZoomFactor(1.055)
+		P0NG AAAA 0 A_FireCustomMissile("MeleeStrike1", 0, 0, 0, 0)
+		TNT1 A 0 //A_WeaponReady(WRF_NoFire|WRF_NoSwitch)
+        P0NC E 1 A_SetPitch(+1 + pitch)
+		TNT1 A 0 A_TakeInventory("DoPunch",1)
+		TNT1 A 0 A_ZoomFactor(1.025)
+		P0NR BCD 1 //A_WeaponReady(WRF_NoFire|WRF_NoSwitch)
+		TNT1 A 0 A_ZoomFactor(1.0)
+		TNT1 A 0 A_JumpIfInventory("Kicking",1,"KickLeft")
+		TNT1 AAAA 1 A_JumpIfInventory("DoPunch",1,"KnifeCombo4")
+		TNT1 A 0 A_TakeInventory("DoPunch",1)
+		TNT1 A 0 A_TakeInventory("KnifeHasHit",1)
+		TNT1 A 0 A_TakeInventory("HasCutingWeapon", 1)
+		Goto Ready//+6
+		
+	SuperKnifeCombo3:
+		TNT1 A 1 A_JumpIfInventory("DoPunch",1, 10)
+		TNT1 A 1 A_JumpIfInventory("DoPunch",1, 10)
+		TNT1 A 1 A_JumpIfInventory("DoPunch",1, 10)
+		TNT1 A 1 A_JumpIfInventory("DoPunch",1, 10)
+		TNT1 A 0 A_TakeInventory("DoPunch",1)
+		TNT1 A 0 A_TakeInventory("KnifeHasHit",1)
+		TNT1 A 0 A_TakeInventory("HasCutingWeapon", 1)
+		Goto Ready//+6
+		TNT1 AAAAAAAAAAA 0
+		TNT1 A 0 A_ZoomFactor(1.015)
+		TNT1 A 0 A_PlaySound("weapons/ultrwhoosh")
+		P0NC AB 1 //A_WeaponReady(WRF_NoFire|WRF_NoSwitch) 
+		TNT1 A 0 A_ZoomFactor(1.03)
+		TNT1 A 0 //A_WeaponReady(WRF_NoFire|WRF_NoSwitch)
+        P0NC C 1 A_SetPitch(+2 + pitch)
+		TNT1 A 0 A_ZoomFactor(1.045)
+		TNT1 A 0 //A_WeaponReady(WRF_NoFire|WRF_NoSwitch)
+        P0NC D 1 A_SetPitch(-3 + pitch)
+		TNT1 A 0 A_ZoomFactor(1.055)
+		P0NG AA 0 A_FireCustomMissile("MeleeStrikeSuperHook", 0, 0, 0, 0)
+		TNT1 A 0 //A_WeaponReady(WRF_NoFire|WRF_NoSwitch)
+        P0NC E 1 A_SetPitch(+1 + pitch)
+		TNT1 A 0 A_TakeInventory("DoPunch",1)
+		TNT1 A 0 A_ZoomFactor(1.025)
+		P0NR BCD 1 //A_WeaponReady(WRF_NoFire|WRF_NoSwitch)
+		TNT1 A 0 A_ZoomFactor(1.0)
+		TNT1 A 0 A_JumpIfInventory("Kicking",1,"SuperKickLeft")
+		TNT1 AAAA 1 A_JumpIfInventory("DoPunch",1,"SuperKnifeCombo4")
+		TNT1 A 0 A_TakeInventory("DoPunch",1)
+		TNT1 A 0 A_TakeInventory("KnifeHasHit",1)
+		TNT1 A 0 A_TakeInventory("HasCutingWeapon", 1)
+		Goto Ready//+6
+		
+	KnifeCombo4:
+		TNT1 A 1 A_JumpIfInventory("DoPunch",1, 10)
+		TNT1 A 1 A_JumpIfInventory("DoPunch",1, 10)
+		TNT1 A 1 A_JumpIfInventory("DoPunch",1, 10)
+		TNT1 A 1 A_JumpIfInventory("DoPunch",1, 10)
+		TNT1 A 0 A_TakeInventory("DoPunch",1)
+		TNT1 A 0 A_TakeInventory("KnifeHasHit",1)
+		TNT1 A 0 A_TakeInventory("HasCutingWeapon", 1)
+		Goto Ready//+6
+		TNT1 AAAAAAAAAAA 0
+		TNT1 A 0 A_PlaySound("KNIFUP", 0)
+		TNT1 A 0 A_ZoomFactor(1.015)
+		MC6S AB 1 //A_WeaponReady(WRF_NoFire|WRF_NoSwitch) 
+		TNT1 A 0 A_PlaySound("KNIFSWNG", 1)
+		TNT1 A 0 A_ZoomFactor(1.03)
+		TNT1 A 0 //A_WeaponReady(WRF_NoFire|WRF_NoSwitch)
+        MC6S C 1 A_SetPitch(+2 + pitch)
+		TNT1 A 0 A_ZoomFactor(1.045)
+		TNT1 A 0 //A_WeaponReady(WRF_NoFire|WRF_NoSwitch)
+        MC6S D 1 A_SetPitch(-3 + pitch)
+		TNT1 A 0 A_ZoomFactor(1.055)
+		TNT1 A 0 //A_WeaponReady(WRF_NoFire|WRF_NoSwitch)
+		TNT1 A 0 A_TakeInventory("DoPunch",1)
+		TNT1 A 0 A_FireCustomMissile("KnifeSwing", 0, 0, 0, 0)
+        MC6S EF 1 A_SetPitch(+1 + pitch)
+		TNT1 A 0 A_ZoomFactor(1.025)
+		MC6S GHIJ 1 //A_WeaponReady(WRF_NoFire|WRF_NoSwitch)
+		TNT1 A 0 A_ZoomFactor(1.0)
+		TNT1 A 0 A_JumpIfInventory("KnifeHasHit",1,"KnifeCombo1")
+		TNT1 A 0 A_JumpIfInventory("Kicking",1,"KickRight")
+		TNT1 A 0 A_TakeInventory("DoPunch",1)
+		TNT1 A 0 A_TakeInventory("KnifeHasHit",1)
+		TNT1 A 0 A_TakeInventory("HasCutingWeapon", 1)
+		Goto Ready//+6
+		
+	SuperKnifeCombo4:
+		TNT1 A 1 A_JumpIfInventory("DoPunch",1, 10)
+		TNT1 A 1 A_JumpIfInventory("DoPunch",1, 10)
+		TNT1 A 1 A_JumpIfInventory("DoPunch",1, 10)
+		TNT1 A 1 A_JumpIfInventory("DoPunch",1, 10)
+		TNT1 A 0 A_TakeInventory("DoPunch",1)
+		TNT1 A 0 A_TakeInventory("KnifeHasHit",1)
+		TNT1 A 0 A_TakeInventory("HasCutingWeapon", 1)
+		Goto Ready//+6
+		TNT1 AAAAAAAAAAA 0
+		TNT1 A 0 A_PlaySound("KNIFUP", 0)
+		TNT1 A 0 A_ZoomFactor(1.015)
+		MC6S AB 1 //A_WeaponReady(WRF_NoFire|WRF_NoSwitch) 
+		TNT1 A 0 A_PlaySound("KNIFSWNG", 1)
+		TNT1 A 0 A_ZoomFactor(1.03)
+		TNT1 A 0 //A_WeaponReady(WRF_NoFire|WRF_NoSwitch)
+        MC6S C 1 A_SetPitch(+2 + pitch)
+		TNT1 A 0 A_ZoomFactor(1.045)
+		TNT1 A 0 //A_WeaponReady(WRF_NoFire|WRF_NoSwitch)
+        MC6S D 1 A_SetPitch(-3 + pitch)
+		TNT1 A 0 A_ZoomFactor(1.055)
+		TNT1 A 0 //A_WeaponReady(WRF_NoFire|WRF_NoSwitch)
+		TNT1 A 0 A_TakeInventory("DoPunch",1)
+		TNT1 A 0 A_FireCustomMissile("SuperKnifeSwing", 0, 0, 0, 0)
+        MC6S EF 1 A_SetPitch(+1 + pitch)
+		TNT1 A 0 A_ZoomFactor(1.025)
+		MC6S GHIJ 1 //A_WeaponReady(WRF_NoFire|WRF_NoSwitch)
+		TNT1 A 0 A_ZoomFactor(1.0)
+		TNT1 A 0 A_JumpIfInventory("KnifeHasHit",1,"SuperKnifeCombo1")
+		TNT1 A 0 A_JumpIfInventory("Kicking",1,"SuperKickRight")
+		TNT1 A 0 A_TakeInventory("DoPunch",1)
+		TNT1 A 0 A_TakeInventory("KnifeHasHit",1)
+		TNT1 A 0 A_TakeInventory("HasCutingWeapon", 1)
+		Goto Ready//+6
+		
+	KickLeft:
+		KIK1 ABC 1
+        TNT1 A 0 A_PlaySound("KICK", 5)
+		TNT1 A 0 //A_GiveInventory("Punching",1)
+		TNT1 A 0 A_GiveInventory("Kicking",1)
+		TNT1 A 0 A_SetPitch(-6 + pitch)
+		KIK1 D 1
+		RIfF A 0 A_FireCustomMissile("KickAttack", 0, 0, 5, 5)
+		KIK1 DD 1
+		TNT1 A 0 A_TakeInventory("DoPunch",1)
+		KIK1 ECBA 1
+		TNT1 A 0 A_TakeInventory("Kicking",1)
+        TNT1 AAAAA 1 A_JumpIfInventory("DoPunch",1,"KnifeCombo2")
+		TNT1 A 0 A_TakeInventory("DoPunch",1)
+		TNT1 A 0 A_TakeInventory("KnifeHasHit",1)
+		TNT1 A 0 A_TakeInventory("HasCutingWeapon", 1)
+		Goto Ready
+		
+	SuperKickLeft:
+		KIK1 ABC 1
+        TNT1 A 0 A_PlaySound("KICK", 5)
+		TNT1 A 0 //A_GiveInventory("Punching",1)
+		TNT1 A 0 A_GiveInventory("Kicking",1)
+		TNT1 A 0 A_SetPitch(-6 + pitch)
+		KIK1 D 1
+		RIfF A 0 A_FireCustomMissile("SuperKickAttack", 0, 0, 5, 5)
+		KIK1 DD 1
+		TNT1 A 0 A_TakeInventory("DoPunch",1)
+		KIK1 ECBA 1
+		TNT1 A 0 A_TakeInventory("Kicking",1)
+        TNT1 AAAAA 1 A_JumpIfInventory("DoPunch",1,"SuperKnifeCombo2")
+		TNT1 A 0 A_TakeInventory("DoPunch",1)
+		TNT1 A 0 A_TakeInventory("KnifeHasHit",1)
+		TNT1 A 0 A_TakeInventory("HasCutingWeapon", 1)
+		Goto Ready
+		
+	KickRight:
+		KIK2 ABC 1
+        TNT1 A 0 A_PlaySound("KICK", 5)
+		TNT1 A 0 //A_GiveInventory("Punching",1)
+		TNT1 A 0 A_GiveInventory("Kicking",1)
+		TNT1 A 0 A_SetPitch(-6 + pitch)
+		KIK2 D 1
+		RIfF A 0 A_FireCustomMissile("KickAttack", 0, 0, 5, 5)
+		KIK2 DD 1
+		TNT1 A 0 A_TakeInventory("DoPunch",1)
+		KIK2 ECBA 1
+		TNT1 A 0 A_TakeInventory("Kicking",1)
+        TNT1 AAAAA 1 A_JumpIfInventory("DoPunch",1,"KnifeCombo2")
+		TNT1 A 0 A_TakeInventory("DoPunch",1)
+		TNT1 A 0 A_TakeInventory("KnifeHasHit",1)
+		TNT1 A 0 A_TakeInventory("HasCutingWeapon", 1)
+		Goto Ready
+		
+	SuperKickRight:
+		KIK2 ABC 1
+        TNT1 A 0 A_PlaySound("KICK", 5)
+		TNT1 A 0 //A_GiveInventory("Punching",1)
+		TNT1 A 0 A_GiveInventory("Kicking",1)
+		TNT1 A 0 A_SetPitch(-6 + pitch)
+		KIK2 D 1
+		RIfF A 0 A_FireCustomMissile("SuperKickAttack", 0, 0, 5, 5)
+		KIK2 DD 1
+		TNT1 A 0 A_TakeInventory("DoPunch",1)
+		KIK2 ECBA 1
+		TNT1 A 0 A_TakeInventory("Kicking",1)
+        TNT1 AAAAA 1 A_JumpIfInventory("DoPunch",1,"SuperKnifeCombo2")
+		TNT1 A 0 A_TakeInventory("DoPunch",1)
+		TNT1 A 0 A_TakeInventory("KnifeHasHit",1)
+		TNT1 A 0 A_TakeInventory("HasCutingWeapon", 1)
+		Goto Ready
+
+////////////////////////////////////////////////KNIFE COMBO//////////////////////////////////////////////////////////////
+
 		
     DoKick:
 	    TNT1 A 0

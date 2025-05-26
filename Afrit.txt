@@ -52,6 +52,12 @@ Actor Afrit replaces Cacodemon
   States
   {
   
+  Death.Blackhole:
+		TNT1 A 0 A_Scream
+        TNT1 A 0 A_NoBlocking
+        TNT1 A 0 A_SpawnItem("BlackHoledAfrit")
+		Stop
+  
   ReplaceVanilla:
 		TNT1 A 0 A_ChangeFlag("THRUACTORS", 1)
 		TNT1 A 0 A_ChangeFlag("COUNTKILL", 0)
@@ -67,8 +73,6 @@ Actor Afrit replaces Cacodemon
 	FRIT A 1 ACS_NamedExecuteAlways("MonsterPerformanceMode", 0, 0, 0, 0)//Check Effects
 	FRIT A 1 ACS_ExecuteAlways(796, 0, 0, 0, 0)//Check if Vanilla Mode is activated
     FRIT A 0
-    //FRIT A 0 A_CustomMissile("OrbitComet", 44, 0, 0, 2, 0)
-    //FRIT A 0 A_CustomMissile("OrbitComet2", 44, 0, 180, 2, 0)
     FRIT AABB 4 Bright A_Look
     Goto Spawn+3
   Idle:
@@ -210,6 +214,14 @@ Actor Afrit replaces Cacodemon
 	TNT1 A 0 A_CustomMissile("BurnParticles", 15 ,0, random (0, 360), 2, random (50, 130))
 	TNT1 A 0 A_CustomMissile("ExplosionParticleVerySlow", 20, 0, random (0, 360), 2, random (50, 130))
     Goto See
+	
+	Possession:
+		TNT1 A 0 A_SetInvulnerable
+		FRIT H 3
+		FRIT H 3 A_Pain
+		"####" "#" 35 ACS_NamedExecuteAlways("Pos - Flicker effect")
+		TNT1 A 0 A_UnSetInvulnerable
+		Goto See
 	
   PerformancePain:
     FRIT H 4 Bright
@@ -717,8 +729,6 @@ Actor Vanilla_Afrit : Afrit
 		Spawn:
 		FRIT A 0
 	TNT1 A 0 ACS_NamedExecuteAlways("MonsterPerformanceMode", 0, 0, 0, 0)//Check Effects
-		//FRIT A 0 A_CustomMissile("OrbitComet", 44, 0, 0, 2, 0)
-		//FRIT A 0 A_CustomMissile("OrbitComet2", 44, 0, 180, 2, 0)
 		FRIT AABB 4 Bright A_Look
 		Goto Spawn+3
 	}

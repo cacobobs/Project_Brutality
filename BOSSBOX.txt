@@ -2,6 +2,7 @@ actor MasterMindHitBox
 {
 	+NOTARGET
 damagefactor "Taunt", 0.0
+damagefactor "Desintegrate", 1.80
 damagefactor "Blood", 0.0
 damagefactor "BlueBlood", 0.0
 damagefactor "Head", 0.0
@@ -20,8 +21,8 @@ DamageFactor "Blackhole", 0.0
 -COUNTKILL
 Health 300
 GibHealth 10000
-Radius 60
-Height 60
+Radius 66
+Height 78
 DamageType head
 BloodType "Brutal_Blood"
 PainChance 255
@@ -33,10 +34,12 @@ PainChance 255
 +THRUGHOST
 +NORADIUSDMG
 +GHOST
+   +DONTRIP
 +SERVERSIDEONLY
 +FORCERADIUSDMG
 -COUNTKILL
 damagefactor "Trample", 0
+Renderstyle "none"
 States
 {
 Spawn:
@@ -59,50 +62,50 @@ TNT1 A 0 A_JumpIfHealthLower(225, "Pain150")
 TNT1 A 0 A_JumpIfHealthLower(250, "Pain100")
 TNT1 A 0 A_JumpIfHealthLower(275, "Pain50")
 TNT1 A 0 A_JumpIfHealthLower(288, "Pain35")
-XDT3 A 0 A_Explode(15,20)
+XDT3 A 0 A_Explode(10,20)
 PLAY A 0
 Stop
 
 
 Pain35:
 TNT1 A 0
-XDT3 A 0 A_Explode(35,60)
+XDT3 A 0 A_Explode(10,60)
 TNT1 A 1
 Stop
 
 Pain50:
 TNT1 A 0
-XDT3 A 0 A_Explode(50,60)
+XDT3 A 0 A_Explode(20,60)
 TNT1 A 1
 Stop
 
 Pain100:
 TNT1 A 0
-XDT3 A 0 A_Explode(100,60)
+XDT3 A 0 A_Explode(30,60)
 TNT1 A 1
 Stop
 
 Pain150:
 TNT1 A 0
-XDT3 A 0 A_Explode(150,60)
+XDT3 A 0 A_Explode(40,60)
 TNT1 A 1
 Stop
 
 Pain200:
 TNT1 A 0
-XDT3 A 0 A_Explode(200,60)
+XDT3 A 0 A_Explode(50,60)
 TNT1 A 1
 Stop
 
 Pain250:
 TNT1 A 0
-XDT3 A 0 A_Explode(250,60)
+XDT3 A 0 A_Explode(50,60)
 TNT1 A 1
 Stop
 
 Pain300:
 TNT1 A 0
-XDT3 A 0 A_Explode(300,60)
+XDT3 A 0 A_Explode(60,60)
 TNT1 A 1
 Stop
 
@@ -110,7 +113,7 @@ Pain350:
 
 TNT1 A 0
 TNT1 AAAAA 0 A_CustomMissile ("SmallSuperGore", 50, 0, random (0, 360), 2, random (10, 170))
-XDT3 A 0 A_Explode(350,60)
+XDT3 A 0 A_Explode(60,60)
 TNT1 A 1
 Stop
 
@@ -118,8 +121,7 @@ Pain400:
 TNT1 A 0
 TNT1 AAAAA 0 A_CustomMissile ("SmallSuperGore", 50, 0, random (0, 360), 2, random (10, 170))
 TNT1 AAAAA 0 A_CustomMissile ("MediumSuperGore", 50, 0, random (0, 360), 2, random (10, 170))
-XDT3 AA 0 A_Explode(100,60)
-XDT3 A 0 A_Explode(50,60)
+XDT3 A 0 A_Explode(60,60)
 TNT1 A 1
 Stop
 
@@ -127,8 +129,7 @@ Pain450:
 TNT1 A 0
 TNT1 AAAAA 0 A_CustomMissile ("SmallSuperGore", 50, 0, random (0, 360), 2, random (10, 170))
 TNT1 AAAAA 0 A_CustomMissile ("MediumSuperGore", 50, 0, random (0, 360), 2, random (10, 170))
-XDT3 AAA 0 A_Explode(100,60)
-XDT3 A 0 A_Explode(50,60)
+XDT3 A 0 A_Explode(70,60)
 TNT1 A 1
 Stop
 
@@ -136,8 +137,7 @@ Pain500:
 TNT1 A 0
 TNT1 AAAAA 0 A_CustomMissile ("SmallSuperGore", 50, 0, random (0, 360), 2, random (10, 170))
 TNT1 AAAAA 0 A_CustomMissile ("MediumSuperGore", 50, 0, random (0, 360), 2, random (10, 170))
-XDT3 AAA 0 A_Explode(100,60)
-XDT3 AA 0 A_Explode(50,60)
+XDT3 A 0 A_Explode(70,60)
 TNT1 A 1
 Stop
 
@@ -145,21 +145,20 @@ Pain550:
 TNT1 A 0
 TNT1 AAAAA 0 A_CustomMissile ("SmallSuperGore", 50, 0, random (0, 360), 2, random (10, 170))
 TNT1 AAAAA 0 A_CustomMissile ("MediumSuperGore", 50, 0, random (0, 360), 2, random (10, 170))
-XDT3 AAA 0 A_Explode(100,60)
-XDT3 AAA 0 A_Explode(50,60)
+XDT3 A 0 A_Explode(75,60)
 TNT1 A 1
 Stop
 
 Pain600:
 TNT1 A 0
-XDT3 AAAAAA 0 A_Explode(100,60)
+XDT3 A 0 A_Explode(75,60)
 TNT1 A 1
 Stop
 
 Death:
 TNT1 A 0
 TNT1 AAAAA 0 A_CustomMissile ("GiantSuperGore", 50, 0, random (0, 360), 2, random (10, 170))
-XDT3 AAAAAAAAA 0 A_Explode(50,60)
+XDT3 A 0 A_Explode(20,60)
 TNT1 A 1
 Stop
 
@@ -167,8 +166,7 @@ Stop
 XDeath:
 TNT1 A 0
 TNT1 AAAAA 0 A_CustomMissile ("GiantSuperGore", 50, 0, random (0, 360), 2, random (10, 170))
-XDT3 AAAAAAAAA 0 A_Explode(50,60)
-XDT3 AAAAAAAAA 0 A_Explode(50,60)
+XDT3 A 0 A_Explode(40,60)
 TNT1 A 1
 Stop
 
@@ -239,6 +237,7 @@ PainChance 255
 +FORCERADIUSDMG
 -COUNTKILL
 damagefactor "Trample", 0
+Renderstyle "none"
 States
 {
 Spawn:

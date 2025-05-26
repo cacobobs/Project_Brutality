@@ -966,6 +966,8 @@ ACTOR XDeathHalfImpUpperPart32
     }
 }
 
+
+
 actor Gib_HalfImpUpperPart32: BigGibBase
 {
 	damagefactor "ExplosiveImpact", 5.0
@@ -2597,7 +2599,42 @@ ACTOR XDeathHellKnightArm: XDeathArm1
     }
 }
 
+ACTOR XDeathCyberKnightArm: XDeathArm1
+{
+    Scale 1.1
+    Speed 12
+	BounceFactor 0.4
+	BounceCount 3
+    States
+    {
+    Spawn:
+        TNT1 A 0 A_SpawnItem("Brutal_BloodSpot",0,0,0,1)
+	    TNT1 A 0 A_JumpIf(waterlevel > 1, "Death")
+		G0RB ABCD 4 A_CustomMissile ("Brutal_FlyingBloodTrail5", 0, 0, random (0, 360), 2, random (0, 360))
+		Loop
+	Death:
+	    G0RB E 1
+        G0RB E -1
+        Stop
+    }
+}
+
 actor Gib_HellKnightArm: LimbBase
+{
+    Scale 1.1
+    States
+    {
+    Spawn:
+        G0RB E 1900 A_SpawnItem("Brutal_BloodSpot",0,0,0,1)
+       Loop
+Death.plasma: Death.Burn: Death.Flames:	    TNT1 A 0 A_CustomMissile ("XDeathBurnedMeat2", 32, 0, random (0, 360), 2, random (0, 160))        Stop
+    Death:    
+    TNT1 AAAA 0 A_CustomMissile ("Brutal_FlyingBloodTrail", 0, 0, random (0, 360), 2, random (0, 360))
+    TNT1 AAAAAAA 0 A_CustomMissile ("BloodTr", 0, 0, random (0, 360), 2, random (0, 360))
+    TNT1 A 0 A_CustomMissile ("Xdeath1", 0, 0, random (0, 360), 2, random (0, 360))
+Stop}}
+
+actor Gib_CyberKnightArm: LimbBase
 {
     Scale 1.1
     States
@@ -2627,8 +2664,27 @@ ACTOR XDeathHellKnightLeg: XDeathArm1
 		GORA ABCD 4 A_CustomMissile ("Brutal_FlyingBloodTrail5", 0, 0, random (0, 360), 2, random (0, 360))
 		Loop
 	Death:
-	    GORA E 1
-		GORA E -1
+	    GORA A 1
+		GORA A -1
+		Stop
+    }
+}
+
+ACTOR XDeathCyberKnightLeg: XDeathArm1
+{
+    Scale 1.1
+    Speed 12
+	BounceFactor 0.4
+    States
+    {
+    Spawn:
+        TNT1 A 0 A_SpawnItem("Brutal_BloodSpot",0,0,0,1)
+	    TNT1 A 0 A_JumpIf(waterlevel > 1, "Death")
+		G0RA ABCD 4 A_CustomMissile ("Brutal_FlyingBloodTrail5", 0, 0, random (0, 360), 2, random (0, 360))
+		Loop
+	Death:
+	    G0RA A 1
+		G0RA A -1
 		Stop
     }
 }
@@ -2640,6 +2696,21 @@ actor Gib_HellKnightLeg: LimbBase
     {
     Spawn:
         GORA A 1900 A_SpawnItem("Brutal_BloodSpot",0,0,0,1)
+       Loop
+Death.plasma: Death.Burn: Death.Flames:	    TNT1 A 0 A_CustomMissile ("XDeathBurnedMeat2", 32, 0, random (0, 360), 2, random (0, 160))        Stop
+    Death:    
+    TNT1 AAAA 0 A_CustomMissile ("Brutal_FlyingBloodTrail", 0, 0, random (0, 360), 2, random (0, 360))
+    TNT1 AAAAAAA 0 A_CustomMissile ("BloodTr", 0, 0, random (0, 360), 2, random (0, 360))
+    TNT1 A 0 A_CustomMissile ("Xdeath1", 0, 0, random (0, 360), 2, random (0, 360))
+Stop}}
+
+actor Gib_CyberKnightLeg: LimbBase
+{
+    Scale 1.1
+    States
+    {
+    Spawn:
+        G0RA A 1900 A_SpawnItem("Brutal_BloodSpot",0,0,0,1)
        Loop
 Death.plasma: Death.Burn: Death.Flames:	    TNT1 A 0 A_CustomMissile ("XDeathBurnedMeat2", 32, 0, random (0, 360), 2, random (0, 160))        Stop
     Death:    
@@ -2709,6 +2780,26 @@ ACTOR XDeathBaronofHellTorso: XDeathArm1
     }
 }
 
+ACTOR XDeathCyberKnightTorso: XDeathArm1
+{
+    Scale 1.3
+    Speed 12
+	BounceFactor 0.4
+    States
+    {
+    Spawn:
+        TNT1 A 0 A_SpawnItem("Brutal_BloodSpot",0,0,0,1)
+	    TNT1 A 0 A_JumpIf(waterlevel > 1, "Death")
+		G0RC ABCD 4 A_CustomMissile ("Brutal_FlyingBloodTrail5", 0, 0, random (0, 360), 2, random (0, 360))
+		Loop
+	Death:
+        TNT1 A 0 A_SpawnItem("Brutal_BloodSpot",0,0,0,1)
+	    G0RC E 1
+        HNDC A 0 A_SpawnItem("Gib_CyberKnightTorso",0,0,0,1)
+        Stop
+    }
+}
+
 actor Gib_BaronofHellTorso: LimbBase
 {
     Scale 1.3
@@ -2724,12 +2815,85 @@ Death.plasma: Death.Burn: Death.Flames:	    TNT1 A 0 A_CustomMissile ("XDeathBur
     TNT1 A 0 A_CustomMissile ("Xdeath1", 0, 0, random (0, 360), 2, random (0, 360))
 Stop}}
 
+actor Gib_CyberKnightTorso: LimbBase
+{
+    Scale 1.3
+    States
+    {
+    Spawn:
+        G0RC E 1900 A_SpawnItem("Brutal_BloodSpot",0,0,0,1)
+       Loop
+Death.plasma: Death.Burn: Death.Flames:	    TNT1 A 0 A_CustomMissile ("XDeathBurnedMeat2", 32, 0, random (0, 360), 2, random (0, 160))        Stop
+    Death:    
+    TNT1 AAAA 0 A_CustomMissile ("Brutal_FlyingBloodTrail", 0, 0, random (0, 360), 2, random (0, 360))
+    TNT1 AAAAAAA 0 A_CustomMissile ("BloodTr", 0, 0, random (0, 360), 2, random (0, 360))
+    TNT1 A 0 A_CustomMissile ("Xdeath1", 0, 0, random (0, 360), 2, random (0, 360))
+Stop}}
 
 
+ACTOR XDeathVolcabusArm: XDeathArm1
+{
+    +SKYEXPLODE
+	-CLIENTSIDEONLY
+    Scale 1.2
+    Speed 9
+	Gravity 0.4
+	BounceFactor 0.4
+    States
+    {
+    Spawn:
+        TNT1 A 0 A_JumpIf(waterlevel > 1, "Death")
+		VOLA ABCDEFGH 3
+		Loop
+   	Death:
+        TNT1 A 0 A_SpawnItem("Brutal_BloodSpot",0,0,0,1)
+        VOLA I -1
+        Stop
+    }
+}
 
+ACTOR XDeathMancubusTorso: XDeathArm1
+{
+    +SKYEXPLODE
+	-CLIENTSIDEONLY
+    Scale 1.2
+    Speed 9
+	Gravity 0.4
+	BounceFactor 0.4
+    States
+    {
+    Spawn:
+        TNT1 A 0 A_JumpIf(waterlevel > 1, "Death")
+		MANA IJKLMNOP 3
+		Loop
+   	Death:
+        TNT1 A 0 A_SpawnItem("Brutal_BloodSpot",0,0,0,1)
+	Rest:
+        MANA QRSTTT 4
+        Loop
+    }
+}
 
-
-
+ACTOR XDeathMancubusLeg: XDeathArm1
+{
+    +SKYEXPLODE
+	-CLIENTSIDEONLY
+    Scale 1.2
+    Speed 9
+	Gravity 0.4
+	BounceFactor 0.4
+    States
+    {
+    Spawn:
+        TNT1 A 0 A_JumpIf(waterlevel > 1, "Death")
+		MAN4 ABCDEFGH 3
+		Loop
+   	Death:
+        TNT1 A 0 A_SpawnItem("Brutal_BloodSpot",0,0,0,1)
+        MAN4 I -1
+        Stop
+    }
+}
 
 ACTOR XDeathMancubusArm: XDeathArm1
 {
@@ -2752,6 +2916,135 @@ ACTOR XDeathMancubusArm: XDeathArm1
         Stop
     }
 }
+
+ACTOR XDeathSpiderPart1: XDeathArm1
+{
+    +SKYEXPLODE
+	-CLIENTSIDEONLY
+    Scale 1.1
+    Speed 9
+	Gravity 0.4
+	BounceFactor 0.4
+    States
+    {
+    Spawn:
+        TNT1 A 0 A_JumpIf(waterlevel > 1, "Death")
+		TRP1 ABCDEFGH 3
+		Loop
+   	Death:
+        TNT1 A 0 A_SpawnItem("Brutal_BloodSpot",0,0,0,1)
+	    HND8 A 0
+        TRP1 G -1
+        Stop
+    }
+}
+
+ACTOR XDeathSpiderPart2: XDeathArm1
+{
+    +SKYEXPLODE
+	-CLIENTSIDEONLY
+    Scale 1.1
+    Speed 9
+	Gravity 0.4
+	BounceFactor 0.4
+    States
+    {
+    Spawn:
+        TNT1 A 0 A_JumpIf(waterlevel > 1, "Death")
+		TRP2 ABCDEFGH 3
+		Loop
+   	Death:
+        TNT1 A 0 A_SpawnItem("Brutal_BloodSpot",0,0,0,1)
+	    HND8 A 0
+        TRP2 E -1
+        Stop
+    }
+}
+
+ACTOR XDeathSpiderPart3: XDeathArm1
+{
+    +SKYEXPLODE
+	-CLIENTSIDEONLY
+    Scale 1.1
+    Speed 9
+	Gravity 0.4
+	BounceFactor 0.4
+    States
+    {
+    Spawn:
+        TNT1 A 0 A_JumpIf(waterlevel > 1, "Death")
+		TRP3 ABCDEFGH 3
+		Loop
+   	Death:
+        TNT1 A 0 A_SpawnItem("Brutal_BloodSpot",0,0,0,1)
+        TRP3 E -1
+        Stop
+    }
+}
+
+ACTOR XDeathSpiderPart4: XDeathArm1
+{
+    +SKYEXPLODE
+	-CLIENTSIDEONLY
+    Scale 1.1
+    Speed 9
+	Gravity 0.4
+	BounceFactor 0.4
+    States
+    {
+    Spawn:
+        TNT1 A 0 A_JumpIf(waterlevel > 1, "Death")
+		TRP4 ABCDEFGH 3
+		Loop
+   	Death:
+        TNT1 A 0 A_SpawnItem("Brutal_BloodSpot",0,0,0,1)
+        TRP4 E -1
+        Stop
+    }
+}
+
+ACTOR XDeathSpiderPart5: XDeathArm1
+{
+    +SKYEXPLODE
+	-CLIENTSIDEONLY
+    Scale 1.1
+    Speed 9
+	Gravity 0.4
+	BounceFactor 0.4
+    States
+    {
+    Spawn:
+        TNT1 A 0 A_JumpIf(waterlevel > 1, "Death")
+		TRP5 ABCDEFGH 3
+		Loop
+   	Death:
+        TNT1 A 0 A_SpawnItem("Brutal_BloodSpot",0,0,0,1)
+        TRP5 E -1
+        Stop
+    }
+}
+
+ACTOR XDeathSpiderPart6: XDeathArm1
+{
+    +SKYEXPLODE
+	-CLIENTSIDEONLY
+    Scale 1.1
+    Speed 9
+	Gravity 0.4
+	BounceFactor 0.4
+    States
+    {
+    Spawn:
+        TNT1 A 0 A_JumpIf(waterlevel > 1, "Death")
+		TRP6 ABCDEFGH 3
+		Loop
+   	Death:
+        TNT1 A 0 A_SpawnItem("Brutal_BloodSpot",0,0,0,1)
+        TRP6 A -1
+        Stop
+    }
+}
+
 
 
 
@@ -3325,11 +3618,68 @@ ACTOR XDeathHellKnightHead: XDeathBullArm1
 }
 }
 
+ACTOR XDeathCyberPaladinHead: XDeathBullArm1
+{
+-CLIENTSIDEONLY
+    Scale 1.0
+    States
+    {
+	Spawn:
+        TNT1 A 0 A_SpawnItem("Brutal_BloodSpot",0,0,0,1)
+	    TNT1 A 0 A_JumpIf(waterlevel > 1, "Death")
+		TNT1 A 0 A_JumpIf(momz == 0, "Death")
+		G0RH ABCD 6
+		Loop
+   	Death:
+        TNT1 A 0 A_SpawnItem("Brutal_BloodSpot",0,0,0,1)
+	    G0RH E 1
+        G0RH E -1
+        Stop
+}
+}
+
+ACTOR XDeathCyberPaladinRipped: XDeathBullArm1
+{
+-CLIENTSIDEONLY
+    Scale 1.0
+	Speed 4
+    States
+    {
+	Spawn:
+        TNT1 A 0 A_SpawnItem("Brutal_BloodSpot",0,0,0,1)
+	    TNT1 A 0 A_JumpIf(waterlevel > 1, "Death")
+		TNT1 A 0 A_JumpIf(momz == 0, "Death")
+		CP4L AA 6
+		Loop
+   	Death:
+        TNT1 A 0 A_SpawnItem("Brutal_BloodSpot",0,0,0,1)
+	    CP4L B 1
+        CP4L B -1
+        Stop
+}
+}
 
 
-
-
-
+ACTOR XDeathCyberKnightRipped: XDeathBullArm1
+{
+-CLIENTSIDEONLY
+    Scale 1.0
+	Speed 4
+    States
+    {
+	Spawn:
+        TNT1 A 0 A_SpawnItem("Brutal_BloodSpot",0,0,0,1)
+	    TNT1 A 0 A_JumpIf(waterlevel > 1, "Death")
+		TNT1 A 0 A_JumpIf(momz == 0, "Death")
+		CP4L CC 6
+		Loop
+   	Death:
+        TNT1 A 0 A_SpawnItem("Brutal_BloodSpot",0,0,0,1)
+	    CP4L D 1
+        CP4L D -1
+        Stop
+}
+}
 
 ACTOR XDeathPinkyDemonHead: XDeathBullArm1
 {
@@ -4280,6 +4630,73 @@ ACTOR XDeathPainElementalNew2: XDeathPainElementalNew1
     }
 }
 
+ACTOR XDeathPainElementalGreen1: XDeath1
+{
+    Speed 12
+	Gravity 0.4
+    Decal BrutalBloodSplat
+	SeeSound "misc/xdeath4"
+    DeathSound "misc/xdeath4"
+	Translation "16:47=112:127", "192:207=80:111", "168:191=64:79"
+    Scale 1.1
+    States
+    {
+    Spawn:
+	    TNT1 A 0 A_JumpIf(waterlevel > 1, "Splash")
+        CAGI ABCDEFGH 2 A_CustomMissile ("GreenBloodTrails", 5, 0, random (0, 360), 2, random (0, 360))
+        Loop
+    Death:
+	    
+		TNT1 A 0
+        TNT1 AAA 0 A_SpawnItem("GreenBloodTrails", 0, 5)
+	    TNT1 A 0 A_CheckFloor("SpawnFloor")
+		TNT1 A 0 A_SpawnItemEx ("DetectCeilBloodSimpler",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,0)
+		TNT1 A 0 A_SpawnItemEx ("DetectCeilXDeath2",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,0)
+		
+		//TNT1 A 0 A_SpawnItem("Brutal_BloodSpot",0,0,0,1)
+        CAGI Q 9009
+		TNT1 A 2
+        Stop
+	SpawnFloor:
+	    CAGI Q 9009
+		TNT1 A 2
+		Stop
+    }
+}
+
+
+
+ACTOR XDeathPainElementalGreen2: XDeathPainElementalGreen1
+{
+    Speed 12
+	Gravity 0.6
+    Decal BrutalBloodSplat
+    Scale 1.1
+    States
+    {
+    Spawn:
+	    TNT1 A 0 A_JumpIf(waterlevel > 1, "Splash")
+        CAGI IJKLMNOP 2 A_CustomMissile ("GreenBloodTrails", 5, 0, random (0, 360), 2, random (0, 360))
+        Loop
+    Death:
+	    
+		TNT1 A 0
+        TNT1 AAA 0 A_SpawnItem("GreenBloodTrails", 0, 5)
+	    TNT1 A 0 A_CheckFloor("SpawnFloor")
+		TNT1 A 0 A_SpawnItemEx ("DetectCeilBloodSimpler",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,0)
+		TNT1 A 0 A_SpawnItemEx ("DetectCeilXDeath2",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,0)
+		
+		//TNT1 A 0 A_SpawnItem("Brutal_BloodSpot",0,0,0,1)
+        CAGI R 9009
+		TNT1 A 2
+        Stop
+	SpawnFloor:
+	    CAGI R 9009
+		TNT1 A 2
+		Stop
+    }
+}
+
 ACTOR XDeathSpiderNew1: XDeathPainElementalNew1
 {
     Scale 0.8
@@ -4848,4 +5265,62 @@ ACTOR XDeathCyberdemonHead2: XDeathBullArm1
 }
 }
 
-	   
+
+ACTOR SpiderLeg2
+{
+    Radius 8
+    Height 8
+	Speed 12
+	Mass 1
+    +NOBLOCKMAP
+	+MISSILE
+    +NOTELEPORT
+    +DONTSPLASH
+	+DOOMBOUNCE
+    +MOVEWITHSECTOR
+    +CLIENTSIDEONLY
+	SeeSound "misc/xdeath4"
+    DeathSound "misc/xdeath3"
+	BounceFactor 0.3
+	BounceCount 3
+    States
+    {
+    Spawn:
+	    TNT1 A 0 A_JumpIf(waterlevel > 1, "Death")
+		XDS2 ABCDEFGH 2
+		Loop
+	Death:
+	    XDS2 I 9009
+		Stop
+    }
+}
+
+ACTOR XDeathArachnotronHead2: XDeath1
+{
+    Speed 12
+	Gravity 0.9
+	+DONTSPLASH
+    DeathSound "none"
+	SeeSound "none"
+	+SKYEXPLODE
+	Decal none
+    Scale 1.0
+    States
+    {
+    Spawn:
+	    NAHB ABCDEFGH 4
+        Loop
+    Death:
+	TNT1 A 0
+	//TNT1 A 0 A_Jump(128, "CleanDeath")
+	TNT1 A 0 A_SpawnItem("CrawlingDyingSpider2")
+	Stop
+	CleanDeath:
+	TNT1 AAAAAAAAAAAA 0 A_CustomMissile ("SmallBrainPiece", 10, 0, random (0, 360), 2, random (0, 160))
+		TNT1 AAAA 0 A_CustomMissile ("XDeath1", 10, 0, random (0, 360), 2, random (0, 160))
+		NAHD IJKLMN 5
+		NAHD N -5
+	Stop
+		Stop
+    }
+}	   

@@ -31,7 +31,7 @@ DamageFactor "bloodsplasher", 0.0    DamageFactor "tinybloodsplasher", 0.0    Da
     +MISSILEEVENMORE
 DamageFactor "Blood", 0.0 DamageFactor "BlueBlood", 0.0 DamageFactor "GreenBlood", 0.0
     BloodType "Brutal_Blood", "BloodSPlatterReplacer", "Brutal_Blood"
-	AttackSound "hmgun"
+	AttackSound "weapons/gatlingfire"
     DamageFactor "Kick", 0.4
     DamageFactor "Shrapnel", 0.4
 	DamageFactor "explosiveimpact", 2.0
@@ -62,12 +62,12 @@ DamageFactor "Blood", 0.0 DamageFactor "BlueBlood", 0.0 DamageFactor "GreenBlood
 	 Spawn:
 		TNT1 A 0
 		TNT1 A 0 ACS_ExecuteAlways(796, 0, 0, 0, 0)//Check if Vanilla Mode is activated
-	TNT1 A 0 A_GiveInventory("SKChaingunGuy", 1)
-	TNT1 A 0 A_JumpIfInTargetInventory("ChainguyguyContinue", 1, "MissileContinue")
+		TNT1 A 0 A_GiveInventory("SKChaingunGuy", 1)
+		TNT1 A 0 A_JumpIfInTargetInventory("ChainguyguyContinue", 1, "MissileContinue")
 		CPOS A 0 A_CheckSight("Spawn2")
         TNT1 A 0 A_SpawnItem ("HeadshotTarget10", 0, 42,0)
 		CPOS B 10 A_Look
-		Loop
+		Goto Spawn+3
 		
 	Spawn2:
 		CPOS B 1 A_Look
@@ -209,50 +209,50 @@ DamageFactor "Blood", 0.0 DamageFactor "BlueBlood", 0.0 DamageFactor "GreenBlood
 		TNT1 A 0 A_SpawnItem("HeadshotTarget10", 0, 42,0)
 		CPOS E 12 A_FaceTarget
 		TNT1 A 0 A_SpawnItem("HeadshotTarget10", 0, 42,0)
-		TNT1 A 0
+		TNT1 A 0 A_PlaySound("CHA1NSPI", 8)
     MissileContinue:
 		CPOS E 3 A_FaceTarget 
 		TNT1 A 0 A_SpawnItem("HeadshotTarget10", 0, 42,0)
         TNT1 AA 0 A_CustomMissile("OrangeLensFlareAltFast", 34, 10, 15, 0)
-		TNT1 A 0 A_PlaySound("hmgun", 2)
-        CPOS F 2 BRIGHT A_CustomMissile("MonsterNewChainGunTracer", 38, 0, random(-11, 11), 0)
+		TNT1 A 0 A_PlaySound("weapons/gatlingfire")
+        CPOS F 2 BRIGHT A_CustomMissile("MonsterNewMinigunTracer", 38, 0, random(-11, 11), 0)
 		TNT1 A 0 A_SpawnItem("HeadshotTarget10", 0, 42,0)
         TNT1 A 0 A_SpawnItem ("RifleCaseSpawn", 0, 30,0)
 
 		CPOS E 2 A_FaceTarget 
 		TNT1 A 0 A_SpawnItem("HeadshotTarget10", 0, 42,0)
         TNT1 AA 0 A_CustomMissile("OrangeLensFlareAltFast", 34, 10, 15, 0)
-		TNT1 A 0 A_PlaySound("hmgun")
-        CPOS F 2 BRIGHT A_CustomMissile("MonsterNewChainGunTracer", 38, 0, random(-11, 11), 0)
+		TNT1 A 0 A_PlaySound("weapons/gatlingfire")
+        CPOS F 2 BRIGHT A_CustomMissile("MonsterNewMinigunTracer", 38, 0, random(-11, 11), 0)
         TNT1 A 0 A_SpawnItem ("RifleCaseSpawn", 0, 30,0)
 		TNT1 A 0 A_SpawnItem("HeadshotTarget10", 0, 42,0)
 		CPOS E 2 A_FaceTarget 
 		TNT1 A 0 A_SpawnItem("HeadshotTarget10", 0, 42,0)
         TNT1 AA 0 A_CustomMissile("OrangeLensFlareAltFast", 34, 10, 15, 0)
-		TNT1 A 0 A_PlaySound("hmgun")
-        CPOS F 2 BRIGHT A_CustomMissile("MonsterNewChainGunTracer", 38, 0, random(-11, 11), 0)
+		TNT1 A 0 A_PlaySound("weapons/gatlingfire")
+        CPOS F 2 BRIGHT A_CustomMissile("MonsterNewMinigunTracer", 38, 0, random(-11, 11), 0)
         TNT1 A 0 A_SpawnItem ("RifleCaseSpawn", 0, 30,0)
 		TNT1 A 0 A_SpawnItem("HeadshotTarget10", 0, 42,0)
 		CPOS E 2 A_FaceTarget
 		TNT1 A 0 A_SpawnItem("HeadshotTarget10", 0, 42,0)
         TNT1 AA 0 A_CustomMissile("OrangeLensFlareAltFast", 34, 10, 15, 0)
-		TNT1 A 0 A_PlaySound("hmgun")
-        CPOS F 2 BRIGHT A_CustomMissile("MonsterNewChainGunTracer", 38, 0, random(-11, 11), 0)
+		TNT1 A 0 A_PlaySound("weapons/gatlingfire")
+        CPOS F 2 BRIGHT A_CustomMissile("MonsterNewMinigunTracer", 38, 0, random(-11, 11), 0)
         TNT1 A 0 A_SpawnItem ("RifleCaseSpawn", 0, 30,0)
 		TNT1 A 0 A_SpawnItem("HeadshotTarget10", 0, 42,0)
 		CPOS E 3 A_FaceTarget
 		TNT1 A 0 A_SpawnItem("HeadshotTarget10", 0, 42,0)
         TNT1 AA 0 A_CustomMissile("OrangeLensFlareAltFast", 34, 10, 15, 0)
-		TNT1 A 0 A_PlaySound("hmgun")
-        CPOS F 2 BRIGHT A_CustomMissile("MonsterNewChainGunTracer", 38, 0, random(-11, 11), 0)
+		TNT1 A 0 A_PlaySound("weapons/gatlingfire")
+        CPOS F 2 BRIGHT A_CustomMissile("MonsterNewMinigunTracer", 38, 0, random(-11, 11), 0)
         TNT1 A 0 A_SpawnItem ("RifleCaseSpawn", 0, 30,0)
 		TNT1 A 0 A_SpawnItem("HeadshotTarget10", 0, 42,0)
 		TNT1 A 0 A_JumpIfInTargetInventory("ChainguyguyContinue", 1, "MissileContinue")
 		CPOS E 2 A_FaceTarget 
 		TNT1 A 0 A_SpawnItem("HeadshotTarget10", 0, 42,0)
         TNT1 AA 0 A_CustomMissile("OrangeLensFlareAltFast", 34, 10, 15, 0)
-		TNT1 A 0 A_PlaySound("hmgun")
-        CPOS F 2 BRIGHT A_CustomMissile("MonsterNewChainGunTracer", 38, 0, random(-11, 11), 0)
+		TNT1 A 0 A_PlaySound("weapons/gatlingfire")
+        CPOS F 2 BRIGHT A_CustomMissile("MonsterNewMinigunTracer", 38, 0, random(-11, 11), 0)
         TNT1 A 0 A_SpawnItem ("RifleCaseSpawn", 0, 30,0)
 		TNT1 A 0 A_CPosRefire
 		TNT1 A 0 A_JumpIfInTargetInventory("ChainguyguyContinue", 1, "MissileContinue")
@@ -294,13 +294,21 @@ DamageFactor "Blood", 0.0 DamageFactor "BlueBlood", 0.0 DamageFactor "GreenBlood
         CPOS G 3 A_Pain
 		TNT1 A 0 A_TakeInventory("IsFiring", 1)
        Goto SeeContinue
+	   
+	   Possession:
+		TNT1 A 0 A_SetInvulnerable
+		CPOS G 3
+		CPOS G 3 A_Pain
+		"####" "#" 35 ACS_NamedExecuteAlways("Pos - Flicker effect")
+		TNT1 A 0 A_UnSetInvulnerable
+		Goto See
 		
 	Pain.IsFiring:	
 	TNT1 A 0 A_StopSound(2)
 	MPDR A 3 A_SpawnItem("HeadshotTarget6", 0, 42,0)
 	TNT1 A 0 A_SpawnItem ("RifleCaseSpawn", 0, 30,0)
-	TNT1 A 0 A_PlaySound("hmgun")
-	TNT1 A 0 A_CustomMissile ("MonsterNewChainGunTracer", 32, 15, 0, 2, -20)
+	TNT1 A 0 A_PlaySound("weapons/gatlingfire")
+	TNT1 A 0 A_CustomMissile ("MonsterNewMinigunTracer", 32, 15, 0, 2, -20)
 	MPDR B 3 BRIGHT A_NoBlocking
 	Goto MissileContinue
 
@@ -393,64 +401,64 @@ DamageFactor "Blood", 0.0 DamageFactor "BlueBlood", 0.0 DamageFactor "GreenBlood
 	TNT1 A 0 A_FaceTarget
 	MPDR A 3 A_Scream
 	TNT1 A 0 A_SpawnItem ("RifleCaseSpawn", 0, 30,0)
-	TNT1 A 0 A_CustomMissile ("MonsterNewChainGunTracer", 32, 15, 0, 2, -20)
-	TNT1 A 0 A_PlaySound("hmgun" ,2)
+	TNT1 A 0 A_CustomMissile ("MonsterNewMinigunTracer", 32, 15, 0, 2, -20)
+	TNT1 A 0 A_PlaySound("weapons/gatlingfire" ,2)
 	MPDR B 3 BRIGHT A_NoBlocking
 	
 	MPDR A 3
 	TNT1 A 0 A_SpawnItem ("RifleCaseSpawn", 0, 30,0)
-	TNT1 A 0 A_CustomMissile ("MonsterNewChainGunTracer", 32, 15, 0, 2, -20)
-	TNT1 A 0 A_PlaySound("hmgun" ,2)
+	TNT1 A 0 A_CustomMissile ("MonsterNewMinigunTracer", 32, 15, 0, 2, -20)
+	TNT1 A 0 A_PlaySound("weapons/gatlingfire" ,2)
 	MPDR B 3 BRIGHT A_NoBlocking
 	
 
 	MPDR C 2
 	TNT1 A 0 A_SpawnItem ("RifleCaseSpawn", 0, 30,0)
-	TNT1 A 0 A_CustomMissile ("MonsterNewChainGunTracer", 24, 15, -20, 2, -20)
-	TNT1 A 0 A_PlaySound("hmgun" ,2)
+	TNT1 A 0 A_CustomMissile ("MonsterNewMinigunTracer", 24, 15, -20, 2, -20)
+	TNT1 A 0 A_PlaySound("weapons/gatlingfire" ,2)
 	MPDR D 2 BRIGHT
 	
 	MPDR C 2
 	TNT1 A 0 A_SpawnItem ("RifleCaseSpawn", 0, 30,0)
-	TNT1 A 0 A_CustomMissile ("MonsterNewChainGunTracer", 24, 15, -20, 2, -20)
-	TNT1 A 0 A_PlaySound("hmgun" ,2)
+	TNT1 A 0 A_CustomMissile ("MonsterNewMinigunTracer", 24, 15, -20, 2, -20)
+	TNT1 A 0 A_PlaySound("weapons/gatlingfire" ,2)
 	MPDR D 2 BRIGHT
 	
 	MPDR E 2
 	TNT1 A 0 A_SpawnItem ("RifleCaseSpawn", 0, 30,0)
-	TNT1 A 0 A_CustomMissile ("MonsterNewChainGunTracer", 24, 15, -20, 2, 20)
-	TNT1 A 0 A_PlaySound("hmgun" ,2)
+	TNT1 A 0 A_CustomMissile ("MonsterNewMinigunTracer", 24, 15, -20, 2, 20)
+	TNT1 A 0 A_PlaySound("weapons/gatlingfire" ,2)
 	MPDR F 2 BRIGHT
 	
 	MPDR G 2
 	TNT1 A 0 A_SpawnItem ("RifleCaseSpawn", 0, 30,0)
-	TNT1 A 0 A_CustomMissile ("MonsterNewChainGunTracer", 24, 15, -10, 2, 40)
-	TNT1 A 0 A_PlaySound("hmgun" ,2)
+	TNT1 A 0 A_CustomMissile ("MonsterNewMinigunTracer", 24, 15, -10, 2, 40)
+	TNT1 A 0 A_PlaySound("weapons/gatlingfire" ,2)
 	MPDR H 2 BRIGHT
 	
 	MPDR I 2
 	TNT1 A 0 A_JumpIf((MomY == 0), "TakeASit")
 	TNT1 A 0 A_SpawnItem ("RifleCaseSpawn", 0, 30,0)
-	TNT1 A 0 A_CustomMissile ("MonsterNewChainGunTracer", 24, 15, -10, 2, 40)
-	TNT1 A 0 A_PlaySound("hmgun" ,2)
+	TNT1 A 0 A_CustomMissile ("MonsterNewMinigunTracer", 24, 15, -10, 2, 40)
+	TNT1 A 0 A_PlaySound("weapons/gatlingfire" ,2)
 	MPDR J 2 BRIGHT
 	TNT1 A 0 A_JumpIf((MomY == 0), "TakeASit")
 	MPDR K 2
 	TNT1 A 0 A_SpawnItem ("RifleCaseSpawn", 0, 30,0)
-	TNT1 A 0 A_CustomMissile ("MonsterNewChainGunTracer", 12, 15, -20, 2, 40)
+	TNT1 A 0 A_CustomMissile ("MonsterNewMinigunTracer", 12, 15, -20, 2, 40)
 	
 	MPDR L 2 BRIGHT
 	TNT1 A 0 A_SpawnItem ("GrowingBloodPool")
 		TNT1 A 0 A_PlaySound("BODYF",6)
 	MPDR M 2
 	TNT1 A 0 A_SpawnItem ("RifleCaseSpawn", 0, 30,0)
-	TNT1 A 0 A_CustomMissile ("MonsterNewChainGunTracer", 12, 15, -20, 2, 20)
-	TNT1 A 0 A_PlaySound("hmgun")
+	TNT1 A 0 A_CustomMissile ("MonsterNewMinigunTracer", 12, 15, -20, 2, 20)
+	TNT1 A 0 A_PlaySound("weapons/gatlingfire")
 	MPDR N 2 BRIGHT
 	MPDR M 2
 	TNT1 A 0 A_SpawnItem ("RifleCaseSpawn", 0, 30,0)
-	TNT1 A 0 A_CustomMissile ("MonsterNewChainGunTracer", 12, 15, -20, 2, 20)
-	TNT1 A 0 A_PlaySound("hmgun")
+	TNT1 A 0 A_CustomMissile ("MonsterNewMinigunTracer", 12, 15, -20, 2, 20)
+	TNT1 A 0 A_PlaySound("weapons/gatlingfire")
 	TNT1 A 0 A_StopSound(2)
 	MPDR N 2 BRIGHT
 	
@@ -517,9 +525,14 @@ DamageFactor "Blood", 0.0 DamageFactor "BlueBlood", 0.0 DamageFactor "GreenBlood
 		TNT1 A 1 A_SpawnItem ("BrutalizedCommando1")
 	    Stop
 
+	Death.Blackhole:
+        TNT1 A 0 A_Scream
+        TNT1 A 0 A_NoBlocking
+        TNT1 A 0 A_SpawnItem("BlackHoledHuman")
+		Stop
+
     XDeath:
 	Death.QuadBlast:
-	Death.BlackHole:
 		TNT1 A 0 A_StopSound(2)
 		TNT1 A 0 A_XScream
 		TNT1 A 0 A_NoBlocking
