@@ -665,7 +665,7 @@ Fader Bye
 
 Fader FreezerBurnFader
 {
-	DecayStart 16.0
+	DecayStart 8.0
 	DecayTime 0.7
 }
 
@@ -853,7 +853,6 @@ fader LiquidFaderFast
 
 slider Drops
 {
-   DistX 0
    DistY -320
    SlideStart 0.01
    SlideTime 15
@@ -1047,23 +1046,23 @@ decal BulletDecalNew1
 
 Decal FreezerBurn
 {
-	Pic "graphics/decals/fsplat1.png"
-	X-Scale  0.35
-	Y-Scale  0.35
+	Pic "sprites/weapons/slot 7/freezer/FRPJD0.png"
+	X-Scale  1.0
+	Y-Scale  1.0
 	randomflipx
 	randomflipy
-	add 0.9
+	add 0.7
 	animator FreezerBurnFader
 }
 
 Decal FreezerBurnSmall
 {
-	Pic "graphics/decals/fsplat1.png"
-	X-Scale  0.355
-	Y-Scale  0.355
+	Pic "/sprites/weapons/slot 7/freezer/FRPJD0.png"
+	X-Scale  0.65
+	Y-Scale  0.65
 	randomflipx
 	randomflipy
-	add 0.9
+	add 0.7
 	animator FreezerBurnFader
 }
 

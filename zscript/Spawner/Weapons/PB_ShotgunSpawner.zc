@@ -1,45 +1,114 @@
-Class PB_ShotgunSpawner : PB_SpawnerBase
+Class PBShotgunSpawner : PB_SpawnerBase //replaces Shotgun
 {
-	override void Tick()
+	//Int WeaponHasBeenSpawned;
+	//Actor ptr;
+	default
 	{
-		
-		Super.Tick();
-		
-		
-		//Check CVARs if tiered preset and, if so, select appropriate tier (I, II, III, IV) ... else go with default spawn
-		//Check CVARs for spawn value pulled from presets
-		
-		//If monster, check surrounding actors for same class name
-		
+		scale 0.45;
+		//-SHOOTABLE;
+		-COUNTKILL; 
+		//-SOLID;
+		+NOTIMEFREEZE;
+		//CANPUSHWALLS;
+		//-CANUSEWALLS;
+		//-ACTIVATEMCROSS;
+		//-CANPASS;
+		-ISMONSTER;
+		//+NODAMAGE;
+		//-NOMENU;
+		Species "sgspawner";
 	}
-	
 	States
 	{
-		Spawn:
-			TNT1 A 1;
-			loop;
-			
-		Spawn_Default:
-			TNT1 A 0 A_SpawnItemEx("PB_Shotgun",0,0,0,0,0,0,0,SXF_TRANSFERSPECIAL | SXF_TRANSFERAMBUSHFLAG | SXF_TRANSFERPOINTERS | 288,0,tid);
-			Stop;
-		Spawn_No_Tier:
-			TNT1 A 0 ;
-			Stop;
-		Spawn_Tier_I:
+		Tier4:
 			TNT1 A 0;
+			TNT1 A 0 A_SpawnItemEx("PB_ShotSpawnerT4",flags:SXF_TRANSFERSPECIAL|SXF_TRANSFERAMBUSHFLAG|SXF_TRANSFERPOINTERS|288,tid:tid);
 			Stop;
-		Spawn_Tier_II:
+		Tier3:
 			TNT1 A 0;
+			TNT1 A 0 A_SpawnItemEx("PB_ShotSpawnerT3",flags:SXF_TRANSFERSPECIAL|SXF_TRANSFERAMBUSHFLAG|SXF_TRANSFERPOINTERS|288,tid:tid);
 			Stop;
-		Spawn_Tier_III:
+		Tier2:
+		RandomJumpT2:	
 			TNT1 A 0;
+			TNT1 A 0 A_SpawnItemEx("PB_ShotSpawnerT2",flags:SXF_TRANSFERSPECIAL|SXF_TRANSFERAMBUSHFLAG|SXF_TRANSFERPOINTERS|288,tid:tid);
 			Stop;
-		Spawn_Tier_IV:
+		Tier1:
+		Spawn_Shotgun:
 			TNT1 A 0;
+			TNT1 A 0 A_SpawnItemEx("PB_ShotSpawnerT1",flags:SXF_TRANSFERSPECIAL|SXF_TRANSFERAMBUSHFLAG|SXF_TRANSFERPOINTERS|288,tid:tid);
+			Stop;
+		Spawn_Tier_I_SSG:
+			TNT1 A 0
+			{
+			if(pb_SSGRandomSpawn==false)
+			{
+			SetStateLabel("Spawn_Shotgun");
+			}
+			}
+			TNT1 A 0;
+			TNT1 A 0 A_Jump(168,"SpawnSSG");
+			TNT1 A 0 A_Jump(256,"Spawn_Shotgun");
+			Stop;
+		SpawnSSG:
+			TNT1 A 0;
+			TNT1 A 0 A_SpawnItemEx("PB_SSGSpawnerT1",flags:SXF_TRANSFERSPECIAL|SXF_TRANSFERAMBUSHFLAG|SXF_TRANSFERPOINTERS|288,tid:tid);
 			Stop;
 		Death:
-			TNT1 A 1;
-			stop;
+			TNT1 A 0;
+			Goto Spawn;
 	}
 }
 
+class PB_ShotSpawnerT1 : PB_WeaponSpawner
+{
+	Default
+	{
+		DropItem 'PB_Shotgun', 255, 1;
+	}
+}
+
+class PB_ShotSpawnerT2 : PB_WeaponSpawner
+{
+	Default
+	{
+		DropItem 'PB_Autoshotgun', 255, 1;
+		DropItem 'PB_Revolver', 255, 1;
+	}
+	
+	override void HandleSpawnExeptions(in out name toSpawn)
+	{
+		if(DisablePB_Revolver && toSpawn == "PB_Revolver")
+			toSpawn = "PB_Autoshotgun";
+		if(DisablePB_Autoshotgun && toSpawn == "PB_Autoshotgun")
+			toSpawn = "PB_Shotgun";
+	}
+}
+
+class PB_ShotSpawnerT3 : PB_WeaponSpawner
+{
+	Default
+	{
+		DropItem 'PB_SGMagazine', 255, 1;
+	} 
+	
+	override void HandleSpawnExeptions(in out name toSpawn)
+	{
+		if(DisablePB_SGMagazine && toSpawn == "PB_SGMagazine")
+			toSpawn = "PB_Shotgun";
+	}
+}
+
+class PB_ShotSpawnerT4 : PB_WeaponSpawner
+{
+	Default
+	{
+		DropItem 'PB_Deagle', 255, 1;
+	}
+	
+	override void HandleSpawnExeptions(in out name toSpawn)
+	{
+		if(DisablePB_Deagle && toSpawn == "PB_Deagle")
+			toSpawn = "PB_Shotgun";
+	}
+}
