@@ -111,7 +111,7 @@ class PB_CasingBase : Actor
 		smoketime = random(10, 32);
 	}
 	
-	override int SpecialBounceHit(Actor bounceMobj, Line bounceLine, readonly<SecPlane> bouncePlane)
+	override int SpecialBounceHit(Actor bounceMobj, Line bounceLine, SecPlane bouncePlane)
 	{		
 		if(bouncePlane)
 		{

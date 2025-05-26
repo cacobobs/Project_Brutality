@@ -46,7 +46,7 @@ Class EmptyMagBase : Actor
 		spinSpeed = 1.0;
 	}
 
-	override int SpecialBounceHit(Actor bounceMobj, Line bounceLine, readonly<SecPlane> bouncePlane)
+	override int SpecialBounceHit(Actor bounceMobj, Line bounceLine, SecPlane bouncePlane)
 	{		
 		if(bouncePlane)
 		{
