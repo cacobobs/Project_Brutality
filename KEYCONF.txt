@@ -1,0 +1,45 @@
+clearplayerclasses
+addplayerclass PB_Doomer
+
+   addkeysection "Project Brutality - Interactions" PBInteractions             
+      
+   addkeysection "Project Brutality" PBAdvMoves   
+   
+	AddMenuKey "Activate Weapon Special" "+PBWeaponSpecial"
+	alias "+PBWeaponSpecial" "netevent PBWeaponSpecialOn"
+	alias "-PBWeaponSpecial" "netevent PBWeaponSpecialOff"
+   
+   AddMenuKey "Equipment Selection Wheel" "+PBEquipSpecial"
+	alias "+PBEquipSpecial" "netevent PBEquipSpecialOn"
+	alias "-PBEquipSpecial" "netevent PBEquipSpecialOff"
+
+   addmenukey "Unload Gun" unreloader
+   alias unreloader "puke 363"
+   defaultbind U unreloader
+   
+   
+	AddMenuKey "Activate Equipment" +User1
+	Alias +User1
+	DefaultBind G +User1
+
+	AddMenuKey "Quick Melee/Execution" +User2
+	Alias +User2
+	DefaultBind F +User2
+   
+	addmenukey "Dash" +User3
+	alias +User3
+	defaultbind Alt +User3
+	
+	addmenukey "Kick" +User4
+	alias +User4
+	defaultbind Q +User4
+
+//Needs to actually be finished.    
+//    AddMenuKey "Open PDA" openpda
+//    alias openpda "netevent openpda"
+   
+   addmenukey "Clear All Debris" "netevent EV_ClearGore"
+defaultbind L "netevent EV_ClearGore"
+
+	AddMenuKey "Toggle PBVP Models" togglepbvp
+	Alias togglepbvp "Toggle V5_MODELS"

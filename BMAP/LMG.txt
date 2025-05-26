@@ -1,0 +1,1 @@
+brightmap sprite LMPIA0 {map "brightmaps/WEAPONS/LMPIA.png" disablefullbright}

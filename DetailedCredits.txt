@@ -1,7 +1,10 @@
-
+(NEEDS TO BE UPDATED BY FINAL RELEASE)
 
 Extra rotations for PLAY  A - G
 John Romero
+
+Brutal Doom Base
+Sergeant_Mark_IV
 
 MARN * and MARJ *
 Sergeant_Mark_IV
@@ -17,6 +20,9 @@ Base by Captain Toenail, edited by Sergeant_Mark_IV
 
 MAIS *, MAZS *, and MASS*
 Sergeant_Mark_IV
+
+POSSITEM
+Realm667, Blue Shadow
 
 Cheering Marine MWAV A to F
 Unknown
@@ -56,12 +62,15 @@ Base by FreeDoom team, edited by Sergeant_Mark_IV
 
 Chainsaw
 Base by Mike12, edited by Sergeant_Mark_IV
+Overhauled sprites by Benjamin Zuriel, various other chainsaw slash attack bases by Revae.
 
 Minigun Sprites
 Extra animations for barrels by Perkristian and Minigunner, Ammo Belt by Mike12, base by Skulltag Team, animations and muzzle by Sergeant_Mark_IV
 
-Assault Rifle (RIFF*, RIFFR*)
-Mike12, animations and muzzle by Sergeant_Mark_IV
+Assault Rifle/DMR
+Design inpsired by Mike12's design
+New sprites by Metalman and iamcarrotmaster, original idle and angled bases by Koff Zerno (particularly the dogtag),
+animations by Galdoc 
 
 Assault Rifle Iron Sights (RI2G*)
 Crucux Duo, edited by Sergeant_Mark_IV
@@ -74,15 +83,21 @@ Mike12, Foregrip by JoeyTD edited by Mike12, muzzle and animations by Sergeant_M
 
 Super Shotgun
 Mike12, extra sprites by Perkristian, animation and muzzle by Sergeant_Mark_IV
+Overhauled sprites by iamcarrotmaster, animations by Moa Dixon, and dual wield sprites by TypicalSF(Sonik.o.fan).
 
 Rocket Launcher (MISS* MISG* MISR*)
 Base by Sergeant_Mark_IV, polished by Minigunner. Ammo barrels from Necrodome.
+Overhauled base sprite by Metalman, iamcarrotmaster and TypicalSF(original base origin), animation by Galdoc.
 
-Rocket MISL*
+Rocket MISL*/M1SL*
 FreeDoom team
+New updated sprites by Metalman.
+
+Hideous Destructor (referenced in Cyberdemon death option) is created by Matt.
 
 MP40
-Apogee Entertainment
+Metalman - Sprites
+ikdfa - Animations
 
 BFG9000
 Sergeant_mark_IV
@@ -95,15 +110,20 @@ Mike12
 
 Salute (SALU*)
 Base from Duke Nukem 3D, edited by Mike12
+Duke Nukem is by 3D Realms and Gearbox Software.
 
 Revenant Missile Launcher (RVCG)
-Base from Hacx, edited by Mike12
+Wereknight, Metalman, iamcarrotmaster
 
 Plasma Gun
 Base by Eriance, edited by Sergeant_Mark_IV
 
 Various Weapons
 Bases by Doomnukem, edited by Pa1nki113r, or created by Pa1nki113r
+
+New Revolver sprites
+Base by DoomNukem, edited version by Solid Steak
+Speedloader sprite by Galdoc
 
 New Fatalities, Deaths, Armless Demon, Slumped Deaths
 Frankensprited by Pa1nki113r
@@ -113,3 +133,246 @@ Finalizer
 
 Shotgun and Super Grenade Launchers
 Created by Doom Nukem for Wild Weasel's ATM mod- edited by PA1NKI113R
+New Super Grenade Launcher by iamcarrotmaster, animations by Galdoc.
+Other pieces of the new SGL from other weapons go to their respective artists. If you know them, please ask me.
+
+
+Amuscaria/Eriance
+
+Extra Gore
+Beautiful Doom
+Beautiful Doom is by Jekyll_Grim_Payne(also known as Agent_Ash).
+
+SNK Corporation and Nazca Corporation - Some of the blood splatter sprites and some liquid splash sprites are from the Metal Slug series.
+
+SavageImp, Helmet Commando and Helmet Animation
+Merser
+
+Double Jumping
+Code by Agent ME
+
+PB BFG 9000 Mark V Sprites
+Doom RLArsenal 
+
+Freezer, HMG, and various other sprites
+Mr. Enchanter
+Update: New Freezer sprites by iamcarrotmaster and Metalman, animation by Galdoc.
+HMG is now the Nailgun. Nailgun sprites by iamcarrotmaster, animation by Galdoc.
+Xaser, zrrion the insect, Bloax, Paul NMN, NeoWorm, Velocity, Banjo Software - Certain sprites (explosion mainly) and code from Cryobow on Realm667
+
+Fatalities, death animations
+Kain "Pockgor"
+
+Special thanks to
+Loismustdie555 for support, coding, content scouting, etc.
+
+SkyMarshall
+Brightmaps, bug fixes, various visual enhancements, extra monsters
+
+Pulse Cannon and other works
+AnKeburu
+
+Desert Eagle sprites
+Base by DoomNukem, edits by iamcarrotmaster
+kofeinoe_zerno (reload angles)
+Moa Dixon (animations)
+Solid Steak (centered frame, modified by iamcarrotmaster)
+
+Overhauled SMG sprites
+Sprites by kofeinoe_zerno
+Animations by Moa Dixon
+New hip fire animations again, by Metalman
+
+Nail Gun inspiration
+TheShooter7, Mechadon (Realm667 Nailgun)
+
+Damson
+New Chaingunner Sprites
+
+X-Weapon and the Railgunner
+Weapon Bases for frankenspriting
+
+Trailblazer
+Machete Base Animation, misc sounds
+
+Awesome particle effects, weapon inspirations, base sprites
+Russian Overkill
+
+Trailblazer and Russian Overkill are by PillowBlaster.
+
+Activision and Infinity Ward - SGL Unload, DMR UBGL Upgrade fire and and reload sounds from Call of Duty: Modern Warfare 2.
+LMG bullet feed sounds from COD Black Ops Cold War. Several other sounds may come from various COD games as well.
+
+Electronic Arts (EA) and DICE - Various sounds from Battlefield 4:
+Particularly SMG reloading sounds Shotgun shell insert sounds, some Carbine reload sounds and DMR select sound
+
+Various MG42 sounds
+freesound.com, Marregheriti - MG42 Overheat sound //I may consider changing this
+Valve Corporation - Pickup and select sounds (from Day of Defeat: Source)
+
+Mantle Climb Code
+Parkmore
+
+videovo.net and sounds-mp3.com - Nazi helmet drop sound
+
+Nazi Burning sounds 
+ID Software, Bethesda, Activision, (COD 2 sound by Infinity Ward and Activision) and Grey Matter Interactive
+
+ThrashFanBert1994 - Pieces of his nazi spritesheet used to make some of the new Nazi death animations
+
+Alex238 and JoeyTD - Luger sprites used for the Nazi last stand
+
+cyber - Nazi sprite edits
+
+Lewisk3 - Laser API code for the Freezer Rifle Freeze Ray mode, ported by popguy12
+
+Smart Scavenger
+amv2k9
+
+Background Artwork for title map
+Benthedwarf
+
+Overhauled Spawn System and Spritework and Support
+Daarkon
+
+Void Spectre
+Gez/Yholl
+
+Void Spectre Gibs and other death animations
+skeep
+
+Pinned Zombies
+r3w
+PA1NKI113R (animation)
+Keeper (re-skinning to other former humans)
+
+Chainsaw Zombie
+Solmir
+Keeper(gore and extra deaths)
+
+Solmir - Headless Zombies sprites used as a base for zombie grenade attacks
+
+New first person burning barrel and various sprite resources
+RedAr
+
+New Axe pickup sound
+snappyaddy (aka fluenCdoom)
+
+Tons of sprite resources
+Mryayayify
+
+Tons of sprite resources
+Keeper
+
+Various sprite resources and tutorials on muzzle flashes
+Dox778
+
+Tons of sprite animations
+Skeep
+
+Awesome Voxels for Vehicles
+D3X1K AXYZ
+
+Running/Shooting Zombiemen
+Angel-Neko_X
+
+Various Animations and Spritework
+Iamcarrotmaster
+
+Captured Marine rotations and impaled Marines decorations (?). More to come from him soon.
+DoomJedi
+iamcarrotmaster also contributed to the base of the captured marine rotations.
+
+New keycard sprites
+Kinnerokhn (aka Kinnero) and Metalman
+
+Kinnerokhn - Updated Demon Strength Rune sprites
+
+Kamil - For his amazing work on optimizing sprites and fixing some minor issues in the mod, 
+along with pointing out various bugs
+
+SkeletronMK666 - Fixed Shotgun guy boot color on some head shot death sprites, fixed MP40 pickup
+
+Edward Marlus - Certain sound changes and MP40 pickup sprite
+
+Motion Blur Effects / Screen Tilting Options
+Pixel Eater
+Nash Muhandes
+Caligari87
+Tormentor667
+
+Various Overhauled Weapon spritework
+TypicalSF (Sonik.o.fan)
+iamcarrotmaster
+Metalman
+
+Amazing sprite animations for weapons
+galdoc
+Moa Dixon (Endie) (SMG, Deagle, Autoshotgun, SSG, Axe, Pistol, M1 and M2 Plasma Rifles)
+ikdfa (MG42, LMG, MP40, QSG animations)
+
+Voxels for weapons
+D3X1K AXYZ
+popguy12
+H3LLW4LK3R (Demon Tech Rifle voxel model base)
+
+Amazing weapon pickup sprites and spent casings
+Metalman
+
+CyberBaron XDeath/explosion death sound - Renegade4339
+
+Vampy - Fixes to LMG reload
+inkoalawetrust - Ultimate Doom Builder support added
+
+======Shotgun Overhaul=====
+
+This thing has been through quite some changes. 
+
+Secret
+Code Optimizations & rearrangement. (Special thanks to PA1NKI113R for a_setweaponsprite) - Secret
+Slug/DB Colored Shells on stock shotgun sprite, Lighting on Pump Firing Frames
+Recoil Frames For The Shotgun
+
+Mryayayify 
+Colored Shell Casings
+
+Jmartinez2098
+Colored Shells For Reloading, and ADS Colored Shells, and Colored Shells
+on the magazine
+
+Benjamin Zuriel
+New Shotgun Reload Shell 
+
+Carrot(Iamcarrotmaster) 
+Muzzleflash for the shotgun firing sprites, ADS Firing Frames
+Improved ADS Touchups to be more consistent with stock shotgun
+Touchups removing transparent pixels.
+
+TypicalSonicFan / MrTypical
+New Slam Fire Animations
+
+Skeep
+New Pump Animations, New Chamber Insert Animations, New Shell Insert Positions
+New Mag Insert Anims, New Mag Removal Anims
+======Shotgun Overhaul END===== 
+
+==== Z-Movement ====
+Dusk Movement is inspired by the game DUSK, developed by David Szymanski and published by New Blood Interactive.
+Painkiller movement is inspired by the game Painkiller, developed by People Can Fly and published by THQ Nordic
+Player sounds included in this mod come from the aforementioned game.
+
+Credits:
+- Ivory Duke: all original coding;
+- Nash, Gutawer, Ijon: creators of code that put me on the right track when I started working on this project;
+- Michaelis and DoomKrakken: help, support, and answers to my ZScript questions.
+
+==== WeaponWheel ====
+[ DrPyspy ]- ZScript code, wheel graphics, etc.
+
+[ m8f ]- Fixed wheel crash
+	
+Movement Tilt - Nash
+
+Improved Guided Rocket Launcher Code - Scotty
+
+BerserkerNoir - Optimized blood decals

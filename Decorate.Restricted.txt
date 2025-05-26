@@ -1,5 +1,0 @@
-
-Actor IsPlayingAsRestricted : Inventory
-{
-inventory.maxamount 1
-}
