@@ -11,11 +11,14 @@ Class PB_Cacodemon : PB_Monster// Replaces DoomImp
 	override void Tick()
 	{
 		Super.Tick();
-		
+		if(isFrozen())
+			return;
 		A_SetFloatSpeed(self.Speed / 2);
-		if(self.health > 0 )
+		if(self.health > 0)
 		{
-			SetZ(pos.z + (sin(gametic) * 0.5));
+			bFLOATBOB = true; //use vanilla floatbob formula
+			self.AddZ(GetBobOffset() * FloatBobStrength,true); //dont go thru floors
+			bFLOATBOB = false;
 		}
 	}
 	
@@ -60,7 +63,7 @@ Class PB_Cacodemon : PB_Monster// Replaces DoomImp
 		PB_Monster.CanIReload false;
 		
 		//+FLOATBOB;
-		//FloatBobStrength 0.25;
+		FloatBobStrength 0.25;
 		
 		+FLOAT;
 		FloatSpeed 4;
@@ -72,6 +75,7 @@ Class PB_Cacodemon : PB_Monster// Replaces DoomImp
 		+DONTHARMSPECIES;
 		+DONTHARMCLASS;
 		+NOINFIGHTSPECIES;
+		+FORCEXYBILLBOARD;
 	}
 	
 	States

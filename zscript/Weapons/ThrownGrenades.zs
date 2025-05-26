@@ -81,7 +81,7 @@ class PB_ThrownGrenade : Actor
 			SetStateLabel("Explode");
 	}
 	
-	override int SpecialBounceHit(Actor bounceMobj, Line bounceLine, SecPlane bouncePlane)
+	override int SpecialBounceHit(Actor bounceMobj, Line bounceLine, readonly<SecPlane> bouncePlane)
 	{
 		if(bouncePlane)
 			roll = 0;
