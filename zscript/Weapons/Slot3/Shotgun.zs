@@ -11,6 +11,7 @@ Class PB_Shotgun : PB_WeaponBase
 		weapon.ammotype1 "PB_Shell";
 		weapon.ammogive1 4;		
 		weapon.ammotype2 "ShotgunAmmo";
+		weapon.slotpriority 0.5;
 		PB_WeaponBase.unloadertoken "PBPumpShotgunHasUnloaded";
 		PB_WeaponBase.respectItem "RespectShotgun";
 		inventory.pickupsound "SHOTPICK";
@@ -176,6 +177,7 @@ Class PB_Shotgun : PB_WeaponBase
 				A_SetRoll(0);
 				PB_HandleCrosshair(69);
 				A_SetInventory("PB_LockScreenTilt",0);
+				A_SetInventory("CantWeaponSpecial",0);
 				A_SetInventory("CantDoAction",0);
 				}
 			TNT1 A 0 
@@ -247,6 +249,7 @@ Class PB_Shotgun : PB_WeaponBase
 				A_fireprojectile("ShotgunParticles", random(-17,17), 0, -1, random(-17,17));
 				PB_GunSmoke(-1,0,-4);
 				PB_GunSmoke(1,0,-4);
+                PB_MuzzleFlashEffects(0,0,-4);
 				A_Overlay(-6, "ShotFlash",true);
 				//A_GunFlash();
 				PB_DynamicTail("shotgun", "shotgun");
@@ -555,12 +558,15 @@ Class PB_Shotgun : PB_WeaponBase
 			SHTM I 1;
 			SHTM JKLMN 1;
 			TNT1 A 0 {
-				if(CountInv("ShotgunAmmo") == 0)
-				
+				if(CountInv("ShotgunAmmo") == 0){
 					PB_AmmoIntoMag("ShotgunAmmo","PB_Shell",10,1);
-				else
+					return ResolveState(null);
+				}
+				else{
 					PB_AmmoIntoMag("ShotgunAmmo","PB_Shell",11,1);
-				
+					return ResolveState("ReloadMagFinished");
+				}
+				return ResolveState(null);
 			}
 		LoadChamberMag:
 			SHMG J 1 A_SetRoll(roll-0.1,SPF_INTERPOLATE);
@@ -589,6 +595,7 @@ Class PB_Shotgun : PB_WeaponBase
 				A_StartSound("weapons/sgpump", 10,CHANF_OVERLAP);
 			}	
 			SHMG J 1 A_SetRoll(roll+0.1,SPF_INTERPOLATE);
+			TNT1 A 0 A_JumpIf(PressingReload() && CountInv("PB_Shell"), "ActuallyBeginMagReload");
 		ReloadMagFinished:
 			SHTM OPQR 1 A_SetRoll(roll+0.1,SPF_INTERPOLATE);
 			SHTG EDCB 1 A_SetRoll(roll+0.1,SPF_INTERPOLATE);
@@ -771,6 +778,7 @@ Class PB_Shotgun : PB_WeaponBase
 				 A_Fireprojectile("ShotgunParticles", random(-17,17), 0, -1, random(-17,17));
 				 PB_GunSmoke(-1,0,0);
 				 PB_GunSmoke(1,0,0);
+                 PB_MuzzleFlashEffects(0,0,0);
 				 PB_DynamicTail("shotgun", "shotgun");
 				 A_SetInventory("CantDoAction",1);
 				 

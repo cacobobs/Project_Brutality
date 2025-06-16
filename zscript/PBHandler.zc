@@ -3,9 +3,8 @@ class PB_EventHandler : EventHandler
 	string NextMap;
 	PB_GlobalStats Stats;
 	
-	double dashAlpha;
+	ui double dashAlpha, dashScale;
 	int tick;
-	bool dasheffect;
 	
 	bool HatExists;
 	int HatMonth;
@@ -28,24 +27,13 @@ class PB_EventHandler : EventHandler
 		playerinfo plr = players[consoleplayer];
         if (!plr)
             return;
-		
-		if(tick % 35 == 0)
-			dashEffect = cvar.GetCvar("pb_dasheffect", plr).GetBool();
-		
-		if(dashAlpha > 0.0000000)
-			dashAlpha -= 0.2;
 			
 		if(taunttimer > 0)
 			taunttimer--;
 	}
 	
 	override void NetworkProcess(ConsoleEvent e)
-	{
-		if(e.name == "PB_DashWhatchamacallit")
-		{
-			dashAlpha = 1.0;
-		}
-		
+	{	
 		if (e.Name == "PB_MonthCheck")
 		{
 			HatMonth = e.Args[0];
@@ -147,6 +135,15 @@ class PB_EventHandler : EventHandler
 			//console.PrintfEx(PRINT_NONOTIFY , "PB_EventHandler: Player is NOT using GZDoom 4.13+.");
 		}*/
 	}
+
+    override void InterfaceProcess(ConsoleEvent e)
+    {
+        if(e.name == "PB_DashWhatchamacallit")
+		{
+			dashAlpha = 1.0;
+            dashScale = 1.0;
+		}
+    }
 	
 	override void RenderOverlay(RenderEvent e)
 	{
@@ -156,11 +153,16 @@ class PB_EventHandler : EventHandler
     	let pmo = players[consoleplayer].mo;
         if (!pmo)
             return;
-            
-        let texture = TexMan.CheckForTexture("Graphics/HUD/FULLSCRN/PB_DashOverlay.png");
         
-        if(dashAlpha > 0.00000 && dashEffect)
-        	screen.DrawTexture(texture, false, 0, 0, DTA_DestWidthF, Screen.GetWidth(), DTA_DestHeightF, Screen.GetHeight(), DTA_Alpha, dashAlpha);
+        if(dashAlpha > 0 && cvar.GetCvar("pb_dasheffect", players[consoleplayer]).GetBool()) {
+            Screen.DrawTexture(TexMan.CheckForTexture("Graphics/HUD/FULLSCRN/PB_DashOverlay.png"), false, 
+                Screen.GetWidth() / 2.f, Screen.GetHeight() / 2.f,
+                DTA_DestWidth, Screen.GetWidth(), DTA_DestHeight, Screen.GetHeight(), 
+                DTA_Alpha, dashAlpha,
+                DTA_CenterOffset, true, 
+                DTA_ScaleX, dashScale, DTA_ScaleY, dashScale
+            );
+        }
 	}
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -336,6 +338,23 @@ class PB_EventHandler : EventHandler
 			holder.FixState();
 		}
 	}
+
+    Override Void WorldThingDied(WorldEvent e)
+	{
+        if(!e.thing || !e.Inflictor) return;
+
+        if(e.thing.bismonster && e.Inflictor is 'UnmakerBeamPuff')
+        {
+            if(!PB_HelpNotificationsHandler.CheckTipEvent(1 << 4, CVar.GetCvar("pb_helpflags", players[consoleplayer])))
+            {
+                Array<String> pbTipsBuf;
+                pbTipsBuf.Push("By killing enemies with the Unmaker, you will earn souls.");
+                pbTipsBuf.Push("When your soul bar is full, you can use the Weapon Special button to switch to overcharge mode.");
+                pbTipsBuf.Push("Overcharge mode will deplete your soul bar and a bit of ammo until it your soul bar is empty.");
+                PB_HelpNotificationsHandler.PB_SendTipArray(pbTipsBuf, "pb_helpflags", 1 << 4);
+            }
+        }
+    }
 	
 	//Festive Hats handling
 	
@@ -366,6 +385,23 @@ class PB_EventHandler : EventHandler
 			e.Thing.bSTRETCHPIXELS = true;
 	}
 	
+	 /* [Pop] Keeping this here so its backed up, in may become useful
+	 switch(e.Thing.bloodcolor)
+        {
+            case Color("Blue"): // this is blue blood
+                console.printf("set blue blood enemy translation");
+                e.Thing.bloodtranslation = Translation.GetID("PB_TRNSLATE_BloodBlue");
+                break;
+            case Color("Green"): // this is green blood
+                console.printf("set green blood enemy translation");
+                e.Thing.bloodtranslation = Translation.GetID("PB_TRNSLATE_BloodGreen");
+                break;
+                
+            default:
+                break;
+        }
+	*/
+	
 	//////////////////////
 	
 	override void UiTick()
@@ -378,6 +414,12 @@ class PB_EventHandler : EventHandler
 			HatMonthInt = HatMonthString.ToInt(10);
 			EventHandler.SendNetworkEvent("PB_MonthCheck", HatMonthInt);
 		}
+
+        if(dashAlpha > 0)
+        {
+			dashAlpha -= 0.2;
+            dashScale += 0.05;
+        }
 	}
 	
 	

@@ -29,6 +29,14 @@ user bool pb_exaggeratedrecoil = true;
 user float pb_exaggeratedrecoilmul = 0.5;
 user int pb_floorwallblooddrawdist = 800;
 server bool pb_keepweapons = false;
+server int PB_WeaponDrops = 1;
+server bool pb_dtechfire = true;
+server int pb_naillifetime = 5;
+//Weapon Keep CVars
+user bool PB_KeepPistol = true;
+user bool PB_KeepRevolver = true;
+user bool PB_KeepSSG = true;
+user bool PB_KeepCarbine = true;
 
 user int sd_lasers_densityoffset = 1;
 
@@ -45,6 +53,7 @@ server int pb_nobulletpenetration = 1;// CVar Info
 server int pb_knuckleanimationinstart = 0;
 
 user int pb_execution_box = 1;
+user int	pb_execution_indicatorType	= 	4;
 
 server int pb_disabledecorations = 1;
 
@@ -111,7 +120,8 @@ server float pb_weapon_recoil_mod_vertical = 1.0;
 server float pb_weapon_recoil_mod_horizontal = 1.0;
 server bool pb_weapon_recoil_extra_weapons = false; //some people don't like recoil on the rocket launcher, BFG etc, as they consider it not lore friendly or antithetical to the weapons design. This cvar enables recoil for them
 
-
+//Accessability Options
+server bool pb_camerarolltoggle = true; //Invert
 
 //Rendering
 server int noscreensplash = 0;
@@ -246,13 +256,14 @@ server int pb_NoPulseCannonUpgrade = 0;
 
 server bool pb_nocooldown = false;
 server int pb_fastcryowarmup = 0;
-user int pb_UpgradeRevolver = 0;
-user int pb_UpgradeCarbine = 0;
-user int pb_UpgradeShotgun = 0;
-user int pb_UpgradeNailgun = 0;
-user int pb_UpgradePlasma = 0;
-user int pb_UpgradeGL = 0;
-user int pb_UpgradeLMG = 1; // ¯\_(ツ)_/¯
+user bool pb_qsgquadload = false;
+//user int pb_UpgradeRevolver = 0;
+//user int pb_UpgradeCarbine = 0;
+//user int pb_UpgradeShotgun = 0;
+//user int pb_UpgradeNailgun = 0;
+//user int pb_UpgradePlasma = 0;
+//user int pb_UpgradeGL = 0;
+//user int pb_UpgradeLMG = 1; // ¯\_(ツ)_/¯
 
 user int pb_SGAltAmmoSwap = 0;
 user int pb_SGPumpFromHip = 0;
@@ -314,6 +325,7 @@ server int nashgore_maxcasings = 50;
 // NashGore CVARs
 server int nashgore_maxgore = 1024;
 server int nashgore_bloodtype = 0;
+server float nashgore_bloodmult = 1.0;
 server int nashgore_bloodamount = 255;
 server bool nashgore_spriteblood = false;
 server bool nashgore_bloodspurt = true;
@@ -531,6 +543,14 @@ user bool pb_showblooddrops = true;
 user float pb_blooddropsalpha = 0.8;
 user bool pb_showglasscracks = true;
 user float pb_glasscracksalpha = 0.2;
+
+user float pb_visorscale = 1.0;
+user float pb_visorofsx = 0;
+user float pb_visorofsy = 0;
+user bool pb_visormiddlepartbottom = false;
+
+user int pb_helpflags = 0;
+user bool pb_showtutorials = true;
 
 nosave server bool pbcv_inter = true;
 

@@ -10,7 +10,7 @@ class PB_ArmorBonus : PB_Armor2
 		Armor.SaveAmount 2;
 		Armor.MaxSaveAmount 500;
 		Inventory.PickUpSound "misc/abonus_PickUp";
-		Inventory.PickupMessage "Armor Bonus (+2 AP)";
+		Inventory.PickupMessage "Armor Bonus (+%a AP)";
 		//Scale .34;
 		+COUNTITEM;
 	}

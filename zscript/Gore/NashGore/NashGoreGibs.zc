@@ -39,6 +39,7 @@ class NashGoreGibs : Actor
 		BounceType 'Doom';
 		BounceFactor 0.5;
 		BounceSound "nashgore/gibbounce";
+        Decal "BloodSplat";
 		+MISSILE
 		+NOBLOCKMAP
 		+THRUACTORS
@@ -48,7 +49,7 @@ class NashGoreGibs : Actor
 		+MOVEWITHSECTOR
 		+FORCEXYBILLBOARD
 		-SOLID
-		DistanceCheck "pb_floorwallblooddrawdist";
+		// DistanceCheck "pb_floorwallblooddrawdist";
 	}
 
 	//===========================================================================
@@ -68,7 +69,19 @@ class NashGoreGibs : Actor
 	override void PostBeginPlay(void)
 	{
 		if (random() < (255 - nashgore_gibamount)) { Destroy(); return; }
-		Super.PostBeginPlay();
+
+        if(int(self.Translation) == 0)
+        {
+            if(target) CopyBloodColor(target);
+            else if(master) CopyBloodColor(master);
+            else if(tracer) CopyBloodColor(tracer);
+
+            // this means you found a new translation so set it
+            if(int(bloodtranslation) != 0) 
+                self.Translation = bloodtranslation;
+        }
+
+        Super.PostBeginPlay();
 	}
 
 	override void Tick(void)
@@ -107,6 +120,11 @@ class NashGoreGibs : Actor
 			obj.target = mo;
 			obj.scale = (truescale, truescale);
 		}
+
+        for(int i = 0; i < (size / 5); i++)
+        {
+            mo.A_SpawnItemEx("PB_BloodSpotHuge", frandom(-32, 32) * truescale, frandom(-32, 32) * truescale, flags: SXF_USEBLOODCOLOR | SXF_NOCHECKPOSITION);
+        }
 
 		for (int i = 0; i < size; i++)
 		{		
@@ -236,7 +254,7 @@ class NashGoreGibs : Actor
 	Death:
 		"####" E 0 {
 			class<Actor> cls;
-			if (nashgore_bloodtype == 0)		cls = "NashGoreBloodSpot";
+			if (nashgore_bloodtype == 0)		cls = "PB_BloodSpot";
 			else if (nashgore_bloodtype == 1)	cls = "NashGoreBloodSpotClassic";
 			A_SpawnItemEx(cls, flags: (NashGoreBloodBase.BLOOD_FLAGS | SXF_TRANSFERPOINTERS) & ~SXF_NOCHECKPOSITION, 150);
 		}
