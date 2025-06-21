@@ -497,7 +497,7 @@ class PlayerPawnBase : PlayerPawn
 
 	bool CheckNotPredicting()
 	{
-		return !(player.cheats & CF_PREDICTING);
+		return self && player && !(player.cheats & CF_PREDICTING);
 	}
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////

@@ -131,6 +131,9 @@ Class PB_Shotgun : PB_WeaponBase
 				A_SetInventory("PumpshotgunMagNotInserted",0);
 				A_GiveInventory("ShotgunAmmo",11);
 				A_SetInventory("PumpShotgunMagazine",1);
+				A_ZoomFactor(1.0);
+				A_SetInventory("Zoomed",0);
+				A_SetInventory("ADSmode",0);
 			}
 			SHTG BCDEFGH 1 A_DoPBWeaponAction(WRF_NOBOB);
 			SHTM A 1 A_DoPBWeaponAction(WRF_NOBOB);
@@ -257,7 +260,7 @@ Class PB_Shotgun : PB_WeaponBase
 				{
 					case Shell_Buck:	
 						A_StartSound("weapons/sg", CHAN_Weapon, CHANF_DEFAULT, 1.0, ATTN_NORM, frandom(0.95, 1.05));
-						PB_FireBullets("PB_12GAPellet",9,3.5,0,0,3.5);
+						PB_FireBullets("PB_12GAPellet",9,1.5,0,0,1.5);
 						break;
 					case Shell_Slug:
 						A_StartSound("SlugShot", CHAN_WEAPON);
@@ -786,7 +789,7 @@ Class PB_Shotgun : PB_WeaponBase
 				{
 					case Shell_Buck:	
 						A_StartSound("weapons/sg", CHAN_Weapon, CHANF_DEFAULT, 1.0, ATTN_NORM, frandom(0.95, 1.05));
-						PB_FireBullets("PB_12GAPellet",9,3,0,0,3);
+						PB_FireBullets("PB_12GAPellet",9,1.5,0,0,1.5);
 						break;
 					case Shell_Slug:
 						A_StartSound("SlugShot", CHAN_WEAPON);

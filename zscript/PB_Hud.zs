@@ -492,7 +492,7 @@ class PB_Hud_ZS : BaseStatusBar
                     if(crandom() < 50)
                     {
                         helmetKernelPanic++;
-			//S_StartSound("visor/interference", CHAN_AUTO, CHANF_OVERLAP, 0.5);
+						S_StartSound("visor/interference", CHAN_AUTO, CHANF_OVERLAP, 0.5);
                     }
                 }
 			}
